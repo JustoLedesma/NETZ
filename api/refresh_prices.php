@@ -7,7 +7,7 @@
  * conexion/conexion.php, procesa los productos y los dominios (>500 TLDs),
  * y regenera automáticamente los archivos JSON por país:
  *   - assets/data/prices/{country}.json (26 dominios destacados + productos)
- *   - assets/data/prices/domains_extended_{country}.json (dominios extendidos)
+ *   - assets/data/prices/domains_extended_{country}.json (dominios extendidos de la base)
  */
 
 header('Content-Type: application/json; charset=utf-8');
@@ -56,7 +56,6 @@ $conexion = null;
 
 if (file_exists($conexionPath)) {
     try {
-        // Suprimir errores fatales si MySQL está inaccesible en local
         @include_once $conexionPath;
         if (isset($conexion) && $conexion instanceof mysqli && !$conexion->connect_error) {
             $hasDb = true;
@@ -89,8 +88,19 @@ if ($hasDb) {
         }
     }
 
-    // B. Precios de Productos desde WHMCS
-    // tblproducts + tblpricing (type='product')
+    // B. Obtener el catálogo COMPLETO de TLDs configurados en tbldomainpricing (513 TLDs)
+    $allConfiguredTlds = [];
+    $tldSql = $conexion->query("SELECT id, extension FROM tbldomainpricing ORDER BY id ASC");
+    if ($tldSql) {
+        while ($t = $tldSql->fetch_assoc()) {
+            $cleanExt = ltrim(strtolower(trim($t['extension'])), '.');
+            if ($cleanExt !== '') {
+                $allConfiguredTlds[$cleanExt] = (int)$t['id'];
+            }
+        }
+    }
+
+    // C. Precios de Productos desde WHMCS
     $prodSql = $conexion->query("
         SELECT p.id as pid, p.name, pr.currency,
                pr.monthly, pr.quarterly, pr.semiannually, pr.annually, pr.biennially, pr.triennially,
@@ -131,12 +141,11 @@ if ($hasDb) {
         }
     }
 
-    // C. Precios de Dominios desde WHMCS
-    // tbldomainpricing + tblpricing (type IN ('domainregister', 'domainrenew', 'domaintransfer'))
+    // D. Precios de Dominios desde WHMCS por Moneda
     $domSql = $conexion->query("
         SELECT dp.id as dpid, dp.extension, pr.type as ptype, pr.currency, pr.msetupfee
         FROM tbldomainpricing dp
-        LEFT JOIN tblpricing pr ON (pr.relid = dp.id AND pr.type IN ('domainregister', 'domainrenew', 'domaintransfer'))
+        INNER JOIN tblpricing pr ON (pr.relid = dp.id AND pr.type IN ('domainregister', 'domainrenew', 'domaintransfer'))
         ORDER BY dp.id ASC
     ");
 
@@ -170,7 +179,7 @@ if ($hasDb) {
         }
     }
 
-    // Dominios paraguayos fijos si no están definidos
+    // Dominios paraguayos fijos si no estuvieran en tbldomainpricing
     $pygManuales = [
         'com.py' => ['register' => 169000, 'renew' => 169000, 'transfer' => 169000],
         'org.py' => ['register' => 169000, 'renew' => 169000, 'transfer' => 169000],
@@ -178,38 +187,79 @@ if ($hasDb) {
         'edu.py' => ['register' => 169000, 'renew' => 169000, 'transfer' => 169000],
         'coop.py' => ['register' => 169000, 'renew' => 169000, 'transfer' => 169000],
         'mil.py' => ['register' => 169000, 'renew' => 169000, 'transfer' => 169000],
+        'py' => ['register' => 169000, 'renew' => 169000, 'transfer' => 169000],
     ];
 
     $totalUpdatedCountries = 0;
-    $totalExtendedCount = 0;
+    $maxExtendedCount = 0;
 
     foreach ($countryConfig as $cCode => $cMeta) {
         $cName = $cMeta['country'];
         $cCurr = strtoupper($cMeta['currency']);
         $cLocale = $cMeta['locale'];
 
-        // Determinar ID de moneda
+        // Determinar ID y tasa de moneda
         $targetCurrencyId = $defaultCurrencyId;
+        $currRate = 1.0;
         if (isset($whmcsCurrencies[$cCurr])) {
             $targetCurrencyId = $whmcsCurrencies[$cCurr]['id'];
+            $currRate = $whmcsCurrencies[$cCurr]['rate'] ?: 1.0;
         }
 
         // Productos para este país
         $countryProducts = $productsByCurrency[$targetCurrencyId] ?? $productsByCurrency[$defaultCurrencyId] ?? [];
 
-        // Dominios para este país
-        $allCountryDomains = $domainsByCurrency[$targetCurrencyId] ?? $domainsByCurrency[$defaultCurrencyId] ?? [];
+        // Construir catálogo COMPLETO de dominios para este país
+        // Garantiza que TODOS los TLDs de tbldomainpricing estén incluidos
+        $allCountryDomains = [];
 
-        // Si es Paraguay, asegurar extensiones .py
+        foreach ($allConfiguredTlds as $cleanExt => $dpid) {
+            $reg = null;
+            $ren = null;
+            $tra = null;
+
+            // 1. Buscar precio específico en la moneda del país
+            if (isset($domainsByCurrency[$targetCurrencyId][$cleanExt])) {
+                $p = $domainsByCurrency[$targetCurrencyId][$cleanExt];
+                $reg = $p['register'];
+                $ren = $p['renew'];
+                $tra = $p['transfer'];
+            }
+            // 2. Si no tiene precio en moneda local, tomar el precio base USD y convertir por tasa
+            elseif (isset($domainsByCurrency[$defaultCurrencyId][$cleanExt])) {
+                $pBase = $domainsByCurrency[$defaultCurrencyId][$cleanExt];
+                if ($pBase['register'] !== null) {
+                    $reg = ($targetCurrencyId === $defaultCurrencyId)
+                        ? $pBase['register']
+                        : round($pBase['register'] * $currRate, ($cCurr === 'PYG' || $cCurr === 'CLP' || $cCurr === 'COP') ? 0 : 2);
+                }
+                if ($pBase['renew'] !== null) {
+                    $ren = ($targetCurrencyId === $defaultCurrencyId)
+                        ? $pBase['renew']
+                        : round($pBase['renew'] * $currRate, ($cCurr === 'PYG' || $cCurr === 'CLP' || $cCurr === 'COP') ? 0 : 2);
+                }
+                if ($pBase['transfer'] !== null) {
+                    $tra = ($targetCurrencyId === $defaultCurrencyId)
+                        ? $pBase['transfer']
+                        : round($pBase['transfer'] * $currRate, ($cCurr === 'PYG' || $cCurr === 'CLP' || $cCurr === 'COP') ? 0 : 2);
+                }
+            }
+
+            $allCountryDomains[$cleanExt] = [
+                'register' => $reg,
+                'renew' => $ren,
+                'transfer' => $tra
+            ];
+        }
+
+        // Si es Paraguay, asegurar que las extensiones paraguayas existan
         if ($cCode === 'py') {
             foreach ($pygManuales as $pExt => $pVals) {
-                if (!isset($allCountryDomains[$pExt])) {
-                    $allCountryDomains[$pExt] = $pVals;
-                }
+                $allCountryDomains[$pExt] = $pVals;
             }
         }
 
-        // Separar en 26 destacados vs extendidos
+        // Separar en 26 destacados para el index vs extendidos
         $publicDomains = [];
         $extendedDomains = [];
 
@@ -221,7 +271,7 @@ if ($hasDb) {
             }
         }
 
-        // 1. Archivo {country}.json
+        // 1. Archivo {country}.json (26 dominios + productos)
         $countryData = [
             'country' => $cName,
             'countryCode' => $cCode,
@@ -239,7 +289,7 @@ if ($hasDb) {
             @file_put_contents($distOutputDir . "/{$cCode}.json", $jsonStr);
         }
 
-        // 2. Archivo domains_extended_{country}.json
+        // 2. Archivo domains_extended_{country}.json (catálogo completo de la base de datos)
         $extendedData = [
             'countryCode' => $cCode,
             'currency' => $cCurr,
@@ -249,14 +299,14 @@ if ($hasDb) {
         ];
 
         $jsonExtStr = json_encode($extendedData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-        file_put_contents($outputDir . "/domains_extended_{cCode}.json", $jsonExtStr);
+        file_put_contents($outputDir . "/domains_extended_{$cCode}.json", $jsonExtStr);
         if (is_dir($distOutputDir)) {
-            @file_put_contents($distOutputDir . "/domains_extended_{cCode}.json", $jsonExtStr);
+            @file_put_contents($distOutputDir . "/domains_extended_{$cCode}.json", $jsonExtStr);
         }
 
         $totalUpdatedCountries++;
-        if ($totalExtendedCount < count($extendedDomains)) {
-            $totalExtendedCount = count($extendedDomains);
+        if ($maxExtendedCount < count($extendedDomains)) {
+            $maxExtendedCount = count($extendedDomains);
         }
     }
 
@@ -266,14 +316,14 @@ if ($hasDb) {
         'timestamp' => $nowIso,
         'countries_updated' => $totalUpdatedCountries,
         'featured_domains' => count($featuredDomainKeys),
-        'extended_domains' => $totalExtendedCount,
+        'extended_domains' => $maxExtendedCount,
+        'total_domains_catalog' => count($featuredDomainKeys) + $maxExtendedCount,
         'source' => 'mysql_whmcs'
     ]);
     exit;
 }
 
-// 5. Fallback si MySQL no está conectado directamente (ej. entorno de desarrollo estático local)
-// Actualiza la marca de tiempo de los archivos JSON existentes
+// 5. Fallback si MySQL no está conectado directamente (ej. entorno local estático sin PHP/MySQL)
 $updatedCount = 0;
 foreach ($countryConfig as $cCode => $cMeta) {
     $fPath = $outputDir . "/{$cCode}.json";
@@ -290,7 +340,7 @@ foreach ($countryConfig as $cCode => $cMeta) {
         }
     }
 
-    $extPath = $outputDir . "/domains_extended_{cCode}.json";
+    $extPath = $outputDir . "/domains_extended_{$cCode}.json";
     if (file_exists($extPath)) {
         $extData = json_decode(file_get_contents($extPath), true);
         if ($extData) {
@@ -298,7 +348,7 @@ foreach ($countryConfig as $cCode => $cMeta) {
             $newExtJson = json_encode($extData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             file_put_contents($extPath, $newExtJson);
             if (is_dir($distOutputDir)) {
-                @file_put_contents($distOutputDir . "/domains_extended_{cCode}.json", $newExtJson);
+                @file_put_contents($distOutputDir . "/domains_extended_{$cCode}.json", $newExtJson);
             }
         }
     }
@@ -311,4 +361,3 @@ echo json_encode([
     'countries_updated' => $updatedCount,
     'source' => 'local_cache_refreshed'
 ]);
-
