@@ -262,6 +262,48 @@
     }
     .btn-refresh:hover { background: var(--primary-hover); }
 
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .sync-toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s ease;
+      max-width: 480px;
+    }
+    .sync-toast.info {
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+    }
+    .sync-toast.success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .sync-toast.warn {
+      background: #fffbeb;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
     .btn-settings {
       background: #f3f4f6;
       color: #374151;
@@ -629,7 +671,7 @@
         <div class="admin-pill" id="admin-session-pill">
           <span>●</span> <span id="admin-user-display">admin</span>
         </div>
-        <button class="btn-refresh" id="btn-top-refresh" onclick="loadAllCountries()">
+        <button class="btn-refresh" id="btn-top-refresh" onclick="handleRefreshPrices()">
           <span>🔄</span> Recargar Precios
         </button>
         <button class="btn-settings" id="btn-top-settings" onclick="toggleView('settings')">
@@ -1243,6 +1285,58 @@
           r.style.display = txt.includes(val) ? '' : 'none';
         }
       });
+    }
+
+    let activeSyncToastTimer = null;
+    function showSyncToast(type, message, duration = 4000) {
+      let toast = document.getElementById('sync-floating-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'sync-floating-toast';
+        document.body.appendChild(toast);
+      }
+      toast.className = 'sync-toast ' + type;
+      toast.innerHTML = `<span>${type === 'success' ? '✅' : (type === 'warn' ? '⚠️' : 'ℹ️')}</span> <div>${message}</div>`;
+      toast.style.display = 'flex';
+
+      if (activeSyncToastTimer) clearTimeout(activeSyncToastTimer);
+      activeSyncToastTimer = setTimeout(() => {
+        toast.style.display = 'none';
+      }, duration);
+    }
+
+    async function handleRefreshPrices() {
+      const btn = document.getElementById('btn-top-refresh');
+      const originalHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<span style="display:inline-block; animation: spin 0.8s linear infinite;">🔄</span> Sincronizando BD...`;
+
+      showSyncToast('info', 'Consultando base de datos de WHMCS y regenerando JSONs...');
+
+      try {
+        const res = await fetch('api/refresh_prices.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          cache: 'no-store'
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const extCount = data.extended_domains ? ` (+${data.extended_domains} dominios extendidos)` : '';
+          const successMsg = data.message || `¡Precios actualizados exitosamente!`;
+          showSyncToast('success', `${successMsg}${extCount}`);
+        } else {
+          showSyncToast('warn', `Aviso: El servidor respondió con estado ${res.status}. Actualizando datos en pantalla...`);
+        }
+      } catch (err) {
+        showSyncToast('warn', 'Modo local: recargando archivos de precios...');
+      }
+
+      // Recargar y re-renderizar todas las pestañas con timestamp para evitar caché
+      await loadAllCountries();
+
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
     }
 
     async function loadAllCountries() {
