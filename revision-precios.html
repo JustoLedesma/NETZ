@@ -243,7 +243,7 @@
       gap: 6px;
     }
 
-    .btn-refresh, .btn-logout {
+    .btn-refresh, .btn-logout, .btn-settings {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -262,6 +262,17 @@
     }
     .btn-refresh:hover { background: var(--primary-hover); }
 
+    .btn-settings {
+      background: #f3f4f6;
+      color: #374151;
+      border-color: #d1d5db;
+    }
+    .btn-settings:hover, .btn-settings.active {
+      background: #e5e7eb;
+      color: #111827;
+      border-color: #9ca3af;
+    }
+
     .btn-logout {
       background: #fff;
       color: #dc2626;
@@ -269,6 +280,89 @@
     }
     .btn-logout:hover {
       background: #fef2f2;
+    }
+
+    /* Vista de Ajustes */
+    .settings-container {
+      max-width: 660px;
+      margin: 0 auto 40px;
+      animation: fadeIn 0.25s ease-out;
+    }
+    .settings-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 26px 30px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+    .settings-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .settings-card p.subtitle {
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      margin-bottom: 20px;
+    }
+    .settings-alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      margin-bottom: 20px;
+      display: none;
+    }
+    .settings-alert.success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      display: block;
+    }
+    .settings-alert.error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+      display: block;
+    }
+    .btn-save-settings {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      padding: 11px 22px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.92rem;
+      transition: background 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-save-settings:hover {
+      background: var(--primary-hover);
+    }
+    .settings-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 0.88rem;
+    }
+    .settings-meta-row:last-child {
+      border-bottom: none;
+    }
+    .settings-meta-label {
+      color: var(--text-muted);
+    }
+    .settings-meta-val {
+      font-weight: 600;
+      color: var(--text);
     }
 
     .legend {
@@ -521,22 +615,25 @@
   </div>
 
   <!-- ========================================================
-       DASHBOARD DE REVISIÓN DE PRECIOS (PROTEGIDO)
+       DASHBOARD DE REVISIÓN DE PRECIOS Y AJUSTES (PROTEGIDO)
        ======================================================== -->
   <div id="dashboard-app" class="container" style="display: none;">
     <header>
       <div>
-        <h1>
+        <h1 id="header-main-title">
           <span>📊</span> Revisión de Precios por País
         </h1>
-        <p>Precios oficiales sincronizados desde WHMCS con unión de dominios en tiempo real.</p>
+        <p id="header-main-desc">Precios oficiales sincronizados desde WHMCS con unión de dominios en tiempo real.</p>
       </div>
       <div class="header-actions">
-        <div class="admin-pill">
-          <span>●</span> Sesión Activa
+        <div class="admin-pill" id="admin-session-pill">
+          <span>●</span> <span id="admin-user-display">admin</span>
         </div>
-        <button class="btn-refresh" onclick="loadAllCountries()">
+        <button class="btn-refresh" id="btn-top-refresh" onclick="loadAllCountries()">
           <span>🔄</span> Recargar Precios
+        </button>
+        <button class="btn-settings" id="btn-top-settings" onclick="toggleView('settings')">
+          <span>⚙️</span> Ajustes
         </button>
         <button class="btn-logout" onclick="handleLogout()">
           <span>🚪</span> Salir
@@ -544,37 +641,130 @@
       </div>
     </header>
 
-    <div class="legend">
-      <div class="legend-item">
-        <span class="pending-cell" style="padding: 2px 6px;">PENDIENTE</span>
-        <span>Ciclo desactivado (-1) o sin precio en WHMCS</span>
+    <!-- VISTA 1: TABLAS DE PRECIOS Y DOMINIOS -->
+    <div id="view-prices">
+      <div class="legend">
+        <div class="legend-item">
+          <span class="pending-cell" style="padding: 2px 6px;">PENDIENTE</span>
+          <span>Ciclo desactivado (-1) o sin precio en WHMCS</span>
+        </div>
+        <div class="legend-item">
+          <span class="sync-badge ok" style="padding: 2px 6px;">Sincronizado</span>
+          <span>Sincronización en menos de 24 horas</span>
+        </div>
+        <div class="legend-item">
+          <span class="sync-badge warn" style="padding: 2px 6px;">⚠️ Advertencia</span>
+          <span>Más de 24 horas sin sincronizar (revisar cron)</span>
+        </div>
       </div>
-      <div class="legend-item">
-        <span class="sync-badge ok" style="padding: 2px 6px;">Sincronizado</span>
-        <span>Sincronización en menos de 24 horas</span>
-      </div>
-      <div class="legend-item">
-        <span class="sync-badge warn" style="padding: 2px 6px;">⚠️ Advertencia</span>
-        <span>Más de 24 horas sin sincronizar (revisar cron)</span>
-      </div>
+
+      <!-- Navegación de Pestañas -->
+      <nav class="tabs-nav" id="tabs-nav" aria-label="Selección de país"></nav>
+
+      <!-- Contenido de cada pestaña -->
+      <main id="tabs-contents"></main>
     </div>
 
-    <!-- Navegación de Pestañas -->
-    <nav class="tabs-nav" id="tabs-nav" aria-label="Selección de país"></nav>
+    <!-- VISTA 2: AJUSTES DE CUENTA Y SEGURIDAD -->
+    <div id="view-settings" style="display: none;">
+      <div class="settings-container">
+        <div class="settings-card">
+          <h3><span>⚙️</span> Cambiar Credenciales de Acceso</h3>
+          <p class="subtitle">Actualiza el usuario o contraseña para el acceso administrativo a este panel.</p>
 
-    <!-- Contenido de cada pestaña -->
-    <main id="tabs-contents"></main>
+          <div id="settings-alert" class="settings-alert"></div>
+
+          <form id="settings-form" onsubmit="handleSaveSettings(event)">
+            <div class="form-group">
+              <label for="settings-username">Nombre de Usuario</label>
+              <div class="form-input-wrap">
+                <input type="text" id="settings-username" required placeholder="admin" autocomplete="username">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="settings-current-pass">Contraseña Actual</label>
+              <div class="form-input-wrap">
+                <input type="password" id="settings-current-pass" required placeholder="Ingresa tu contraseña actual" autocomplete="current-password">
+                <button type="button" class="toggle-pass-btn" onclick="toggleFieldVisibility('settings-current-pass')" title="Mostrar/ocultar">👁️</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="settings-new-pass">Nueva Contraseña</label>
+              <div class="form-input-wrap">
+                <input type="password" id="settings-new-pass" required minlength="6" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+                <button type="button" class="toggle-pass-btn" onclick="toggleFieldVisibility('settings-new-pass')" title="Mostrar/ocultar">👁️</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="settings-confirm-pass">Confirmar Nueva Contraseña</label>
+              <div class="form-input-wrap">
+                <input type="password" id="settings-confirm-pass" required minlength="6" placeholder="Repite la nueva contraseña" autocomplete="new-password">
+                <button type="button" class="toggle-pass-btn" onclick="toggleFieldVisibility('settings-confirm-pass')" title="Mostrar/ocultar">👁️</button>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 24px; align-items: center; flex-wrap: wrap;">
+              <button type="submit" class="btn-save-settings" id="btn-save-settings">
+                <span>💾</span> Guardar Nuevas Credenciales
+              </button>
+              <button type="button" class="btn-settings" onclick="toggleView('prices')">
+                Volver a Precios
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="settings-card">
+          <h3><span>🛡️</span> Estado de Almacenamiento y Seguridad</h3>
+          <p class="subtitle">Detalles técnicos del almacenamiento de credenciales.</p>
+          <div class="settings-meta-row">
+            <span class="settings-meta-label">Persistencia en Servidor:</span>
+            <span class="settings-meta-val" id="meta-server-status"><code>config/admin_credentials.php</code></span>
+          </div>
+          <div class="settings-meta-row">
+            <span class="settings-meta-label">Usuario Activo:</span>
+            <span class="settings-meta-val" id="meta-current-user">admin</span>
+          </div>
+          <div class="settings-meta-row">
+            <span class="settings-meta-label">Mecanismo Criptográfico:</span>
+            <span class="settings-meta-val">SHA-256 Digest con timing-safe compare</span>
+          </div>
+          <div class="settings-meta-row">
+            <span class="settings-meta-label">Protección .htaccess:</span>
+            <span class="settings-meta-val" style="color: #059669;">Activa (Acceso directo denegado)</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
     // ========================================================
     // AUTENTICACIÓN SEGURA Y CONTROL DE ACCESO
     // ========================================================
-    const ADMIN_CONFIG = {
+    const DEFAULT_CONFIG = {
       username: "admin",
-      // Hash SHA-256 de la contraseña por defecto: "NetzAdmin2026*"
+      // Hash SHA-256 de "NetzAdmin2026*"
       passwordHash: "d5b1abba5fe88a187064c359c17b731ce7d402daab27bf014093b1a20fe5f691"
     };
+
+    function getStoredCredentials() {
+      try {
+        const raw = localStorage.getItem('netz_admin_custom_creds');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.username && parsed.passwordHash) {
+            return parsed;
+          }
+        }
+      } catch (e) {}
+      return { ...DEFAULT_CONFIG };
+    }
+
+    let activeAdminConfig = getStoredCredentials();
 
     async function sha256(text) {
       const buffer = new TextEncoder().encode(text);
@@ -588,12 +778,47 @@
       const userIn = document.getElementById('admin-user').value.trim();
       const passIn = document.getElementById('admin-pass').value;
       const errorDiv = document.getElementById('login-error-msg');
-
       const passHash = await sha256(passIn);
 
-      if (userIn === ADMIN_CONFIG.username && passHash === ADMIN_CONFIG.passwordHash) {
+      // 1. Intentar validar vía API del servidor PHP (si está disponible en cPanel)
+      try {
+        const res = await fetch('api/admin_auth.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'login', username: userIn, password_hash: passHash })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          errorDiv.style.display = 'none';
+          sessionStorage.setItem('netz_admin_session', 'authenticated');
+          sessionStorage.setItem('netz_admin_user', data.username || userIn);
+          activeAdminConfig.username = data.username || userIn;
+          activeAdminConfig.passwordHash = passHash;
+          // Actualizar localStorage para sincronía
+          localStorage.setItem('netz_admin_custom_creds', JSON.stringify({
+            username: activeAdminConfig.username,
+            passwordHash: passHash
+          }));
+          showDashboard();
+          return;
+        } else if (res.status === 401) {
+          // Credenciales rechazadas explícitamente por el servidor
+          errorDiv.style.display = 'block';
+          document.getElementById('admin-pass').value = '';
+          document.getElementById('admin-pass').focus();
+          return;
+        }
+      } catch (err) {
+        // Fallback local silencioso si el servidor PHP no está respondiendo (ej. dev_server local)
+      }
+
+      // 2. Validación local con credenciales almacenadas
+      const localCreds = getStoredCredentials();
+      if (userIn === localCreds.username && passHash === localCreds.passwordHash) {
         errorDiv.style.display = 'none';
         sessionStorage.setItem('netz_admin_session', 'authenticated');
+        sessionStorage.setItem('netz_admin_user', userIn);
+        activeAdminConfig = localCreds;
         showDashboard();
       } else {
         errorDiv.style.display = 'block';
@@ -603,12 +828,19 @@
     }
 
     function togglePasswordVisibility() {
-      const input = document.getElementById('admin-pass');
-      input.type = (input.type === 'password') ? 'text' : 'password';
+      toggleFieldVisibility('admin-pass');
+    }
+
+    function toggleFieldVisibility(fieldId) {
+      const input = document.getElementById(fieldId);
+      if (input) {
+        input.type = (input.type === 'password') ? 'text' : 'password';
+      }
     }
 
     function handleLogout() {
       sessionStorage.removeItem('netz_admin_session');
+      sessionStorage.removeItem('netz_admin_user');
       document.getElementById('dashboard-app').style.display = 'none';
       document.getElementById('login-screen').style.display = 'flex';
       document.getElementById('admin-pass').value = '';
@@ -627,7 +859,148 @@
     function showDashboard() {
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('dashboard-app').style.display = 'block';
+      updateUserDisplay();
+      toggleView('prices');
       loadAllCountries();
+    }
+
+    function updateUserDisplay() {
+      const currentUser = sessionStorage.getItem('netz_admin_user') || activeAdminConfig.username || 'admin';
+      const userDisplay = document.getElementById('admin-user-display');
+      if (userDisplay) userDisplay.textContent = currentUser;
+      const metaUser = document.getElementById('meta-current-user');
+      if (metaUser) metaUser.textContent = currentUser;
+      const settingsUserInput = document.getElementById('settings-username');
+      if (settingsUserInput) settingsUserInput.value = currentUser;
+    }
+
+    // Alternar entre Vista de Precios y Vista de Ajustes
+    let currentActiveView = 'prices';
+    function toggleView(viewName) {
+      currentActiveView = viewName;
+      const viewPrices = document.getElementById('view-prices');
+      const viewSettings = document.getElementById('view-settings');
+      const btnSettings = document.getElementById('btn-top-settings');
+      const btnRefresh = document.getElementById('btn-top-refresh');
+      const title = document.getElementById('header-main-title');
+      const desc = document.getElementById('header-main-desc');
+
+      if (viewName === 'settings') {
+        viewPrices.style.display = 'none';
+        viewSettings.style.display = 'block';
+        btnSettings.classList.add('active');
+        btnSettings.innerHTML = '<span>📊</span> Ver Precios';
+        btnSettings.setAttribute('onclick', "toggleView('prices')");
+        btnRefresh.style.display = 'none';
+        title.innerHTML = '<span>⚙️</span> Ajustes de Seguridad y Acceso';
+        desc.textContent = 'Modifica el usuario y la contraseña del panel de administración.';
+        updateUserDisplay();
+        document.getElementById('settings-alert').style.display = 'none';
+        document.getElementById('settings-current-pass').value = '';
+        document.getElementById('settings-new-pass').value = '';
+        document.getElementById('settings-confirm-pass').value = '';
+      } else {
+        viewPrices.style.display = 'block';
+        viewSettings.style.display = 'none';
+        btnSettings.classList.remove('active');
+        btnSettings.innerHTML = '<span>⚙️</span> Ajustes';
+        btnSettings.setAttribute('onclick', "toggleView('settings')");
+        btnRefresh.style.display = 'inline-flex';
+        title.innerHTML = '<span>📊</span> Revisión de Precios por País';
+        desc.textContent = 'Precios oficiales sincronizados desde WHMCS con unión de dominios en tiempo real.';
+      }
+    }
+
+    // Guardar nuevas credenciales
+    async function handleSaveSettings(e) {
+      e.preventDefault();
+      const alertBox = document.getElementById('settings-alert');
+      const newUser = document.getElementById('settings-username').value.trim();
+      const currentPass = document.getElementById('settings-current-pass').value;
+      const newPass = document.getElementById('settings-new-pass').value;
+      const confirmPass = document.getElementById('settings-confirm-pass').value;
+
+      if (!newUser) {
+        showSettingsAlert('error', 'El nombre de usuario no puede estar vacío.');
+        return;
+      }
+      if (newPass.length < 6) {
+        showSettingsAlert('error', 'La nueva contraseña debe tener al menos 6 caracteres.');
+        return;
+      }
+      if (newPass !== confirmPass) {
+        showSettingsAlert('error', 'Las contraseñas nuevas no coinciden.');
+        return;
+      }
+
+      const currentHash = await sha256(currentPass);
+      const newHash = await sha256(newPass);
+
+      // Validar que la contraseña actual coincida localmente antes de proceder
+      const localCreds = getStoredCredentials();
+      if (currentHash !== localCreds.passwordHash) {
+        showSettingsAlert('error', 'La contraseña actual ingresada es incorrecta.');
+        return;
+      }
+
+      const saveBtn = document.getElementById('btn-save-settings');
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<span>⏳</span> Guardando...';
+
+      let serverUpdated = false;
+      try {
+        const res = await fetch('api/admin_auth.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'update',
+            current_user: localCreds.username,
+            current_password_hash: currentHash,
+            new_username: newUser,
+            new_password_hash: newHash
+          })
+        });
+        if (res.ok) {
+          serverUpdated = true;
+        } else {
+          const errData = await res.json();
+          if (res.status === 401) {
+            showSettingsAlert('error', errData.message || 'La contraseña actual no es correcta en el servidor.');
+            saveBtn.disabled = false;
+            saveBtn.innerHTML = '<span>💾</span> Guardar Nuevas Credenciales';
+            return;
+          }
+        }
+      } catch (err) {
+        // En entorno local estático sin PHP, continuamos con persistencia local
+      }
+
+      // Persistir nuevas credenciales
+      const newCreds = { username: newUser, passwordHash: newHash };
+      localStorage.setItem('netz_admin_custom_creds', JSON.stringify(newCreds));
+      sessionStorage.setItem('netz_admin_user', newUser);
+      activeAdminConfig = newCreds;
+
+      updateUserDisplay();
+      document.getElementById('settings-current-pass').value = '';
+      document.getElementById('settings-new-pass').value = '';
+      document.getElementById('settings-confirm-pass').value = '';
+
+      saveBtn.disabled = false;
+      saveBtn.innerHTML = '<span>💾</span> Guardar Nuevas Credenciales';
+
+      const successMsg = serverUpdated
+        ? '✅ ¡Credenciales actualizadas exitosamente en el servidor (config/admin_credentials.php) y en este navegador!'
+        : '✅ ¡Credenciales actualizadas exitosamente! Usa tus nuevos datos en tu próximo inicio de sesión.';
+      showSettingsAlert('success', successMsg);
+    }
+
+    function showSettingsAlert(type, text) {
+      const alertBox = document.getElementById('settings-alert');
+      alertBox.className = 'settings-alert ' + type;
+      alertBox.textContent = text;
+      alertBox.style.display = 'block';
+      alertBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     // ========================================================

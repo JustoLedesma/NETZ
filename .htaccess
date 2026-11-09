@@ -1,6 +1,11 @@
 ErrorDocument 404 /404.html
 DirectoryIndex index.html index.php
 
+# Proteger archivos sensibles de configuración
+<FilesMatch "^(admin_credentials|\.ht|\.env|whmcs_config)">
+    Require all denied
+</FilesMatch>
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /

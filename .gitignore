@@ -21,6 +21,7 @@ server_out.log
 cron/whmcs_config.php
 whmcs_config.php
 configuration.php
+config/admin_credentials.php
 *.private.php
 .htpasswd
 .env
