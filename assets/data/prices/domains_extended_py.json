@@ -1,0 +1,283 @@
+﻿{
+    "countryCode":  "py",
+    "currency":  "PYG",
+    "generatedAt":  "2026-11-09T10:42:24-03:00",
+    "totalExtended":  55,
+    "domains":  {
+                    "store":  {
+                                  "register":  37425,
+                                  "renew":  112425,
+                                  "transfer":  112425
+                              },
+                    "tech":  {
+                                 "register":  37425,
+                                 "renew":  112425,
+                                 "transfer":  112425
+                             },
+                    "site":  {
+                                 "register":  22425,
+                                 "renew":  97425,
+                                 "transfer":  97425
+                             },
+                    "space":  {
+                                  "register":  97425,
+                                  "renew":  172425,
+                                  "transfer":  172425
+                              },
+                    "digital":  {
+                                    "register":  97425,
+                                    "renew":  172425,
+                                    "transfer":  172425
+                                },
+                    "link":  {
+                                 "register":  97425,
+                                 "renew":  172425,
+                                 "transfer":  172425
+                             },
+                    "xyz":  {
+                                "register":  22425,
+                                "renew":  97425,
+                                "transfer":  97425
+                            },
+                    "dev":  {
+                                "register":  97425,
+                                "renew":  172425,
+                                "transfer":  172425
+                            },
+                    "cloud":  {
+                                  "register":  97425,
+                                  "renew":  172425,
+                                  "transfer":  172425
+                              },
+                    "lat":  {
+                                "register":  97425,
+                                "renew":  172425,
+                                "transfer":  172425
+                            },
+                    "mobi":  {
+                                 "register":  97425,
+                                 "renew":  172425,
+                                 "transfer":  172425
+                             },
+                    "io":  {
+                               "register":  374925,
+                               "renew":  449925,
+                               "transfer":  449925
+                           },
+                    "ai":  {
+                               "register":  374925,
+                               "renew":  449925,
+                               "transfer":  449925
+                           },
+                    "co":  {
+                               "register":  97425,
+                               "renew":  172425,
+                               "transfer":  172425
+                           },
+                    "me":  {
+                               "register":  97425,
+                               "renew":  172425,
+                               "transfer":  172425
+                           },
+                    "cc":  {
+                               "register":  97425,
+                               "renew":  172425,
+                               "transfer":  172425
+                           },
+                    "ws":  {
+                               "register":  97425,
+                               "renew":  172425,
+                               "transfer":  172425
+                           },
+                    "biz.py":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "net.br":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "com.ar":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "com.br":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "com.mx":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "com.co":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "cl":  {
+                               "register":  97425,
+                               "renew":  172425,
+                               "transfer":  172425
+                           },
+                    "agency":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "solutions":  {
+                                      "register":  97425,
+                                      "renew":  172425,
+                                      "transfer":  172425
+                                  },
+                    "company":  {
+                                    "register":  97425,
+                                    "renew":  172425,
+                                    "transfer":  172425
+                                },
+                    "guru":  {
+                                 "register":  97425,
+                                 "renew":  172425,
+                                 "transfer":  172425
+                             },
+                    "live":  {
+                                 "register":  97425,
+                                 "renew":  172425,
+                                 "transfer":  172425
+                             },
+                    "stream":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "zone":  {
+                                 "register":  97425,
+                                 "renew":  172425,
+                                 "transfer":  172425
+                             },
+                    "email":  {
+                                  "register":  97425,
+                                  "renew":  172425,
+                                  "transfer":  172425
+                              },
+                    "news":  {
+                                 "register":  97425,
+                                 "renew":  172425,
+                                 "transfer":  172425
+                             },
+                    "world":  {
+                                  "register":  97425,
+                                  "renew":  172425,
+                                  "transfer":  172425
+                              },
+                    "global":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "media":  {
+                                  "register":  97425,
+                                  "renew":  172425,
+                                  "transfer":  172425
+                              },
+                    "network":  {
+                                    "register":  97425,
+                                    "renew":  172425,
+                                    "transfer":  172425
+                                },
+                    "software":  {
+                                     "register":  97425,
+                                     "renew":  172425,
+                                     "transfer":  172425
+                                 },
+                    "academy":  {
+                                    "register":  97425,
+                                    "renew":  172425,
+                                    "transfer":  172425
+                                },
+                    "center":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "support":  {
+                                    "register":  97425,
+                                    "renew":  172425,
+                                    "transfer":  172425
+                                },
+                    "services":  {
+                                     "register":  97425,
+                                     "renew":  172425,
+                                     "transfer":  172425
+                                 },
+                    "systems":  {
+                                    "register":  97425,
+                                    "renew":  172425,
+                                    "transfer":  172425
+                                },
+                    "expert":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "consulting":  {
+                                       "register":  97425,
+                                       "renew":  172425,
+                                       "transfer":  172425
+                                   },
+                    "marketing":  {
+                                      "register":  97425,
+                                      "renew":  172425,
+                                      "transfer":  172425
+                                  },
+                    "host":  {
+                                 "register":  97425,
+                                 "renew":  172425,
+                                 "transfer":  172425
+                             },
+                    "press":  {
+                                  "register":  97425,
+                                  "renew":  172425,
+                                  "transfer":  172425
+                              },
+                    "vip.py":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "website":  {
+                                    "register":  97425,
+                                    "renew":  172425,
+                                    "transfer":  172425
+                                },
+                    "design":  {
+                                   "register":  97425,
+                                   "renew":  172425,
+                                   "transfer":  172425
+                               },
+                    "photography":  {
+                                        "register":  97425,
+                                        "renew":  172425,
+                                        "transfer":  172425
+                                    },
+                    "finance":  {
+                                    "register":  97425,
+                                    "renew":  172425,
+                                    "transfer":  172425
+                                },
+                    "capital":  {
+                                    "register":  97425,
+                                    "renew":  172425,
+                                    "transfer":  172425
+                                },
+                    "trade":  {
+                                  "register":  97425,
+                                  "renew":  172425,
+                                  "transfer":  172425
+                              }
+                }
+}

@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en-US" data-country="us" class="prices-loading">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="/assets/img/header/N-SVG.svg" type="image/x-icon">
+    <link rel="preload" href="/assets/data/prices/us.json?v=1" as="fetch" crossorigin>
+    <style>
+        .prices-loading [data-pid],
+        .prices-loading [data-domain],
+        .prices-loading [data-price] {
+            opacity: 0;
+        }
+
+        [data-pid],
+        [data-domain],
+        [data-price] {
+            transition: opacity 0.15s ease-in;
+        }
+    </style>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/main.min.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/fontawesome-all.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+    <link href="/assets/css/typography.css" rel="stylesheet">
+    <link href="/assets/css/whatsapp.css" rel="stylesheet">
+    <title>Hosting Reseller DirectAdmin Económico | NETZ</title>
+    <meta name="description"
+        content="Planes Reseller de alto rendimiento con panel DirectAdmin, cuentas ilimitadas y excelente relación precio-calidad." />
+    <meta name="keywords" content="reseller directadmin, hosting revendedor directadmin, reseller barato" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://netz.com.py/us/reseller-directadmin">
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://netz.com.py/us/reseller-directadmin">
+    <meta property="og:site_name" content="NETZ">
+    <meta property="og:title" content="Hosting Reseller DirectAdmin Económico | NETZ">
+    <meta property="og:description"
+        content="Planes Reseller de alto rendimiento con panel DirectAdmin, cuentas ilimitadas y excelente relación precio-calidad.">
+    <meta property="og:image" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+    <meta property="og:image:secure_url" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_LA">
+    <meta property="og:locale:alternate" content="es_ES">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hosting Reseller DirectAdmin Económico | NETZ">
+    <meta name="twitter:description"
+        content="Planes Reseller de alto rendimiento con panel DirectAdmin, cuentas ilimitadas y excelente relación precio-calidad.">
+    <meta name="twitter:image" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+</head>
+
+<body>
+    <div id="coodiv-header" class="subpages-header-min">
+        <div class="bg_overlay_header">
+            <div class="bg-img-header-new-standard">&nbsp;</div>
+        </div>
+        <div id="navbar-container">
+            <nav id="coodiv-navbar-header" class="navbar navbar-expand-md fixed-header-layout">
+                <div class="container main-header-coodiv-s">
+                    <a class="navbar-brand" href="/us/"><img src="/assets/img/header/NETZ-IA.svg" width="100px"
+                            alt="Logo" decoding="async" /></a>
+                    <button class="navbar-toggle offcanvas-toggle menu-btn-span-bar ml-auto" data-toggle="offcanvas"
+                        data-target="#offcanvas-menu-home">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="collapse navbar-collapse navbar-offcanvas" id="offcanvas-menu-home">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="/us/">Inicio<span class="sr-only">(current)</span> </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Hosting</a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="webhosting-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-infinity"></i> <a href="/us/hosting-ilimitado">Hosting
+                                                Ilimitado<span class="nav-new-tag">Servicio sin límites de
+                                                    recursos</span></a></li>
+                                        <li><i class="fas fa-server"></i> <a href="/us/hosting-exclusivo">Hosting
+                                                Exclusivo<span>Recursos exclusivos</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="vps-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Vps<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="vps-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fab fa-linux"></i> <a href="/us/vps-linux-no-administrado">Linux
+                                                no administrado<span>¡Administre usted mismo!</span></a></li>
+                                        <li><i class="fab fa-linux"></i> <a href="/us/vps-linux-administrado">Linux
+                                                Administrado<span>Todo el poder <br>NINGUNO de los problemas</span></a>
+                                        </li>
+                                        <li><i class="fab fa-windows"></i> <a href="/us/vps-windows-no-administrado">Windows
+                                                no
+                                                Administrado<span>¡Administre usted mismo!</span></a></li>
+                                        <li><i class="fab fa-windows"></i> <a href="/us/vps-windows-administrado">Windows
+                                                Administrado<span>Todo el
+                                                    poder <br>NINGUNO de los problemas</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="streaming-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Streaming<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="streaming-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-microphone"></i> <a href="/us/audio-streaming">Radio
+                                                Streaming<span>Sonido limpio y fluido <br>Sonido de Calidad</span></a>
+                                        </li>
+                                        <li><i class="fab fas fa-video"></i> <a href="/us/video-streaming">Video
+                                                Streaming<span>Calidad máxima 720p <br>Streaming SSL</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="reseller-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Reseller<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="reseller-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fab fa-cpanel"></i> <a href="/us/reseller-cpanel">cPanel &
+                                                WHM<span>2 CPU - 2Gb Ram, por cPanel</span></a></li>
+                                        <li><i class="fas fa-sign"></i> <a
+                                                href="/us/reseller-directadmin">DirectAdmin<span>2 CPU - 2Gb Ram, por
+                                                    cuenta</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Dominios</a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="dominios-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-globe-americas"></i> <a href="/us/buscar-dominios">Comprobador
+                                                de dominio<span class="nav-new-tag">Consulta de
+                                                    disponibilidad</span></a></li>
+                                        <li><i class="fas fa-random"></i> <a
+                                                href="https://client.netz.com.py/cart.php?a=add&domain=transfer">Transferencia
+                                                de dominio<span>Transfiera su dominio</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="#" role="button" id="header-pages-drop-down"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresa<span
+                                        class="sr-only">(current)</span></a>
+                                <ul class="dropdown-menu coodiv-dropdown-header"
+                                    aria-labelledby="header-pages-drop-down">
+                                    <li><a class="dropdown-item" href="/us/about">Sobre Nosotros</a></li>
+                                    <li><a class="dropdown-item" href="/us/terminos-del-servicio">Términos de
+                                            Servicio</a></li>
+                                    <li><a class="dropdown-item" href="/us/politica-de-privacidad">Politica de
+                                            Privacidad</a></li>
+                                    <li><a class="dropdown-item" href="/us/aviso-legal">Aviso Legal</a></li>
+                                    <li><a class="dropdown-item" href="/us/contact">Cóntactenos</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ul class="header-user-info-coodiv">
+                        <li class="dropdown"><a role="button" id="header-login-dropdown"
+                                href="https://client.netz.com.py/login.php">Iniciar Sesión</a> <span>+595 973 136
+                                822</span>
+                            <div class="dropdown-menu coodiv-dropdown-header user-login-dropdown"
+                                aria-labelledby="header-login-dropdown">
+                                <form class="user-login-dropdown-form" action="https://client.netz.com.py/login.php"
+                                    data-form="validate">
+                                    <div class="form-group username">
+                                        <input type="email" name="username" id="inputEmail" placeholder="E-mail"
+                                            class="form-control" autofocus><i class="fas fa-at"></i>
+                                    </div>
+                                    <div class="form-group password">
+                                        <input type="password" name="password" id="inputPassword"
+                                            placeholder="Contraseña" class="form-control"><i class="fas fa-lock"></i>
+                                    </div>
+                                    <button data-toggle="tooltip" data-placement="left" title="login"
+                                        class="user-login-dropdown-form-button" type="submit"><i
+                                            class="fas fa-angle-right"></i></button>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <section style="background: #fff" class="padding-70-0 position-relative">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-md-8 about-us-img-section">
+                    <img src="/assets/img/demo/directadmin.png" alt="" / loading="lazy" decoding="async">
+                </div>
+                <div class="col-md-4 side-text-right-container d-flex mx-auto flex-column">
+                    <div class="mb-auto"></div>
+                    <h1 class="side-text-right-title f-size30">Alojamiento de<br> revendedor ilimitado</h1>
+                    <h2 class="side-text-right-title f-size25">Desarrollado por DirectAdmin</h2>
+                    <p class="side-text-right-text f-size16">Nuestro alojamiento de revendedor ilimitado proporciona un
+                        rendimiento de vanguardia a una tarifa mensual asequible.<br>Inicie su negocio de alojamiento
+                        hoy mismo utilizando DirectAdmin como su panel de control de elección: rompa con las
+                        limitaciones de los precios de cPanel.<br></p>
+                    <p><a class="side-text-right-button" href="/us/reseller-cpanel">Ver cPanel para revendedor</a></p>
+                    <div class="mt-auto"></div>
+                </div>
+            </div>
+        </div>
+        </div><br>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-5 cpanel-resslers-plan">
+                    <div class="cpanel-resslers-plan-header">
+                        <img src="/assets/img/demo/logodirectadmin.png" width="40%" alt="" / loading="lazy"
+                            decoding="async"><br>
+                        <span>Plan Básico</span><br><br>
+                        <h5>Alojamiento de revendedor, nivel de entrada de gran valor, <br>ideal para alojar varios
+                            sitios o blogs.</h5>
+                        <span data-pid="19" data-cycle="monthly">USD 19.97 <i>/ Mensual</i></span>
+                    </div>
+                    <div class="cpanel-resslers-plan-body">
+                        <p>20 cuentas de cPanel</p>
+                        <p>50 GB almacenamiento SSD</p>
+                        <p>2 núcleos de CPU / 2 GB de RAM <br>(por cuenta de alojamiento)</p>
+                        <p>Litespeed Enterprise</p>
+                        <p>Suite de correo CrossBox</p>
+                        <p>Ancho de banda ilimitado</p>
+                        <p>Servidores de nombres personalizados gratuitos</p>
+                        <p>Paquetes ilimitados</p>
+                        <p>Gestión centralizada</p>
+                        <p>Protección DDoS</p>
+                        <p>Soporte técnico 24/7</p>
+                        <p>Let's Encrypt<br>(Certificado SSL Gratis<br>en todas las cuentas)</p>
+                    </div>
+                    <div class="cpanel-resslers-plan-footer">
+                        <a data-whmcs-link data-pid="19"
+                            href="https://client.netz.com.py/cart.php?a=add&pid=19">Contratar</a>
+                        <!--<div style="text-align: center; margin-top: 8px;"><a href="/us/terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                    </div>
+                </div>
+                <div class="col-md-5 cpanel-resslers-plan">
+                    <div class="cpanel-resslers-plan-header t">
+                        <img src="/assets/img/demo/logodirectadmin.png" width="40%" alt="" / loading="lazy"
+                            decoding="async"><br>
+                        <span>Plan Full</span><br><br>
+                        <h5>Alojamiento de revendedor ilimitado impulsado <br>por el Panel de control de DirectAdmin
+                        </h5>
+                        <span data-pid="20" data-cycle="monthly">USD 39.49 <i>/ Mensual</i></span>
+                    </div>
+                    <div class="cpanel-resslers-plan-body">
+                        <p>250 cuentas de cPanel</p>
+                        <p>Almacenamiento SSD ilimitado</p>
+                        <p>2 núcleos de CPU / 2 GB de RAM <br>(por cuenta de alojamiento)</p>
+                        <p>Litespeed Enterprise</p>
+                        <p>Suite de correo CrossBox</p>
+                        <p>Ancho de banda ilimitado</p>
+                        <p>Servidores de nombres personalizados gratuitos</p>
+                        <p>Paquetes ilimitados</p>
+                        <p>Gestión centralizada</p>
+                        <p>Protección DDoS</p>
+                        <p>Soporte técnico 24/7</p>
+                        <p>Let's Encrypt<br>(Certificado SSL Gratis<br>en todas las cuentas)</p>
+                    </div>
+                    <div class="cpanel-resslers-plan-footer t">
+                        <a data-whmcs-link data-pid="20"
+                            href="https://client.netz.com.py/cart.php?a=add&pid=20">Contratar</a>
+                        <!--<div style="text-align: center; margin-top: 8px;"><a href="/us/terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section style="background: #fff" class="padding-100-0 position-relative">
+        <div class="container">
+            <h5 class="title-default-coodiv-two">¿Cómo funciona?<br>
+                <span>VEA NUESTRA DESCRIPCIÓN GENERAL DE NUESTRO ALOJAMIENTO PARA REVENDEDORES</span>
+            </h5>
+            <div class="row justify-content-center mr-tp-70 how-it-work-section-row2">
+                <div class="col-md-3">
+                    <div class="how-it-works-box">
+                        <img src="/assets/img/svgs/reseller/precio-bajo.svg" width="60px" alt="" loading="lazy"
+                            decoding="async">
+                        <h5>Negocios de bajo costo</h5>
+                        <p>Reseller Hosting es una opción de bajo costo para administrar su propio negocio con éxito.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="how-it-works-box">
+                        <img src="/assets/img/svgs/reseller/tasa-de-interes-fija.svg" width="60px" alt="" loading="lazy"
+                            decoding="async">
+                        <h5>Ingresos fijos</h5>
+                        <p>Puede ejecutar un negocio de alojamiento de forma independiente o como un servicio adicional.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="how-it-works-box">
+                        <img src="/assets/img/svgs/reseller/marca.svg" width="60px" alt="" loading="lazy"
+                            decoding="async">
+                        <h5>Tu marca</h5>
+                        <p>Personalice cPanel para sus clientes con su propio logotipo y marca.<br><br></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="how-it-works-box">
+                        <img src="/assets/img/svgs/reseller/varita-magica.svg" width="60px" alt="" loading="lazy"
+                            decoding="async">
+                        <h5>Automatización</h5>
+                        <p>Haga crecer su negocio en piloto automático, utilizando nuestra plataforma líder en la
+                            industria.</p>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        <div class="container">
+            <h5 class="title-default-coodiv-tree"><span>Nosotros nos encargamos de...</span></h5>
+            <div class="row justify-content-left mr-tp-30">
+                <div class="col-md-4">
+                    <div class="features-box-style-two">
+                        <i class="fas fa-toolbox"></i>
+                        <h5>Gestionar la plataforma</h5>
+                        <p>Gestionamos proactivamente nuestros servidores para asegurarnos de ofrecer la mejor
+                            plataforma de alojamiento para revendedores. Nuestros ingenieros trabajan arduamente para
+                            garantizar que nuestra plataforma de alojamiento en la nube de múltiples rutas sirva a sus
+                            sitios web lo más rápido posible y permanezca en línea en todo momento.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="features-box-style-two">
+                        <i class="fas fa-shield-alt"></i>
+                        <h5>Seguridad del servidor</h5>
+                        <p>Trabajamos mucho para mantener nuestros servidores seguros y protegidos contra posibles
+                            amenazas a través de nuestras instalaciones de protección de nivel de red y malware. También
+                            usamos CloudLinux en todos nuestros servicios compartidos para garantizar que cada usuario
+                            tenga su propio aislamiento.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="features-box-style-two">
+                        <i class="fab fa-cpanel"></i>
+                        <h5>Aplicaciones y software</h5>
+                        <p>Nuestros paquetes de revendedor incluyen DirectAdmin como estándar, junto con nuestra
+                            combinación única de herramientas e instalaciones para hacer que la experiencia de hospedaje
+                            para sus clientes sea una alegría absoluta. Desde instalaciones de almacenamiento en caché
+                            únicas integradas internamente hasta malware y seguridad.</p>
+                    </div>
+                </div>
+            </div>
+            <h5 class="title-default-coodiv-tree"><span>Tú te encargas de...</span></h5>
+            <div class="row justify-content-left mr-tp-30">
+                <div class="col-md-4">
+                    <div class="features-box-style-two">
+                        <i class="fas fa-headset"></i>
+                        <h5>Apoyando a sus clientes</h5>
+                        <p>Como revendedor, usted es responsable de brindar soporte técnico a sus clientes, ya sea solo
+                            o dirigiendo su propio pequeño equipo de agentes. Usted sería el contacto de sus clientes,
+                            ya que no podríamos comunicarnos con ellos directamente.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="features-box-style-two">
+                        <i class="fas fa-chart-line"></i>
+                        <h5>Gestionar su negocio</h5>
+                        <p>Sería responsable del marketing, la publicidad, los precios, los paquetes y la gestión
+                            general de su empresa. Para ayudar con la automatización de su negocio, le recomendamos que
+                            utilice software de automatización de alojamiento como WHMCS o Blesta.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="features-box-style-two">
+                        <i class="fas fa-users-cog"></i>
+                        <h5>Configurar cuentas de cliente</h5>
+                        <p>Puede crear y administrar las cuentas de alojamiento de sus clientes a través del intuitivo y
+                            fácil de usar DirectAdmin, sin embargo, también le recomendamos que compre una licencia
+                            WHMCS que automatizaría esto para usted y su negocio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="footer-container"></div>
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/template-scripts.js"></script>
+    <script src="/assets/js/flickity.pkgd.min.js"></script>
+    <script src="/assets/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/assets/js/parallax.min.js"></script>
+    <script src="/assets/js/mailchamp.js"></script>
+    <script src="/assets/js/bootstrap.offcanvas.min.js"></script>
+    <script src="/assets/js/jquery.touchSwipe.min.js"></script>
+    <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/footer.js"></script>
+    <script type="text/javascript">
+        window.$crisp = []; window.CRISP_WEBSITE_ID = "02f304ef-eff7-4205-aa12-3ba5680bc43f";
+        (function () {
+            function loadCrisp() {
+                if (window.crispLoaded) return;
+                window.crispLoaded = true;
+                var d = document, s = d.createElement("script");
+                s.src = "https://client.crisp.chat/l.js";
+                s.async = 1;
+                d.getElementsByTagName("head")[0].appendChild(s);
+            }
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(function () { setTimeout(loadCrisp, 2500); });
+            } else {
+                setTimeout(loadCrisp, 2500);
+            }
+            ['scroll', 'touchstart', 'mousemove'].forEach(function (ev) {
+                window.addEventListener(ev, loadCrisp, { once: true, passive: true });
+            });
+        })();
+    </script>
+</body>
+
+</html>

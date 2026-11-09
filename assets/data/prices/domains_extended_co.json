@@ -1,0 +1,283 @@
+﻿{
+    "countryCode":  "co",
+    "currency":  "COP",
+    "generatedAt":  "2026-11-09T10:42:24-03:00",
+    "totalExtended":  55,
+    "domains":  {
+                    "store":  {
+                                  "register":  20958,
+                                  "renew":  62958,
+                                  "transfer":  62958
+                              },
+                    "tech":  {
+                                 "register":  20958,
+                                 "renew":  62958,
+                                 "transfer":  62958
+                             },
+                    "site":  {
+                                 "register":  12558,
+                                 "renew":  54558,
+                                 "transfer":  54558
+                             },
+                    "space":  {
+                                  "register":  54558,
+                                  "renew":  96558,
+                                  "transfer":  96558
+                              },
+                    "digital":  {
+                                    "register":  54558,
+                                    "renew":  96558,
+                                    "transfer":  96558
+                                },
+                    "link":  {
+                                 "register":  54558,
+                                 "renew":  96558,
+                                 "transfer":  96558
+                             },
+                    "xyz":  {
+                                "register":  12558,
+                                "renew":  54558,
+                                "transfer":  54558
+                            },
+                    "dev":  {
+                                "register":  54558,
+                                "renew":  96558,
+                                "transfer":  96558
+                            },
+                    "cloud":  {
+                                  "register":  54558,
+                                  "renew":  96558,
+                                  "transfer":  96558
+                              },
+                    "lat":  {
+                                "register":  54558,
+                                "renew":  96558,
+                                "transfer":  96558
+                            },
+                    "mobi":  {
+                                 "register":  54558,
+                                 "renew":  96558,
+                                 "transfer":  96558
+                             },
+                    "io":  {
+                               "register":  209958,
+                               "renew":  251958,
+                               "transfer":  251958
+                           },
+                    "ai":  {
+                               "register":  209958,
+                               "renew":  251958,
+                               "transfer":  251958
+                           },
+                    "co":  {
+                               "register":  54558,
+                               "renew":  96558,
+                               "transfer":  96558
+                           },
+                    "me":  {
+                               "register":  54558,
+                               "renew":  96558,
+                               "transfer":  96558
+                           },
+                    "cc":  {
+                               "register":  54558,
+                               "renew":  96558,
+                               "transfer":  96558
+                           },
+                    "ws":  {
+                               "register":  54558,
+                               "renew":  96558,
+                               "transfer":  96558
+                           },
+                    "biz.py":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "net.br":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "com.ar":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "com.br":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "com.mx":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "com.co":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "cl":  {
+                               "register":  54558,
+                               "renew":  96558,
+                               "transfer":  96558
+                           },
+                    "agency":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "solutions":  {
+                                      "register":  54558,
+                                      "renew":  96558,
+                                      "transfer":  96558
+                                  },
+                    "company":  {
+                                    "register":  54558,
+                                    "renew":  96558,
+                                    "transfer":  96558
+                                },
+                    "guru":  {
+                                 "register":  54558,
+                                 "renew":  96558,
+                                 "transfer":  96558
+                             },
+                    "live":  {
+                                 "register":  54558,
+                                 "renew":  96558,
+                                 "transfer":  96558
+                             },
+                    "stream":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "zone":  {
+                                 "register":  54558,
+                                 "renew":  96558,
+                                 "transfer":  96558
+                             },
+                    "email":  {
+                                  "register":  54558,
+                                  "renew":  96558,
+                                  "transfer":  96558
+                              },
+                    "news":  {
+                                 "register":  54558,
+                                 "renew":  96558,
+                                 "transfer":  96558
+                             },
+                    "world":  {
+                                  "register":  54558,
+                                  "renew":  96558,
+                                  "transfer":  96558
+                              },
+                    "global":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "media":  {
+                                  "register":  54558,
+                                  "renew":  96558,
+                                  "transfer":  96558
+                              },
+                    "network":  {
+                                    "register":  54558,
+                                    "renew":  96558,
+                                    "transfer":  96558
+                                },
+                    "software":  {
+                                     "register":  54558,
+                                     "renew":  96558,
+                                     "transfer":  96558
+                                 },
+                    "academy":  {
+                                    "register":  54558,
+                                    "renew":  96558,
+                                    "transfer":  96558
+                                },
+                    "center":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "support":  {
+                                    "register":  54558,
+                                    "renew":  96558,
+                                    "transfer":  96558
+                                },
+                    "services":  {
+                                     "register":  54558,
+                                     "renew":  96558,
+                                     "transfer":  96558
+                                 },
+                    "systems":  {
+                                    "register":  54558,
+                                    "renew":  96558,
+                                    "transfer":  96558
+                                },
+                    "expert":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "consulting":  {
+                                       "register":  54558,
+                                       "renew":  96558,
+                                       "transfer":  96558
+                                   },
+                    "marketing":  {
+                                      "register":  54558,
+                                      "renew":  96558,
+                                      "transfer":  96558
+                                  },
+                    "host":  {
+                                 "register":  54558,
+                                 "renew":  96558,
+                                 "transfer":  96558
+                             },
+                    "press":  {
+                                  "register":  54558,
+                                  "renew":  96558,
+                                  "transfer":  96558
+                              },
+                    "vip.py":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "website":  {
+                                    "register":  54558,
+                                    "renew":  96558,
+                                    "transfer":  96558
+                                },
+                    "design":  {
+                                   "register":  54558,
+                                   "renew":  96558,
+                                   "transfer":  96558
+                               },
+                    "photography":  {
+                                        "register":  54558,
+                                        "renew":  96558,
+                                        "transfer":  96558
+                                    },
+                    "finance":  {
+                                    "register":  54558,
+                                    "renew":  96558,
+                                    "transfer":  96558
+                                },
+                    "capital":  {
+                                    "register":  54558,
+                                    "renew":  96558,
+                                    "transfer":  96558
+                                },
+                    "trade":  {
+                                  "register":  54558,
+                                  "renew":  96558,
+                                  "transfer":  96558
+                              }
+                }
+}

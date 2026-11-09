@@ -1,0 +1,283 @@
+﻿{
+    "countryCode":  "mx",
+    "currency":  "MXN",
+    "generatedAt":  "2026-11-09T10:42:24-03:00",
+    "totalExtended":  55,
+    "domains":  {
+                    "store":  {
+                                  "register":  97.3,
+                                  "renew":  292.3,
+                                  "transfer":  292.3
+                              },
+                    "tech":  {
+                                 "register":  97.3,
+                                 "renew":  292.3,
+                                 "transfer":  292.3
+                             },
+                    "site":  {
+                                 "register":  58.31,
+                                 "renew":  253.3,
+                                 "transfer":  253.3
+                             },
+                    "space":  {
+                                  "register":  253.3,
+                                  "renew":  448.31,
+                                  "transfer":  448.31
+                              },
+                    "digital":  {
+                                    "register":  253.3,
+                                    "renew":  448.31,
+                                    "transfer":  448.31
+                                },
+                    "link":  {
+                                 "register":  253.3,
+                                 "renew":  448.31,
+                                 "transfer":  448.31
+                             },
+                    "xyz":  {
+                                "register":  58.31,
+                                "renew":  253.3,
+                                "transfer":  253.3
+                            },
+                    "dev":  {
+                                "register":  253.3,
+                                "renew":  448.31,
+                                "transfer":  448.31
+                            },
+                    "cloud":  {
+                                  "register":  253.3,
+                                  "renew":  448.31,
+                                  "transfer":  448.31
+                              },
+                    "lat":  {
+                                "register":  253.3,
+                                "renew":  448.31,
+                                "transfer":  448.31
+                            },
+                    "mobi":  {
+                                 "register":  253.3,
+                                 "renew":  448.31,
+                                 "transfer":  448.31
+                             },
+                    "io":  {
+                               "register":  974.8,
+                               "renew":  1169.8,
+                               "transfer":  1169.8
+                           },
+                    "ai":  {
+                               "register":  974.8,
+                               "renew":  1169.8,
+                               "transfer":  1169.8
+                           },
+                    "co":  {
+                               "register":  253.3,
+                               "renew":  448.31,
+                               "transfer":  448.31
+                           },
+                    "me":  {
+                               "register":  253.3,
+                               "renew":  448.31,
+                               "transfer":  448.31
+                           },
+                    "cc":  {
+                               "register":  253.3,
+                               "renew":  448.31,
+                               "transfer":  448.31
+                           },
+                    "ws":  {
+                               "register":  253.3,
+                               "renew":  448.31,
+                               "transfer":  448.31
+                           },
+                    "biz.py":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "net.br":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "com.ar":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "com.br":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "com.mx":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "com.co":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "cl":  {
+                               "register":  253.3,
+                               "renew":  448.31,
+                               "transfer":  448.31
+                           },
+                    "agency":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "solutions":  {
+                                      "register":  253.3,
+                                      "renew":  448.31,
+                                      "transfer":  448.31
+                                  },
+                    "company":  {
+                                    "register":  253.3,
+                                    "renew":  448.31,
+                                    "transfer":  448.31
+                                },
+                    "guru":  {
+                                 "register":  253.3,
+                                 "renew":  448.31,
+                                 "transfer":  448.31
+                             },
+                    "live":  {
+                                 "register":  253.3,
+                                 "renew":  448.31,
+                                 "transfer":  448.31
+                             },
+                    "stream":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "zone":  {
+                                 "register":  253.3,
+                                 "renew":  448.31,
+                                 "transfer":  448.31
+                             },
+                    "email":  {
+                                  "register":  253.3,
+                                  "renew":  448.31,
+                                  "transfer":  448.31
+                              },
+                    "news":  {
+                                 "register":  253.3,
+                                 "renew":  448.31,
+                                 "transfer":  448.31
+                             },
+                    "world":  {
+                                  "register":  253.3,
+                                  "renew":  448.31,
+                                  "transfer":  448.31
+                              },
+                    "global":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "media":  {
+                                  "register":  253.3,
+                                  "renew":  448.31,
+                                  "transfer":  448.31
+                              },
+                    "network":  {
+                                    "register":  253.3,
+                                    "renew":  448.31,
+                                    "transfer":  448.31
+                                },
+                    "software":  {
+                                     "register":  253.3,
+                                     "renew":  448.31,
+                                     "transfer":  448.31
+                                 },
+                    "academy":  {
+                                    "register":  253.3,
+                                    "renew":  448.31,
+                                    "transfer":  448.31
+                                },
+                    "center":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "support":  {
+                                    "register":  253.3,
+                                    "renew":  448.31,
+                                    "transfer":  448.31
+                                },
+                    "services":  {
+                                     "register":  253.3,
+                                     "renew":  448.31,
+                                     "transfer":  448.31
+                                 },
+                    "systems":  {
+                                    "register":  253.3,
+                                    "renew":  448.31,
+                                    "transfer":  448.31
+                                },
+                    "expert":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "consulting":  {
+                                       "register":  253.3,
+                                       "renew":  448.31,
+                                       "transfer":  448.31
+                                   },
+                    "marketing":  {
+                                      "register":  253.3,
+                                      "renew":  448.31,
+                                      "transfer":  448.31
+                                  },
+                    "host":  {
+                                 "register":  253.3,
+                                 "renew":  448.31,
+                                 "transfer":  448.31
+                             },
+                    "press":  {
+                                  "register":  253.3,
+                                  "renew":  448.31,
+                                  "transfer":  448.31
+                              },
+                    "vip.py":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "website":  {
+                                    "register":  253.3,
+                                    "renew":  448.31,
+                                    "transfer":  448.31
+                                },
+                    "design":  {
+                                   "register":  253.3,
+                                   "renew":  448.31,
+                                   "transfer":  448.31
+                               },
+                    "photography":  {
+                                        "register":  253.3,
+                                        "renew":  448.31,
+                                        "transfer":  448.31
+                                    },
+                    "finance":  {
+                                    "register":  253.3,
+                                    "renew":  448.31,
+                                    "transfer":  448.31
+                                },
+                    "capital":  {
+                                    "register":  253.3,
+                                    "renew":  448.31,
+                                    "transfer":  448.31
+                                },
+                    "trade":  {
+                                  "register":  253.3,
+                                  "renew":  448.31,
+                                  "transfer":  448.31
+                              }
+                }
+}

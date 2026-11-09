@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="pt-BR" data-country="br" class="prices-loading">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="/assets/img/header/N-SVG.svg" type="image/x-icon">
+    <link rel="preload" href="/assets/data/prices/br.json?v=1" as="fetch" crossorigin>
+    <style>
+        .prices-loading [data-pid], .prices-loading [data-domain], .prices-loading [data-price] { opacity: 0; }
+        [data-pid], [data-domain], [data-price] { transition: opacity 0.15s ease-in; }
+    </style>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/main.min.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/fontawesome-all.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+    <link href="/assets/css/typography.css" rel="stylesheet">
+    <link href="/assets/css/whatsapp.css" rel="stylesheet">
+    <title>Hosting Exclusivo y Empresarial Dedicado | NETZ</title>
+    <meta name="description"
+        content="Web Hosting con recursos de CPU y memoria RAM 100% exclusivos para proyectos de alta demanda, tiendas online y empresas." />
+    <meta name="keywords"
+        content="hosting exclusivo, hosting empresarial, hosting recursos dedicados, hosting alto rendimiento" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://netz.com.py/br/hosting-exclusivo">
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://netz.com.py/br/hosting-exclusivo">
+    <meta property="og:site_name" content="NETZ">
+    <meta property="og:title" content="Hosting Exclusivo y Empresarial Dedicado | NETZ">
+    <meta property="og:description"
+        content="Web Hosting con recursos de CPU y memoria RAM 100% exclusivos para proyectos de alta demanda, tiendas online y empresas.">
+    <meta property="og:image" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+    <meta property="og:image:secure_url" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_LA">
+    <meta property="og:locale:alternate" content="es_ES">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hosting Exclusivo y Empresarial Dedicado | NETZ">
+    <meta name="twitter:description"
+        content="Web Hosting con recursos de CPU y memoria RAM 100% exclusivos para proyectos de alta demanda, tiendas online y empresas.">
+    <meta name="twitter:image" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+</head>
+
+<body>
+    <div id="coodiv-header" class="d-flex mx-auto flex-column subpages-header">
+        <div class="bg_overlay_header">
+            <div class="bg-img-header-new-standard">&nbsp;</div>
+        </div>
+        <div id="navbar-container">
+            <nav id="coodiv-navbar-header" class="navbar navbar-expand-md fixed-header-layout">
+                <div class="container main-header-coodiv-s">
+                    <a class="navbar-brand" href="/br/"><img src="/assets/img/header/NETZ-IA.svg" width="100px"
+                            alt="Logo" decoding="async" /></a>
+                    <button class="navbar-toggle offcanvas-toggle menu-btn-span-bar ml-auto" data-toggle="offcanvas"
+                        data-target="#offcanvas-menu-home">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="collapse navbar-collapse navbar-offcanvas" id="offcanvas-menu-home">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="/br/">Inicio<span class="sr-only">(current)</span> </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Hosting</a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="webhosting-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-infinity"></i> <a href="/br/hosting-ilimitado">Hosting
+                                                Ilimitado<span class="nav-new-tag">Servicio sin límites de
+                                                    recursos</span></a></li>
+                                        <li><i class="fas fa-server"></i> <a href="/br/hosting-exclusivo">Hosting
+                                                Exclusivo<span>Recursos exclusivos</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="vps-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Vps<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="vps-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fab fa-linux"></i> <a href="/br/vps-linux-no-administrado">Linux
+                                                no administrado<span>¡Administre usted mismo!</span></a></li>
+                                        <li><i class="fab fa-linux"></i> <a href="/br/vps-linux-administrado">Linux
+                                                Administrado<span>Todo el poder <br>NINGUNO de los problemas</span></a>
+                                        </li>
+                                        <li><i class="fab fa-windows"></i> <a
+                                                href="/br/vps-windows-no-administrado">Windows no
+                                                Administrado<span>¡Administre usted mismo!</span></a></li>
+                                        <li><i class="fab fa-windows"></i> <a
+                                                href="/br/vps-windows-administrado">Windows Administrado<span>Todo el
+                                                    poder <br>NINGUNO de los problemas</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="streaming-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Streaming<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="streaming-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-microphone"></i> <a href="/br/audio-streaming">Radio
+                                                Streaming<span>Sonido limpio y fluido <br>Sonido de Calidad</span></a>
+                                        </li>
+                                        <li><i class="fab fas fa-video"></i> <a href="/br/video-streaming">Video
+                                                Streaming<span>Calidad máxima 720p <br>Streaming SSL</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="reseller-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Reseller<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="reseller-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fab fa-cpanel"></i> <a href="/br/reseller-cpanel">cPanel &
+                                                WHM<span>2 CPU - 2Gb Ram, por cPanel</span></a></li>
+                                        <li><i class="fas fa-sign"></i> <a
+                                                href="/br/reseller-directadmin">DirectAdmin<span>2 CPU - 2Gb Ram, por
+                                                    cuenta</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Dominios</a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="dominios-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-globe-americas"></i> <a
+                                                href="/br/buscar-dominios">Comprobador de dominio<span
+                                                    class="nav-new-tag">Consulta de disponibilidad</span></a></li>
+                                        <li><i class="fas fa-random"></i> <a
+                                                href="https://client.netz.com.py/cart.php?a=add&domain=transfer">Transferencia
+                                                de dominio<span>Transfiera su dominio</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="#" role="button" id="header-pages-drop-down"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresa<span
+                                        class="sr-only">(current)</span></a>
+                                <ul class="dropdown-menu coodiv-dropdown-header"
+                                    aria-labelledby="header-pages-drop-down">
+                                    <li><a class="dropdown-item" href="/br/about">Sobre Nosotros</a></li>
+                                    <li><a class="dropdown-item" href="/br/terminos-del-servicio">Términos de
+                                            Servicio</a></li>
+                                    <li><a class="dropdown-item" href="/br/politica-de-privacidad">Politica de
+                                            Privacidad</a></li>
+                                    <li><a class="dropdown-item" href="/br/aviso-legal">Aviso Legal</a></li>
+                                    <li><a class="dropdown-item" href="/br/contact">Cóntactenos</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ul class="header-user-info-coodiv">
+                        <li class="dropdown"><a role="button" id="header-login-dropdown"
+                                href="https://client.netz.com.py/login.php">Iniciar Sesión</a> <span>0973 136 822</span>
+                            <div class="dropdown-menu coodiv-dropdown-header user-login-dropdown"
+                                aria-labelledby="header-login-dropdown">
+                                <form class="user-login-dropdown-form" action="https://client.netz.com.py/login.php"
+                                    data-form="validate">
+                                    <div class="form-group username">
+                                        <input type="email" name="username" id="inputEmail" placeholder="E-mail"
+                                            class="form-control" autofocus><i class="fas fa-at"></i>
+                                    </div>
+                                    <div class="form-group password">
+                                        <input type="password" name="password" id="inputPassword"
+                                            placeholder="Contraseña" class="form-control"><i class="fas fa-lock"></i>
+                                    </div>
+                                    <button data-toggle="tooltip" data-placement="left" title="login"
+                                        class="user-login-dropdown-form-button" type="submit"><i
+                                            class="fas fa-angle-right"></i></button>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="mt-auto header-top-height"></div>
+        <main class="container mb-auto">
+            <div class="row">
+                <div class="col-md-5 d-flex mx-auto flex-column">
+                    <div class="mb-auto"></div>
+                    <h3 class="mt-3 main-header-text-title"><span>Mantenga el control total de su entorno <br>con
+                            nuestro Alojamiento Web</span>Hosting Empresarial</h3>
+                </div>
+                <div class="col-md-7">
+                    <div class="breadcrumb-hosting-pages row">
+                        <a class="col-md-3" href="/br/hosting-ilimitado"><span class="off-tag">-20% off</span>
+                            <img src="/assets/img/svgs/hosting.svg" alt="" / loading="lazy" decoding="async">
+                            <span class="sub-breadcrumb-host-title">web hosting<br>Compartido</span>
+                        </a>
+                        <a class="col-md-3 active" href="/br/hosting-exclusivo"><img
+                                src="/assets/img/svgs/dedicated.svg" alt="" / loading="lazy" decoding="async">
+                            <span class="sub-breadcrumb-host-title">Web Hosting<br>Exclusivo</span>
+                        </a>
+                        <a class="col-md-3" href="/br/vps-linux"><span class="off-tag">-15% off</span>
+                            <img src="/assets/img/svgs/servers.svg" alt="" / loading="lazy" decoding="async">
+                            <span class="sub-breadcrumb-host-title">VPS<br>Linux</span>
+                        </a>
+                        <a class="col-md-3" href="/br/vps-windows"><img src="/assets/img/svgs/clouds.svg" alt="#" /
+                                loading="lazy" decoding="async">
+                            <span class="sub-breadcrumb-host-title">VPS<br>Windows</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div class="mt-auto"></div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-between mr-tp-50">
+            <div class="col-md-6 side-text-right-container">
+                <h2 class="side-text-right-title">Alojamiento Empresarial</h2>
+                <p class="side-text-right-text">Potente alojamiento cPanel diseñado para sitios web o comercio
+                    electrónico más grandes y exigentes<br><br>Alojamiento compatible con PCI diseñado para proporcionar
+                    un rendimiento líder en la industria con grandes límites de recursos en unidades NVMe puras.
+                    <br><br>Nuestro alojamiento empresarial es ideal para empresas en crecimiento, blogs o sitios web de
+                    comercio electrónico para un rendimiento líder en la industria. <br><br>
+                <div class="button-row text-center">
+                    <a class="btn jango-color-btn" href="https://trycpanel.net/" target="_blank">Demo C-Panel</a>
+                </div>
+                </p>
+            </div>
+            <div class="col-md-6 side-text-right-image text-center d-flex mx-auto flex-column">
+                <div class="mb-auto"></div>
+                <img src="/assets/img/demo/server.svg" alt="" / loading="lazy" decoding="async">
+                <div class="mt-auto"></div>
+            </div>
+        </div>
+    </div>
+    <section class="padding-100-0 position-relative">
+        <div class="body_overlay_ono"></div>
+        <div class="container">
+            <h3 class="map-comment-area-title"><span class="mr-tp-20">Recursos exclusivos con mayor velocidad!</span>
+            </h3>
+            <div class="row justify-content-center">
+                <div id="monthly-yearly-chenge" class="mr-tp-40 style-two">
+                    <a class="active monthly-price"> <span class="change-box-text">Mensual</span> <span
+                            class="change-box"></span></a>
+                    <a class="yearli-price"> <span class="change-box-text">Año</span></a>
+                </div>
+            </div>
+            <div class="row justify-content-start second-pricing-table-container mr-tp-30">
+                <div class="col-md-4">
+                    <div class="second-pricing-table">
+                        <h5 class="second-pricing-table-title">Pro<span>Alojamiento rápido y asequible con un potente
+                                almacenamiento en caché.</span></h5>
+                        <span class="second-pricing-table-price monthly">
+                            <i class="monthly" data-pid="15" data-cycle="monthly">USD. 21.28<small> /Mensual</small></i>
+                            <i class="yearly" data-pid="15" data-cycle="annually">USD. 212.80<small> /Año</small></i>
+                        </span>
+                        <ul class="second-pricing-table-body">
+                            <li>50 GB de almacenamiento NVMe</li>
+                            <li>4 CPU / 4GB RAM / 75 EP</li>
+                            <li>Dominios: 10</li>
+                            <li>Kit de herramientas de WordPress</li>
+                            <li>Litespeed con Bolt-Cache</li>
+                            <li>Cumple con PCI</li>
+                            <li>Copias de seguridad por hora</li>
+                            <li>99,99% de garantía de tiempo de actividad</li>
+                            <li>Suite de correo CrossBox</li>
+                            <li>Ancho de banda ilimitado</li>
+                            <li>Buzones ilimitados</li>
+                            <li>Bases de datos MySQL ilimitadas</li>
+                            <li>Migración libre</li>
+                            <li>Nombre de dominio gratis</li>
+                            <li>Certificados SSL gratuitos</li>
+                            <li>Firewall de aplicaciones web</li>
+                            <li>Protección DDoS</li>
+                            <li>Soporte técnico 24/7</li>
+                        </ul>
+                        <a class="second-pricing-table-button" data-whmcs-link data-pid="15"
+                            href="https://client.netz.com.py/cart.php?a=add&pid=15">Contratar</a>
+                        <!--<div style="text-align: center; margin-top: 8px;"><a href="/br/terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="second-pricing-table active">
+                        <h5 class="second-pricing-table-title">Negocio<span>Potente alojamiento web para su negocio o
+                                blog en crecimiento.</span></h5>
+                        <span class="second-pricing-table-price monthly">
+                            <i class="monthly" data-pid="16" data-cycle="monthly">USD. 38.80<small> /Mensual</small></i>
+                            <i class="yearly" data-pid="16" data-cycle="annually">USD. 388.00<small> /Año</small></i>
+                        </span>
+                        <ul class="second-pricing-table-body">
+                            <li>100 GB de almacenamiento NVMe</li>
+                            <li>6 CPU / 6GB RAM / 100 EP</li>
+                            <li>Dominios: ilimitados</li>
+                            <li>Kit de herramientas de WordPress</li>
+                            <li>Litespeed con Bolt-Cache</li>
+                            <li>Cumple con PCI</li>
+                            <li>Copias de seguridad por hora</li>
+                            <li>99,99% de garantía de tiempo de actividad</li>
+                            <li>Suite de correo CrossBox</li>
+                            <li>Ancho de banda ilimitado</li>
+                            <li>Buzones ilimitados</li>
+                            <li>Bases de datos MySQL ilimitadas</li>
+                            <li>Migración libre</li>
+                            <li>Nombre de dominio gratis</li>
+                            <li>Certificados SSL gratuitos</li>
+                            <li>Firewall de aplicaciones web</li>
+                            <li>Protección DDoS</li>
+                            <li>Soporte técnico 24/7</li>
+                        </ul>
+                        <a class="second-pricing-table-button" data-whmcs-link data-pid="16"
+                            href="https://client.netz.com.py/cart.php?a=add&pid=16">Contratar</a>
+                        <!--<div style="text-align: center; margin-top: 8px;"><a href="/br/terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="second-pricing-table">
+                        <h5 class="second-pricing-table-title">Empresa<span>Potente alojamiento web para su negocio o
+                                blog en crecimiento.</span></h5>
+                        <span class="second-pricing-table-price monthly">
+                            <i class="monthly" data-pid="17" data-cycle="monthly">USD. 75.07<small> /Mensual</small></i>
+                            <i class="yearly" data-pid="17" data-cycle="annually">USD. 750.70<small> /Año</small></i>
+                        </span>
+                        <ul class="second-pricing-table-body">
+                            <li>250 GB de almacenamiento NVMe</li>
+                            <li>8 CPU / 8 GB de RAM / 150 EP</li>
+                            <li>Dominios: ilimitados</li>
+                            <li>Kit de herramientas de WordPress</li>
+                            <li>Litespeed con Bolt-Cache</li>
+                            <li>Cumple con PCI</li>
+                            <li>Copias de seguridad por hora</li>
+                            <li>99,99% de garantía de tiempo de actividad</li>
+                            <li>Suite de correo CrossBox</li>
+                            <li>Ancho de banda ilimitado</li>
+                            <li>Buzones ilimitados</li>
+                            <li>Bases de datos MySQL ilimitadas</li>
+                            <li>Migración libre</li>
+                            <li>Nombre de dominio gratis</li>
+                            <li>Certificados SSL gratuitos</li>
+                            <li>Firewall de aplicaciones web</li>
+                            <li>Protección DDoS</li>
+                            <li>Soporte técnico 24/7</li>
+                        </ul>
+                        <a class="second-pricing-table-button" data-whmcs-link data-pid="17"
+                            href="https://client.netz.com.py/cart.php?a=add&pid=17">Contratar</a>
+                        <!--<div style="text-align: center; margin-top: 8px;"><a href="/br/terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                    </div>
+                </div>
+            </div><br><br>
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-md-8 about-us-img-section">
+                        <img src="/assets/img/demo/ilimitado.svg" alt="" / loading="lazy" decoding="async">
+                    </div>
+                    <div class="col-md-4 side-text-right-container d-flex mx-auto flex-column">
+                        <div class="mb-auto"></div>
+                        <h2>Full Ilimitado</h2>
+                        <h5><span>Ideal para comercio electrónico o negocios empresariales.</span></h5>
+                        <span class="second-pricing-table-price monthly">
+                            <i class="monthly" data-pid="18" data-cycle="monthly">USD. 140.20<small> /Mensual</small></i>
+                            <i class="yearly" data-pid="18" data-cycle="annually">USD. 1402.00<small> /Año</small></i>
+                        </span>
+                        <ul class="second-pricing-table-body">
+                            Almacenamiento ilimitado NVMe
+                            <br>12 CPU / 12 GB de RAM / 250 EP
+                            <br>Dominios: ilimitados
+                            <br>Kit de herramientas de WordPress
+                            <br>Litespeed con Bolt-Cache
+                            <br>Cumple con PCI
+                            <br>Copias de seguridad por hora
+                            <br>99,99% de garantía de tiempo de actividad
+                            <br>Suite de correo CrossBox
+                            <br>Ancho de banda ilimitado
+                            <br>Buzones ilimitados
+                            <br>Bases de datos MySQL ilimitadas
+                            <br>Migración libre
+                            <br>Nombre de dominio gratis
+                            <br>Certificados SSL gratuitos
+                            <br>Firewall de aplicaciones web
+                            <br>Protección DDoS
+                            <br>Soporte técnico 24/7
+                        </ul>
+                        <a class="second-pricing-table-button text-center" data-whmcs-link data-pid="18"
+                            href="https://client.netz.com.py/cart.php?a=add&pid=18">Contratar</a>
+                        <!--<div style="text-align: center; margin-top: 8px;"><a href="/br/terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                    </div>
+                </div>
+            </div>
+    </section>
+    <div class="container">
+        <h5 class="title-default-coodiv-two">Herramientas Simples Y Potentes<span class="mr-tp-10">Servidores AMD EPYC
+                7502P, incorporando la tecnología multihilo simultáneo, 64 cores (núcleos), 320GB DDR4 ECC de memoria
+                RAM, unidades de disco NVMe 100%</span></h5>
+        <div class="row justify-content-center mr-tp-40">
+            <div class="col-md-3">
+                <div class="box-features-one">
+                    <a href="#"> <img src="/assets/img/hosting/cpanel.png" width="100px" alt="" / loading="lazy"
+                            decoding="async"> </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box-features-one">
+                    <a href="#"> <img src="/assets/img/hosting/mysql.png" width="100px" alt="" / loading="lazy"
+                            decoding="async"> </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box-features-one">
+                    <a href="#"> <img src="/assets/img/hosting/webmail.png" width="100px" alt="" / loading="lazy"
+                            decoding="async"> </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box-features-one">
+                    <a href="#"> <img src="/assets/img/hosting/phpmyadmin.png" width="120px" alt="" / loading="lazy"
+                            decoding="async"> </a>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mr-tp-10">
+            <div class="col-md-3">
+                <div class="box-features-one">
+                    <a href="#"> <img src="/assets/img/hosting/posgre.png" width="120px" alt="" / loading="lazy"
+                            decoding="async"> </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box-features-one">
+                    <a href="#"> <img src="/assets/img/hosting/horde.png" width="100px" alt="" / loading="lazy"
+                            decoding="async"> </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box-features-one">
+                    <a href="#"> <img src="/assets/img/hosting/softaculous.png" width="120px" alt="" / loading="lazy"
+                            decoding="async"> </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box-features-one">
+                    <a href="#"> <img src="/assets/img/hosting/wordpress.png" width="120px" alt="" / loading="lazy"
+                            decoding="async"> </a>
+                </div>
+            </div>
+        </div>
+    </div><br><br>
+    <div class="container">
+        <div class="tittle-simple-one">
+            <h5>Herramientas simples pero poderosas<span>Todo lo que necesitas y mucho más<br>A un solo lugar a un solo
+                    click de distancia.</span></h5>
+        </div>
+        <div class="row mr-tp-50">
+            <div class="col-md-4">
+                <div class="main-service-box mt-20 text-center">
+                    <img src="/assets/img/demo/rico/cloudflare.svg" width="150px" alt="" / loading="lazy"
+                        decoding="async">
+                    <br><br>
+                    <p>Asegura y garantiza la fiabilidad de tus recursos dirigidos al público como sitios web, API y
+                        aplicaciones.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="main-service-box mt-20 text-center">
+                    <img src="/assets/img/demo/rico/litespeed.svg" width="200px" alt="" / loading="lazy"
+                        decoding="async">
+                    <br><br>
+                    <p>Con este plugin que se conecta directamente con el servidor y utiliza la tecnología y desde
+                        servidor para acelerar WordPress.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="main-service-box mt-20 text-center">
+                    <img src="/assets/img/demo/rico/bitninja.svg" width="200px" alt="" / loading="lazy"
+                        decoding="async"><br><br>
+                    <p>Es prioridad máxima en nuestro servicio.<br>BitNinja protege tanto de ataques únicos como de
+                        multitud de ataques simultaneos.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="main-service-box mt-20 text-center">
+                    <img src="/assets/img/demo/rico/crossbox.svg" width="180px" alt="" / loading="lazy"
+                        decoding="async"><br><br>
+                    <p>Es hermoso, increíblemente rápido y viene con características avanzadas que le brindan a usted y
+                        a su equipo tecnologías de comunicación de vanguardia.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="main-service-box mt-20 text-center">
+                    <img src="/assets/img/demo/rico/wordpress.svg" width="220px" alt="" / loading="lazy"
+                        decoding="async"><br><br>
+                    <p>Es un sistema de gestión de contenidos, Es la forma más simple y popular para crear su propio
+                        sitio o blog, es el manejador de contenidos más grande del mundo.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="main-service-box mt-20 text-center">
+                    <img src="/assets/img/demo/rico/sitepro.svg" width="140px" alt="" / loading="lazy"
+                        decoding="async"><br><br>
+                    <p>Es constructor de sitios web profesional y muy fácil de utilizar. No se necesitas tener
+                        conocimientos en programación o configuraciones complejas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section style="position: relative;margin-bottom: -70px;"
+        class="padding-90-0-100 position-relative overflow-hidden">
+        <span class="section-with-moon-back-under"></span>
+        <span class="section-with-moon-men-quastions-under"></span>
+        <div class="container">
+            <div class="tittle-simple-one">
+                <h5>Preguntas frecuentes<span>En caso de que sus dudas no son aclaradas no dude en visitar nuestra
+                        seccion de <a href="/br/centro-de-ayuda">preguntas y respuestas</a> <br>O escribenos en cualquiera
+                        de nuestra sección de atención al cliente.</span></h5>
+            </div>
+            <div class="row justify-content-left mr-tp-90">
+                <div class="col-md-6">
+                    <div class="nuhost-filter-list-container">
+                        <div class="filter-content-box" id="go-to-qst-02-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Los planes de Hosting son gestionados?</h5>
+                            <p>El hosting de NETZ está gestionado parcialmente. Puedes configurar distintas opciones de
+                                tu cuenta a través del cPanel individual.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-04-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Es necesario comprar un dominio al adquirir un plan?</h5>
+                            <p>No es necesario comprar un dominio para contratar un plan. Puedes trabajar con tu
+                                proveedor o transferir el dominio con nosotros.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-05-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Cuanto tiempo tarda en activarse mi cuenta?</h5>
+                            <p>La activación de los planes se realiza una vez recibamos el pago por el servicio
+                                contratado.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-06-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Puedo elegir un plan y luego cambiarlo por otro?</h5>
+                            <p>Sí. Puedes cambiar de plan en cualquier momento.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-07-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Qué tipo de base de datos están incluidas?</h5>
+                            <p>Las bases de datos disponibles en nuestros planes de Hosting incluyen: bases de datos
+                                MySQL y PostgreSQL bajo MariaDB.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-09-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Cuál es la garantía de disponibilidad?</h5>
+                            <p>Nuestra garantía de disponibilidad del servicio es del 99,9%.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-10-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Qué contenido puedo alojar?</h5>
+                            <p>Todos los servicios ofrecidos por NETZ solo pueden ser utilizados para fines lícitos. No
+                                está permitido alojar pornografía bajo ninguna circunstancia, contenido con derechos de
+                                autor o cualquier otro tipo de contenido que viole nuestros términos del servicio.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-11-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Ofrecemos conexión SSH?</h5>
+                            <p>Ofrecemos conexión SSH en todos nuestros planes de Hosting</p>
+                            <p>La conexión SSH es para usuarios avanzados. Si no tienes los conocimientos suficientes,
+                                no utilices el servicio SSH, no damos ningún tipo de soporte respecto a conexiones SSH,
+                                siendo responsabilidad del cliente todas las acciones que realice.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-12-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Ofrecemos rubygems, Python y node.js?</h5>
+                            <p>Ofrecemos rubygems, python y node.js en todos nuestros planes de Hosting
+                            <p>No damos ningún tipo de soporte o configuraciones personalizadas en los servicios
+                                adicionales de python, rubygems y nodej.js. Los servicios adicionales indicados
+                                requieren de un conocimiento suficiente para su uso. Por favor, si no tienes los
+                                conocimientos necesarios, no utilices ninguno de los servicios.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-14-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Se permite el envió de Spam?</h5>
+                            <p>No está permitido enviar Spam bajo ninguna circunstancia. Enviar Spam es motivo de
+                                suspensión de la cuenta.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-15-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Puedo realizar copias de seguridad?</h5>
+                            <p>Puedes realizar copias de seguridad manuales desde cPanel. Recuerda eliminar la copia de
+                                seguridad una vez la hayas descargado a tu equipo. No está permitido alojar de forma
+                                permanente ninguna copia de seguridad.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-16-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Cual es nuestro nivel de seguridad?</h5>
+                            <p>Disponemos de múltiples niveles de seguridad, filtros, antivirus y firewalls específicos
+                                contra todo tipo de ataques, intentos de intrusión o ataques de denegación de servicio
+                                DDoS.</p>
+                        </div>
+                        <ul id="nuhost-filter-list">
+                            <li><a id="go-to-qst-02">¿Los planes de Hosting son gestionados?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-04">¿Es necesario comprar un dominio al adquirir un plan?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-05">¿Cuanto tiempo tarda en activarse mi cuenta?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-06">¿Puedo elegir un plan y luego cambiarlo por otro?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-07">¿Qué tipo de base de datos están incluidas?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-09">¿Cuál es la garantía de disponibilidad?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-10">¿Qué contenido puedo alojar?<i class="fas fa-angle-right"></i></a>
+                            </li>
+                            <li><a id="go-to-qst-11">¿Ofrecemos conexión SSH?<i class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-12">¿Ofrecemos rubygems, Python y node.js?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-14">¿Se permite el envió de Spam?<i class="fas fa-angle-right"></i></a>
+                            </li>
+                            <li><a id="go-to-qst-15">¿Puedo realizar copias de seguridad?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-16">¿Cual es nuestro nivel de seguridad?<i
+                                        class="fas fa-angle-right"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="footer-container"></div>
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/template-scripts.js"></script>
+    <script src="/assets/js/flickity.pkgd.min.js"></script>
+    <script src="/assets/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/assets/js/parallax.min.js"></script>
+    <script src="/assets/js/mailchamp.js"></script>
+    <script src="/assets/js/bootstrap.offcanvas.min.js"></script>
+    <script src="/assets/js/jquery.touchSwipe.min.js"></script>
+    <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/footer.js"></script>
+    <script src="/assets/js/prices.js" defer></script>
+    <script type="text/javascript">
+        window.$crisp = []; window.CRISP_WEBSITE_ID = "02f304ef-eff7-4205-aa12-3ba5680bc43f";
+        (function () {
+            function loadCrisp() {
+                if (window.crispLoaded) return;
+                window.crispLoaded = true;
+                var d = document, s = d.createElement("script");
+                s.src = "https://client.crisp.chat/l.js";
+                s.async = 1;
+                d.getElementsByTagName("head")[0].appendChild(s);
+            }
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(function () { setTimeout(loadCrisp, 2500); });
+            } else {
+                setTimeout(loadCrisp, 2500);
+            }
+            ['scroll', 'touchstart', 'mousemove'].forEach(function (ev) {
+                window.addEventListener(ev, loadCrisp, { once: true, passive: true });
+            });
+        })();
+    </script>
+</body>
+
+</html>

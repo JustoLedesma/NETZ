@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * NETZ - Script de Sincronización Automática de Precios desde WHMCS
  *
@@ -428,7 +428,26 @@ foreach ($countryConfig as $countryCode => $cMeta) {
         logMsg("Aviso: GetTLDPricing no devolvió resultados para {$countryName} (puede deberse a versión de WHMCS o permisos). Conservando dominios existentes si aplica.", 'NOTICE');
     }
 
-    // Armar payload final para este país
+    // Separar dominios: 26 destacados para el sitio web (index) vs resto de la base
+    $featuredDomainKeys = [
+        'com', 'net', 'org', 'online', 'info', 'biz', 'click', 'us', 'tv', 'la',
+        'srl', 'top', 'vip', 'fun', 'pro', 'app', 'pet', 'bet', 'blog', 'club',
+        'com.py', 'org.py', 'net.py', 'edu.py', 'coop.py', 'mil.py'
+    ];
+
+    $publicDomains = [];
+    $extendedDomains = [];
+
+    foreach ($parsedDomains as $ext => $pInfo) {
+        $extLower = strtolower($ext);
+        if (in_array($extLower, $featuredDomainKeys, true)) {
+            $publicDomains[$extLower] = $pInfo;
+        } else {
+            $extendedDomains[$extLower] = $pInfo;
+        }
+    }
+
+    // 1. Archivo ultraligero para el sitio público (solo 26 dominios + productos)
     $countryPayload = [
         'country' => $countryName,
         'countryCode' => $countryCode,
@@ -438,10 +457,20 @@ foreach ($countryConfig as $countryCode => $cMeta) {
         'generatedAt' => $generatedAt,
         'status' => 'active',
         'products' => $parsedProducts,
-        'domains' => $parsedDomains
+        'domains' => $publicDomains
     ];
-
     saveCountryPrices($countryCode, $countryPayload, $outputDir, $isDryRun);
+
+    // 2. Archivo extendido con el resto de dominios de WHMCS para revisión y auditoría
+    $extendedPayload = [
+        'country' => $countryName,
+        'countryCode' => $countryCode,
+        'currency' => $targetCurrency,
+        'generatedAt' => $generatedAt,
+        'totalExtended' => count($extendedDomains),
+        'domains' => $extendedDomains
+    ];
+    saveCountryPrices("domains_extended_{$countryCode}", $extendedPayload, $outputDir, $isDryRun);
 }
 
 logMsg("Sincronización completada exitosamente.");

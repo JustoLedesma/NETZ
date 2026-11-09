@@ -250,6 +250,15 @@ func main() {
 				fmt.Printf("    ❌ Error escribiendo %s: %v\n", dstPath, err)
 				continue
 			}
+
+			// Si es un país diferente a Paraguay, guardar también en la carpeta raíz del proyecto
+			// para que Git y cPanel (public_html) tengan las carpetas /br/, /us/, etc. directamente
+			if countryCode != "py" {
+				rootCountryDir := countryCode
+				_ = os.MkdirAll(rootCountryDir, 0755)
+				_ = os.WriteFile(filepath.Join(rootCountryDir, page), []byte(transformed), 0644)
+			}
+
 			generatedCount++
 		}
 	}

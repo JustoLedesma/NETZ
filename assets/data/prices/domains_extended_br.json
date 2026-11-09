@@ -1,0 +1,283 @@
+﻿{
+    "countryCode":  "br",
+    "currency":  "BRL",
+    "generatedAt":  "2026-11-09T10:42:24-03:00",
+    "totalExtended":  55,
+    "domains":  {
+                    "store":  {
+                                  "register":  27.94,
+                                  "renew":  83.94,
+                                  "transfer":  83.94
+                              },
+                    "tech":  {
+                                 "register":  27.94,
+                                 "renew":  83.94,
+                                 "transfer":  83.94
+                             },
+                    "site":  {
+                                 "register":  16.74,
+                                 "renew":  72.74,
+                                 "transfer":  72.74
+                             },
+                    "space":  {
+                                  "register":  72.74,
+                                  "renew":  128.74,
+                                  "transfer":  128.74
+                              },
+                    "digital":  {
+                                    "register":  72.74,
+                                    "renew":  128.74,
+                                    "transfer":  128.74
+                                },
+                    "link":  {
+                                 "register":  72.74,
+                                 "renew":  128.74,
+                                 "transfer":  128.74
+                             },
+                    "xyz":  {
+                                "register":  16.74,
+                                "renew":  72.74,
+                                "transfer":  72.74
+                            },
+                    "dev":  {
+                                "register":  72.74,
+                                "renew":  128.74,
+                                "transfer":  128.74
+                            },
+                    "cloud":  {
+                                  "register":  72.74,
+                                  "renew":  128.74,
+                                  "transfer":  128.74
+                              },
+                    "lat":  {
+                                "register":  72.74,
+                                "renew":  128.74,
+                                "transfer":  128.74
+                            },
+                    "mobi":  {
+                                 "register":  72.74,
+                                 "renew":  128.74,
+                                 "transfer":  128.74
+                             },
+                    "io":  {
+                               "register":  279.94,
+                               "renew":  335.94,
+                               "transfer":  335.94
+                           },
+                    "ai":  {
+                               "register":  279.94,
+                               "renew":  335.94,
+                               "transfer":  335.94
+                           },
+                    "co":  {
+                               "register":  72.74,
+                               "renew":  128.74,
+                               "transfer":  128.74
+                           },
+                    "me":  {
+                               "register":  72.74,
+                               "renew":  128.74,
+                               "transfer":  128.74
+                           },
+                    "cc":  {
+                               "register":  72.74,
+                               "renew":  128.74,
+                               "transfer":  128.74
+                           },
+                    "ws":  {
+                               "register":  72.74,
+                               "renew":  128.74,
+                               "transfer":  128.74
+                           },
+                    "biz.py":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "net.br":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "com.ar":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "com.br":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "com.mx":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "com.co":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "cl":  {
+                               "register":  72.74,
+                               "renew":  128.74,
+                               "transfer":  128.74
+                           },
+                    "agency":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "solutions":  {
+                                      "register":  72.74,
+                                      "renew":  128.74,
+                                      "transfer":  128.74
+                                  },
+                    "company":  {
+                                    "register":  72.74,
+                                    "renew":  128.74,
+                                    "transfer":  128.74
+                                },
+                    "guru":  {
+                                 "register":  72.74,
+                                 "renew":  128.74,
+                                 "transfer":  128.74
+                             },
+                    "live":  {
+                                 "register":  72.74,
+                                 "renew":  128.74,
+                                 "transfer":  128.74
+                             },
+                    "stream":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "zone":  {
+                                 "register":  72.74,
+                                 "renew":  128.74,
+                                 "transfer":  128.74
+                             },
+                    "email":  {
+                                  "register":  72.74,
+                                  "renew":  128.74,
+                                  "transfer":  128.74
+                              },
+                    "news":  {
+                                 "register":  72.74,
+                                 "renew":  128.74,
+                                 "transfer":  128.74
+                             },
+                    "world":  {
+                                  "register":  72.74,
+                                  "renew":  128.74,
+                                  "transfer":  128.74
+                              },
+                    "global":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "media":  {
+                                  "register":  72.74,
+                                  "renew":  128.74,
+                                  "transfer":  128.74
+                              },
+                    "network":  {
+                                    "register":  72.74,
+                                    "renew":  128.74,
+                                    "transfer":  128.74
+                                },
+                    "software":  {
+                                     "register":  72.74,
+                                     "renew":  128.74,
+                                     "transfer":  128.74
+                                 },
+                    "academy":  {
+                                    "register":  72.74,
+                                    "renew":  128.74,
+                                    "transfer":  128.74
+                                },
+                    "center":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "support":  {
+                                    "register":  72.74,
+                                    "renew":  128.74,
+                                    "transfer":  128.74
+                                },
+                    "services":  {
+                                     "register":  72.74,
+                                     "renew":  128.74,
+                                     "transfer":  128.74
+                                 },
+                    "systems":  {
+                                    "register":  72.74,
+                                    "renew":  128.74,
+                                    "transfer":  128.74
+                                },
+                    "expert":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "consulting":  {
+                                       "register":  72.74,
+                                       "renew":  128.74,
+                                       "transfer":  128.74
+                                   },
+                    "marketing":  {
+                                      "register":  72.74,
+                                      "renew":  128.74,
+                                      "transfer":  128.74
+                                  },
+                    "host":  {
+                                 "register":  72.74,
+                                 "renew":  128.74,
+                                 "transfer":  128.74
+                             },
+                    "press":  {
+                                  "register":  72.74,
+                                  "renew":  128.74,
+                                  "transfer":  128.74
+                              },
+                    "vip.py":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "website":  {
+                                    "register":  72.74,
+                                    "renew":  128.74,
+                                    "transfer":  128.74
+                                },
+                    "design":  {
+                                   "register":  72.74,
+                                   "renew":  128.74,
+                                   "transfer":  128.74
+                               },
+                    "photography":  {
+                                        "register":  72.74,
+                                        "renew":  128.74,
+                                        "transfer":  128.74
+                                    },
+                    "finance":  {
+                                    "register":  72.74,
+                                    "renew":  128.74,
+                                    "transfer":  128.74
+                                },
+                    "capital":  {
+                                    "register":  72.74,
+                                    "renew":  128.74,
+                                    "transfer":  128.74
+                                },
+                    "trade":  {
+                                  "register":  72.74,
+                                  "renew":  128.74,
+                                  "transfer":  128.74
+                              }
+                }
+}

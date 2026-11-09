@@ -219,7 +219,7 @@
                     drop.classList.remove('show');
                     if (menu) menu.classList.remove('show');
                     if (toggle) toggle.setAttribute('aria-expanded', 'false');
-                }, 180);
+                }, 90);
             }
 
             drop.addEventListener('mouseenter', open);

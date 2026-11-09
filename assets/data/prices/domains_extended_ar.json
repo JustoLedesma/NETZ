@@ -1,0 +1,283 @@
+﻿{
+    "countryCode":  "ar",
+    "currency":  "ARS",
+    "generatedAt":  "2026-11-09T10:42:24-03:00",
+    "totalExtended":  55,
+    "domains":  {
+                    "store":  {
+                                  "register":  5988,
+                                  "renew":  17988,
+                                  "transfer":  17988
+                              },
+                    "tech":  {
+                                 "register":  5988,
+                                 "renew":  17988,
+                                 "transfer":  17988
+                             },
+                    "site":  {
+                                 "register":  3588,
+                                 "renew":  15588,
+                                 "transfer":  15588
+                             },
+                    "space":  {
+                                  "register":  15588,
+                                  "renew":  27588,
+                                  "transfer":  27588
+                              },
+                    "digital":  {
+                                    "register":  15588,
+                                    "renew":  27588,
+                                    "transfer":  27588
+                                },
+                    "link":  {
+                                 "register":  15588,
+                                 "renew":  27588,
+                                 "transfer":  27588
+                             },
+                    "xyz":  {
+                                "register":  3588,
+                                "renew":  15588,
+                                "transfer":  15588
+                            },
+                    "dev":  {
+                                "register":  15588,
+                                "renew":  27588,
+                                "transfer":  27588
+                            },
+                    "cloud":  {
+                                  "register":  15588,
+                                  "renew":  27588,
+                                  "transfer":  27588
+                              },
+                    "lat":  {
+                                "register":  15588,
+                                "renew":  27588,
+                                "transfer":  27588
+                            },
+                    "mobi":  {
+                                 "register":  15588,
+                                 "renew":  27588,
+                                 "transfer":  27588
+                             },
+                    "io":  {
+                               "register":  59988,
+                               "renew":  71988,
+                               "transfer":  71988
+                           },
+                    "ai":  {
+                               "register":  59988,
+                               "renew":  71988,
+                               "transfer":  71988
+                           },
+                    "co":  {
+                               "register":  15588,
+                               "renew":  27588,
+                               "transfer":  27588
+                           },
+                    "me":  {
+                               "register":  15588,
+                               "renew":  27588,
+                               "transfer":  27588
+                           },
+                    "cc":  {
+                               "register":  15588,
+                               "renew":  27588,
+                               "transfer":  27588
+                           },
+                    "ws":  {
+                               "register":  15588,
+                               "renew":  27588,
+                               "transfer":  27588
+                           },
+                    "biz.py":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "net.br":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "com.ar":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "com.br":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "com.mx":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "com.co":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "cl":  {
+                               "register":  15588,
+                               "renew":  27588,
+                               "transfer":  27588
+                           },
+                    "agency":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "solutions":  {
+                                      "register":  15588,
+                                      "renew":  27588,
+                                      "transfer":  27588
+                                  },
+                    "company":  {
+                                    "register":  15588,
+                                    "renew":  27588,
+                                    "transfer":  27588
+                                },
+                    "guru":  {
+                                 "register":  15588,
+                                 "renew":  27588,
+                                 "transfer":  27588
+                             },
+                    "live":  {
+                                 "register":  15588,
+                                 "renew":  27588,
+                                 "transfer":  27588
+                             },
+                    "stream":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "zone":  {
+                                 "register":  15588,
+                                 "renew":  27588,
+                                 "transfer":  27588
+                             },
+                    "email":  {
+                                  "register":  15588,
+                                  "renew":  27588,
+                                  "transfer":  27588
+                              },
+                    "news":  {
+                                 "register":  15588,
+                                 "renew":  27588,
+                                 "transfer":  27588
+                             },
+                    "world":  {
+                                  "register":  15588,
+                                  "renew":  27588,
+                                  "transfer":  27588
+                              },
+                    "global":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "media":  {
+                                  "register":  15588,
+                                  "renew":  27588,
+                                  "transfer":  27588
+                              },
+                    "network":  {
+                                    "register":  15588,
+                                    "renew":  27588,
+                                    "transfer":  27588
+                                },
+                    "software":  {
+                                     "register":  15588,
+                                     "renew":  27588,
+                                     "transfer":  27588
+                                 },
+                    "academy":  {
+                                    "register":  15588,
+                                    "renew":  27588,
+                                    "transfer":  27588
+                                },
+                    "center":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "support":  {
+                                    "register":  15588,
+                                    "renew":  27588,
+                                    "transfer":  27588
+                                },
+                    "services":  {
+                                     "register":  15588,
+                                     "renew":  27588,
+                                     "transfer":  27588
+                                 },
+                    "systems":  {
+                                    "register":  15588,
+                                    "renew":  27588,
+                                    "transfer":  27588
+                                },
+                    "expert":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "consulting":  {
+                                       "register":  15588,
+                                       "renew":  27588,
+                                       "transfer":  27588
+                                   },
+                    "marketing":  {
+                                      "register":  15588,
+                                      "renew":  27588,
+                                      "transfer":  27588
+                                  },
+                    "host":  {
+                                 "register":  15588,
+                                 "renew":  27588,
+                                 "transfer":  27588
+                             },
+                    "press":  {
+                                  "register":  15588,
+                                  "renew":  27588,
+                                  "transfer":  27588
+                              },
+                    "vip.py":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "website":  {
+                                    "register":  15588,
+                                    "renew":  27588,
+                                    "transfer":  27588
+                                },
+                    "design":  {
+                                   "register":  15588,
+                                   "renew":  27588,
+                                   "transfer":  27588
+                               },
+                    "photography":  {
+                                        "register":  15588,
+                                        "renew":  27588,
+                                        "transfer":  27588
+                                    },
+                    "finance":  {
+                                    "register":  15588,
+                                    "renew":  27588,
+                                    "transfer":  27588
+                                },
+                    "capital":  {
+                                    "register":  15588,
+                                    "renew":  27588,
+                                    "transfer":  27588
+                                },
+                    "trade":  {
+                                  "register":  15588,
+                                  "renew":  27588,
+                                  "transfer":  27588
+                              }
+                }
+}

@@ -1,0 +1,283 @@
+﻿{
+    "countryCode":  "es",
+    "currency":  "EUR",
+    "generatedAt":  "2026-11-09T10:42:24-03:00",
+    "totalExtended":  55,
+    "domains":  {
+                    "store":  {
+                                  "register":  4.59,
+                                  "renew":  13.79,
+                                  "transfer":  13.79
+                              },
+                    "tech":  {
+                                 "register":  4.59,
+                                 "renew":  13.79,
+                                 "transfer":  13.79
+                             },
+                    "site":  {
+                                 "register":  2.75,
+                                 "renew":  11.95,
+                                 "transfer":  11.95
+                             },
+                    "space":  {
+                                  "register":  11.95,
+                                  "renew":  21.15,
+                                  "transfer":  21.15
+                              },
+                    "digital":  {
+                                    "register":  11.95,
+                                    "renew":  21.15,
+                                    "transfer":  21.15
+                                },
+                    "link":  {
+                                 "register":  11.95,
+                                 "renew":  21.15,
+                                 "transfer":  21.15
+                             },
+                    "xyz":  {
+                                "register":  2.75,
+                                "renew":  11.95,
+                                "transfer":  11.95
+                            },
+                    "dev":  {
+                                "register":  11.95,
+                                "renew":  21.15,
+                                "transfer":  21.15
+                            },
+                    "cloud":  {
+                                  "register":  11.95,
+                                  "renew":  21.15,
+                                  "transfer":  21.15
+                              },
+                    "lat":  {
+                                "register":  11.95,
+                                "renew":  21.15,
+                                "transfer":  21.15
+                            },
+                    "mobi":  {
+                                 "register":  11.95,
+                                 "renew":  21.15,
+                                 "transfer":  21.15
+                             },
+                    "io":  {
+                               "register":  45.99,
+                               "renew":  55.19,
+                               "transfer":  55.19
+                           },
+                    "ai":  {
+                               "register":  45.99,
+                               "renew":  55.19,
+                               "transfer":  55.19
+                           },
+                    "co":  {
+                               "register":  11.95,
+                               "renew":  21.15,
+                               "transfer":  21.15
+                           },
+                    "me":  {
+                               "register":  11.95,
+                               "renew":  21.15,
+                               "transfer":  21.15
+                           },
+                    "cc":  {
+                               "register":  11.95,
+                               "renew":  21.15,
+                               "transfer":  21.15
+                           },
+                    "ws":  {
+                               "register":  11.95,
+                               "renew":  21.15,
+                               "transfer":  21.15
+                           },
+                    "biz.py":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "net.br":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "com.ar":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "com.br":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "com.mx":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "com.co":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "cl":  {
+                               "register":  11.95,
+                               "renew":  21.15,
+                               "transfer":  21.15
+                           },
+                    "agency":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "solutions":  {
+                                      "register":  11.95,
+                                      "renew":  21.15,
+                                      "transfer":  21.15
+                                  },
+                    "company":  {
+                                    "register":  11.95,
+                                    "renew":  21.15,
+                                    "transfer":  21.15
+                                },
+                    "guru":  {
+                                 "register":  11.95,
+                                 "renew":  21.15,
+                                 "transfer":  21.15
+                             },
+                    "live":  {
+                                 "register":  11.95,
+                                 "renew":  21.15,
+                                 "transfer":  21.15
+                             },
+                    "stream":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "zone":  {
+                                 "register":  11.95,
+                                 "renew":  21.15,
+                                 "transfer":  21.15
+                             },
+                    "email":  {
+                                  "register":  11.95,
+                                  "renew":  21.15,
+                                  "transfer":  21.15
+                              },
+                    "news":  {
+                                 "register":  11.95,
+                                 "renew":  21.15,
+                                 "transfer":  21.15
+                             },
+                    "world":  {
+                                  "register":  11.95,
+                                  "renew":  21.15,
+                                  "transfer":  21.15
+                              },
+                    "global":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "media":  {
+                                  "register":  11.95,
+                                  "renew":  21.15,
+                                  "transfer":  21.15
+                              },
+                    "network":  {
+                                    "register":  11.95,
+                                    "renew":  21.15,
+                                    "transfer":  21.15
+                                },
+                    "software":  {
+                                     "register":  11.95,
+                                     "renew":  21.15,
+                                     "transfer":  21.15
+                                 },
+                    "academy":  {
+                                    "register":  11.95,
+                                    "renew":  21.15,
+                                    "transfer":  21.15
+                                },
+                    "center":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "support":  {
+                                    "register":  11.95,
+                                    "renew":  21.15,
+                                    "transfer":  21.15
+                                },
+                    "services":  {
+                                     "register":  11.95,
+                                     "renew":  21.15,
+                                     "transfer":  21.15
+                                 },
+                    "systems":  {
+                                    "register":  11.95,
+                                    "renew":  21.15,
+                                    "transfer":  21.15
+                                },
+                    "expert":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "consulting":  {
+                                       "register":  11.95,
+                                       "renew":  21.15,
+                                       "transfer":  21.15
+                                   },
+                    "marketing":  {
+                                      "register":  11.95,
+                                      "renew":  21.15,
+                                      "transfer":  21.15
+                                  },
+                    "host":  {
+                                 "register":  11.95,
+                                 "renew":  21.15,
+                                 "transfer":  21.15
+                             },
+                    "press":  {
+                                  "register":  11.95,
+                                  "renew":  21.15,
+                                  "transfer":  21.15
+                              },
+                    "vip.py":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "website":  {
+                                    "register":  11.95,
+                                    "renew":  21.15,
+                                    "transfer":  21.15
+                                },
+                    "design":  {
+                                   "register":  11.95,
+                                   "renew":  21.15,
+                                   "transfer":  21.15
+                               },
+                    "photography":  {
+                                        "register":  11.95,
+                                        "renew":  21.15,
+                                        "transfer":  21.15
+                                    },
+                    "finance":  {
+                                    "register":  11.95,
+                                    "renew":  21.15,
+                                    "transfer":  21.15
+                                },
+                    "capital":  {
+                                    "register":  11.95,
+                                    "renew":  21.15,
+                                    "transfer":  21.15
+                                },
+                    "trade":  {
+                                  "register":  11.95,
+                                  "renew":  21.15,
+                                  "transfer":  21.15
+                              }
+                }
+}

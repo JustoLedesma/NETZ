@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel Interno de Revisión de Precios | NETZ</title>
   <meta name="robots" content="noindex, nofollow">
+  <link rel="shortcut icon" href="/assets/img/header/N-SVG.svg" type="image/x-icon">
   <style>
     :root {
       --bg: #f4f6f9;
@@ -35,8 +36,159 @@
       color: var(--text);
       line-height: 1.5;
       padding: 16px;
+      min-height: 100vh;
     }
 
+    /* ========================================================
+       PANTALLA DE LOGIN
+       ======================================================== */
+    .login-overlay {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 85vh;
+      padding: 20px;
+    }
+
+    .login-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 420px;
+      padding: 36px 32px;
+      text-align: center;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .login-header-icon {
+      width: 64px;
+      height: 64px;
+      background: #eff6ff;
+      color: #3b82f6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 18px;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    }
+
+    .login-box h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 6px;
+    }
+
+    .login-box p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input-wrap {
+      position: relative;
+    }
+
+    .form-input-wrap input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: #f9fafb;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .form-input-wrap input:focus {
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .toggle-pass-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 15px;
+      padding: 4px;
+    }
+
+    .btn-login {
+      width: 100%;
+      background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .btn-login:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .btn-login:active {
+      transform: translateY(0);
+    }
+
+    .login-error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-bottom: 18px;
+      display: none;
+      animation: shake 0.3s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================================================
+       ESTILOS DEL DASHBOARD INTERNO
+       ======================================================== */
     .container {
       max-width: 1280px;
       margin: 0 auto;
@@ -71,82 +223,126 @@
       margin-top: 4px;
     }
 
-    .actions {
+    .header-actions {
       display: flex;
-      gap: 10px;
       align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .admin-pill {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-refresh, .btn-logout {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
     }
 
     .btn-refresh {
       background: var(--primary);
-      color: #ffffff;
-      border: none;
-      padding: 9px 16px;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
+      color: #fff;
+    }
+    .btn-refresh:hover { background: var(--primary-hover); }
+
+    .btn-logout {
+      background: #fff;
+      color: #dc2626;
+      border-color: #fecaca;
+    }
+    .btn-logout:hover {
+      background: #fef2f2;
+    }
+
+    .legend {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
       align-items: center;
-      gap: 8px;
-      transition: background 0.15s ease;
+      gap: 6px;
     }
 
-    .btn-refresh:hover {
-      background: var(--primary-hover);
-    }
-
+    /* Pestañas */
     .tabs-nav {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
       padding-bottom: 8px;
-      margin-bottom: 16px;
-      scrollbar-width: thin;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border);
     }
 
     .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
       background: var(--card-bg);
       border: 1px solid var(--border);
-      padding: 10px 18px;
-      border-radius: 8px;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
       font-size: 0.875rem;
       font-weight: 600;
       color: var(--text-muted);
       cursor: pointer;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 8px;
       transition: all 0.15s ease;
+      white-space: nowrap;
     }
 
     .tab-btn:hover {
-      color: var(--text);
-      border-color: #cbd5e1;
+      color: var(--primary);
+      background: #f8fafc;
     }
 
     .tab-btn.active {
-      background: var(--primary);
-      color: #ffffff;
+      color: var(--primary);
+      background: var(--card-bg);
       border-color: var(--primary);
-      box-shadow: 0 2px 4px rgba(79, 70, 229, 0.25);
+      border-bottom: 2px solid var(--card-bg);
+      margin-bottom: -2px;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.03);
     }
 
     .tab-content {
       display: none;
+      animation: fadeIn 0.2s ease-out;
     }
 
     .tab-content.active {
       display: block;
     }
 
+    /* Tarjeta de Metadatos */
     .meta-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 18px 22px;
-      margin-bottom: 20px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 16px;
@@ -162,20 +358,18 @@
     .meta-label {
       font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
       color: var(--text-muted);
       font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     .meta-val {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #111827;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
     }
 
+    /* Badges de Sincronización */
     .sync-badge {
       display: inline-flex;
       align-items: center;
@@ -184,7 +378,6 @@
       border-radius: 6px;
       font-size: 0.8125rem;
       font-weight: 600;
-      width: fit-content;
     }
 
     .sync-badge.ok {
@@ -195,13 +388,19 @@
     .sync-badge.warn {
       background: var(--warning-bg);
       color: var(--warning-text);
-      border: 1px solid #f87171;
     }
 
+    .sync-badge.none {
+      background: var(--pending-bg);
+      color: var(--pending-text);
+    }
+
+    /* Tablas */
     .section-title {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      margin: 24px 0 12px;
+      margin-bottom: 12px;
+      color: #111827;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -212,7 +411,7 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow-x: auto;
-      margin-bottom: 24px;
+      margin-bottom: 30px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.03);
     }
 
@@ -225,17 +424,19 @@
 
     th {
       background: #f8fafc;
-      color: #475569;
+      padding: 12px 16px;
       font-weight: 600;
-      padding: 12px 14px;
+      color: #475569;
       border-bottom: 1px solid var(--border);
-      white-space: nowrap;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     td {
-      padding: 12px 14px;
-      border-bottom: 1px solid #f1f5f9;
-      vertical-align: middle;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
     }
 
     tr:last-child td {
@@ -243,99 +444,102 @@
     }
 
     tr:hover td {
-      background-color: #f8fafc;
-    }
-
-    .pid-badge {
-      font-family: var(--font-mono);
-      background: #f1f5f9;
-      color: #334155;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.8125rem;
-      font-weight: 600;
-      display: inline-block;
-    }
-
-    .price-cell {
-      font-weight: 600;
-      color: #0f172a;
-      white-space: nowrap;
+      background: #f8fafc;
     }
 
     .pending-cell {
-      background-color: var(--pending-bg) !important;
+      background-color: var(--pending-bg);
       color: var(--pending-text);
-      font-size: 0.75rem;
       font-weight: 700;
-      padding: 4px 8px;
+      padding: 3px 8px;
       border-radius: 4px;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
       display: inline-block;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
     }
 
     .alert-box {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: 10px;
-      padding: 16px 20px;
-      margin-bottom: 20px;
-      color: #92400e;
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
       display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.9rem;
+      align-items: center;
+      gap: 16px;
     }
 
     .alert-box.error {
+      border-color: #fca5a5;
       background: #fef2f2;
-      border-color: #fecaca;
       color: #991b1b;
     }
 
-    .legend {
-      display: flex;
-      gap: 16px;
-      margin-top: 8px;
-      margin-bottom: 20px;
-      font-size: 0.8125rem;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
     @media (max-width: 768px) {
-      body {
-        padding: 10px;
-      }
-      header {
-        padding: 16px;
-      }
-      .meta-card {
-        grid-template-columns: 1fr 1fr;
-      }
+      body { padding: 10px; }
+      header { padding: 16px; }
+      .meta-card { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <!-- ========================================================
+       PANTALLA DE ACCESO PROTEGIDO (LOGIN)
+       ======================================================== -->
+  <div id="login-screen" class="login-overlay">
+    <div class="login-box">
+      <div class="login-header-icon">🔒</div>
+      <h2>Acceso Administrativo</h2>
+      <p>Panel privado de revisión de precios y auditoría WHMCS</p>
+
+      <div id="login-error-msg" class="login-error">
+        Usuario o contraseña incorrectos.
+      </div>
+
+      <form id="admin-login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="admin-user">Usuario</label>
+          <div class="form-input-wrap">
+            <input type="text" id="admin-user" required placeholder="admin" autofocus autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="admin-pass">Contraseña</label>
+          <div class="form-input-wrap">
+            <input type="password" id="admin-pass" required placeholder="••••••••••••" autocomplete="current-password">
+            <button type="button" class="toggle-pass-btn" onclick="togglePasswordVisibility()" title="Mostrar/ocultar">👁️</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login">
+          Ingresar al Panel
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       DASHBOARD DE REVISIÓN DE PRECIOS (PROTEGIDO)
+       ======================================================== -->
+  <div id="dashboard-app" class="container" style="display: none;">
     <header>
       <div>
         <h1>
           <span>📊</span> Revisión de Precios por País
         </h1>
-        <p>Herramienta interna para validar la sincronización directa desde WHMCS (sin caché).</p>
+        <p>Precios oficiales sincronizados desde WHMCS con unión de dominios en tiempo real.</p>
       </div>
-      <div class="actions">
-        <button class="btn-refresh" id="btn-refresh" onclick="loadAllCountries()">
+      <div class="header-actions">
+        <div class="admin-pill">
+          <span>●</span> Sesión Activa
+        </div>
+        <button class="btn-refresh" onclick="loadAllCountries()">
           <span>🔄</span> Recargar Precios
+        </button>
+        <button class="btn-logout" onclick="handleLogout()">
+          <span>🚪</span> Salir
         </button>
       </div>
     </header>
@@ -343,11 +547,11 @@
     <div class="legend">
       <div class="legend-item">
         <span class="pending-cell" style="padding: 2px 6px;">PENDIENTE</span>
-        <span>Ciclo desactivado (-1) o sin precio definido en WHMCS</span>
+        <span>Ciclo desactivado (-1) o sin precio en WHMCS</span>
       </div>
       <div class="legend-item">
         <span class="sync-badge ok" style="padding: 2px 6px;">Sincronizado</span>
-        <span>Última sincronización en menos de 24 horas</span>
+        <span>Sincronización en menos de 24 horas</span>
       </div>
       <div class="legend-item">
         <span class="sync-badge warn" style="padding: 2px 6px;">⚠️ Advertencia</span>
@@ -356,129 +560,153 @@
     </div>
 
     <!-- Navegación de Pestañas -->
-    <nav class="tabs-nav" id="tabs-nav" aria-label="Selección de país">
-      <!-- Se generará dinámicamente -->
-    </nav>
+    <nav class="tabs-nav" id="tabs-nav" aria-label="Selección de país"></nav>
 
-    <!-- Contenido de Pestañas -->
-    <main id="tabs-contents">
-      <!-- Se generará dinámicamente -->
-    </main>
+    <!-- Contenido de cada pestaña -->
+    <main id="tabs-contents"></main>
   </div>
 
   <script>
-    const COUNTRIES = [
-      { code: 'py', name: 'Paraguay', flag: '🇵🇾', defaultLocale: 'es-PY', defaultCurrency: 'USD' },
-      { code: 'br', name: 'Brasil', flag: '🇧🇷', defaultLocale: 'pt-BR', defaultCurrency: 'BRL' },
-      { code: 'ar', name: 'Argentina', flag: '🇦🇷', defaultLocale: 'es-AR', defaultCurrency: 'ARS' },
-      { code: 'es', name: 'España', flag: '🇪🇸', defaultLocale: 'es-ES', defaultCurrency: 'EUR' },
-      { code: 'us', name: 'Estados Unidos', flag: '🇺🇸', defaultLocale: 'en-US', defaultCurrency: 'USD' },
-      { code: 'cl', name: 'Chile', flag: '🇨🇱', defaultLocale: 'es-CL', defaultCurrency: 'CLP' },
-      { code: 'co', name: 'Colombia', flag: '🇨🇴', defaultLocale: 'es-CO', defaultCurrency: 'COP' },
-      { code: 'mx', name: 'México', flag: '🇲🇽', defaultLocale: 'es-MX', defaultCurrency: 'MXN' }
-    ];
-
-    // Nombres de respaldo para productos conocidos si el JSON no trae campo name
-    const PRODUCT_NAMES = {
-      "1": "Web Hosting Básico",
-      "2": "Web Hosting Pro",
-      "3": "Web Hosting Pro+",
-      "4": "Radio Stream Mini",
-      "5": "Radio Stream Junior",
-      "6": "Radio Stream Junior II",
-      "7": "Reseller cPanel 1",
-      "8": "Reseller cPanel 2",
-      "9": "Reseller cPanel 3",
-      "10": "Reseller cPanel 4",
-      "11": "Video Streaming 1",
-      "12": "Video Streaming 2",
-      "13": "Video Streaming 3",
-      "14": "Video Streaming 4",
-      "15": "Hosting Exclusivo 1",
-      "16": "Hosting Exclusivo 2",
-      "17": "Hosting Exclusivo 3",
-      "18": "Hosting Exclusivo 4",
-      "19": "Reseller DirectAdmin 1",
-      "20": "Reseller DirectAdmin 2",
-      "21": "Radio Streaming Plan Adicional"
+    // ========================================================
+    // AUTENTICACIÓN SEGURA Y CONTROL DE ACCESO
+    // ========================================================
+    const ADMIN_CONFIG = {
+      username: "admin",
+      // Hash SHA-256 de la contraseña por defecto: "NetzAdmin2026*"
+      passwordHash: "d5b1abba5fe88a187064c359c17b731ce7d402daab27bf014093b1a20fe5f691"
     };
 
+    async function sha256(text) {
+      const buffer = new TextEncoder().encode(text);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const userIn = document.getElementById('admin-user').value.trim();
+      const passIn = document.getElementById('admin-pass').value;
+      const errorDiv = document.getElementById('login-error-msg');
+
+      const passHash = await sha256(passIn);
+
+      if (userIn === ADMIN_CONFIG.username && passHash === ADMIN_CONFIG.passwordHash) {
+        errorDiv.style.display = 'none';
+        sessionStorage.setItem('netz_admin_session', 'authenticated');
+        showDashboard();
+      } else {
+        errorDiv.style.display = 'block';
+        document.getElementById('admin-pass').value = '';
+        document.getElementById('admin-pass').focus();
+      }
+    }
+
+    function togglePasswordVisibility() {
+      const input = document.getElementById('admin-pass');
+      input.type = (input.type === 'password') ? 'text' : 'password';
+    }
+
+    function handleLogout() {
+      sessionStorage.removeItem('netz_admin_session');
+      document.getElementById('dashboard-app').style.display = 'none';
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('admin-pass').value = '';
+      document.getElementById('admin-user').focus();
+    }
+
+    function checkExistingSession() {
+      if (sessionStorage.getItem('netz_admin_session') === 'authenticated') {
+        showDashboard();
+      } else {
+        document.getElementById('login-screen').style.display = 'flex';
+        document.getElementById('dashboard-app').style.display = 'none';
+      }
+    }
+
+    function showDashboard() {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('dashboard-app').style.display = 'block';
+      loadAllCountries();
+    }
+
+    // ========================================================
+    // LÓGICA DE PRECIOS Y UNIÓN DE DOMINIOS
+    // ========================================================
+    const COUNTRIES = [
+      { code: 'py', name: 'Paraguay', flag: '🇵🇾', defaultCurrency: 'PYG', defaultLocale: 'es-PY' },
+      { code: 'br', name: 'Brasil', flag: '🇧🇷', defaultCurrency: 'BRL', defaultLocale: 'pt-BR' },
+      { code: 'ar', name: 'Argentina', flag: '🇦🇷', defaultCurrency: 'ARS', defaultLocale: 'es-AR' },
+      { code: 'es', name: 'España', flag: '🇪🇸', defaultCurrency: 'EUR', defaultLocale: 'es-ES' },
+      { code: 'us', name: 'Estados Unidos', flag: '🇺🇸', defaultCurrency: 'USD', defaultLocale: 'en-US' },
+      { code: 'cl', name: 'Chile', flag: '🇨🇱', defaultCurrency: 'CLP', defaultLocale: 'es-CL' },
+      { code: 'co', name: 'Colombia', flag: '🇨🇴', defaultCurrency: 'COP', defaultLocale: 'es-CO' },
+      { code: 'mx', name: 'México', flag: '🇲🇽', defaultCurrency: 'MXN', defaultLocale: 'es-MX' }
+    ];
+
     let activeCountry = 'py';
-    const cacheData = {};
-
-    function initTabs() {
-      const nav = document.getElementById('tabs-nav');
-      nav.innerHTML = COUNTRIES.map(c => `
-        <button class="tab-btn ${c.code === activeCountry ? 'active' : ''}" 
-                onclick="switchTab('${c.code}')" 
-                id="btn-tab-${c.code}">
-          <span>${c.flag}</span> ${c.name}
-        </button>
-      `).join('');
-    }
-
-    function switchTab(code) {
-      activeCountry = code;
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(pane => pane.classList.remove('active'));
-
-      const activeBtn = document.getElementById(`btn-tab-${code}`);
-      const activePane = document.getElementById(`pane-${code}`);
-      if (activeBtn) activeBtn.classList.add('active');
-      if (activePane) activePane.classList.add('active');
-    }
 
     function formatPrice(val, locale, currency) {
-      if (val === null || val === undefined || isNaN(val)) {
-        return `<span class="pending-cell">PENDIENTE</span>`;
+      if (val === null || val === undefined || val === -1) {
+        return '<span class="pending-cell">PENDIENTE</span>';
       }
       try {
         const noDecimals = (currency === 'CLP' || currency === 'COP' || currency === 'PYG');
-        const formatted = new Intl.NumberFormat(locale, {
+        return new Intl.NumberFormat(locale, {
           style: 'currency',
           currency: currency,
           minimumFractionDigits: noDecimals ? 0 : 2,
           maximumFractionDigits: noDecimals ? 0 : 2
         }).format(val);
-        return `<span class="price-cell">${formatted}</span>`;
       } catch (e) {
-        return `<span class="price-cell">${val} ${currency}</span>`;
+        return `${val} ${currency}`;
       }
     }
 
     function checkSyncStatus(generatedAtStr) {
       if (!generatedAtStr) {
-        return { ok: false, text: 'Sin fecha registrada', label: 'warn' };
+        return { ok: false, text: 'No sincronizado aún', label: 'none' };
       }
-      const syncDate = new Date(generatedAtStr);
-      if (isNaN(syncDate.getTime())) {
-        return { ok: false, text: 'Fecha inválida', label: 'warn' };
+      try {
+        const genTime = new Date(generatedAtStr).getTime();
+        const now = Date.now();
+        const diffHours = (now - genTime) / (1000 * 60 * 60);
+
+        const dateFormatted = new Date(generatedAtStr).toLocaleString('es-PY', {
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit', second: '2-digit'
+        });
+
+        if (diffHours > 24) {
+          return { ok: false, text: `⚠️ Desactualizado: ${dateFormatted} (${Math.round(diffHours)}h atrás)`, label: 'warn' };
+        }
+        return { ok: true, text: `✅ Sincronizado: ${dateFormatted}`, label: 'ok' };
+      } catch (e) {
+        return { ok: false, text: generatedAtStr, label: 'none' };
       }
-      const diffHours = (Date.now() - syncDate.getTime()) / (1000 * 60 * 60);
-      const formattedDate = syncDate.toLocaleString();
-      if (diffHours > 24) {
-        return {
-          ok: false,
-          text: `⚠️ ${formattedDate} (${Math.floor(diffHours)}h atrás - posible fallo de cron)`,
-          label: 'warn'
-        };
-      }
-      return {
-        ok: true,
-        text: `✓ ${formattedDate} (${Math.round(diffHours)}h atrás)`,
-        label: 'ok'
-      };
     }
 
     async function loadCountryData(country) {
-      const url = `/assets/data/prices/${country.code}.json?_=${Date.now()}`;
+      const urlPublic = `/assets/data/prices/${country.code}.json?_=${Date.now()}`;
+      const urlExtended = `/assets/data/prices/domains_extended_${country.code}.json?_=${Date.now()}`;
+
       try {
-        const res = await fetch(url);
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}: Archivo no encontrado o no disponible`);
+        const resPublic = await fetch(urlPublic);
+        if (!resPublic.ok) {
+          throw new Error(`HTTP ${resPublic.status}: Archivo principal no encontrado`);
         }
-        const data = await res.json();
-        return { success: true, data };
+        const data = await resPublic.json();
+
+        // Cargar archivo extendido de dominios (si existe) para unirlo
+        let extendedData = null;
+        try {
+          const resExt = await fetch(urlExtended);
+          if (resExt.ok) {
+            extendedData = await resExt.json();
+          }
+        } catch (e) {}
+
+        return { success: true, data, extendedData };
       } catch (err) {
         return { success: false, error: err.message };
       }
@@ -494,7 +722,7 @@
                 <strong>No se pudo cargar el archivo de precios para ${country.name} (/assets/data/prices/${country.code}.json).</strong>
                 <p style="margin-top: 4px; font-size: 0.85rem;">
                   Motivo: ${result.error}.<br>
-                  Esto ocurre normalmente si aún no se ha ejecutado el cron de sincronización <code>cron/sync_prices.php</code> o si la moneda ${country.defaultCurrency} aún no está configurada en WHMCS.
+                  Esto ocurre si aún no se ha ejecutado el cron <code>cron/sync_prices.php</code> o si la moneda ${country.defaultCurrency} aún no está configurada en WHMCS.
                 </p>
               </div>
             </div>
@@ -505,20 +733,19 @@
       const d = result.data;
       const currency = d.currency || country.defaultCurrency;
       const locale = d.locale || country.defaultLocale;
-      const whmcsId = d.whmcsCurrencyId !== undefined ? d.whmcsCurrencyId : 'null (sin ID)';
+      const whmcsId = d.whmcsCurrencyId !== null ? `#${d.whmcsCurrencyId}` : '<span class="pending-cell">No asignado</span>';
       const sync = checkSyncStatus(d.generatedAt);
 
       // Tabla de Productos
       const products = d.products || {};
-      const productIds = Object.keys(products).sort((a, b) => parseInt(a) - parseInt(b));
+      const productIds = Object.keys(products).sort((a, b) => Number(a) - Number(b));
 
       const productsRows = productIds.length > 0 ? productIds.map(pid => {
         const p = products[pid] || {};
-        const name = p.name || PRODUCT_NAMES[pid] || `Producto #${pid}`;
         return `
           <tr>
-            <td><span class="pid-badge">PID ${pid}</span></td>
-            <td><strong>${name}</strong></td>
+            <td><code>PID ${pid}</code></td>
+            <td><strong>${p.name || 'Plan #' + pid}</strong></td>
             <td>${formatPrice(p.monthly, locale, currency)}</td>
             <td>${formatPrice(p.quarterly, locale, currency)}</td>
             <td>${formatPrice(p.semiannually, locale, currency)}</td>
@@ -529,16 +756,23 @@
         `;
       }).join('') : `<tr><td colspan="8" style="text-align:center; padding: 20px; color: var(--text-muted);">No se encontraron productos registrados en este archivo.</td></tr>`;
 
-      // Tabla de Dominios
-      const domains = d.domains || {};
-      const domainKeys = Object.keys(domains).sort();
+      // Unión de Dominios: 26 del index/web pública + los extendidos de la base
+      const publicDomains = d.domains || {};
+      const extendedDomains = (result.extendedData && result.extendedData.domains) ? result.extendedData.domains : {};
+      const allDomains = Object.assign({}, extendedDomains, publicDomains);
+      const domainKeys = Object.keys(allDomains).sort();
 
       const domainsRows = domainKeys.length > 0 ? domainKeys.map(ext => {
-        const dom = domains[ext] || {};
+        const dom = allDomains[ext] || {};
         const dotExt = ext.startsWith('.') ? ext : `.${ext}`;
+        const isPublic = publicDomains.hasOwnProperty(ext);
+        const originBadge = isPublic 
+          ? `<span style="background: #e0f2fe; color: #0284c7; font-size: 11px; padding: 2px 7px; border-radius: 4px; font-weight: 600; margin-left: 8px;">Index / Web</span>`
+          : `<span style="background: #f1f5f9; color: #64748b; font-size: 11px; padding: 2px 7px; border-radius: 4px; font-weight: 500; margin-left: 8px;">Base WHMCS</span>`;
+
         return `
           <tr>
-            <td><strong>${dotExt}</strong></td>
+            <td><strong>${dotExt}</strong> ${originBadge}</td>
             <td>${formatPrice(dom.register, locale, currency)}</td>
             <td>${formatPrice(dom.renew, locale, currency)}</td>
             <td>${formatPrice(dom.transfer, locale, currency)}</td>
@@ -596,13 +830,22 @@
             </table>
           </div>
 
-          <!-- Tabla de Dominios -->
-          <h2 class="section-title">🌐 Precios de Dominios (${domainKeys.length})</h2>
+          <!-- Tabla de Dominios con Buscador y Desglose -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 35px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <h2 class="section-title" style="margin: 0;">🌐 Precios de Dominios (${domainKeys.length})</h2>
+              <p style="margin: 3px 0 0; font-size: 12px; color: var(--text-muted);">
+                <strong>${Object.keys(publicDomains).length}</strong> cargados en index/web pública + 
+                <strong>${Object.keys(extendedDomains).length}</strong> de la base de datos completa
+              </p>
+            </div>
+            <input type="text" placeholder="🔍 Filtrar extensión (ej: .store, .com)..." oninput="filterDomainTable(this, 'table-domains-${country.code}')" style="padding: 7px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; outline: none; width: 280px; max-width: 100%; background: #fff;">
+          </div>
           <div class="table-container">
-            <table>
+            <table id="table-domains-${country.code}">
               <thead>
                 <tr>
-                  <th style="width: 150px;">Extensión (TLD)</th>
+                  <th style="width: 240px;">Extensión (TLD)</th>
                   <th>Registro</th>
                   <th>Renovación</th>
                   <th>Transferencia</th>
@@ -617,23 +860,51 @@
       `;
     }
 
+    function filterDomainTable(input, tableId) {
+      const val = input.value.toLowerCase().trim();
+      const rows = document.querySelectorAll('#' + tableId + ' tbody tr');
+      rows.forEach(r => {
+        const tldCell = r.querySelector('td strong');
+        if (tldCell) {
+          const txt = tldCell.textContent.toLowerCase();
+          r.style.display = txt.includes(val) ? '' : 'none';
+        }
+      });
+    }
+
     async function loadAllCountries() {
       const container = document.getElementById('tabs-contents');
-      container.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--text-muted);">Cargando precios de todos los países...</div>`;
+      container.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--text-muted);">Cargando precios de todos los países y uniendo dominios...</div>`;
 
       const results = await Promise.all(COUNTRIES.map(async c => {
         const res = await loadCountryData(c);
         return { country: c, result: res };
       }));
 
+      // Renderizar Nav
+      const navContainer = document.getElementById('tabs-nav');
+      navContainer.innerHTML = COUNTRIES.map(c => `
+        <button class="tab-btn ${c.code === activeCountry ? 'active' : ''}" onclick="switchTab('${c.code}')">
+          <span>${c.flag}</span> ${c.name}
+        </button>
+      `).join('');
+
+      // Renderizar Paneles
       container.innerHTML = results.map(r => renderCountryPane(r.country, r.result)).join('');
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      initTabs();
-      loadAllCountries();
-    });
+    function switchTab(code) {
+      activeCountry = code;
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', COUNTRIES[idx].code === code);
+      });
+      document.querySelectorAll('.tab-content').forEach(pane => {
+        pane.classList.toggle('active', pane.id === `pane-${code}`);
+      });
+    }
+
+    // Inicialización con verificación de sesión
+    checkExistingSession();
   </script>
 </body>
 </html>
-

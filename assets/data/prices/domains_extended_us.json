@@ -1,0 +1,283 @@
+﻿{
+    "countryCode":  "us",
+    "currency":  "USD",
+    "generatedAt":  "2026-11-09T10:42:24-03:00",
+    "totalExtended":  55,
+    "domains":  {
+                    "store":  {
+                                  "register":  4.99,
+                                  "renew":  14.99,
+                                  "transfer":  14.99
+                              },
+                    "tech":  {
+                                 "register":  4.99,
+                                 "renew":  14.99,
+                                 "transfer":  14.99
+                             },
+                    "site":  {
+                                 "register":  2.99,
+                                 "renew":  12.99,
+                                 "transfer":  12.99
+                             },
+                    "space":  {
+                                  "register":  12.99,
+                                  "renew":  22.99,
+                                  "transfer":  22.99
+                              },
+                    "digital":  {
+                                    "register":  12.99,
+                                    "renew":  22.99,
+                                    "transfer":  22.99
+                                },
+                    "link":  {
+                                 "register":  12.99,
+                                 "renew":  22.99,
+                                 "transfer":  22.99
+                             },
+                    "xyz":  {
+                                "register":  2.99,
+                                "renew":  12.99,
+                                "transfer":  12.99
+                            },
+                    "dev":  {
+                                "register":  12.99,
+                                "renew":  22.99,
+                                "transfer":  22.99
+                            },
+                    "cloud":  {
+                                  "register":  12.99,
+                                  "renew":  22.99,
+                                  "transfer":  22.99
+                              },
+                    "lat":  {
+                                "register":  12.99,
+                                "renew":  22.99,
+                                "transfer":  22.99
+                            },
+                    "mobi":  {
+                                 "register":  12.99,
+                                 "renew":  22.99,
+                                 "transfer":  22.99
+                             },
+                    "io":  {
+                               "register":  49.99,
+                               "renew":  59.99,
+                               "transfer":  59.99
+                           },
+                    "ai":  {
+                               "register":  49.99,
+                               "renew":  59.99,
+                               "transfer":  59.99
+                           },
+                    "co":  {
+                               "register":  12.99,
+                               "renew":  22.99,
+                               "transfer":  22.99
+                           },
+                    "me":  {
+                               "register":  12.99,
+                               "renew":  22.99,
+                               "transfer":  22.99
+                           },
+                    "cc":  {
+                               "register":  12.99,
+                               "renew":  22.99,
+                               "transfer":  22.99
+                           },
+                    "ws":  {
+                               "register":  12.99,
+                               "renew":  22.99,
+                               "transfer":  22.99
+                           },
+                    "biz.py":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "net.br":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "com.ar":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "com.br":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "com.mx":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "com.co":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "cl":  {
+                               "register":  12.99,
+                               "renew":  22.99,
+                               "transfer":  22.99
+                           },
+                    "agency":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "solutions":  {
+                                      "register":  12.99,
+                                      "renew":  22.99,
+                                      "transfer":  22.99
+                                  },
+                    "company":  {
+                                    "register":  12.99,
+                                    "renew":  22.99,
+                                    "transfer":  22.99
+                                },
+                    "guru":  {
+                                 "register":  12.99,
+                                 "renew":  22.99,
+                                 "transfer":  22.99
+                             },
+                    "live":  {
+                                 "register":  12.99,
+                                 "renew":  22.99,
+                                 "transfer":  22.99
+                             },
+                    "stream":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "zone":  {
+                                 "register":  12.99,
+                                 "renew":  22.99,
+                                 "transfer":  22.99
+                             },
+                    "email":  {
+                                  "register":  12.99,
+                                  "renew":  22.99,
+                                  "transfer":  22.99
+                              },
+                    "news":  {
+                                 "register":  12.99,
+                                 "renew":  22.99,
+                                 "transfer":  22.99
+                             },
+                    "world":  {
+                                  "register":  12.99,
+                                  "renew":  22.99,
+                                  "transfer":  22.99
+                              },
+                    "global":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "media":  {
+                                  "register":  12.99,
+                                  "renew":  22.99,
+                                  "transfer":  22.99
+                              },
+                    "network":  {
+                                    "register":  12.99,
+                                    "renew":  22.99,
+                                    "transfer":  22.99
+                                },
+                    "software":  {
+                                     "register":  12.99,
+                                     "renew":  22.99,
+                                     "transfer":  22.99
+                                 },
+                    "academy":  {
+                                    "register":  12.99,
+                                    "renew":  22.99,
+                                    "transfer":  22.99
+                                },
+                    "center":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "support":  {
+                                    "register":  12.99,
+                                    "renew":  22.99,
+                                    "transfer":  22.99
+                                },
+                    "services":  {
+                                     "register":  12.99,
+                                     "renew":  22.99,
+                                     "transfer":  22.99
+                                 },
+                    "systems":  {
+                                    "register":  12.99,
+                                    "renew":  22.99,
+                                    "transfer":  22.99
+                                },
+                    "expert":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "consulting":  {
+                                       "register":  12.99,
+                                       "renew":  22.99,
+                                       "transfer":  22.99
+                                   },
+                    "marketing":  {
+                                      "register":  12.99,
+                                      "renew":  22.99,
+                                      "transfer":  22.99
+                                  },
+                    "host":  {
+                                 "register":  12.99,
+                                 "renew":  22.99,
+                                 "transfer":  22.99
+                             },
+                    "press":  {
+                                  "register":  12.99,
+                                  "renew":  22.99,
+                                  "transfer":  22.99
+                              },
+                    "vip.py":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "website":  {
+                                    "register":  12.99,
+                                    "renew":  22.99,
+                                    "transfer":  22.99
+                                },
+                    "design":  {
+                                   "register":  12.99,
+                                   "renew":  22.99,
+                                   "transfer":  22.99
+                               },
+                    "photography":  {
+                                        "register":  12.99,
+                                        "renew":  22.99,
+                                        "transfer":  22.99
+                                    },
+                    "finance":  {
+                                    "register":  12.99,
+                                    "renew":  22.99,
+                                    "transfer":  22.99
+                                },
+                    "capital":  {
+                                    "register":  12.99,
+                                    "renew":  22.99,
+                                    "transfer":  22.99
+                                },
+                    "trade":  {
+                                  "register":  12.99,
+                                  "renew":  22.99,
+                                  "transfer":  22.99
+                              }
+                }
+}
