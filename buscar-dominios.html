@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es" data-country="py" class="prices-loading">
 
 <head>
@@ -512,13 +512,13 @@
                     '<span style="background: #FF4C4C" class="badge badge-pill badge-success">GS. ' + escapeHtml(dominio.gs) + '</span>' +
                     '</div>' +
                     '<div class="col-md-2">' +
-                    '<a data-toggle="tooltip" data-placement="bottom" title="Registrar" href="buscar-dominios.html#coodiv-header"><i class="fas fa-plus"></i></a>' +
+                    '<a data-toggle="tooltip" data-placement="bottom" title="Registrar" href="#coodiv-header"><i class="fas fa-plus"></i></a>' +
                     '<a data-toggle="tooltip" data-placement="bottom" title="Transferir" href="https://client.netz.com.py/cart.php?a=add&domain=transfer"><i class="fas fa-exchange-alt"></i></a>' +
                     '</div>' +
                     '</div>';
             }
 
-            fetch('api/precios-dominios.php')
+            fetch('/api/precios-dominios.php')
                 .then(function (res) {
                     if (!res.ok) throw new Error('Respuesta no válida del servidor');
                     return res.json();
@@ -588,7 +588,7 @@
                         '</div>';
                 }
 
-                fetch('conexion/check-domain.php', {
+                fetch('/conexion/check-domain.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'

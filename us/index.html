@@ -1146,7 +1146,9 @@
                 return;
             }
 
-            window.location.href = 'buscar-dominios.html?domain=' + encodeURIComponent(domain);
+            var country = document.documentElement.getAttribute('data-country') || 'py';
+            var targetPath = (country === 'py') ? '/buscar-dominios' : '/' + country + '/buscar-dominios';
+            window.location.href = targetPath + '?domain=' + encodeURIComponent(domain);
         }
 
         if (searchBtn) {
