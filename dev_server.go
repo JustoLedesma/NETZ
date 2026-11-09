@@ -6,7 +6,19 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
+	"time"
 )
+
+type responseLogger struct {
+	http.ResponseWriter
+	statusCode int
+}
+
+func (lr *responseLogger) WriteHeader(code int) {
+	lr.statusCode = code
+	lr.ResponseWriter.WriteHeader(code)
+}
 
 func main() {
 	port := "8080"
@@ -19,71 +31,118 @@ func main() {
 		log.Fatalf("Error obteniendo directorio actual: %v", err)
 	}
 
-	// Si existe la carpeta dist/ generada, servir prioritariamente desde dist/
-	baseDir := root
-	if distInfo, err := os.Stat(filepath.Join(root, "dist")); err == nil && distInfo.IsDir() {
-		baseDir = filepath.Join(root, "dist")
+	// Directorio de producción si existe
+	distDir := filepath.Join(root, "dist")
+	hasDist := false
+	if fi, err := os.Stat(distDir); err == nil && fi.IsDir() {
+		hasDist = true
 	}
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		// Desactivar caché en desarrollo local para reflejar cambios al instante
+		w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
+		w.Header().Set("Pragma", "no-cache")
+		w.Header().Set("Expires", "0")
+
 		reqPath := r.URL.Path
-
 		cleanPath := filepath.Clean(reqPath)
-		targetFile := filepath.Join(baseDir, cleanPath)
+		trimmedPath := strings.TrimPrefix(filepath.FromSlash(cleanPath), "\\")
 
-		// 1. Si es archivo estático (/assets/, /revision-precios.html, etc.) y existe
-		fi, err := os.Stat(targetFile)
-		if err == nil && !fi.IsDir() {
-			http.ServeFile(w, r, targetFile)
-			return
-		}
-
-		// 2. Si piden directorio raíz o subcarpeta de país (ej. / o /br/ o /us/)
-		if err == nil && fi.IsDir() {
-			indexCandidate := filepath.Join(targetFile, "index.html")
-			if _, errIndex := os.Stat(indexCandidate); errIndex == nil {
-				http.ServeFile(w, r, indexCandidate)
+		// 1. Redirigir si es directorio de país sin barra final (ej. /br -> /br/)
+		countryFolders := []string{"br", "ar", "es", "us", "cl", "co", "mx"}
+		for _, c := range countryFolders {
+			if reqPath == "/"+c {
+				http.Redirect(w, r, "/"+c+"/", http.StatusMovedPermanently)
 				return
 			}
 		}
 
-		// 3. Simulación .htaccess: si piden /hosting-ilimitado o /br/hosting-ilimitado
-		htmlCandidate := targetFile + ".html"
-		if _, errHtml := os.Stat(htmlCandidate); errHtml == nil {
-			http.ServeFile(w, r, htmlCandidate)
-			return
+		// Candidatos a resolver (prioridad: dist/, luego root)
+		searchDirs := []string{root}
+		if hasDist {
+			searchDirs = []string{distDir, root}
 		}
 
-		// 4. Si la ruta es "/" servir index.html
+		// A. Piden la raíz "/"
 		if cleanPath == "\\" || cleanPath == "/" || cleanPath == "." {
-			rootIndex := filepath.Join(baseDir, "index.html")
-			if _, errRootIndex := os.Stat(rootIndex); errRootIndex == nil {
-				http.ServeFile(w, r, rootIndex)
+			for _, dir := range searchDirs {
+				idx := filepath.Join(dir, "index.html")
+				if _, err := os.Stat(idx); err == nil {
+					http.ServeFile(w, r, idx)
+					return
+				}
+			}
+		}
+
+		// B. Piden subcarpeta con index.html (ej. /br/, /us/)
+		for _, dir := range searchDirs {
+			target := filepath.Join(dir, trimmedPath)
+			if fi, err := os.Stat(target); err == nil && fi.IsDir() {
+				idx := filepath.Join(target, "index.html")
+				if _, errIdx := os.Stat(idx); errIdx == nil {
+					http.ServeFile(w, r, idx)
+					return
+				}
+			}
+		}
+
+		// C. Piden archivo exacto (ej. /assets/css/style.css, /assets/img/efects/..., /revision-precios.html, /br/index.html)
+		for _, dir := range searchDirs {
+			target := filepath.Join(dir, trimmedPath)
+			if fi, err := os.Stat(target); err == nil && !fi.IsDir() {
+				http.ServeFile(w, r, target)
 				return
 			}
 		}
 
-		// 5. Error 404 simulado con 404.html
-		w.WriteHeader(http.StatusNotFound)
-		err404 := filepath.Join(baseDir, "404.html")
-		if _, errStat := os.Stat(err404); errStat == nil {
-			http.ServeFile(w, r, err404)
-		} else {
-			fmt.Fprintf(w, "404 Not Found")
+		// D. Simulación .htaccess: Piden ruta limpia sin .html (ej. /hosting-ilimitado o /br/hosting-ilimitado)
+		for _, dir := range searchDirs {
+			targetHTML := filepath.Join(dir, trimmedPath+".html")
+			if fi, err := os.Stat(targetHTML); err == nil && !fi.IsDir() {
+				http.ServeFile(w, r, targetHTML)
+				return
+			}
 		}
+
+		// E. 404 Not Found
+		w.WriteHeader(http.StatusNotFound)
+		for _, dir := range searchDirs {
+			err404 := filepath.Join(dir, "404.html")
+			if _, errStat := os.Stat(err404); errStat == nil {
+				http.ServeFile(w, r, err404)
+				return
+			}
+		}
+		fmt.Fprintf(w, "404 Not Found: %s\n", reqPath)
+	})
+
+	// Middleware de logging para ver cada petición en la consola
+	loggedHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		lr := &responseLogger{ResponseWriter: w, statusCode: http.StatusOK}
+		start := time.Now()
+		mux.ServeHTTP(lr, r)
+		duration := time.Since(start)
+		fmt.Printf("[%s] %d %-4s %s (%v)\n", time.Now().Format("15:04:05"), lr.statusCode, r.Method, r.URL.Path, duration)
 	})
 
 	fmt.Println("=======================================================")
-	fmt.Printf("🚀 Servidor local NETZ (simulación .htaccess cPanel)\n")
-	fmt.Printf("📂 Sirviendo desde:       %s\n", baseDir)
-	fmt.Printf("👉 Abre en tu navegador:  http://localhost:%s\n", port)
-	fmt.Printf("👉 Versión Brasil (BRL):  http://localhost:%s/br/\n", port)
-	fmt.Printf("👉 Versión EE.UU. (USD):  http://localhost:%s/us/\n", port)
-	fmt.Printf("👉 Revisión de precios:   http://localhost:%s/revision-precios.html\n", port)
-	fmt.Println("   Presiona Ctrl+C para detener el servidor")
+	fmt.Printf("🚀 SERVIDOR LOCAL NETZ (SIMULADOR CPANEL / APACHE)\n")
+	if hasDist {
+		fmt.Printf("📂 Modo:                  Producción (sirviendo dist/ y fallback root)\n")
+	} else {
+		fmt.Printf("📂 Modo:                  Desarrollo (sirviendo raíz)\n")
+	}
+	fmt.Printf("👉 Sitio Principal (PY):  http://localhost:%s/\n", port)
+	fmt.Printf("👉 Versión Brasil (BR):   http://localhost:%s/br/\n", port)
+	fmt.Printf("👉 Versión EE.UU. (US):   http://localhost:%s/us/\n", port)
+	fmt.Printf("👉 Revisión de Precios:   http://localhost:%s/revision-precios.html\n", port)
+	fmt.Println("-------------------------------------------------------")
+	fmt.Println("   Presiona Ctrl+C en esta ventana para detenerlo")
 	fmt.Println("=======================================================")
 
-	if err := http.ListenAndServe(":"+port, nil); err != nil {
+	if err := http.ListenAndServe(":"+port, loggedHandler); err != nil {
 		log.Fatalf("Error al iniciar el servidor: %v", err)
 	}
 }
