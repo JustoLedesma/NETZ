@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es-CL" data-country="cl" class="prices-loading">
 
 <head>
@@ -433,7 +433,7 @@
                 <div class="col-md-3">
                     <span>Renovación</span>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2" id="header-col-local-price">
                     <span>Registro en GS.</span>
                 </div>
                 <div class="col-md-2">
@@ -484,16 +484,31 @@
         })();
     </script>
 
-    <!-- Carga los dominios de activación automática desde el endpoint PHP -->
+    <!-- Carga los dominios de activación automática desde el endpoint PHP según país -->
     <script type="text/javascript">
         (function () {
+            var currentCountry = document.documentElement.getAttribute('data-country') || 'py';
+
+            var headerCol = document.getElementById('header-col-local-price');
+            if (headerCol) {
+                if (currentCountry === 'br') headerCol.innerHTML = '<span>Registro em BRL (R$)</span>';
+                else if (currentCountry === 'ar') headerCol.innerHTML = '<span>Registro en ARS ($)</span>';
+                else if (currentCountry === 'es') headerCol.innerHTML = '<span>Registro en EUR (€)</span>';
+                else if (currentCountry === 'us') headerCol.innerHTML = '<span>Registro en USD</span>';
+                else headerCol.innerHTML = '<span>Registro en GS.</span>';
+            }
+
             function escapeHtml(str) {
-                return String(str).replace(/[&<>"']/g, function (c) {
+                return String(str || '').replace(/[&<>"']/g, function (c) {
                     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
                 });
             }
 
             function renderFila(dominio) {
+                var sym = (currentCountry === 'py') ? 'GS.' : (dominio.currency_symbol || 'GS.');
+                var val = (currentCountry === 'py') ? dominio.gs : (dominio.local_price || dominio.gs);
+                var colLabel = (currentCountry === 'br') ? 'Registro em BRL' : ((currentCountry === 'us') ? 'Registro en USD' : ('Registro en ' + (dominio.currency || 'GS.')));
+
                 return '' +
                     '<div class="row justify-content-left domain-search-page-table-body">' +
                     '<div class="col-md-3">' +
@@ -508,8 +523,8 @@
                     '<span style="background: #9057D7" class="badge badge-pill badge-info">USD ' + escapeHtml(dominio.usd) + '</span>' +
                     '</div>' +
                     '<div class="col-md-2 ltd-name-small-phone-styles">' +
-                    '<small class="ltd-name-small-phone">Registro en GS.</small>' +
-                    '<span style="background: #FF4C4C" class="badge badge-pill badge-success">GS. ' + escapeHtml(dominio.gs) + '</span>' +
+                    '<small class="ltd-name-small-phone">' + escapeHtml(colLabel) + '</small>' +
+                    '<span style="background: #FF4C4C" class="badge badge-pill badge-success">' + escapeHtml(sym) + ' ' + escapeHtml(val) + '</span>' +
                     '</div>' +
                     '<div class="col-md-2">' +
                     '<a data-toggle="tooltip" data-placement="bottom" title="Registrar" href="#coodiv-header"><i class="fas fa-plus"></i></a>' +
@@ -518,7 +533,7 @@
                     '</div>';
             }
 
-            fetch('/api/precios-dominios.php')
+            fetch('/api/precios-dominios.php?country=' + encodeURIComponent(currentCountry))
                 .then(function (res) {
                     if (!res.ok) throw new Error('Respuesta no válida del servidor');
                     return res.json();
@@ -588,12 +603,14 @@
                         '</div>';
                 }
 
+                var currentCountry = document.documentElement.getAttribute('data-country') || 'py';
+
                 fetch('/conexion/check-domain.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                     },
-                    body: 'domain=' + encodeURIComponent(dominio)
+                    body: 'domain=' + encodeURIComponent(dominio) + '&country=' + encodeURIComponent(currentCountry)
                 })
                     .then(function (res) {
                         return res.json();
@@ -615,11 +632,26 @@
 
                         if (data.available) {
                             var badgesPrecios = '';
-                            if (data.precio_gs !== null && data.precio_gs !== undefined) {
-                                badgesPrecios += '<span style="background: #9057D7; font-size: 14px; padding: 8px 14px; margin-right: 6px; font-weight: 700;" class="badge badge-pill badge-primary">Gs. ' + formatearGs(data.precio_gs) + '</span>';
-                            }
-                            if (data.precio_usd !== null && data.precio_usd !== undefined) {
-                                badgesPrecios += '<span style="background: #9057D7; font-size: 14px; padding: 8px 14px; font-weight: 700;" class="badge badge-pill badge-info">USD ' + formatearUsd(data.precio_usd) + '</span>';
+                            if (currentCountry === 'py') {
+                                if (data.precio_gs !== null && data.precio_gs !== undefined) {
+                                    badgesPrecios += '<span style="background: #9057D7; font-size: 14px; padding: 8px 14px; margin-right: 6px; font-weight: 700;" class="badge badge-pill badge-primary">Gs. ' + formatearGs(data.precio_gs) + '</span>';
+                                }
+                                if (data.precio_usd !== null && data.precio_usd !== undefined) {
+                                    badgesPrecios += '<span style="background: #9057D7; font-size: 14px; padding: 8px 14px; font-weight: 700;" class="badge badge-pill badge-info">USD ' + formatearUsd(data.precio_usd) + '</span>';
+                                }
+                            } else if (currentCountry === 'us') {
+                                if (data.precio_usd !== null && data.precio_usd !== undefined) {
+                                    badgesPrecios += '<span style="background: #9057D7; font-size: 14px; padding: 8px 14px; font-weight: 700;" class="badge badge-pill badge-primary">USD ' + formatearUsd(data.precio_usd) + '</span>';
+                                }
+                            } else {
+                                // Países internacionales (BR, AR, ES, etc.)
+                                var sym = data.currency_symbol || (currentCountry === 'br' ? 'R$' : '$');
+                                var localVal = data.precio_local_formatted || ((data.precio_local !== null && data.precio_local !== undefined) ? String(data.precio_local) : data.precio_gs);
+                                badgesPrecios += '<span style="background: #9057D7; font-size: 14px; padding: 8px 14px; margin-right: 6px; font-weight: 700;" class="badge badge-pill badge-primary">' + escapeHtml(sym) + ' ' + escapeHtml(localVal) + '</span>';
+
+                                if (data.precio_usd !== null && data.precio_usd !== undefined) {
+                                    badgesPrecios += '<span style="background: #9057D7; font-size: 14px; padding: 8px 14px; font-weight: 700;" class="badge badge-pill badge-info">USD ' + formatearUsd(data.precio_usd) + '</span>';
+                                }
                             }
 
                             var enlaceRegistro = 'https://client.netz.com.py/cart.php?a=add&domain=register&query=' + encodeURIComponent(data.domain || dominio);
