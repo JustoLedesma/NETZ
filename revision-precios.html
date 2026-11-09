@@ -616,6 +616,272 @@
       header { padding: 16px; }
       .meta-card { grid-template-columns: 1fr 1fr; }
     }
+
+    /* ========================================================
+       MODAL DE VÍNCULOS DE PRODUCTO (WHMCS)
+       ======================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      padding: 16px;
+      animation: fadeIn 0.15s ease-out;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+      width: 100%;
+      max-width: 820px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      animation: slideUp 0.2s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(15px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      background: #f8fafc;
+    }
+
+    .modal-close-btn {
+      background: #e2e8f0;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 16px;
+      color: #475569;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      line-height: 1;
+    }
+
+    .modal-close-btn:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+
+    .modal-body {
+      padding: 22px 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .modal-link-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      transition: all 0.15s ease;
+    }
+
+    .modal-link-item:hover {
+      border-color: #cbd5e1;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .modal-link-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+
+    .modal-link-label span.whmcs-tag {
+      font-size: 10px;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .modal-link-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .modal-link-input {
+      flex: 1;
+      padding: 9px 12px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #0f172a;
+      outline: none;
+      cursor: text;
+    }
+
+    .modal-link-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .btn-copy-link {
+      background: #4f46e5;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .btn-copy-link:hover {
+      background: #4338ca;
+    }
+
+    .btn-copy-link.copied {
+      background: #16a34a !important;
+    }
+
+    .btn-open-link {
+      background: #ffffff;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .btn-open-link:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+      border-color: #94a3b8;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      background: #f8fafc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-modal-close {
+      background: #e2e8f0;
+      color: #334155;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .btn-modal-close:hover {
+      background: #cbd5e1;
+    }
+
+    /* Filas de Productos Clickeables */
+    .product-row {
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .product-row:hover td {
+      background-color: #eef2ff !important;
+    }
+
+    .product-name-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .product-name-link {
+      color: #4f46e5;
+      font-weight: 700;
+      transition: color 0.15s ease;
+    }
+
+    .product-row:hover .product-name-link {
+      color: #312e81;
+      text-decoration: underline;
+    }
+
+    .badge-vinc {
+      background: #e0e7ff;
+      color: #4338ca;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .product-row:hover .badge-vinc {
+      background: #c7d2fe;
+      opacity: 1;
+    }
+
+    .pid-badge {
+      background: #f1f5f9;
+      color: #475569;
+      font-weight: 700;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
   </style>
 </head>
 <body>
@@ -778,6 +1044,38 @@
             <span class="settings-meta-val" style="color: #059669;">Activa (Acceso directo denegado)</span>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL DE VÍNCULOS OFICIALES DE PRODUCTO (WHMCS)
+       ======================================================== -->
+  <div id="modal-product-links" class="modal-overlay" style="display: none;" onclick="handleModalBackdropClick(event)">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <h2 id="modal-prod-title" style="margin: 0; font-size: 1.25rem; font-weight: 700; color: #111827;">Vínculos de Producto</h2>
+            <span id="modal-prod-pid" style="background: #e0e7ff; color: #3730a3; padding: 2px 9px; border-radius: 6px; font-weight: 700; font-size: 12px;">PID 1</span>
+            <span id="modal-prod-group" style="background: #f1f5f9; color: #475569; padding: 2px 9px; border-radius: 6px; font-weight: 600; font-size: 12px;">Grupo</span>
+          </div>
+          <p style="margin: 6px 0 0; color: var(--text-muted); font-size: 13px;">
+            Vínculos directos oficiales generados exactamente con la misma nomenclatura y configuración de WHMCS.
+          </p>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeProductLinksModal()" title="Cerrar (Esc)">✕</button>
+      </div>
+
+      <div class="modal-body" id="modal-links-container">
+        <!-- Renderizado dinámico de vínculos -->
+      </div>
+
+      <div class="modal-footer">
+        <span style="font-size: 12px; color: var(--text-muted);">
+          💡 Haz clic en <strong>"Copiar"</strong> para copiar la URL al portapapeles o en <strong>"Abrir"</strong> para probar el link en una nueva pestaña.
+        </span>
+        <button type="button" class="btn-modal-close" onclick="closeProductLinksModal()">Cerrar</button>
       </div>
     </div>
   </div>
@@ -1045,20 +1343,42 @@
     }
 
     // ========================================================
-    // LÓGICA DE PRECIOS Y UNIÓN DE DOMINIOS
+    // LÓGICA DE PRECIOS, UNIÓN DE DOMINIOS Y VÍNCULOS WHMCS
     // ========================================================
-    const COUNTRIES = [
-      { code: 'py', name: 'Paraguay', flag: '🇵🇾', defaultCurrency: 'PYG', defaultLocale: 'es-PY' },
-      { code: 'br', name: 'Brasil', flag: '🇧🇷', defaultCurrency: 'BRL', defaultLocale: 'pt-BR' },
-      { code: 'ar', name: 'Argentina', flag: '🇦🇷', defaultCurrency: 'ARS', defaultLocale: 'es-AR' },
-      { code: 'es', name: 'España', flag: '🇪🇸', defaultCurrency: 'EUR', defaultLocale: 'es-ES' },
-      { code: 'us', name: 'Estados Unidos', flag: '🇺🇸', defaultCurrency: 'USD', defaultLocale: 'en-US' },
-      { code: 'cl', name: 'Chile', flag: '🇨🇱', defaultCurrency: 'CLP', defaultLocale: 'es-CL' },
-      { code: 'co', name: 'Colombia', flag: '🇨🇴', defaultCurrency: 'COP', defaultLocale: 'es-CO' },
-      { code: 'mx', name: 'México', flag: '🇲🇽', defaultCurrency: 'MXN', defaultLocale: 'es-MX' }
+    let COUNTRIES = [
+      { code: 'py', name: 'Paraguay', flag: '🇵🇾', defaultCurrency: 'PYG', defaultLocale: 'es-PY', whmcsCurrencyId: 2 },
+      { code: 'br', name: 'Brasil', flag: '🇧🇷', defaultCurrency: 'BRL', defaultLocale: 'pt-BR', whmcsCurrencyId: 3 },
+      { code: 'ar', name: 'Argentina', flag: '🇦🇷', defaultCurrency: 'ARS', defaultLocale: 'es-AR', whmcsCurrencyId: 4 },
+      { code: 'es', name: 'España', flag: '🇪🇸', defaultCurrency: 'EUR', defaultLocale: 'es-ES', whmcsCurrencyId: 5 },
+      { code: 'us', name: 'Estados Unidos', flag: '🇺🇸', defaultCurrency: 'USD', defaultLocale: 'en-US', whmcsCurrencyId: 1 },
+      { code: 'cl', name: 'Chile', flag: '🇨🇱', defaultCurrency: 'CLP', defaultLocale: 'es-CL', whmcsCurrencyId: null },
+      { code: 'co', name: 'Colombia', flag: '🇨🇴', defaultCurrency: 'COP', defaultLocale: 'es-CO', whmcsCurrencyId: null },
+      { code: 'mx', name: 'México', flag: '🇲🇽', defaultCurrency: 'MXN', defaultLocale: 'es-MX', whmcsCurrencyId: null }
     ];
 
     let activeCountry = 'py';
+    let loadedCountryData = {};
+
+    function slugify(text) {
+      if (!text) return 'item';
+      return text.toString().toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '')
+        .replace(/\-\-+/g, '-')
+        .replace(/^-+/, '')
+        .replace(/-+$/, '') || 'item';
+    }
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
 
     function formatPrice(val, locale, currency) {
       if (val === null || val === undefined || val === -1) {
@@ -1120,7 +1440,9 @@
           }
         } catch (e) {}
 
-        return { success: true, data, extendedData };
+        const out = { success: true, data, extendedData };
+        loadedCountryData[country.code] = out;
+        return out;
       } catch (err) {
         return { success: false, error: err.message };
       }
@@ -1136,7 +1458,7 @@
                 <strong>No se pudo cargar el archivo de precios para ${country.name} (/assets/data/prices/${country.code}.json).</strong>
                 <p style="margin-top: 4px; font-size: 0.85rem;">
                   Motivo: ${result.error}.<br>
-                  Esto ocurre si aún no se ha ejecutado el cron <code>cron/sync_prices.php</code> o si la moneda ${country.defaultCurrency} aún no está configurada en WHMCS.
+                  Esto ocurre si aún no se ha ejecutado la sincronización o si la moneda ${country.defaultCurrency} aún no está sincronizada.
                 </p>
               </div>
             </div>
@@ -1150,16 +1472,22 @@
       const whmcsId = d.whmcsCurrencyId !== null ? `#${d.whmcsCurrencyId}` : '<span class="pending-cell">No asignado</span>';
       const sync = checkSyncStatus(d.generatedAt);
 
-      // Tabla de Productos
+      // Tabla de Productos Clickeables para abrir Vínculos
       const products = d.products || {};
       const productIds = Object.keys(products).sort((a, b) => Number(a) - Number(b));
 
       const productsRows = productIds.length > 0 ? productIds.map(pid => {
         const p = products[pid] || {};
+        const safeName = p.name || 'Plan #' + pid;
         return `
-          <tr>
-            <td><code>PID ${pid}</code></td>
-            <td><strong>${p.name || 'Plan #' + pid}</strong></td>
+          <tr class="product-row" onclick="openProductLinksModal(${pid}, '${country.code}')" title="Haz clic para ver y copiar los vínculos directos de este producto">
+            <td><code class="pid-badge">PID ${pid}</code></td>
+            <td>
+              <div class="product-name-wrap">
+                <span class="product-name-link">${escapeHtml(safeName)}</span>
+                <span class="badge-vinc">🔗 Vínculos</span>
+              </div>
+            </td>
             <td>${formatPrice(p.monthly, locale, currency)}</td>
             <td>${formatPrice(p.quarterly, locale, currency)}</td>
             <td>${formatPrice(p.semiannually, locale, currency)}</td>
@@ -1223,7 +1551,12 @@
           </div>
 
           <!-- Tabla de Productos / Planes -->
-          <h2 class="section-title">📦 Planes y Productos (${productIds.length})</h2>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <h2 class="section-title" style="margin: 0;">📦 Planes y Productos (${productIds.length})</h2>
+            <span style="font-size: 12px; color: var(--text-muted); background: #f8fafc; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border);">
+              💡 Haz clic en cualquier fila para ver y copiar sus <strong>Vínculos oficiales de WHMCS</strong>
+            </span>
+          </div>
           <div class="table-container">
             <table>
               <thead>
@@ -1272,6 +1605,168 @@
           </div>
         </div>
       `;
+    }
+
+    // ========================================================
+    // MODAL DE VÍNCULOS OFICIALES DE PRODUCTO (WHMCS)
+    // ========================================================
+    function openProductLinksModal(pid, countryCode) {
+      const countryResult = loadedCountryData[countryCode];
+      if (!countryResult || !countryResult.data) {
+        showSyncToast('warn', 'Los datos del producto aún no se han cargado por completo.');
+        return;
+      }
+
+      const products = countryResult.data.products || {};
+      const p = products[pid] || {};
+      const countryMeta = COUNTRIES.find(c => c.code === countryCode) || {
+        name: countryResult.data.country || 'Paraguay',
+        flag: '🇵🇾',
+        defaultCurrency: countryResult.data.currency || 'PYG'
+      };
+
+      const currency = countryResult.data.currency || countryMeta.defaultCurrency || 'USD';
+      const whmcsCurrencyId = countryResult.data.whmcsCurrencyId || countryMeta.whmcsCurrencyId || 1;
+
+      const prodName = p.name || ('Plan #' + pid);
+      const prodSlug = p.slug || slugify(prodName);
+      const groupName = p.group_name || 'Web Hosting';
+      const groupSlug = p.group_slug || (slugify(groupName) || 'basic-plan');
+
+      // Actualizar encabezados del modal
+      document.getElementById('modal-prod-title').textContent = prodName;
+      document.getElementById('modal-prod-pid').textContent = `PID ${pid}`;
+      document.getElementById('modal-prod-group').textContent = `Grupo: ${groupName}`;
+
+      // WHMCS Base URL oficial de NETZ
+      const whmcsBase = 'https://client.netz.com.py';
+
+      // Construcción de Vínculos con los nombres idénticos a WHMCS
+      const links = [
+        {
+          id: 'link-direct-store',
+          title: 'Link directo al Carrito de Compras',
+          tag: 'Oficial WHMCS',
+          desc: 'Ruta amigable oficial de la tienda WHMCS (recomendado para botones de compra).',
+          url: `${whmcsBase}/index.php?rp=/store/${groupSlug}/${prodSlug}`,
+          altUrl: `${whmcsBase}/cart.php?a=add&pid=${pid}`
+        },
+        {
+          id: 'link-carttpl',
+          title: 'Link directo al Carrito de Compras, especificando la plantilla',
+          tag: 'Plantilla Cart',
+          desc: 'Añade el producto al carrito forzando la plantilla activa de compra (carttpl=horn).',
+          url: `${whmcsBase}/cart.php?a=add&pid=${pid}&carttpl=horn`
+        },
+        {
+          id: 'link-domain',
+          title: 'Link directo al Carrito de Compras, incluyendo dominio',
+          tag: 'Con Dominio',
+          desc: 'Añade el producto preconfigurando el flujo de registro o asignación de dominio.',
+          url: `${whmcsBase}/cart.php?a=add&pid=${pid}&sld=whmcs&tld=.com`
+        },
+        {
+          id: 'link-group',
+          title: 'Link al carrito del Grupo del producto',
+          tag: 'Grupo Store',
+          desc: 'Enlace a la categoría/grupo completo de productos en el catálogo de WHMCS.',
+          url: `${whmcsBase}/index.php?rp=/store/${groupSlug}`
+        },
+        {
+          id: 'link-product-urls',
+          title: 'Product URLs (URL directa de la Tienda)',
+          tag: 'Store URL',
+          desc: 'Vínculo canónico asignado por WHMCS a este producto.',
+          url: `${whmcsBase}/index.php?rp=/store/${groupSlug}/${prodSlug}`
+        },
+        {
+          id: 'link-currency',
+          title: `Link directo con Moneda Activa (${countryMeta.flag} ${countryMeta.name} · ${currency})`,
+          tag: 'Moneda Preseleccionada',
+          desc: `Fuerza a WHMCS a cargar el carrito directamente en ${currency} (Currency ID #${whmcsCurrencyId}).`,
+          url: `${whmcsBase}/cart.php?a=add&pid=${pid}&currency=${whmcsCurrencyId}`
+        }
+      ];
+
+      const container = document.getElementById('modal-links-container');
+      container.innerHTML = links.map((lnk) => `
+        <div class="modal-link-item">
+          <div class="modal-link-label">
+            <span>${escapeHtml(lnk.title)}</span>
+            <span class="whmcs-tag">${escapeHtml(lnk.tag)}</span>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 7px;">
+            ${escapeHtml(lnk.desc)}
+          </div>
+          <div class="modal-link-input-row">
+            <input type="text" id="${lnk.id}" class="modal-link-input" value="${escapeHtml(lnk.url)}" readonly onclick="this.select()">
+            <button type="button" class="btn-copy-link" onclick="copyLink('${lnk.id}', this)">
+              <span>📋</span> Copiar
+            </button>
+            <a href="${escapeHtml(lnk.url)}" target="_blank" rel="noopener noreferrer" class="btn-open-link" title="Abrir en pestaña nueva">
+              <span>🔗</span> Abrir
+            </a>
+          </div>
+          ${lnk.altUrl ? `
+            <div style="margin-top: 8px; font-size: 11px; color: #64748b; display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;">
+              <span>Alternativa cart estándar: <code style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px;">${escapeHtml(lnk.altUrl)}</code></span>
+              <button type="button" style="background: none; border: none; color: var(--primary); cursor: pointer; font-size: 11px; text-decoration: underline; font-weight: 600;" onclick="copyDirectValue('${escapeHtml(lnk.altUrl)}')">Copiar alterna</button>
+            </div>
+          ` : ''}
+        </div>
+      `).join('');
+
+      document.getElementById('modal-product-links').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProductLinksModal() {
+      const modal = document.getElementById('modal-product-links');
+      if (modal) modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    function handleModalBackdropClick(e) {
+      if (e.target && e.target.id === 'modal-product-links') {
+        closeProductLinksModal();
+      }
+    }
+
+    // Cerrar modal al presionar Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeProductLinksModal();
+      }
+    });
+
+    async function copyLink(inputId, btnEl) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      input.select();
+      input.setSelectionRange(0, 99999);
+      try {
+        await navigator.clipboard.writeText(input.value);
+        const origHtml = btnEl.innerHTML;
+        btnEl.innerHTML = `<span>✅</span> ¡Copiado!`;
+        btnEl.classList.add('copied');
+        showSyncToast('success', '¡Vínculo copiado al portapapeles!');
+        setTimeout(() => {
+          btnEl.innerHTML = origHtml;
+          btnEl.classList.remove('copied');
+        }, 2200);
+      } catch (err) {
+        document.execCommand('copy');
+        showSyncToast('success', '¡Vínculo copiado!');
+      }
+    }
+
+    async function copyDirectValue(val) {
+      try {
+        await navigator.clipboard.writeText(val);
+        showSyncToast('success', '¡Vínculo alternativo copiado al portapapeles!');
+      } catch (e) {
+        prompt('Copia este enlace:', val);
+      }
     }
 
     function filterDomainTable(input, tableId) {
@@ -1340,14 +1835,39 @@
 
     async function loadAllCountries() {
       const container = document.getElementById('tabs-contents');
-      container.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--text-muted);">Cargando precios de todos los países y uniendo dominios...</div>`;
+      container.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--text-muted);">Cargando precios y configuración de monedas...</div>`;
+
+      // 1. Descubrimiento automático de monedas y países desde manifest.json
+      try {
+        const resManifest = await fetch(`/assets/data/prices/manifest.json?_=${Date.now()}`);
+        if (resManifest.ok) {
+          const manifest = await resManifest.json();
+          if (manifest && Array.isArray(manifest.countries) && manifest.countries.length > 0) {
+            COUNTRIES = manifest.countries.map(c => ({
+              code: c.code,
+              name: c.name,
+              flag: c.flag || '💵',
+              defaultCurrency: c.currency,
+              defaultLocale: c.locale || 'es-PY',
+              whmcsCurrencyId: c.whmcsCurrencyId
+            }));
+          }
+        }
+      } catch (err) {
+        // En caso de fallo de red, se mantiene la configuración local predeterminada
+      }
+
+      // Si activeCountry ya no existe en la lista, resetear al primero
+      if (!COUNTRIES.some(c => c.code === activeCountry)) {
+        activeCountry = COUNTRIES[0].code;
+      }
 
       const results = await Promise.all(COUNTRIES.map(async c => {
         const res = await loadCountryData(c);
         return { country: c, result: res };
       }));
 
-      // Renderizar Nav
+      // Renderizar Nav de pestañas
       const navContainer = document.getElementById('tabs-nav');
       navContainer.innerHTML = COUNTRIES.map(c => `
         <button class="tab-btn ${c.code === activeCountry ? 'active' : ''}" onclick="switchTab('${c.code}')">
@@ -1362,7 +1882,7 @@
     function switchTab(code) {
       activeCountry = code;
       document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
-        btn.classList.toggle('active', COUNTRIES[idx].code === code);
+        btn.classList.toggle('active', COUNTRIES[idx] && COUNTRIES[idx].code === code);
       });
       document.querySelectorAll('.tab-content').forEach(pane => {
         pane.classList.toggle('active', pane.id === `pane-${code}`);
@@ -1371,6 +1891,7 @@
 
     // Inicialización con verificación de sesión
     checkExistingSession();
+  </script>
   </script>
 </body>
 </html>

@@ -100,12 +100,42 @@ if ($hasDb) {
         }
     }
 
-    // C. Precios de Productos desde WHMCS
+    if (!function_exists('netz_slugify')) {
+        function netz_slugify($text) {
+            if (!$text) return '';
+            $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+            if (function_exists('iconv')) {
+                $text = @iconv('utf-8', 'us-ascii//TRANSLIT', $text) ?: $text;
+            }
+            $text = preg_replace('~[^-\w]+~', '', $text);
+            $text = trim($text, '-');
+            $text = preg_replace('~-+~', '-', $text);
+            $text = strtolower($text);
+            return empty($text) ? 'item' : $text;
+        }
+    }
+
+    // C. Precios de Productos desde WHMCS (con nombres, grupos y slugs para vínculos directos)
+    $hasProductSlug = false;
+    $hasGroupSlug = false;
+    $checkProd = @$conexion->query("SHOW COLUMNS FROM tblproducts LIKE 'slug'");
+    if ($checkProd && $checkProd->num_rows > 0) $hasProductSlug = true;
+    $checkGroup = @$conexion->query("SHOW COLUMNS FROM tblproductgroups LIKE 'slug'");
+    if ($checkGroup && $checkGroup->num_rows > 0) $hasGroupSlug = true;
+
+    $prodSlugCol = $hasProductSlug ? 'p.slug as product_slug,' : "'' as product_slug,";
+    $groupSlugCol = $hasGroupSlug ? 'pg.slug as group_slug,' : "'' as group_slug,";
+
     $prodSql = $conexion->query("
-        SELECT p.id as pid, p.name, pr.currency,
+        SELECT p.id as pid, p.gid, p.name,
+               {$prodSlugCol}
+               pg.name as group_name,
+               {$groupSlugCol}
+               pr.currency,
                pr.monthly, pr.quarterly, pr.semiannually, pr.annually, pr.biennially, pr.triennially,
                pr.msetupfee, pr.qsetupfee, pr.ssetupfee, pr.asetupfee, pr.bsetupfee, pr.tsetupfee
         FROM tblproducts p
+        LEFT JOIN tblproductgroups pg ON pg.id = p.gid
         LEFT JOIN tblpricing pr ON (pr.type = 'product' AND pr.relid = p.id)
         WHERE p.hidden = 0 OR p.hidden IS NULL
         ORDER BY p.id ASC
@@ -117,6 +147,20 @@ if ($hasDb) {
             $currId = (int)($row['currency'] ?? $defaultCurrencyId);
             $pid = (int)$row['pid'];
             $pName = trim($row['name']);
+            $gid = (int)($row['gid'] ?? 0);
+            $gName = trim($row['group_name'] ?? '');
+
+            $pSlug = trim($row['product_slug'] ?? '');
+            if (!$pSlug) {
+                $pSlug = netz_slugify($pName);
+            }
+            $gSlug = trim($row['group_slug'] ?? '');
+            if (!$gSlug && $gName) {
+                $gSlug = netz_slugify($gName);
+            }
+            if (!$gSlug) {
+                $gSlug = 'hosting';
+            }
 
             $cycles = [
                 'monthly' => (float)$row['monthly'],
@@ -136,7 +180,12 @@ if ($hasDb) {
                 $productsByCurrency[$currId] = [];
             }
             $productsByCurrency[$currId][$pid] = array_merge([
-                'name' => $pName
+                'pid' => $pid,
+                'gid' => $gid,
+                'name' => $pName,
+                'slug' => $pSlug,
+                'group_name' => $gName,
+                'group_slug' => $gSlug
             ], $parsedCycles);
         }
     }
@@ -192,6 +241,49 @@ if ($hasDb) {
 
     $totalUpdatedCountries = 0;
     $maxExtendedCount = 0;
+    $manifestCountries = [];
+
+    $flagLookup = [
+        'py' => '🇵🇾', 'br' => '🇧🇷', 'ar' => '🇦🇷', 'es' => '🇪🇸',
+        'us' => '🇺🇸', 'cl' => '🇨🇱', 'co' => '🇨🇴', 'mx' => '🇲🇽',
+        'pe' => '🇵🇪', 'uy' => '🇺🇾', 'bo' => '🇧🇴', 'ec' => '🇪🇨',
+        've' => '🇻🇪', 'pa' => '🇵🇦', 'cr' => '🇨🇷', 'gt' => '🇬🇹',
+        'hn' => '🇭🇳', 'ni' => '🇳🇮', 'sv' => '🇸🇻', 'do' => '🇩🇴',
+        'gb' => '🇬🇧', 'de' => '🇩🇪', 'fr' => '🇫🇷', 'it' => '🇮🇹',
+        'pt' => '🇵🇹', 'ca' => '🇨🇦'
+    ];
+    $currToCountryCode = [
+        'PYG' => 'py', 'BRL' => 'br', 'ARS' => 'ar', 'EUR' => 'es',
+        'USD' => 'us', 'CLP' => 'cl', 'COP' => 'co', 'MXN' => 'mx',
+        'PEN' => 'pe', 'UYU' => 'uy', 'BOB' => 'bo', 'GBP' => 'gb',
+        'CAD' => 'ca'
+    ];
+    $currToLocale = [
+        'PYG' => 'es-PY', 'BRL' => 'pt-BR', 'ARS' => 'es-AR', 'EUR' => 'es-ES',
+        'USD' => 'en-US', 'CLP' => 'es-CL', 'COP' => 'es-CO', 'MXN' => 'es-MX',
+        'PEN' => 'es-PE', 'UYU' => 'es-UY', 'BOB' => 'es-BO', 'GBP' => 'en-GB',
+        'CAD' => 'en-CA'
+    ];
+
+    // Autodescubrimiento: Si hay monedas creadas en WHMCS que aún no están en country_currency.json,
+    // se agregan automáticamente para generar sus archivos y pestaña correspondiente
+    $configuredCurrencies = [];
+    foreach ($countryConfig as $cm) {
+        $configuredCurrencies[strtoupper($cm['currency'])] = true;
+    }
+    foreach ($whmcsCurrencies as $wCode => $wData) {
+        if (!isset($configuredCurrencies[$wCode])) {
+            $mappedC = strtolower($currToCountryCode[$wCode] ?? $wCode);
+            if (!isset($countryConfig[$mappedC])) {
+                $countryConfig[$mappedC] = [
+                    'country' => 'Moneda ' . $wCode,
+                    'locale' => $currToLocale[$wCode] ?? 'en-US',
+                    'currency' => $wCode,
+                    'status' => 'active_whmcs'
+                ];
+            }
+        }
+    }
 
     foreach ($countryConfig as $cCode => $cMeta) {
         $cName = $cMeta['country'];
@@ -205,6 +297,15 @@ if ($hasDb) {
             $targetCurrencyId = $whmcsCurrencies[$cCurr]['id'];
             $currRate = $whmcsCurrencies[$cCurr]['rate'] ?: 1.0;
         }
+
+        $manifestCountries[] = [
+            'code' => $cCode,
+            'name' => $cName,
+            'flag' => $flagLookup[$cCode] ?? '💵',
+            'currency' => $cCurr,
+            'locale' => $cLocale,
+            'whmcsCurrencyId' => $targetCurrencyId
+        ];
 
         // Productos para este país
         $countryProducts = $productsByCurrency[$targetCurrencyId] ?? $productsByCurrency[$defaultCurrencyId] ?? [];
@@ -310,6 +411,19 @@ if ($hasDb) {
         }
     }
 
+    // 3. Guardar manifiesto de países y monedas descubiertas para el panel de revisión
+    $manifestData = [
+        'updatedAt' => $nowIso,
+        'totalCountries' => count($manifestCountries),
+        'currencies' => array_values($whmcsCurrencies),
+        'countries' => $manifestCountries
+    ];
+    $manifestJson = json_encode($manifestData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    file_put_contents($outputDir . "/manifest.json", $manifestJson);
+    if (is_dir($distOutputDir)) {
+        @file_put_contents($distOutputDir . "/manifest.json", $manifestJson);
+    }
+
     echo json_encode([
         'status' => 'ok',
         'message' => '¡Precios y dominios sincronizados exitosamente desde la base de datos de WHMCS!',
@@ -325,7 +439,30 @@ if ($hasDb) {
 
 // 5. Fallback si MySQL no está conectado directamente (ej. entorno local estático sin PHP/MySQL)
 $updatedCount = 0;
+$manifestCountries = [];
+$flagLookup = [
+    'py' => '🇵🇾', 'br' => '🇧🇷', 'ar' => '🇦🇷', 'es' => '🇪🇸',
+    'us' => '🇺🇸', 'cl' => '🇨🇱', 'co' => '🇨🇴', 'mx' => '🇲🇽',
+    'pe' => '🇵🇪', 'uy' => '🇺🇾', 'bo' => '🇧🇴', 'ec' => '🇪🇨',
+    've' => '🇻🇪', 'pa' => '🇵🇦', 'cr' => '🇨🇷', 'gt' => '🇬🇹',
+    'hn' => '🇭🇳', 'ni' => '🇳🇮', 'sv' => '🇸🇻', 'do' => '🇩🇴',
+    'gb' => '🇬🇧', 'de' => '🇩🇪', 'fr' => '🇫🇷', 'it' => '🇮🇹'
+];
+
 foreach ($countryConfig as $cCode => $cMeta) {
+    $cName = $cMeta['country'] ?? strtoupper($cCode);
+    $cCurr = strtoupper($cMeta['currency'] ?? 'USD');
+    $cLocale = $cMeta['locale'] ?? 'en-US';
+
+    $manifestCountries[] = [
+        'code' => $cCode,
+        'name' => $cName,
+        'flag' => $flagLookup[$cCode] ?? '💵',
+        'currency' => $cCurr,
+        'locale' => $cLocale,
+        'whmcsCurrencyId' => null
+    ];
+
     $fPath = $outputDir . "/{$cCode}.json";
     if (file_exists($fPath)) {
         $cData = json_decode(file_get_contents($fPath), true);
@@ -347,6 +484,25 @@ foreach ($countryConfig as $cCode => $cMeta) {
             $extData['generatedAt'] = $nowIso;
             $newExtJson = json_encode($extData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             file_put_contents($extPath, $newExtJson);
+            if (is_dir($distOutputDir)) {
+                @file_put_contents($distOutputDir . "/domains_extended_{$cCode}.json", $newExtJson);
+            }
+        }
+    }
+}
+
+// Guardar manifest en fallback
+$manifestData = [
+    'updatedAt' => $nowIso,
+    'totalCountries' => count($manifestCountries),
+    'currencies' => [],
+    'countries' => $manifestCountries
+];
+$manifestJson = json_encode($manifestData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+@file_put_contents($outputDir . "/manifest.json", $manifestJson);
+if (is_dir($distOutputDir)) {
+    @file_put_contents($distOutputDir . "/manifest.json", $manifestJson);
+}
             if (is_dir($distOutputDir)) {
                 @file_put_contents($distOutputDir . "/domains_extended_{$cCode}.json", $newExtJson);
             }
