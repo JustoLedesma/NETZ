@@ -16,8 +16,17 @@ type responseLogger struct {
 }
 
 func (lr *responseLogger) WriteHeader(code int) {
-	lr.statusCode = code
-	lr.ResponseWriter.WriteHeader(code)
+	if lr.statusCode == 0 {
+		lr.statusCode = code
+		lr.ResponseWriter.WriteHeader(code)
+	}
+}
+
+func (lr *responseLogger) Write(b []byte) (int, error) {
+	if lr.statusCode == 0 {
+		lr.statusCode = http.StatusOK
+	}
+	return lr.ResponseWriter.Write(b)
 }
 
 func main() {
@@ -110,8 +119,9 @@ func main() {
 		w.WriteHeader(http.StatusNotFound)
 		for _, dir := range searchDirs {
 			err404 := filepath.Join(dir, "404.html")
-			if _, errStat := os.Stat(err404); errStat == nil {
-				http.ServeFile(w, r, err404)
+			if content, errRead := os.ReadFile(err404); errRead == nil {
+				w.Header().Set("Content-Type", "text/html; charset=utf-8")
+				w.Write(content)
 				return
 			}
 		}
@@ -120,11 +130,15 @@ func main() {
 
 	// Middleware de logging para ver cada petición en la consola
 	loggedHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		lr := &responseLogger{ResponseWriter: w, statusCode: http.StatusOK}
+		lr := &responseLogger{ResponseWriter: w, statusCode: 0}
 		start := time.Now()
 		mux.ServeHTTP(lr, r)
 		duration := time.Since(start)
-		fmt.Printf("[%s] %d %-4s %s (%v)\n", time.Now().Format("15:04:05"), lr.statusCode, r.Method, r.URL.Path, duration)
+		code := lr.statusCode
+		if code == 0 {
+			code = http.StatusOK
+		}
+		fmt.Printf("[%s] %d %-4s %s (%v)\n", time.Now().Format("15:04:05"), code, r.Method, r.URL.Path, duration)
 	})
 
 	fmt.Println("=======================================================")

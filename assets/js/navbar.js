@@ -77,7 +77,7 @@
                 </div>
 
                 <ul class="header-user-info-coodiv">
-                    <li class="dropdown"><a role="button" id="header-login-dropdown" href="https://client.netz.com.py/login.php">Iniciar Sesión</a> <span>0973 136 822</span>
+                    <li class="dropdown"><a role="button" id="header-login-dropdown" href="https://client.netz.com.py/login.php">Iniciar Sesión</a> <span>+595 973 136 822</span>
                         <div class="dropdown-menu coodiv-dropdown-header user-login-dropdown" aria-labelledby="header-login-dropdown">
                             <form class="user-login-dropdown-form" action="https://client.netz.com.py/login.php" data-form="validate">
                                 <div class="form-group username">
@@ -112,7 +112,7 @@
             try {
                 window.jQuery('.offcanvas-toggle, [data-toggle="offcanvas"], .menu-btn-span-bar').off('click');
                 window.jQuery(document).off('click.bs.offcanvas');
-            } catch (e) {}
+            } catch (e) { }
         }
     }
 
@@ -127,7 +127,7 @@
         document.body.classList.remove('offcanvas-stop-scrolling');
     }
 
-        function getCountryPrefix() {
+    function getCountryPrefix() {
         var country = (document.documentElement.getAttribute('data-country') || 'py').toLowerCase();
         return (country === 'py') ? '' : '/' + country;
     }
@@ -175,6 +175,7 @@
             }
         }
         initOffcanvas();
+        initDropdownHover();
     }
 
     // Inicializar inmediatamente
@@ -192,12 +193,51 @@
         });
     }
 
-    // Delegación universal de eventos para el menú lateral móvil (Offcanvas)
+    // Manejo de Hover con apertura fluida en Desktop
+    function initDropdownHover() {
+        const dropdownItems = document.querySelectorAll('#coodiv-navbar-header .nav-item.dropdown, .header-user-info-coodiv .dropdown');
+
+        dropdownItems.forEach(function (drop) {
+            let closeTimer = null;
+            const menu = drop.querySelector('.dropdown-menu');
+            const toggle = drop.querySelector('[data-toggle="dropdown"], #header-login-dropdown');
+
+            function open() {
+                if (window.innerWidth < 768) return;
+                if (closeTimer) {
+                    clearTimeout(closeTimer);
+                    closeTimer = null;
+                }
+                drop.classList.add('show');
+                if (menu) menu.classList.add('show');
+                if (toggle) toggle.setAttribute('aria-expanded', 'true');
+            }
+
+            function close() {
+                if (window.innerWidth < 768) return;
+                closeTimer = setTimeout(function () {
+                    drop.classList.remove('show');
+                    if (menu) menu.classList.remove('show');
+                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                }, 180);
+            }
+
+            drop.addEventListener('mouseenter', open);
+            drop.addEventListener('mouseleave', close);
+
+            if (menu) {
+                menu.addEventListener('mouseenter', open);
+                menu.addEventListener('mouseleave', close);
+            }
+        });
+    }
+
+    // Delegación universal de eventos para Navbar y Menú Móvil
     document.addEventListener('click', function (e) {
         const toggleBtn = e.target.closest('.offcanvas-toggle, [data-toggle="offcanvas"], .menu-btn-span-bar');
         const offcanvas = document.getElementById('offcanvas-menu-home');
 
-        // 1. Clic en el botón hamburguesa (3 rayitas)
+        // 1. Clic en botón hamburguesa móvil
         if (toggleBtn) {
             e.preventDefault();
             e.stopPropagation();
@@ -216,16 +256,32 @@
             return;
         }
 
-        // 2. Clic en dropdown dentro del offcanvas móvil
-        const dropdownLink = e.target.closest('#offcanvas-menu-home [data-toggle="dropdown"]');
+        // 2. Clic en enlaces dropdown (Desktop vs Móvil)
+        const dropdownLink = e.target.closest('#coodiv-navbar-header [data-toggle="dropdown"], .header-user-info-coodiv [data-toggle="dropdown"], #header-login-dropdown');
         if (dropdownLink) {
+            const isDesktop = window.innerWidth >= 768;
+            if (isDesktop) {
+                // En desktop el hover ya lo abre; prevenir salto '#' y alternar limpiamente
+                e.preventDefault();
+                const dropdownParent = dropdownLink.closest('.dropdown');
+                const dropdownMenu = dropdownParent ? dropdownParent.querySelector('.dropdown-menu') : null;
+                if (dropdownParent && dropdownMenu) {
+                    const isOpen = dropdownParent.classList.contains('show');
+                    if (!isOpen) {
+                        dropdownParent.classList.add('show');
+                        dropdownMenu.classList.add('show');
+                        dropdownLink.setAttribute('aria-expanded', 'true');
+                    }
+                }
+                return;
+            }
+
+            // En móvil (offcanvas lateral): un solo toque abre/cierra
+            e.preventDefault();
+            e.stopPropagation();
             const dropdownParent = dropdownLink.closest('.dropdown');
             const dropdownMenu = dropdownParent ? dropdownParent.querySelector('.dropdown-menu') : null;
             if (dropdownMenu) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                // Cerrar otros submenús abiertos dentro del offcanvas
                 const allMenus = document.querySelectorAll('#offcanvas-menu-home .dropdown-menu');
                 for (let i = 0; i < allMenus.length; i++) {
                     if (allMenus[i] !== dropdownMenu) {
@@ -235,25 +291,45 @@
                         }
                     }
                 }
-
                 const isShown = dropdownMenu.classList.toggle('show');
                 if (dropdownParent) dropdownParent.classList.toggle('show', isShown);
+                dropdownLink.setAttribute('aria-expanded', isShown ? 'true' : 'false');
             }
             return;
         }
 
-        // 3. Clic en enlace normal dentro del offcanvas
+        // 3. Clic fuera de dropdowns en Desktop: cerrar cualquier menú abierto
+        if (window.innerWidth >= 768 && !e.target.closest('.dropdown')) {
+            document.querySelectorAll('#coodiv-navbar-header .dropdown.show, .header-user-info-coodiv .dropdown.show').forEach(function (d) {
+                d.classList.remove('show');
+                const m = d.querySelector('.dropdown-menu');
+                if (m) m.classList.remove('show');
+                const t = d.querySelector('[data-toggle="dropdown"], #header-login-dropdown');
+                if (t) t.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        // 4. Clic en enlace normal dentro del offcanvas móvil
         const navLink = e.target.closest('#offcanvas-menu-home a:not([data-toggle="dropdown"])');
         if (navLink) {
             closeOffcanvas();
             return;
         }
 
-        // 4. Clic fuera del menú cuando está abierto: cerrar offcanvas
+        // 5. Clic fuera del menú móvil cuando está abierto: cerrar offcanvas
         if (offcanvas && offcanvas.classList.contains('in')) {
             if (!e.target.closest('#offcanvas-menu-home')) {
                 closeOffcanvas();
             }
         }
     });
+
+    // Inicializar hover tras renderizar
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () {
+            initDropdownHover();
+        });
+    } else {
+        initDropdownHover();
+    }
 })();

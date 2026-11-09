@@ -77,7 +77,7 @@
                 </div>
 
                 <ul class="header-user-info-coodiv">
-                    <li class="dropdown"><a role="button" id="header-login-dropdown" href="https://client.netz.com.py/login.php">Iniciar Sesión</a> <span>0973 136 822</span>
+                    <li class="dropdown"><a role="button" id="header-login-dropdown" href="https://client.netz.com.py/login.php">Iniciar Sesión</a> <span>+595 973 136 822</span>
                         <div class="dropdown-menu coodiv-dropdown-header user-login-dropdown" aria-labelledby="header-login-dropdown">
                             <form class="user-login-dropdown-form" action="https://client.netz.com.py/login.php" data-form="validate">
                                 <div class="form-group username">
@@ -112,7 +112,7 @@
             try {
                 window.jQuery('.offcanvas-toggle, [data-toggle="offcanvas"], .menu-btn-span-bar').off('click');
                 window.jQuery(document).off('click.bs.offcanvas');
-            } catch (e) {}
+            } catch (e) { }
         }
     }
 

@@ -305,3 +305,47 @@
     ul.arvr-headset li:nth-child(2n+2) {padding-left: 15px;}
 
 }
+
+/* ========================================================
+   DROPDOWN HOVER & ANIMACIÓN DE APERTURA (DESKTOP)
+   ======================================================== */
+@media (min-width: 768px) {
+    /* Puente invisible para evitar perder el hover en el margen de 25px */
+    #coodiv-navbar-header .coodiv-dropdown-header::before,
+    .header-user-info-coodiv .coodiv-dropdown-header::before {
+        content: '';
+        position: absolute;
+        top: -28px;
+        left: 0;
+        right: 0;
+        height: 28px;
+        background: transparent;
+        pointer-events: auto;
+    }
+
+    /* Estado inicial del dropdown: cerrado con leve desplazamiento */
+    #coodiv-navbar-header .dropdown-menu,
+    .header-user-info-coodiv .dropdown-menu {
+        display: block !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transform: translateY(-12px) !important;
+        -webkit-transform: translateY(-12px) !important;
+        transition: opacity 0.22s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s !important;
+        -webkit-transition: opacity 0.22s ease, -webkit-transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s !important;
+        will-change: opacity, transform;
+    }
+
+    /* Estado activo al pasar el mouse (:hover) o con clase .show */
+    #coodiv-navbar-header .nav-item.dropdown:hover > .dropdown-menu,
+    #coodiv-navbar-header .nav-item.dropdown.show > .dropdown-menu,
+    .header-user-info-coodiv .dropdown:hover > .dropdown-menu,
+    .header-user-info-coodiv .dropdown.show > .dropdown-menu {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateY(0) !important;
+        -webkit-transform: translateY(0) !important;
+    }
+}
