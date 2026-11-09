@@ -1,0 +1,51 @@
+{
+  "py": {
+    "country": "Paraguay",
+    "locale": "es-PY",
+    "currency": "PYG",
+    "status": "active"
+  },
+  "br": {
+    "country": "Brasil",
+    "locale": "pt-BR",
+    "currency": "BRL",
+    "status": "active"
+  },
+  "ar": {
+    "country": "Argentina",
+    "locale": "es-AR",
+    "currency": "ARS",
+    "status": "active"
+  },
+  "es": {
+    "country": "España",
+    "locale": "es-ES",
+    "currency": "EUR",
+    "status": "active"
+  },
+  "us": {
+    "country": "Estados Unidos",
+    "locale": "en-US",
+    "currency": "USD",
+    "status": "active"
+  },
+  "cl": {
+    "country": "Chile",
+    "locale": "es-CL",
+    "currency": "CLP",
+    "status": "pending_whmcs"
+  },
+  "co": {
+    "country": "Colombia",
+    "locale": "es-CO",
+    "currency": "COP",
+    "status": "pending_whmcs"
+  },
+  "mx": {
+    "country": "México",
+    "locale": "es-MX",
+    "currency": "MXN",
+    "status": "pending_whmcs"
+  }
+}
+

@@ -1,0 +1,29 @@
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:8px;
+	left: 10px;
+	right: auto !important;
+	background-color:#25d366;
+	color:#FFF;
+	border-radius:500px;
+	text-align:center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size:30px;
+	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.281);
+	z-index:100;
+	transition: all 0.3s ease;
+}
+.float:hover {
+	text-decoration: none;
+	color: #25d366;
+	background-color:#fff;
+}
+.float svg {
+	width: 32px;
+	height: 32px;
+	fill: currentColor;
+}

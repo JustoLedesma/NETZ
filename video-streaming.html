@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="es" data-country="py" class="prices-loading">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="/assets/img/header/N-SVG.svg" type="image/x-icon">
+    <link rel="preload" href="/assets/data/prices/py.json?v=1" as="fetch" crossorigin>
+    <style>
+        .prices-loading [data-pid], .prices-loading [data-domain], .prices-loading [data-price] { opacity: 0; }
+        [data-pid], [data-domain], [data-price] { transition: opacity 0.15s ease-in; }
+    </style>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/main.min.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/fontawesome-all.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+    <link href="/assets/css/typography.css" rel="stylesheet">
+    <link href="/assets/css/whatsapp.css" rel="stylesheet">
+    <title>Video Streaming en Vivo HD con SSL | NETZ</title>
+    <meta name="description"
+        content="Transmisión de video streaming en vivo con calidad HD, soporte multidispositivo para móviles y Smart TVs y reproductor web HTML5." />
+    <meta name="keywords"
+        content="video streaming en vivo, streaming video hd, transmision en vivo online, streaming rtmp hls" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://netz.com.py/video-streaming">
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://netz.com.py/video-streaming">
+    <meta property="og:site_name" content="NETZ">
+    <meta property="og:title" content="Video Streaming en Vivo HD con SSL | NETZ">
+    <meta property="og:description"
+        content="Transmisión de video streaming en vivo con calidad HD, soporte multidispositivo para móviles y Smart TVs y reproductor web HTML5.">
+    <meta property="og:image" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+    <meta property="og:image:secure_url" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_LA">
+    <meta property="og:locale:alternate" content="es_ES">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Video Streaming en Vivo HD con SSL | NETZ">
+    <meta name="twitter:description"
+        content="Transmisión de video streaming en vivo con calidad HD, soporte multidispositivo para móviles y Smart TVs y reproductor web HTML5.">
+    <meta name="twitter:image" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+</head>
+
+<body>
+    <div id="coodiv-header" class="d-flex mx-auto flex-column subpages-header">
+        <div class="bg_overlay_header">
+            <div class="bg-img-header-new-standard">&nbsp;</div>
+        </div>
+        <div id="navbar-container">
+            <nav id="coodiv-navbar-header" class="navbar navbar-expand-md fixed-header-layout">
+                <div class="container main-header-coodiv-s">
+                    <a class="navbar-brand" href="index"><img src="/assets/img/header/NETZ-IA.svg" width="100px"
+                            alt="Logo" decoding="async" /></a>
+                    <button class="navbar-toggle offcanvas-toggle menu-btn-span-bar ml-auto" data-toggle="offcanvas"
+                        data-target="#offcanvas-menu-home">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="collapse navbar-collapse navbar-offcanvas" id="offcanvas-menu-home">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="index">Inicio<span class="sr-only">(current)</span> </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Hosting</a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="webhosting-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-infinity"></i> <a href="hosting-ilimitado">Hosting
+                                                Ilimitado<span class="nav-new-tag">Servicio sin límites de
+                                                    recursos</span></a></li>
+                                        <li><i class="fas fa-server"></i> <a href="hosting-exclusivo">Hosting
+                                                Exclusivo<span>Recursos exclusivos</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="vps-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Vps<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="vps-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fab fa-linux"></i> <a href="vps-linux-no-administrado">Linux
+                                                no administrado<span>¡Administre usted mismo!</span></a></li>
+                                        <li><i class="fab fa-linux"></i> <a href="vps-linux-administrado">Linux
+                                                Administrado<span>Todo el poder <br>NINGUNO de los problemas</span></a>
+                                        </li>
+                                        <li><i class="fab fa-windows"></i> <a
+                                                href="vps-windows-no-administrado">Windows no
+                                                Administrado<span>¡Administre usted mismo!</span></a></li>
+                                        <li><i class="fab fa-windows"></i> <a
+                                                href="vps-windows-administrado">Windows Administrado<span>Todo el
+                                                    poder <br>NINGUNO de los problemas</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="streaming-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Streaming<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="streaming-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-microphone"></i> <a href="audio-streaming">Radio
+                                                Streaming<span>Sonido limpio y fluido <br>Sonido de Calidad</span></a>
+                                        </li>
+                                        <li><i class="fab fas fa-video"></i> <a href="video-streaming">Video
+                                                Streaming<span>Calidad máxima 720p <br>Streaming SSL</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="reseller-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Reseller<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="reseller-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fab fa-cpanel"></i> <a href="reseller-cpanel">cPanel &
+                                                WHM<span>2 CPU - 2Gb Ram, por cPanel</span></a></li>
+                                        <li><i class="fas fa-sign"></i> <a
+                                                href="reseller-directadmin">DirectAdmin<span>2 CPU - 2Gb Ram, por
+                                                    cuenta</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Dominios</a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="dominios-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-globe-americas"></i> <a
+                                                href="buscar-dominios">Comprobador de dominio<span
+                                                    class="nav-new-tag">Consulta de disponibilidad</span></a></li>
+                                        <li><i class="fas fa-random"></i> <a
+                                                href="https://client.netz.com.py/cart.php?a=add&domain=transfer">Transferencia
+                                                de dominio<span>Transfiera su dominio</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="#" role="button" id="header-pages-drop-down"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresa<span
+                                        class="sr-only">(current)</span></a>
+                                <ul class="dropdown-menu coodiv-dropdown-header"
+                                    aria-labelledby="header-pages-drop-down">
+                                    <li><a class="dropdown-item" href="about">Sobre Nosotros</a></li>
+                                    <li><a class="dropdown-item" href="terminos-del-servicio">Términos de
+                                            Servicio</a></li>
+                                    <li><a class="dropdown-item" href="politica-de-privacidad">Politica de
+                                            Privacidad</a></li>
+                                    <li><a class="dropdown-item" href="aviso-legal">Aviso Legal</a></li>
+                                    <li><a class="dropdown-item" href="contact">Cóntactenos</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ul class="header-user-info-coodiv">
+                        <li class="dropdown"><a role="button" id="header-login-dropdown"
+                                href="https://client.netz.com.py/login.php">Iniciar Sesión</a> <span>0973 136 822</span>
+                            <div class="dropdown-menu coodiv-dropdown-header user-login-dropdown"
+                                aria-labelledby="header-login-dropdown">
+                                <form class="user-login-dropdown-form" action="https://client.netz.com.py/login.php"
+                                    data-form="validate">
+                                    <div class="form-group username">
+                                        <input type="email" name="username" id="inputEmail" placeholder="E-mail"
+                                            class="form-control" autofocus><i class="fas fa-at"></i>
+                                    </div>
+                                    <div class="form-group password">
+                                        <input type="password" name="password" id="inputPassword"
+                                            placeholder="Contraseña" class="form-control"><i class="fas fa-lock"></i>
+                                    </div>
+                                    <button data-toggle="tooltip" data-placement="left" title="login"
+                                        class="user-login-dropdown-form-button" type="submit"><i
+                                            class="fas fa-angle-right"></i></button>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="mt-auto header-top-height"></div>
+        <main class="container mb-auto">
+            <h3 class="mt-3 main-header-text-title"><span>¿Necesitas Una Forma De Realizar Streaming?</span>VIDEO
+                STREAMING</h3>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-4 col-md-push-4">
+                        <div id="monthly-yearly-chenge" class="mr-tp-40 style-two">
+                            <a class="active monthly-price"> <span class="change-box-text">Mensual</span> <span
+                                    class="change-box"></span></a>
+                            <a class="yearli-price"> <span class="change-box-text">Anual</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-auto"></div>
+    </div>
+    <section style="background:#fff" class="padding-100-0-10 position-relative">
+        <div class="container">
+            <h5 class="title-default-coodiv-two mr-tp-50">Selecciona el plan de streaming tv y comienza a transmitir.
+            </h5>
+            <div class="box-features-new version-two row justify-content-start">
+                <div class="col-md-3 box-features-item">
+                    <div class="box-header"><img src="/assets/img/svgs/2.svg" alt="" / loading="lazy" decoding="async">
+                    </div>
+                    <h5>Streaming TV Basico</h5>
+                    <span class="second-pricing-table-price monthly">
+                        <i class="monthly" data-pid="11" data-cycle="monthly">USD. 8.00<small> /Mensual</small></i>
+                        <i class="yearly" data-pid="11" data-cycle="annually">USD. 80.00<small> /Anual</small></i>
+                    </span>
+                    <!--   <i class="monthly"><b>USD. 14.28</b><small> /Mensual</small></i><br>
+                <i class="monthly"><b>Gs. 100.000</b><small> /Mensual</small></i> -->
+                    <ul class="second-pricing-table-body">
+                        <li><b>50 Espectadores</b></li>
+                        <li>Bitrate Video hasta 720 Kbps</li>
+                        <li>Codec video H.264</li>
+                        <li>Calidad máxima. 480P</li>
+                        <li>Formato MP4</li>
+                        <li>Players HTML5</li>
+                        <li>Streaming SSLL</li>
+                        <li>Soporte para moviles</li>
+                        <li>Wowza Media Server</li>
+                        <li>Panel MediaCP (Cast Control)</li>
+                        <li>Estadisticas/GeoMap</li>
+                        <li>Trafico ilimitado</li>
+                        <li>Compatible con Smartphone</li>
+                        <li class="not-chacked">Auto Dj</li>
+                    </ul>
+                    <a data-whmcs-link data-pid="11" href="https://client.netz.com.py/cart.php?a=add&pid=11">Contratar</a>
+                    <!--<div style="text-align: center; margin-top: 8px;"><a href="terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                </div>
+                <div class="col-md-3 box-features-item">
+                    <div class="box-header"><img src="/assets/img/svgs/3.svg" alt="" / loading="lazy" decoding="async">
+                    </div>
+                    <h5>Streaming TV Estándar</h5>
+                    <span class="second-pricing-table-price monthly">
+                        <i class="monthly" data-pid="12" data-cycle="monthly">USD. 14.28<small> /Mensual</small></i>
+                        <i class="yearly" data-pid="12" data-cycle="annually">USD. 142.80<small> /Anual</small></i>
+                    </span>
+                    <ul class="second-pricing-table-body">
+                        <li><b>100 Espectadores</b></li>
+                        <li>Bitrate Video hasta 1280 Kbps</li>
+                        <li>Codec video H.264</li>
+                        <li>Calidad máxima. 720P</li>
+                        <li>Formato MP4</li>
+                        <li>Players HTML5</li>
+                        <li>Streaming SSLL</li>
+                        <li>Soporte para moviles</li>
+                        <li>Wowza Media Server</li>
+                        <li>Panel MediaCP (Cast Control)</li>
+                        <li>Estadisticas/GeoMap</li>
+                        <li>Trafico ilimitado</li>
+                        <li>Compatible con Smartphone</li>
+                        <li>Auto Dj 5GB</li>
+                    </ul>
+                    <a data-whmcs-link data-pid="12" href="https://client.netz.com.py/cart.php?a=add&pid=12">Contratar</a>
+                    <!--<div style="text-align: center; margin-top: 8px;"><a href="terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                </div>
+                <div class="col-md-3 box-features-item">
+                    <div class="box-header"><img src="/assets/img/svgs/4.svg" alt="" / loading="lazy" decoding="async">
+                    </div>
+                    <h5>Streaming TV Avanzado</h5>
+                    <span class="second-pricing-table-price monthly">
+                        <i class="monthly" data-pid="13" data-cycle="monthly">USD. 25.57<small> /Mensual</small></i>
+                        <i class="yearly" data-pid="13" data-cycle="annually">USD. 255.70<small> /Anual</small></i>
+                    </span>
+                    <ul class="second-pricing-table-body">
+                        <li><b>500 Espectadores</b></li>
+                        <li>Bitrate Video hasta 1280 Kbps</li>
+                        <li>Codec video H.264</li>
+                        <li>Calidad máxima. 720P</li>
+                        <li>Formato MP4</li>
+                        <li>Players HTML5</li>
+                        <li>Streaming SSLL</li>
+                        <li>Soporte para moviles</li>
+                        <li>Wowza Media Server</li>
+                        <li>Panel MediaCP (Cast Control)</li>
+                        <li>Estadisticas/GeoMap</li>
+                        <li>Trafico ilimitado</li>
+                        <li>Compatible con Smartphone</li>
+                        <li>Auto Dj 10GB</li>
+                    </ul>
+                    <a data-whmcs-link data-pid="13" href="https://client.netz.com.py/cart.php?a=add&pid=13">Contratar</a>
+                    <!--<div style="text-align: center; margin-top: 8px;"><a href="terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                </div>
+                <div class="col-md-3 box-features-item">
+                    <div class="box-header"><img src="/assets/img/svgs/5.svg" alt="" / loading="lazy" decoding="async">
+                    </div>
+                    <h5>Streaming TV Corporativo</h5>
+                    <span class="second-pricing-table-price monthly">
+                        <i class="monthly" data-pid="14" data-cycle="monthly">USD. 42.85<small> /Mensual</small></i>
+                        <i class="yearly" data-pid="14" data-cycle="annually">USD. 428.50<small> /Anual</small></i>
+                    </span>
+                    <ul class="second-pricing-table-body">
+                        <li><b>1.000 Espectadores</b></li>
+                        <li>Bitrate Video hasta 1280 Kbps</li>
+                        <li>Codec video H.264</li>
+                        <li>Calidad máxima. 720P</li>
+                        <li>Formato MP4</li>
+                        <li>Players HTML5</li>
+                        <li>Streaming SSLL</li>
+                        <li>Soporte para moviles</li>
+                        <li>Wowza Media Server</li>
+                        <li>Panel MediaCP (Cast Control)</li>
+                        <li>Estadisticas/GeoMap</li>
+                        <li>Trafico ilimitado</li>
+                        <li>Compatible con Smartphone</li>
+                        <li>Auto Dj 20GB</li>
+                    </ul>
+                    <a data-whmcs-link data-pid="14" href="https://client.netz.com.py/cart.php?a=add&pid=14">Contratar</a>
+                    <!--<div style="text-align: center; margin-top: 8px;"><a href="terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </section>
+    <div id="footer-container"></div>
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/template-scripts.js"></script>
+    <script src="/assets/js/flickity.pkgd.min.js"></script>
+    <script src="/assets/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/assets/js/parallax.min.js"></script>
+    <script src="/assets/js/mailchamp.js"></script>
+    <script src="/assets/js/bootstrap.offcanvas.min.js"></script>
+    <script src="/assets/js/jquery.touchSwipe.min.js"></script>
+    <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/footer.js"></script>
+    <script src="/assets/js/prices.js" defer></script>
+    <script type="text/javascript">
+        window.$crisp = []; window.CRISP_WEBSITE_ID = "02f304ef-eff7-4205-aa12-3ba5680bc43f";
+        (function () {
+            function loadCrisp() {
+                if (window.crispLoaded) return;
+                window.crispLoaded = true;
+                var d = document, s = d.createElement("script");
+                s.src = "https://client.crisp.chat/l.js";
+                s.async = 1;
+                d.getElementsByTagName("head")[0].appendChild(s);
+            }
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(function () { setTimeout(loadCrisp, 2500); });
+            } else {
+                setTimeout(loadCrisp, 2500);
+            }
+            ['scroll', 'touchstart', 'mousemove'].forEach(function (ev) {
+                window.addEventListener(ev, loadCrisp, { once: true, passive: true });
+            });
+        })();
+    </script>
+</body>
+
+</html>

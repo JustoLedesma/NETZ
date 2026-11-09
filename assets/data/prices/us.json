@@ -1,0 +1,331 @@
+﻿{
+    "country":  "United States",
+    "countryCode":  "us",
+    "locale":  "en-US",
+    "currency":  "USD",
+    "whmcsCurrencyId":  null,
+    "generatedAt":  "2026-11-08T18:40:00-03:00",
+    "products":  {
+                     "1":  {
+                               "name":  "Web Hosting Básico",
+                               "monthly":  2.50,
+                               "quarterly":  null,
+                               "semiannually":  null,
+                               "annually":  25.00,
+                               "biennially":  null,
+                               "triennially":  null
+                           },
+                     "2":  {
+                               "name":  "Web Hosting Pro",
+                               "monthly":  4.20,
+                               "quarterly":  null,
+                               "semiannually":  null,
+                               "annually":  42.00,
+                               "biennially":  null,
+                               "triennially":  null
+                           },
+                     "3":  {
+                               "name":  "Web Hosting Pro+",
+                               "monthly":  7.20,
+                               "quarterly":  null,
+                               "semiannually":  null,
+                               "annually":  72.00,
+                               "biennially":  null,
+                               "triennially":  null
+                           },
+                     "4":  {
+                               "name":  "Radio Stream Mini",
+                               "monthly":  3.10,
+                               "quarterly":  null,
+                               "semiannually":  null,
+                               "annually":  37.20,
+                               "biennially":  null,
+                               "triennially":  null
+                           },
+                     "5":  {
+                               "name":  "Radio Stream Junior",
+                               "monthly":  7.14,
+                               "quarterly":  null,
+                               "semiannually":  null,
+                               "annually":  85.68,
+                               "biennially":  null,
+                               "triennially":  null
+                           },
+                     "6":  {
+                               "name":  "Radio Stream Junior II",
+                               "monthly":  10.70,
+                               "quarterly":  null,
+                               "semiannually":  null,
+                               "annually":  128.40,
+                               "biennially":  null,
+                               "triennially":  null
+                           },
+                     "7":  {
+                               "name":  "Reseller cPanel 1",
+                               "monthly":  20.15,
+                               "quarterly":  null,
+                               "semiannually":  null,
+                               "annually":  241.80,
+                               "biennially":  null,
+                               "triennially":  null
+                           },
+                     "8":  {
+                               "name":  "Reseller cPanel 2",
+                               "monthly":  35.70,
+                               "quarterly":  null,
+                               "semiannually":  null,
+                               "annually":  null,
+                               "biennially":  null,
+                               "triennially":  null
+                           },
+                     "9":  {
+                               "name":  "Reseller cPanel 3",
+                               "monthly":  51.60,
+                               "quarterly":  null,
+                               "semiannually":  null,
+                               "annually":  null,
+                               "biennially":  null,
+                               "triennially":  null
+                           },
+                     "10":  {
+                                "name":  "Reseller cPanel 4",
+                                "monthly":  87.90,
+                                "quarterly":  null,
+                                "semiannually":  null,
+                                "annually":  null,
+                                "biennially":  null,
+                                "triennially":  null
+                            },
+                     "11":  {
+                                "name":  "Video Streaming 1",
+                                "monthly":  8.00,
+                                "quarterly":  null,
+                                "semiannually":  null,
+                                "annually":  null,
+                                "biennially":  null,
+                                "triennially":  null
+                            },
+                     "12":  {
+                                "name":  "Video Streaming 2",
+                                "monthly":  14.28,
+                                "quarterly":  null,
+                                "semiannually":  null,
+                                "annually":  null,
+                                "biennially":  null,
+                                "triennially":  null
+                            },
+                     "13":  {
+                                "name":  "Video Streaming 3",
+                                "monthly":  25.57,
+                                "quarterly":  null,
+                                "semiannually":  null,
+                                "annually":  null,
+                                "biennially":  null,
+                                "triennially":  null
+                            },
+                     "14":  {
+                                "name":  "Video Streaming 4",
+                                "monthly":  42.85,
+                                "quarterly":  null,
+                                "semiannually":  null,
+                                "annually":  null,
+                                "biennially":  null,
+                                "triennially":  null
+                            },
+                     "15":  {
+                                "name":  "Hosting Exclusivo 1",
+                                "monthly":  21.28,
+                                "quarterly":  null,
+                                "semiannually":  null,
+                                "annually":  null,
+                                "biennially":  null,
+                                "triennially":  null
+                            },
+                     "16":  {
+                                "name":  "Hosting Exclusivo 2",
+                                "monthly":  38.80,
+                                "quarterly":  null,
+                                "semiannually":  null,
+                                "annually":  null,
+                                "biennially":  null,
+                                "triennially":  null
+                            },
+                     "17":  {
+                                "name":  "Hosting Exclusivo 3",
+                                "monthly":  75.07,
+                                "quarterly":  null,
+                                "semiannually":  null,
+                                "annually":  null,
+                                "biennially":  null,
+                                "triennially":  null
+                            },
+                     "18":  {
+                                "name":  "Hosting Exclusivo 4",
+                                "monthly":  140.20,
+                                "quarterly":  null,
+                                "semiannually":  null,
+                                "annually":  null,
+                                "biennially":  null,
+                                "triennially":  null
+                            },
+                     "19":  {
+                                "name":  "Reseller DirectAdmin 1",
+                                "monthly":  19.97,
+                                "quarterly":  null,
+                                "semiannually":  null,
+                                "annually":  null,
+                                "biennially":  null,
+                                "triennially":  null
+                            },
+                     "20":  {
+                                "name":  "Reseller DirectAdmin 2",
+                                "monthly":  39.49,
+                                "quarterly":  null,
+                                "semiannually":  null,
+                                "annually":  null,
+                                "biennially":  null,
+                                "triennially":  null
+                            },
+                     "21":  {
+                                "name":  "Radio Streaming Plan Adicional",
+                                "monthly":  22.00,
+                                "quarterly":  null,
+                                "semiannually":  null,
+                                "annually":  null,
+                                "biennially":  null,
+                                "triennially":  null
+                            }
+                 },
+    "domains":  {
+                    "com":  {
+                                "register":  3.99,
+                                "renew":  14.99,
+                                "transfer":  14.99
+                            },
+                    "net":  {
+                                "register":  5.90,
+                                "renew":  16.99,
+                                "transfer":  16.99
+                            },
+                    "org":  {
+                                "register":  5.90,
+                                "renew":  15.99,
+                                "transfer":  15.99
+                            },
+                    "online":  {
+                                   "register":  22.99,
+                                   "renew":  35.99,
+                                   "transfer":  35.99
+                               },
+                    "info":  {
+                                 "register":  3.90,
+                                 "renew":  18.99,
+                                 "transfer":  18.99
+                             },
+                    "biz":  {
+                                "register":  7.90,
+                                "renew":  19.99,
+                                "transfer":  19.99
+                            },
+                    "click":  {
+                                  "register":  1.99,
+                                  "renew":  12.99,
+                                  "transfer":  12.99
+                              },
+                    "us":  {
+                               "register":  5.90,
+                               "renew":  14.99,
+                               "transfer":  14.99
+                           },
+                    "tv":  {
+                               "register":  27.00,
+                               "renew":  35.00,
+                               "transfer":  35.00
+                           },
+                    "la":  {
+                               "register":  26.00,
+                               "renew":  38.00,
+                               "transfer":  38.00
+                           },
+                    "srl":  {
+                                "register":  25.00,
+                                "renew":  30.00,
+                                "transfer":  30.00
+                            },
+                    "top":  {
+                                "register":  3.00,
+                                "renew":  12.00,
+                                "transfer":  12.00
+                            },
+                    "vip":  {
+                                "register":  8.00,
+                                "renew":  18.00,
+                                "transfer":  18.00
+                            },
+                    "fun":  {
+                                "register":  13.00,
+                                "renew":  24.00,
+                                "transfer":  24.00
+                            },
+                    "pro":  {
+                                "register":  11.00,
+                                "renew":  19.00,
+                                "transfer":  19.00
+                            },
+                    "app":  {
+                                "register":  16.50,
+                                "renew":  22.00,
+                                "transfer":  22.00
+                            },
+                    "pet":  {
+                                "register":  9.00,
+                                "renew":  20.00,
+                                "transfer":  20.00
+                            },
+                    "bet":  {
+                                "register":  11.00,
+                                "renew":  25.00,
+                                "transfer":  25.00
+                            },
+                    "blog":  {
+                                 "register":  18.00,
+                                 "renew":  28.00,
+                                 "transfer":  28.00
+                             },
+                    "club":  {
+                                 "register":  14.00,
+                                 "renew":  20.00,
+                                 "transfer":  20.00
+                             },
+                    "com.py":  {
+                                   "register":  24.99,
+                                   "renew":  24.99,
+                                   "transfer":  24.99
+                               },
+                    "org.py":  {
+                                   "register":  24.99,
+                                   "renew":  24.99,
+                                   "transfer":  24.99
+                               },
+                    "net.py":  {
+                                   "register":  24.99,
+                                   "renew":  24.99,
+                                   "transfer":  24.99
+                               },
+                    "edu.py":  {
+                                   "register":  24.99,
+                                   "renew":  24.99,
+                                   "transfer":  24.99
+                               },
+                    "coop.py":  {
+                                    "register":  24.99,
+                                    "renew":  24.99,
+                                    "transfer":  24.99
+                                },
+                    "mil.py":  {
+                                   "register":  24.99,
+                                   "renew":  24.99,
+                                   "transfer":  24.99
+                               }
+                }
+}

@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /revision-precios.html
+Disallow: /revision-precios
+Disallow: /api/
+Disallow: /conexion/
+Disallow: /cron/
+
+Sitemap: https://netz.com.py/sitemap.xml
+

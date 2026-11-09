@@ -1,0 +1,41 @@
+# Binarios Go
+netz-server.exe
+netz-server-linux
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Logs y temporales
+*.log
+error_log
+server_err.log
+server_out.log
+/templates_c/
+/downloads/
+/attachments/
+
+# Credenciales y archivos privados fuera de control de versiones
+/conexion/
+cron/whmcs_config.php
+whmcs_config.php
+configuration.php
+*.private.php
+.htpasswd
+.env
+.env.*
+
+# Documentación de agentes IA
+/AGENTS.md
+
+# Salida de generación y dependencias
+dist/
+/vendor/
+/node_modules/
+
+# Entornos, SO e IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,229 @@
+// Componente modular Navbar para HTML 00
+(function () {
+    window._navbarOffcanvasLoaded = true;
+
+    const navbarHTML = `
+        <nav id="coodiv-navbar-header" class="navbar navbar-expand-md fixed-header-layout">
+            <div class="container main-header-coodiv-s">
+                <a class="navbar-brand" href="index"><img src="route1/img/header/NETZ-IA.svg" width="100px" alt="Logo" /></a>
+                <button class="navbar-toggle offcanvas-toggle menu-btn-span-bar ml-auto" data-toggle="offcanvas" data-target="#offcanvas-menu-home">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="collapse navbar-collapse navbar-offcanvas" id="offcanvas-menu-home">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="index">Inicio<span class="sr-only">(current)</span> </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Hosting</a>
+                            <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="webhosting-megamenu">
+                                <ul class="web-hosting-menu-header">
+                                    <li><i class="fas fa-infinity"></i> <a href="hosting-ilimitado">Hosting Ilimitado<span class="nav-new-tag">Servicio sin límites de recursos</span></a></li>
+                                    <li><i class="fas fa-server"></i> <a href="hosting-exclusivo">Hosting Exclusivo<span>Recursos exclusivos</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="vps-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Vps<span class="nav-new-tag">Nuevo</span></a>
+                            <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="vps-megamenu">
+                                <ul class="web-hosting-menu-header">
+                                    <li><i class="fab fa-linux"></i> <a href="vps-linux-no-administrado">Linux no administrado<span>¡Administre usted mismo!</span></a></li>
+                                    <li><i class="fab fa-linux"></i> <a href="vps-linux-administrado">Linux Administrado<span>Todo el poder <br>NINGUNO de los problemas</span></a></li>
+                                    <li><i class="fab fa-windows"></i> <a href="vps-windows-no-administrado">Windows no Administrado<span>¡Administre usted mismo!</span></a></li>
+                                    <li><i class="fab fa-windows"></i> <a href="vps-windows-administrado">Windows Administrado<span>Todo el poder <br>NINGUNO de los problemas</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="streaming-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Streaming<span class="nav-new-tag">Nuevo</span></a>
+                            <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="streaming-megamenu">
+                                <ul class="web-hosting-menu-header">
+                                    <li><i class="fas fa-microphone"></i> <a href="audio-streaming">Radio Streaming<span>Sonido limpio y fluido <br>Sonido de Calidad</span></a></li>
+                                    <li><i class="fab fas fa-video"></i> <a href="video-streaming">Video Streaming<span>Calidad máxima 720p <br>Streaming SSL</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="reseller-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Reseller<span class="nav-new-tag">Nuevo</span></a>
+                            <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="reseller-megamenu">
+                                <ul class="web-hosting-menu-header">
+                                    <li><i class="fab fa-cpanel"></i> <a href="reseller-cpanel">cPanel & WHM<span>2 CPU - 2Gb Ram, por cPanel</span></a></li>
+                                    <li><i class="fas fa-sign"></i> <a href="reseller-directadmin">DirectAdmin<span>2 CPU - 2Gb Ram, por cuenta</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Dominios</a>
+                            <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="dominios-megamenu">
+                                <ul class="web-hosting-menu-header">
+                                    <li><i class="fas fa-globe-americas"></i> <a href="buscar-dominios">Comprobador de dominio<span class="nav-new-tag">Consulta de disponibilidad</span></a></li>
+                                    <li><i class="fas fa-random"></i> <a href="https://client.netz.com.py/cart.php?a=add&domain=transfer">Transferencia de dominio<span>Transfiera su dominio</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" id="header-pages-drop-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresa<span class="sr-only">(current)</span></a>
+                            <ul class="dropdown-menu coodiv-dropdown-header" aria-labelledby="header-pages-drop-down">
+                                <li><a class="dropdown-item" href="about">Sobre Nosotros</a></li>
+                                <li><a class="dropdown-item" href="terminos-del-servicio">Términos de Servicio</a></li>
+                                <li><a class="dropdown-item" href="politica-de-privacidad">Politica de Privacidad</a></li>
+                                <li><a class="dropdown-item" href="aviso-legal">Aviso Legal</a></li>
+                                <li><a class="dropdown-item" href="contact">Cóntactenos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <ul class="header-user-info-coodiv">
+                    <li class="dropdown"><a role="button" id="header-login-dropdown" href="https://client.netz.com.py/login.php">Iniciar Sesión</a> <span>0973 136 822</span>
+                        <div class="dropdown-menu coodiv-dropdown-header user-login-dropdown" aria-labelledby="header-login-dropdown">
+                            <form class="user-login-dropdown-form" action="https://client.netz.com.py/login.php" data-form="validate">
+                                <div class="form-group username">
+                                    <input type="email" name="username" id="inputEmail" placeholder="E-mail" class="form-control" autofocus><i class="fas fa-at"></i>
+                                </div>
+                                <div class="form-group password">
+                                    <input type="password" name="password" id="inputPassword" placeholder="Contraseña" class="form-control"><i class="fas fa-lock"></i>
+                                </div>
+                                <button data-toggle="tooltip" data-placement="left" title="login" class="user-login-dropdown-form-button" type="submit"><i class="fas fa-angle-right"></i></button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    `;
+
+    function initOffcanvas() {
+        const offcanvas = document.getElementById('offcanvas-menu-home');
+        if (offcanvas) {
+            if (!offcanvas.classList.contains('offcanvas-transform')) {
+                offcanvas.classList.add('offcanvas-transform');
+            }
+            if (!offcanvas.classList.contains('js-offcanvas-done')) {
+                offcanvas.classList.add('js-offcanvas-done');
+            }
+        }
+        document.querySelectorAll('.offcanvas-toggle, [data-toggle="offcanvas"], .menu-btn-span-bar').forEach(function (btn) {
+            btn.classList.add('js-offcanvas-has-events');
+        });
+        if (typeof window.jQuery !== 'undefined') {
+            try {
+                window.jQuery('.offcanvas-toggle, [data-toggle="offcanvas"], .menu-btn-span-bar').off('click');
+                window.jQuery(document).off('click.bs.offcanvas');
+            } catch (e) {}
+        }
+    }
+
+    function closeOffcanvas() {
+        const offcanvas = document.getElementById('offcanvas-menu-home');
+        if (offcanvas) {
+            offcanvas.classList.remove('in');
+        }
+        document.querySelectorAll('.offcanvas-toggle, .menu-btn-span-bar').forEach(function (btn) {
+            btn.classList.remove('is-open');
+        });
+        document.body.classList.remove('offcanvas-stop-scrolling');
+    }
+
+    function renderNavbar() {
+        const headerContainer = document.getElementById('navbar-container') || document.getElementById('header-navbar-container');
+        if (headerContainer) {
+            if (headerContainer.children.length === 0) {
+                headerContainer.innerHTML = navbarHTML;
+            }
+        } else {
+            const coodivHeader = document.getElementById('coodiv-header');
+            if (coodivHeader) {
+                const overlay = coodivHeader.querySelector('.bg_overlay_header');
+                if (overlay && overlay.nextSibling) {
+                    overlay.insertAdjacentHTML('afterend', navbarHTML);
+                } else {
+                    coodivHeader.insertAdjacentHTML('afterbegin', navbarHTML);
+                }
+            }
+        }
+        initOffcanvas();
+    }
+
+    // Inicializar inmediatamente
+    initOffcanvas();
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderNavbar);
+    } else {
+        renderNavbar();
+    }
+
+    if (typeof window.jQuery !== 'undefined') {
+        window.jQuery(function () {
+            initOffcanvas();
+        });
+    }
+
+    // Delegación universal de eventos para el menú lateral móvil (Offcanvas)
+    document.addEventListener('click', function (e) {
+        const toggleBtn = e.target.closest('.offcanvas-toggle, [data-toggle="offcanvas"], .menu-btn-span-bar');
+        const offcanvas = document.getElementById('offcanvas-menu-home');
+
+        // 1. Clic en el botón hamburguesa (3 rayitas)
+        if (toggleBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (offcanvas) {
+                initOffcanvas();
+                const isOpen = offcanvas.classList.toggle('in');
+                document.querySelectorAll('.offcanvas-toggle, .menu-btn-span-bar').forEach(function (btn) {
+                    btn.classList.toggle('is-open', isOpen);
+                });
+                if (isOpen) {
+                    document.body.classList.add('offcanvas-stop-scrolling');
+                } else {
+                    document.body.classList.remove('offcanvas-stop-scrolling');
+                }
+            }
+            return;
+        }
+
+        // 2. Clic en dropdown dentro del offcanvas móvil
+        const dropdownLink = e.target.closest('#offcanvas-menu-home [data-toggle="dropdown"]');
+        if (dropdownLink) {
+            const dropdownParent = dropdownLink.closest('.dropdown');
+            const dropdownMenu = dropdownParent ? dropdownParent.querySelector('.dropdown-menu') : null;
+            if (dropdownMenu) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Cerrar otros submenús abiertos dentro del offcanvas
+                const allMenus = document.querySelectorAll('#offcanvas-menu-home .dropdown-menu');
+                for (let i = 0; i < allMenus.length; i++) {
+                    if (allMenus[i] !== dropdownMenu) {
+                        allMenus[i].classList.remove('show');
+                        if (allMenus[i].parentElement) {
+                            allMenus[i].parentElement.classList.remove('show');
+                        }
+                    }
+                }
+
+                const isShown = dropdownMenu.classList.toggle('show');
+                if (dropdownParent) dropdownParent.classList.toggle('show', isShown);
+            }
+            return;
+        }
+
+        // 3. Clic en enlace normal dentro del offcanvas
+        const navLink = e.target.closest('#offcanvas-menu-home a:not([data-toggle="dropdown"])');
+        if (navLink) {
+            closeOffcanvas();
+            return;
+        }
+
+        // 4. Clic fuera del menú cuando está abierto: cerrar offcanvas
+        if (offcanvas && offcanvas.classList.contains('in')) {
+            if (!e.target.closest('#offcanvas-menu-home')) {
+                closeOffcanvas();
+            }
+        }
+    });
+})();
