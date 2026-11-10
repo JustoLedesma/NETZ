@@ -133,8 +133,11 @@
     `;
 
         function getCountryPrefix() {
-        var country = (document.documentElement.getAttribute('data-country') || 'py').toLowerCase();
-        return (country === 'py') ? '' : '/' + country;
+        var country = (document.documentElement.getAttribute('data-country') || '').toLowerCase();
+        var path = (window.location.pathname || '').toLowerCase();
+        if (country === 'us' || path.startsWith('/us') || path.includes('/us/')) return '/us';
+        if (country === 'br' || path.startsWith('/br') || path.includes('/br/')) return '/br';
+        return (country === 'py') ? '' : (country ? '/' + country : '');
     }
 
     const footerHTML_pt = `
@@ -422,8 +425,11 @@
     }
 
     function renderFooter() {
-        var country = (document.documentElement.getAttribute('data-country') || 'py').toLowerCase();
-        var template = (country === 'br') ? footerHTML_pt : ((country === 'us') ? footerHTML_en : footerHTML);
+        var country = (document.documentElement.getAttribute('data-country') || '').toLowerCase();
+        var path = (window.location.pathname || '').toLowerCase();
+        var isUs = country === 'us' || path.startsWith('/us') || path.includes('/us/');
+        var isBr = country === 'br' || path.startsWith('/br') || path.includes('/br/');
+        var template = isBr ? footerHTML_pt : (isUs ? footerHTML_en : footerHTML);
         var finalFooterHTML = prefixFooterLinks(template);
         const footerContainer = document.getElementById('footer-container');
         if (footerContainer) {

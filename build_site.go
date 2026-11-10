@@ -92,8 +92,8 @@ func copyFile(src, dst string) error {
 
 func syncAssets(src, dst string) error {
 	if runtime.GOOS == "windows" {
-		// robocopy: solo copia archivos nuevos o modificados (/XO /XN), silencioso
-		cmd := exec.Command("robocopy", src, dst, "/E", "/XO", "/XN", "/NFL", "/NDL", "/NJH", "/NJS", "/NC", "/NS", "/NP")
+		// robocopy: copia completa recursiva incluyendo archivos modificados
+		cmd := exec.Command("robocopy", src, dst, "/E", "/NFL", "/NDL", "/NJH", "/NJS", "/NC", "/NS", "/NP")
 		_ = cmd.Run()
 		return nil
 	}

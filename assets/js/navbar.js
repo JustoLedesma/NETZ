@@ -314,8 +314,11 @@
     }
 
     function getCountryPrefix() {
-        var country = (document.documentElement.getAttribute('data-country') || 'py').toLowerCase();
-        return (country === 'py') ? '' : '/' + country;
+        var country = (document.documentElement.getAttribute('data-country') || '').toLowerCase();
+        var path = (window.location.pathname || '').toLowerCase();
+        if (country === 'us' || path.startsWith('/us') || path.includes('/us/')) return '/us';
+        if (country === 'br' || path.startsWith('/br') || path.includes('/br/')) return '/br';
+        return (country === 'py') ? '' : (country ? '/' + country : '');
     }
 
     function prefixNavbarLinks(html) {
@@ -343,12 +346,15 @@
     }
 
     function renderNavbar() {
-        var country = (document.documentElement.getAttribute('data-country') || 'py').toLowerCase();
-        var template = (country === 'br') ? navbarHTML_pt : ((country === 'us') ? navbarHTML_en : navbarHTML);
+        var country = (document.documentElement.getAttribute('data-country') || '').toLowerCase();
+        var path = (window.location.pathname || '').toLowerCase();
+        var isUs = country === 'us' || path.startsWith('/us') || path.includes('/us/');
+        var isBr = country === 'br' || path.startsWith('/br') || path.includes('/br/');
+        var template = isBr ? navbarHTML_pt : (isUs ? navbarHTML_en : navbarHTML);
         var finalNavbarHTML = prefixNavbarLinks(template);
         const headerContainer = document.getElementById('navbar-container') || document.getElementById('header-navbar-container');
         if (headerContainer) {
-            if (headerContainer.children.length === 0 || country === 'br' || country === 'us') {
+            if (headerContainer.children.length === 0 || isBr || isUs) {
                 headerContainer.innerHTML = finalNavbarHTML;
             }
         } else {
