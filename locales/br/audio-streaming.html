@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="pt-BR" data-country="br" class="prices-loading">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="/assets/img/header/N-SVG.svg" type="image/x-icon">
+    <link rel="preload" href="/assets/data/prices/py.json?v=1" as="fetch" crossorigin>
+    <style>
+        .prices-loading [data-pid],
+        .prices-loading [data-domain],
+        .prices-loading [data-price] {
+            opacity: 0;
+        }
+
+        [data-pid],
+        [data-domain],
+        [data-price] {
+            transition: opacity 0.15s ease-in;
+        }
+    </style>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/main.min.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/fontawesome-all.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+    <link href="/assets/css/typography.css" rel="stylesheet">
+    <link href="/assets/css/whatsapp.css" rel="stylesheet">
+    <title>Rádio Streaming SSL com AutoDJ SonicPanel | NETZ</title>
+    <meta name="description"
+        content="Transmite tu emisora de radio online por internet en calidad de audio HD con SonicPanel, AutoDJ continuo y reproductor HTML5 seguro." />
+    <meta name="keywords"
+        content="radio streaming, streaming audio internet, sonicpanel autodj, radio online hd, streaming shoutcast icecast" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://netz.com.py/audio-streaming">
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://netz.com.py/audio-streaming">
+    <meta property="og:site_name" content="NETZ">
+    <meta property="og:title" content="Radio Streaming SSL con AutoDJ SonicPanel | NETZ">
+    <meta property="og:description"
+        content="Transmite tu emisora de radio online por internet en calidad de audio HD con SonicPanel, AutoDJ continuo y reproductor HTML5 seguro.">
+    <meta property="og:image" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+    <meta property="og:image:secure_url" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:locale:alternate" content="pt_BR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Radio Streaming SSL con AutoDJ SonicPanel | NETZ">
+    <meta name="twitter:description"
+        content="Transmite tu emisora de radio online por internet en calidad de audio HD con SonicPanel, AutoDJ continuo y reproductor HTML5 seguro.">
+    <meta name="twitter:image" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+</head>
+
+<body>
+    <div id="coodiv-header" class="d-flex mx-auto flex-column subpages-header">
+        <div class="bg_overlay_header">
+            <div class="bg-img-header-new-standard">&nbsp;</div>
+        </div>
+        <div id="navbar-container">
+            <nav id="coodiv-navbar-header" class="navbar navbar-expand-md fixed-header-layout">
+                <div class="container main-header-coodiv-s">
+                    <a class="navbar-brand" href="index"><img src="/assets/img/header/NETZ-IA.svg" width="100px"
+                            alt="Logo" decoding="async" /></a>
+                    <button class="navbar-toggle offcanvas-toggle menu-btn-span-bar ml-auto" data-toggle="offcanvas"
+                        data-target="#offcanvas-menu-home">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="collapse navbar-collapse navbar-offcanvas" id="offcanvas-menu-home">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="index">Início<span class="sr-only">(current)</span> </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Hospedagem</a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="webhosting-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-infinity"></i> <a href="hosting-ilimitado">Hosting
+                                                Ilimitado<span class="nav-new-tag">Servicio sin límites de
+                                                    recursos</span></a></li>
+                                        <li><i class="fas fa-server"></i> <a href="hosting-exclusivo">Hosting
+                                                Exclusivo<span>Recursos exclusivos</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="vps-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">VPS<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="vps-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fab fa-linux"></i> <a href="vps-linux-no-administrado">Linux
+                                                no administrado<span>Gerencie você mesmo!</span></a></li>
+                                        <li><i class="fab fa-linux"></i> <a href="vps-linux-administrado">Linux
+                                                Administrado<span>Todo o poder <br>SEM complicações</span></a>
+                                        </li>
+                                        <li><i class="fab fa-windows"></i> <a href="vps-windows-no-administrado">Windows
+                                                no
+                                                Administrado<span>Gerencie você mesmo!</span></a></li>
+                                        <li><i class="fab fa-windows"></i> <a href="vps-windows-administrado">Windows
+                                                Administrado<span>Todo el
+                                                    poder <br>NINGUNO de los problemas</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="streaming-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Streaming<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="streaming-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-microphone"></i> <a href="audio-streaming">Radio
+                                                Streaming<span>Áudio limpo e fluido <br>Som de alta qualidade</span></a>
+                                        </li>
+                                        <li><i class="fab fas fa-video"></i> <a href="video-streaming">Video
+                                                Streaming<span>Qualidade máxima 720p <br>Streaming SSL</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="reseller-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Revenda<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="reseller-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fab fa-cpanel"></i> <a href="reseller-cpanel">cPanel &
+                                                WHM<span>2 CPU - 2GB RAM por cPanel</span></a></li>
+                                        <li><i class="fas fa-sign"></i> <a
+                                                href="reseller-directadmin">DirectAdmin<span>2 CPU - 2Gb Ram, por
+                                                    cuenta</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Domínios</a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="dominios-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-globe-americas"></i> <a href="buscar-dominios">Comprobador
+                                                de dominio<span class="nav-new-tag">Consulta de
+                                                    disponibilidad</span></a></li>
+                                        <li><i class="fas fa-random"></i> <a
+                                                href="https://client.netz.com.py/cart.php?a=add&domain=transfer">Transferencia
+                                                de dominio<span>Transfira seu domínio</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="#" role="button" id="header-pages-drop-down"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresa<span
+                                        class="sr-only">(current)</span></a>
+                                <ul class="dropdown-menu coodiv-dropdown-header"
+                                    aria-labelledby="header-pages-drop-down">
+                                    <li><a class="dropdown-item" href="about">Sobre Nós</a></li>
+                                    <li><a class="dropdown-item" href="terminos-del-servicio">Términos de
+                                            Servicio</a></li>
+                                    <li><a class="dropdown-item" href="politica-de-privacidad">Politica de
+                                            Privacidad</a></li>
+                                    <li><a class="dropdown-item" href="aviso-legal">Aviso Legal</a></li>
+                                    <li><a class="dropdown-item" href="contact">Fale Conosco</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ul class="header-user-info-coodiv">
+                        <li class="dropdown"><a role="button" id="header-login-dropdown"
+                                href="https://client.netz.com.py/login.php">Área do Cliente</a> <span>+595 973 136
+                                822</span>
+                            <div class="dropdown-menu coodiv-dropdown-header user-login-dropdown"
+                                aria-labelledby="header-login-dropdown">
+                                <form class="user-login-dropdown-form" action="https://client.netz.com.py/login.php"
+                                    data-form="validate">
+                                    <div class="form-group username">
+                                        <input type="email" name="username" id="inputEmail" placeholder="E-mail"
+                                            class="form-control" autofocus><i class="fas fa-at"></i>
+                                    </div>
+                                    <div class="form-group password">
+                                        <input type="password" name="password" id="inputPassword"
+                                            placeholder="Senha" class="form-control"><i class="fas fa-lock"></i>
+                                    </div>
+                                    <button data-toggle="tooltip" data-placement="left" title="Entrar"
+                                        class="user-login-dropdown-form-button" type="submit"><i
+                                            class="fas fa-angle-right"></i></button>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="mt-auto header-top-height"></div>
+        <main class="container mb-auto">
+            <h3 class="mt-3 main-header-text-title"><span>¿Precisa de uma plataforma profissional de Streaming?</span>ÁUDIO
+                STREAMING</h3>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-4 col-md-push-4">
+                        <div id="monthly-yearly-chenge" class="mr-tp-40 style-two">
+                            <a class="active monthly-price"> <span class="change-box-text">Mensal</span> <span
+                                    class="change-box"></span></a>
+                            <a class="yearli-price"> <span class="change-box-text">Anual</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-auto"></div>
+    </div>
+
+    <section style="background:#fff">
+        <div class="container">
+            <div class="row justify-content-start voice-plan-container">
+                <div class="col-md-4">
+                    <div class="voice-plan-box">
+                        <span class="voice-plan-price second-pricing-table-price monthly">
+                            <i class="monthly" data-pid="4" data-cycle="monthly"><label>USD.</label>
+                                3.10<b>Mensal</b></i>
+                            <i class="yearly" data-pid="4" data-cycle="annually"><label>USD.</label>
+                                37.20<b>Anual</b></i>
+                        </span>
+                        <img src="/assets/img/header/slider/audifonos.svg" width="130px" alt="20px" / loading="lazy"
+                            decoding="async">
+                        <!--   <i class="fab fa-teamspeak"></i> -->
+                        <!--  <span class="voice-plan-price"><label>USD.</label> 10.70<b>Mensal</b></span> -->
+                        <br>
+                        <br>
+                        <h5>Stream Mini <span>Plan Inicial</span></h5>
+                        <p>Cantidad de Oyentes en Simultáneo <b>1.000</b></p>
+                        <p>Calidad de audio <b>64 kbps</b></p>
+                        <p>Transmisión con <b>Certificado SSL</b></p>
+                        <p>Codec <b>MP3 - AAC</b></p>
+                        <p>Panel <b>Sonic</b></p>
+                        <p>AutoDj <b>2 Gb Almacenamiento</b></p>
+                        <p>Reproductor <b>HTML5</b></p>
+                        <p>Soporte <b>Incluye</b></p>
+                        <!--    <p>+ App Android - Iphone <br>22.000 mensual -<b> Opcional</b></p> -->
+                        <a class="more-btn" data-whmcs-link data-pid="4"
+                            href="https://client.netz.com.py/cart.php?a=add&pid=4">Contratar</a>
+                        <!--<!--<div style="text-align: center; margin-top: 8px;"><a href="terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->-->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="voice-plan-box">
+                        <span class="voice-plan-price second-pricing-table-price monthly">
+                            <i class="monthly" data-pid="5" data-cycle="monthly"><label>USD.</label>
+                                7.14<b>Mensal</b></i>
+                            <i class="yearly" data-pid="5" data-cycle="annually"><label>USD.</label>
+                                85.68<b>Anual</b></i>
+                        </span>
+                        <img src="/assets/img/header/slider/audifonos4.svg" width="130px" alt="20px" / loading="lazy"
+                            decoding="async">
+                        <!--   <i class="fab fa-teamspeak"></i> -->
+                        <!--  <span class="voice-plan-price"><label>USD.</label> 10.70<b>Mensal</b></span> -->
+                        <br>
+                        <br>
+                        <h5>Stream Junior <span>Plan Especial</span></h5>
+                        <p>Cantidad de Oyentes en Simultáneo <b>3.000</b></p>
+                        <p>Calidad de audio <b>128 kbps</b></p>
+                        <p>Transmisión con <b>Certificado SSL</b></p>
+                        <p>Codec <b>MP3 - AAC</b></p>
+                        <p>Panel <b>Sonic</b></p>
+                        <p>AutoDj <b>10 Gb Almacenamiento</b></p>
+                        <p>Reproductor <b>HTML5</b></p>
+                        <p>Soporte <b>Incluye</b></p>
+                        <!--    <p>+ App Android - Iphone <br>22.000 mensual -<b> Opcional</b></p> -->
+                        <a class="more-btn" data-whmcs-link data-pid="5"
+                            href="https://client.netz.com.py/cart.php?a=add&pid=5">Contratar</a>
+                        <!--<div style="text-align: center; margin-top: 8px;"><a href="terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="voice-plan-box">
+                        <span class="voice-plan-price second-pricing-table-price monthly">
+                            <i class="monthly" data-pid="6" data-cycle="monthly"><label>USD.</label>
+                                10.70<b>Mensal</b></i>
+                            <i class="yearly" data-pid="6" data-cycle="annually"><label>USD.</label>
+                                128.40<b>Anual</b></i></span>
+                        </span>
+                        <img src="/assets/img/header/slider/audifonos5.svg" width="130px" alt="20px" / loading="lazy"
+                            decoding="async">
+                        <!--   <i class="fab fa-teamspeak"></i> -->
+                        <!--  <span class="voice-plan-price"><label>USD.</label> 10.70<b>Mensal</b></span> -->
+                        <br>
+                        <br>
+                        <h5>Stream Junior II <span>Plan Premium</span></h5>
+                        <p>Cantidad de Oyentes en Simultáneo <b>5.000</b></p>
+                        <p>Calidad de audio <b>128 kbps</b></p>
+                        <p>Transmisión con <b>Certificado SSL</b></p>
+                        <p>Codec <b>MP3 - AAC</b></p>
+                        <p>Panel <b>Sonic</b></p>
+                        <p>AutoDj <b>100 Gb Almacenamiento</b></p>
+                        <p>Reproductor <b>HTML5</b></p>
+                        <p>Soporte <b>Incluye</b></p>
+                        <!--    <p>+ App Android - Iphone <br>22.000 mensual -<b> Opcional</b></p> -->
+                        <a class="more-btn" data-whmcs-link data-pid="6"
+                            href="https://client.netz.com.py/cart.php?a=add&pid=6">Contratar</a>
+                        <!--<div style="text-align: center; margin-top: 8px;"><a href="terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                    </div>
+                </div>
+            </div>
+        </div><br>
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-md-8 about-us-img-section">
+                    <img src="/assets/img/header/slider/radiocast.svg" width="10px" alt="20px" / loading="lazy"
+                        decoding="async">
+                </div>
+                <div class="col-md-4 side-text-right-container d-flex mx-auto flex-column">
+                    <div class="mb-auto"></div>
+                    <h4><b>Ouvintes Ilimitados</b></h4><span>
+                        <h6>Na NETZ oferecemos a solução definitiva com alta qualidade e estabilidade para a sua rádio online.
+                    </span><br>
+                    <span>
+                        <p>No esperes más y contráta tu plan de radio streaming HD con WhmSonic. Logra audiencia radial
+                            mundial.
+                    </span></h6>
+                    </p>
+                    <span class="second-pricing-table-price monthly">
+                        <i class="monthly" data-pid="21" data-cycle="monthly"><small>USD.</small><b> 22.00</b><small>
+                                /Mensual</small></i>
+                        <i class="yearly" data-pid="21" data-cycle="annually"><small>USD.</small><b> 220.00</b><small>
+                                /Anual</small></i>
+                    </span>
+                    <ul class="second-pricing-table-body">
+                        <span>Cantidad de Oyentes en Simultáneo <b>Ilimitado</b></span><br>
+                        <span>Calidad de audio <b>128 kbps</b></span><br>
+                        <span>Transmisión con <b>Certificado SSL</b></span><br>
+                        <span>Codec <b>MP3 - AAC</b></span><br>
+                        <span>Player <b>HTML5</b></span><br>
+                        <span>Panel <b>Sonic</b></span><br>
+                        <span>AutoDj <b>100 Gb Almacenamiento</b></span><br>
+                        <span>Soporte <b>Incluye</b></span><br>
+                        <!--<li class="not-chacked">Certificado SSL</li>
+                        <li class="not-chacked">Domínio Grátis</li>
+                    -->
+                    </ul>
+                    <a class="second-pricing-table-button text-center" data-whmcs-link data-pid="21"
+                        href="https://client.netz.com.py/cart.php?a=add&pid=21">Contratar</a>
+                    <!--<div style="text-align: center; margin-top: 8px;"><a href="terminos-del-servicio#reembolsos" style="font-size: 11px; opacity: 0.85; text-decoration: underline;">Ver política de reembolsos</a></div>-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wth-amwaj">
+        <div class="bg_overlay_section-amwaj">
+            <img src="/assets/img/bg/b_bg_02.jpg" alt="img-bg" loading="lazy" decoding="async">
+        </div>
+        <div class="container">
+            <div class="row justify-content-between mr-tp-50">
+                <div class="col-md-6 side-text-right-container">
+                    <h3 class="mt-3 main-header-text-title"><b>Radio<br>Streaming</b></h3>
+                    <p class="side-text-right-text">
+                        ShoutCast es una solución para la transmisión de audio en directo a través de Internet como una
+                        estación tradicional de radio. Los usuarios pueden escuchar esta transmisión desde cualquier
+                        reproductor de medios. También es posible la transmisión de audio las 24 horas gracias al
+                        sistema de
+                        autoDJ, con el cual se puede programar el contenido que desees
+                        para su emisión.
+                        <br>Nuestra solución para Radio Streaming HD es SonicPanel: ShoutCast V1 y V2, AutoDJ, PlayList,
+                        MP3
+                        y AAC Plus V2,
+                        con un generador personalizado de reproductores HD HTML5 que son compatibles con Android e iOS,
+                        streaming seguro bajo protocolo HTTPS (SSL) y con transferencia ilimitada.
+                </div>
+                <div class="col-md-6">
+                    <div class="wpb_raw_code wpb_content_element wpb_raw_html">
+                        <br><br>
+                        <div class="wpb_wrapper">
+                            <center><img class="hosting-header-slider-cell-img"
+                                    src="/assets/img/header/slider/popcast.svg" width="150px" alt="" / loading="lazy"
+                                    decoding="async"> </center>
+                        </div>
+                    </div>
+                </div>
+            </div><br>
+            <div class="wpb_raw_code wpb_content_element wpb_raw_html">
+                <div class="container">
+                    <iframe src="https://cloudstream2036.conectarhosting.com/cp/widgets/player/single/?p=8342"
+                        height="110" width="100%" scrolling="no" allow="autoplay" style="border:none;"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background:#fff" class="padding-100-0">
+        <div class="container">
+            <h5 class="title-default-coodiv-two">Ferramentas Simples e Extremamente Potentes<span class="mr-tp-10">CPU 100% Intel De
+                    Alto Rendimiento Y Plataforma Bare Metal 100% SSD.</span></h5>
+            <div class="row justify-content-center mr-tp-40">
+                <div class="col-md-3">
+                    <div class="box-features-one"><img src="/assets/img/streamingaudio/sonicpanel-logo.png"
+                            width="180px" alt="" / loading="lazy" decoding="async"></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="box-features-one"><img src="/assets/img/streamingaudio/aacplus.png" width="180px" alt=""
+                            / loading="lazy" decoding="async"></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="box-features-one"><img src="/assets/img/streamingaudio/autodj2.png" width="180px" alt=""
+                            / loading="lazy" decoding="async"></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="box-features-one"><img src="/assets/img/streamingaudio/shoutcastv2.png" width="180px"
+                            alt="" / loading="lazy" decoding="async"></div>
+                </div>
+            </div>
+            <div class="row justify-content-center mr-tp-10">
+                <div class="col-md-3">
+                    <div class="box-features-one"><img src="/assets/img/streamingaudio/wowza.png" width="180px" alt="" /
+                            loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="box-features-one"><img src="/assets/img/streamingaudio/zararadio.png" width="180px"
+                            alt="" / loading="lazy" decoding="async"></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="box-features-one"><img src="/assets/img/streamingaudio/winamp2.png" width="180px" alt=""
+                            / loading="lazy" decoding="async"></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="box-features-one"><img src="/assets/img/streamingaudio/mp3.png" width="180px" alt="" /
+                            loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="position: relative;margin-bottom: -70px;"
+        class="padding-90-0-100 position-relative overflow-hidden">
+        <span class="section-with-moon-back-under"></span>
+        <span class="section-with-moon-men-quastions-under"></span>
+        <div class="container">
+            <div class="tittle-simple-one">
+                <h5>Perguntas Frequentes<span>En caso de que sus dudas no son aclaradas no dude en visitar nuestra
+                        seccion de <a href="centro-de-ayuda">preguntas y respuestas</a> <br>O escribenos en cualquiera
+                        de nuestra sección de atención al cliente.</span></h5>
+            </div>
+            <div class="row justify-content-left mr-tp-90">
+                <div class="col-md-6">
+                    <div class="nuhost-filter-list-container">
+                        <div class="filter-content-box" id="go-to-qst-02-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿O que é Rádio Streaming?</h5>
+                            <p>Radio Streaming es un servicio para emisiones de audio en directo a través de Internet.
+                                NETZ distribuye la señal de streaming y tus oyentes conectándose a internet, pueden
+                                escuchar la señal de audio en directo a través de una página web en la cual se incluya
+                                el reproductor de audio o directamente desde Windows Media Player, Winamp o cualquier
+                                otro reproductor de medios.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-04-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Os planos incluem sistema de AutoDJ?</h5>
+                            <p>Sí. A partir del plan Junior incluye la función de AutoDJ y PlayList.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-05-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿A transferência de dados (tráfego) é ilimitada?</h5>
+                            <p>Sí. Todos los planes incluyen transferencia ilimitada.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-06-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿O streaming é transmitido com segurança via HTTPS (SSL)?</h5>
+                            <p>Sí. Todos los planes incluyen la transmisión bajo secure streaming (https). Solamente
+                                tienes que indicarnos los datos de tu streaming para activar el protocolo SSL.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-07-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Quanto tempo leva para ativar minha rádio online?</h5>
+                            <p>La activación de los planes se realiza una vez recibamos el pago por el servicio
+                                contratado.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-09-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Posso fazer upgrade de plano a qualquer momento?</h5>
+                            <p>Sí. Puedes cambiar de plan en cualquier momento.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-10-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Quais sistemas operacionais e reprodutores são compatíveis?</h5>
+                            <p>Todos nuestros planes de radio, así como los reproductores HD HTML5 son compatibles con
+                                los sistemas operativos Windows, MacOS y Linux. Para smartphones y tabletas, la
+                                compatibilidad es total con Android e iOS.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-11-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Qual é a garantia de estabilidade e disponibilidade?</h5>
+                            <p>Nuestra garantía de disponibilidad del servicio es del 99%.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-12-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Existe garantia e política de reembolso?</h5>
+                            <p>No hay devolución alguna sobre los servicios de Radio streaming.</p>
+                        </div>
+                        <div class="filter-content-box" id="go-to-qst-14-content">
+                            <span class="filter-content-close" data-toggle="tooltip" data-placement="bottom"
+                                data-original-title="Cerrar">
+                                <span class="first-stright"></span>
+                                <span class="second-stright"></span>
+                            </span>
+                            <h5>¿Posso cancelar o serviço quando desejar?</h5>
+                            <p>Sí. Puedes cancelar el servicio en cualquier momento desde el Área de Clientes sin ningún
+                                tipo de problema.</p>
+                        </div>
+                        <ul id="nuhost-filter-list">
+                            <li><a id="go-to-qst-02">¿O que é Rádio Streaming?<i class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-04">¿Os planos incluem sistema de AutoDJ?<i class="fas fa-angle-right"></i></a>
+                            </li>
+                            <li><a id="go-to-qst-05">¿A transferência de dados (tráfego) é ilimitada?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-06">¿O streaming é transmitido com segurança via HTTPS (SSL)?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-07">¿Quanto tempo leva para ativar minha rádio online?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-09">¿Posso fazer upgrade de plano a qualquer momento?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-10">¿Quais sistemas operacionais e reprodutores são compatíveis?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-11">¿Qual é a garantia de estabilidade e disponibilidade?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-12">¿Existe garantia e política de reembolso?<i
+                                        class="fas fa-angle-right"></i></a></li>
+                            <li><a id="go-to-qst-14">¿Posso cancelar o serviço quando desejar?<i class="fas fa-angle-right"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/template-scripts.js"></script>
+    <script src="/assets/js/flickity.pkgd.min.js"></script>
+    <script src="/assets/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/assets/js/parallax.min.js"></script>
+    <script src="/assets/js/mailchamp.js"></script>
+    <script src="/assets/js/bootstrap.offcanvas.min.js"></script>
+    <script src="/assets/js/jquery.touchSwipe.min.js"></script>
+    <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/footer.js"></script>
+    <script src="/assets/js/prices.js" defer></script>
+    <script type="text/javascript">
+        window.$crisp = []; window.CRISP_WEBSITE_ID = "02f304ef-eff7-4205-aa12-3ba5680bc43f";
+        (function () {
+            function loadCrisp() {
+                if (window.crispLoaded) return;
+                window.crispLoaded = true;
+                var d = document, s = d.createElement("script");
+                s.src = "https://client.crisp.chat/l.js";
+                s.async = 1;
+                d.getElementsByTagName("head")[0].appendChild(s);
+            }
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(function () { setTimeout(loadCrisp, 2500); });
+            } else {
+                setTimeout(loadCrisp, 2500);
+            }
+            ['scroll', 'touchstart', 'mousemove'].forEach(function (ev) {
+                window.addEventListener(ev, loadCrisp, { once: true, passive: true });
+            });
+        })();
+    </script>
+</body>
+
+</html>

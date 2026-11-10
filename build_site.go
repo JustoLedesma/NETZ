@@ -237,6 +237,12 @@ func main() {
 
 		for _, page := range productionPages {
 			srcPath := page
+			// Si existe una versión localizada específica para el país (ej. locales/br/index.html), usarla como base
+			localizedPath := filepath.Join("locales", countryCode, page)
+			if _, err := os.Stat(localizedPath); err == nil {
+				srcPath = localizedPath
+			}
+
 			rawBytes, err := os.ReadFile(srcPath)
 			if err != nil {
 				fmt.Printf("    ⚠️ No se encontró %s, omitiendo...\n", srcPath)

@@ -1,4 +1,4 @@
-﻿// Componente modular Navbar para HTML 00
+// Componente modular Navbar para HTML 00
 (function () {
     window._navbarOffcanvasLoaded = true;
 
@@ -95,6 +95,99 @@
         </nav>
     `;
 
+    const navbarHTML_pt = `
+        <nav id="coodiv-navbar-header" class="navbar navbar-expand-md fixed-header-layout">
+            <div class="container main-header-coodiv-s">
+                <a class="navbar-brand" href="index"><img src="/assets/img/header/NETZ-IA.svg" width="100px" alt="Logo" /></a>
+                <button class="navbar-toggle offcanvas-toggle menu-btn-span-bar ml-auto" data-toggle="offcanvas" data-target="#offcanvas-menu-home">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="collapse navbar-collapse navbar-offcanvas" id="offcanvas-menu-home">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="index">Início<span class="sr-only">(current)</span> </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Hospedagem</a>
+                            <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="webhosting-megamenu">
+                                <ul class="web-hosting-menu-header">
+                                    <li><i class="fas fa-infinity"></i> <a href="hosting-ilimitado">Hospedagem Ilimitada<span class="nav-new-tag">Serviço sem limites de recursos</span></a></li>
+                                    <li><i class="fas fa-server"></i> <a href="hosting-exclusivo">Hospedagem Exclusiva<span>Recursos exclusivos</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="vps-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">VPS<span class="nav-new-tag">Novo</span></a>
+                            <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="vps-megamenu">
+                                <ul class="web-hosting-menu-header">
+                                    <li><i class="fab fa-linux"></i> <a href="vps-linux-no-administrado">Linux não Gerenciado<span>Gerencie você mesmo!</span></a></li>
+                                    <li><i class="fab fa-linux"></i> <a href="vps-linux-administrado">Linux Gerenciado<span>Todo o poder <br>SEM complicações</span></a></li>
+                                    <li><i class="fab fa-windows"></i> <a href="vps-windows-no-administrado">Windows não Gerenciado<span>Gerencie você mesmo!</span></a></li>
+                                    <li><i class="fab fa-windows"></i> <a href="vps-windows-administrado">Windows Gerenciado<span>Todo o poder <br>SEM complicações</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="streaming-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Streaming<span class="nav-new-tag">Novo</span></a>
+                            <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="streaming-megamenu">
+                                <ul class="web-hosting-menu-header">
+                                    <li><i class="fas fa-microphone"></i> <a href="audio-streaming">Rádio Streaming<span>Áudio limpo e fluido <br>Som de alta qualidade</span></a></li>
+                                    <li><i class="fab fas fa-video"></i> <a href="video-streaming">Vídeo Streaming<span>Qualidade máxima 720p <br>Streaming SSL</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="reseller-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Revenda<span class="nav-new-tag">Novo</span></a>
+                            <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="reseller-megamenu">
+                                <ul class="web-hosting-menu-header">
+                                    <li><i class="fab fa-cpanel"></i> <a href="reseller-cpanel">cPanel & WHM<span>2 CPU - 2Gb RAM por cPanel</span></a></li>
+                                    <li><i class="fas fa-sign"></i> <a href="reseller-directadmin">DirectAdmin<span>2 CPU - 2Gb RAM por conta</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Domínios</a>
+                            <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="dominios-megamenu">
+                                <ul class="web-hosting-menu-header">
+                                    <li><i class="fas fa-globe-americas"></i> <a href="buscar-dominios">Verificador de Domínio<span class="nav-new-tag">Consulta de disponibilidade</span></a></li>
+                                    <li><i class="fas fa-random"></i> <a href="https://client.netz.com.py/cart.php?a=add&domain=transfer">Transferência de Domínio<span>Transfira seu domínio</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" id="header-pages-drop-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresa<span class="sr-only">(current)</span></a>
+                            <ul class="dropdown-menu coodiv-dropdown-header" aria-labelledby="header-pages-drop-down">
+                                <li><a class="dropdown-item" href="about">Sobre Nós</a></li>
+                                <li><a class="dropdown-item" href="terminos-del-servicio">Termos de Serviço</a></li>
+                                <li><a class="dropdown-item" href="politica-de-privacidad">Política de Privacidade</a></li>
+                                <li><a class="dropdown-item" href="aviso-legal">Aviso Legal</a></li>
+                                <li><a class="dropdown-item" href="contact">Fale Conosco</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <ul class="header-user-info-coodiv">
+                    <li class="dropdown"><a role="button" id="header-login-dropdown" href="https://client.netz.com.py/login.php">Área do Cliente</a> <span>+595 973 136 822</span>
+                        <div class="dropdown-menu coodiv-dropdown-header user-login-dropdown" aria-labelledby="header-login-dropdown">
+                            <form class="user-login-dropdown-form" action="https://client.netz.com.py/login.php" data-form="validate">
+                                <div class="form-group username">
+                                    <input type="email" name="username" id="inputEmail" placeholder="E-mail" class="form-control" autofocus><i class="fas fa-at"></i>
+                                </div>
+                                <div class="form-group password">
+                                    <input type="password" name="password" id="inputPassword" placeholder="Senha" class="form-control"><i class="fas fa-lock"></i>
+                                </div>
+                                <button data-toggle="tooltip" data-placement="left" title="login" class="user-login-dropdown-form-button" type="submit"><i class="fas fa-angle-right"></i></button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    `;
+
     function initOffcanvas() {
         const offcanvas = document.getElementById('offcanvas-menu-home');
         if (offcanvas) {
@@ -157,10 +250,12 @@
     }
 
     function renderNavbar() {
-        var finalNavbarHTML = prefixNavbarLinks(navbarHTML);
+        var country = (document.documentElement.getAttribute('data-country') || 'py').toLowerCase();
+        var template = (country === 'br') ? navbarHTML_pt : navbarHTML;
+        var finalNavbarHTML = prefixNavbarLinks(template);
         const headerContainer = document.getElementById('navbar-container') || document.getElementById('header-navbar-container');
         if (headerContainer) {
-            if (headerContainer.children.length === 0) {
+            if (headerContainer.children.length === 0 || country === 'br') {
                 headerContainer.innerHTML = finalNavbarHTML;
             }
         } else {

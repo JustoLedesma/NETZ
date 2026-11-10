@@ -95,7 +95,11 @@
             if (minPrice !== Infinity) {
                 const formattedMin = formatNumber(minPrice, locale, currency);
                 if (formattedMin) {
-                    startPriceEl.textContent = `Precio Inicial desde ${formattedMin}/Año`;
+                    if (country === 'br') {
+                        startPriceEl.textContent = `Preço inicial a partir de ${formattedMin}/Ano`;
+                    } else {
+                        startPriceEl.textContent = `Precio Inicial desde ${formattedMin}/Año`;
+                    }
                 }
             }
         }
