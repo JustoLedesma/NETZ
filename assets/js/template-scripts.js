@@ -34,9 +34,7 @@
     document.getElementById("coodiv-header").style.height = heights + "px";
     }
     resize();
-    window.onresize = function() {
-    resize();
-    }; 
+    window.addEventListener('resize', resize);
 	}
 	}());
 	
@@ -53,7 +51,7 @@
 	// header slider carousel //
 	$(function () {
 		var $carouselMain = $('.carousel-main');
-		if ($carouselMain.length && typeof $carouselMain.flickity === 'function') {
+		if ($carouselMain.length && typeof $carouselMain.flickity === 'function' && $carouselMain.children('.carousel-cell').length > 1) {
 			$carouselMain.flickity({
 				prevNextButtons: false,
 				pageDots: false,
@@ -69,7 +67,7 @@
 
 		// 2nd carousel, navigation
 		var $carouselNav = $('.carousel-nav');
-		if ($carouselNav.length && typeof $carouselNav.flickity === 'function') {
+		if ($carouselNav.length && typeof $carouselNav.flickity === 'function' && $carouselNav.children().length > 1) {
 			$carouselNav.flickity({
 				asNavFor: '.carousel-main',
 				contain: true,
@@ -84,8 +82,15 @@
 		var $owl = $('.owl-domain-prices-previw');
 		if (!$owl.length) return;
 
-		// Si owlCarousel aún no está cargado en memoria, reintentar cada 40ms
+		// Si owlCarousel aún no está cargado en memoria, reintentar cada 30ms
 		if (typeof $owl.owlCarousel !== 'function') {
+			setTimeout(initDomainPricesCarousel, 30);
+			return;
+		}
+
+		// Si el contenedor aún no tiene ancho medible (cold-start / pestaña en segundo plano / restore), esperar
+		var currentWidth = $owl.width();
+		if (currentWidth <= 0) {
 			setTimeout(initDomainPricesCarousel, 40);
 			return;
 		}
@@ -102,7 +107,6 @@
 			autoplayTimeout: 3000,
 			autoplayHoverPause: true,
 			responsiveClass: true,
-			responsiveBaseElement: window,
 			dots: false,
 			nav: true,
 			navText: ['', ''],
@@ -131,27 +135,21 @@
 		initDomainPricesCarousel();
 	});
 
-	// Asegurar recálculo cuando carguen completamente imágenes, estilos y fuentes (cold-start)
-	$(window).on('load resize orientationchange', function () {
+	// Asegurar recálculo cuando carguen completamente imágenes, estilos, fuentes o restore de pestaña (pageshow)
+	$(window).on('load resize orientationchange pageshow', function () {
 		initDomainPricesCarousel();
 		setTimeout(function () {
 			var $owl = $('.owl-domain-prices-previw');
 			if ($owl.length && $owl.hasClass('owl-loaded')) {
 				$owl.trigger('refresh.owl.carousel');
 			}
-		}, 100);
+		}, 80);
 		setTimeout(function () {
 			var $owl = $('.owl-domain-prices-previw');
 			if ($owl.length && $owl.hasClass('owl-loaded')) {
 				$owl.trigger('refresh.owl.carousel');
 			}
-		}, 350);
-		setTimeout(function () {
-			var $owl = $('.owl-domain-prices-previw');
-			if ($owl.length && $owl.hasClass('owl-loaded')) {
-				$owl.trigger('refresh.owl.carousel');
-			}
-		}, 800);
+		}, 300);
 	});
 
 	// hosting plans with chekout price yearly and monthly //

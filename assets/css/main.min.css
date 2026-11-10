@@ -348,6 +348,8 @@ a,a:hover{-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-
 .domain-name-classes .features-domains img{width:13px;cursor:pointer;opacity:0.4;margin:auto;display:block;-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out;}
 .domain-name-classes .features-domains img:hover{opacity:0.7;}
 .owl-domain-prices-previw{height:159px;overflow:hidden;margin-top:20px;padding-bottom:40px;}
+.owl-domain-prices-previw:not(.owl-loaded){display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:nowrap;flex-wrap:nowrap;gap:20px;overflow:hidden;}
+.owl-domain-prices-previw:not(.owl-loaded) .domain-name-classes{flex:0 0 140px;-webkit-flex:0 0 140px;margin-top:40px;}
 .owl-domain-prices-previw .owl-item{min-height:1px;float:left;-webkit-backface-visibility:hidden;-webkit-touch-callout:none;}
 .owl-dots.disabled{display:none;}
 .owl-domain-prices-previw .owl-nav{position:absolute;bottom:0px;}

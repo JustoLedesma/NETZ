@@ -97,6 +97,8 @@
                 if (formattedMin) {
                     if (country === 'br') {
                         startPriceEl.textContent = `Preço inicial a partir de ${formattedMin}/Ano`;
+                    } else if (country === 'us') {
+                        startPriceEl.textContent = `Starting price from ${formattedMin}/Year`;
                     } else {
                         startPriceEl.textContent = `Precio Inicial desde ${formattedMin}/Año`;
                     }
