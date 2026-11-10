@@ -82,7 +82,13 @@
 	// header slider domains carousel //
 	function initDomainPricesCarousel() {
 		var $owl = $('.owl-domain-prices-previw');
-		if (!$owl.length || typeof $owl.owlCarousel !== 'function') return;
+		if (!$owl.length) return;
+
+		// Si owlCarousel aún no está cargado en memoria, reintentar cada 40ms
+		if (typeof $owl.owlCarousel !== 'function') {
+			setTimeout(initDomainPricesCarousel, 40);
+			return;
+		}
 
 		if ($owl.hasClass('owl-loaded')) {
 			$owl.trigger('refresh.owl.carousel');
@@ -113,7 +119,7 @@
 					items: 3,
 					margin: 20
 				},
-				1024: {
+				992: {
 					items: 4,
 					margin: 20
 				}
@@ -126,7 +132,7 @@
 	});
 
 	// Asegurar recálculo cuando carguen completamente imágenes, estilos y fuentes (cold-start)
-	$(window).on('load', function () {
+	$(window).on('load resize orientationchange', function () {
 		initDomainPricesCarousel();
 		setTimeout(function () {
 			var $owl = $('.owl-domain-prices-previw');
@@ -139,13 +145,13 @@
 			if ($owl.length && $owl.hasClass('owl-loaded')) {
 				$owl.trigger('refresh.owl.carousel');
 			}
-		}, 400);
+		}, 350);
 		setTimeout(function () {
 			var $owl = $('.owl-domain-prices-previw');
 			if ($owl.length && $owl.hasClass('owl-loaded')) {
 				$owl.trigger('refresh.owl.carousel');
 			}
-		}, 1000);
+		}, 800);
 	});
 
 	// hosting plans with chekout price yearly and monthly //
