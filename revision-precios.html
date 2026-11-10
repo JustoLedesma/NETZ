@@ -1820,17 +1820,24 @@
           const successMsg = data.message || `¡Precios actualizados exitosamente!`;
           showSyncToast('success', `${successMsg}${extCount}`);
         } else {
-          showSyncToast('warn', `Aviso: El servidor respondió con estado ${res.status}. Actualizando datos en pantalla...`);
+          let errDetail = `Aviso: El servidor respondió con estado ${res.status}.`;
+          try {
+            const errData = await res.json();
+            if (errData && errData.message) errDetail = errData.message;
+          } catch(e) {}
+          showSyncToast('warn', errDetail);
         }
       } catch (err) {
         showSyncToast('warn', 'Modo local: recargando archivos de precios...');
+      } finally {
+        try {
+          await loadAllCountries();
+        } catch (err) {
+          console.error('Error al recargar pestañas:', err);
+        }
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
       }
-
-      // Recargar y re-renderizar todas las pestañas con timestamp para evitar caché
-      await loadAllCountries();
-
-      btn.disabled = false;
-      btn.innerHTML = originalHtml;
     }
 
     async function loadAllCountries() {

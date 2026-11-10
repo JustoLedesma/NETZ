@@ -111,6 +111,9 @@
             clearTimeout(safetyTimeout);
             applyPrices(data);
             htmlEl.classList.remove('prices-loading');
+            if (window.jQuery && jQuery('.owl-domain-prices-previw').length) {
+                jQuery('.owl-domain-prices-previw').trigger('refresh.owl.carousel');
+            }
         })
         .catch(function () {
             // Si falla la carga, no se tocan los precios (queda el base en USD)

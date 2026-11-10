@@ -52,65 +52,103 @@
 	
 	// header slider carousel //
 	$(function () {
-	$('.carousel-main').flickity({
-    prevNextButtons: false,
-	pageDots: false,
+		var $carouselMain = $('.carousel-main');
+		if ($carouselMain.length && typeof $carouselMain.flickity === 'function') {
+			$carouselMain.flickity({
+				prevNextButtons: false,
+				pageDots: false,
+			});
+			// Sincronizar recálculo de Owl Carousel cuando Flickity termine su layout o cambie
+			$carouselMain.on('ready.flickity select.flickity settle.flickity', function () {
+				var $owl = $('.owl-domain-prices-previw');
+				if ($owl.length && $owl.hasClass('owl-loaded')) {
+					$owl.trigger('refresh.owl.carousel');
+				}
+			});
+		}
+
+		// 2nd carousel, navigation
+		var $carouselNav = $('.carousel-nav');
+		if ($carouselNav.length && typeof $carouselNav.flickity === 'function') {
+			$carouselNav.flickity({
+				asNavFor: '.carousel-main',
+				contain: true,
+				pageDots: false,
+				prevNextButtons: false
+			});
+		}
 	});
-	// 2nd carousel, navigation
-	$('.carousel-nav').flickity({
-    asNavFor: '.carousel-main',
-    contain: true,
-    pageDots: false,
-    prevNextButtons: false
-  	});
-	});
-	
+
 	// header slider domains carousel //
-	 $(document).ready(function() {
-              $('.owl-domain-prices-previw').owlCarousel({
-                loop: true,
-                margin: 10,
-				autoplay:true,
-   		    	autoplayTimeout: 3000,
- 			    autoplayHoverPause:true,
-                responsiveClass: true,
-				dots: false,
-                responsive: {
-                  0: {
-                    items: 1,
-                  },
-				  340: {
-                    items: 1,
+	function initDomainPricesCarousel() {
+		var $owl = $('.owl-domain-prices-previw');
+		if (!$owl.length || typeof $owl.owlCarousel !== 'function') return;
+
+		if ($owl.hasClass('owl-loaded')) {
+			$owl.trigger('refresh.owl.carousel');
+			return;
+		}
+
+		$owl.owlCarousel({
+			loop: true,
+			margin: 20,
+			autoplay: true,
+			autoplayTimeout: 3000,
+			autoplayHoverPause: true,
+			responsiveClass: true,
+			responsiveBaseElement: window,
+			dots: false,
+			nav: true,
+			navText: ['', ''],
+			responsive: {
+				0: {
+					items: 1,
+					margin: 10
+				},
+				480: {
+					items: 2,
+					margin: 15
+				},
+				768: {
+					items: 3,
 					margin: 20
-                  },
-				  350: {
-                    items: 2,
+				},
+				1024: {
+					items: 4,
 					margin: 20
-                  },
-				  490: {
-                    items: 3,
-					margin: 20
-                  },
-                  780: {
-                    items: 2,
-					margin: 20
-                  },
-                  1000: {
-                    items: 3,
-                    loop: true,
-                    margin: 20
-                  },
-				  1200: {
-                    items: 4,
-                    loop: true,
-                    margin: 20
-                  }
-                }
-              })
-      });
-	  
-	  
-	  // hosting plans with chekout price yearly and monthly //
+				}
+			}
+		});
+	}
+
+	$(document).ready(function () {
+		initDomainPricesCarousel();
+	});
+
+	// Asegurar recálculo cuando carguen completamente imágenes, estilos y fuentes (cold-start)
+	$(window).on('load', function () {
+		initDomainPricesCarousel();
+		setTimeout(function () {
+			var $owl = $('.owl-domain-prices-previw');
+			if ($owl.length && $owl.hasClass('owl-loaded')) {
+				$owl.trigger('refresh.owl.carousel');
+			}
+		}, 100);
+		setTimeout(function () {
+			var $owl = $('.owl-domain-prices-previw');
+			if ($owl.length && $owl.hasClass('owl-loaded')) {
+				$owl.trigger('refresh.owl.carousel');
+			}
+		}, 400);
+		setTimeout(function () {
+			var $owl = $('.owl-domain-prices-previw');
+			if ($owl.length && $owl.hasClass('owl-loaded')) {
+				$owl.trigger('refresh.owl.carousel');
+			}
+		}, 1000);
+	});
+
+	// hosting plans with chekout price yearly and monthly //
 	$('#monthly-yearly-chenge a').on('click', function() {
     $(this).addClass('active').siblings().removeClass('active');
 	

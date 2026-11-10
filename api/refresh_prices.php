@@ -67,128 +67,81 @@ if (file_exists($conexionPath)) {
 
 // 4. Si la base de datos está disponible (Producción en cPanel / Servidor WHMCS)
 if ($hasDb) {
-    // A. Monedas disponibles en WHMCS
-    $whmcsCurrencies = [];
-    $defaultCurrencyId = 1;
-    $currSql = $conexion->query("SELECT id, code, prefix, suffix, rate, `default` FROM tblcurrencies");
-    if ($currSql) {
-        while ($c = $currSql->fetch_assoc()) {
-            $code = strtoupper(trim($c['code']));
-            $whmcsCurrencies[$code] = [
-                'id' => (int)$c['id'],
-                'code' => $code,
-                'prefix' => $c['prefix'],
-                'suffix' => $c['suffix'],
-                'rate' => (float)$c['rate'],
-                'default' => (bool)$c['default']
-            ];
-            if ($c['default']) {
-                $defaultCurrencyId = (int)$c['id'];
+    try {
+        // A. Monedas disponibles en WHMCS
+        $whmcsCurrencies = [];
+        $defaultCurrencyId = 1;
+        $currSql = $conexion->query("SELECT id, code, prefix, suffix, rate, `default` FROM tblcurrencies");
+        if ($currSql) {
+            while ($c = $currSql->fetch_assoc()) {
+                $code = strtoupper(trim($c['code']));
+                $whmcsCurrencies[$code] = [
+                    'id' => (int)$c['id'],
+                    'code' => $code,
+                    'prefix' => $c['prefix'],
+                    'suffix' => $c['suffix'],
+                    'rate' => (float)$c['rate'],
+                    'default' => (bool)$c['default']
+                ];
+                if ($c['default']) {
+                    $defaultCurrencyId = (int)$c['id'];
+                }
             }
         }
-    }
 
-    // B. Obtener el catálogo COMPLETO de TLDs configurados en tbldomainpricing (513 TLDs)
-    $allConfiguredTlds = [];
-    $tldSql = $conexion->query("SELECT id, extension FROM tbldomainpricing ORDER BY id ASC");
-    if ($tldSql) {
-        while ($t = $tldSql->fetch_assoc()) {
-            $cleanExt = ltrim(strtolower(trim($t['extension'])), '.');
-            if ($cleanExt !== '') {
-                $allConfiguredTlds[$cleanExt] = (int)$t['id'];
+        // B. Obtener el catálogo COMPLETO de TLDs configurados en tbldomainpricing (513 TLDs)
+        $allConfiguredTlds = [];
+        $tldSql = $conexion->query("SELECT id, extension FROM tbldomainpricing ORDER BY id ASC");
+        if ($tldSql) {
+            while ($t = $tldSql->fetch_assoc()) {
+                $cleanExt = ltrim(strtolower(trim($t['extension'])), '.');
+                if ($cleanExt !== '') {
+                    $allConfiguredTlds[$cleanExt] = (int)$t['id'];
+                }
             }
         }
-    }
 
-    if (!function_exists('netz_slugify')) {
-        function netz_slugify($text) {
-            if (!$text) return '';
-            $text = preg_replace('~[^\pL\d]+~u', '-', $text);
-            if (function_exists('iconv')) {
-                $text = @iconv('utf-8', 'us-ascii//TRANSLIT', $text) ?: $text;
+        // C. Precios de Productos desde WHMCS (consulta estándar 100% compatible)
+        $prodSql = $conexion->query("
+            SELECT p.id as pid, p.name, pr.currency,
+                   pr.monthly, pr.quarterly, pr.semiannually, pr.annually, pr.biennially, pr.triennially,
+                   pr.msetupfee, pr.qsetupfee, pr.ssetupfee, pr.asetupfee, pr.bsetupfee, pr.tsetupfee
+            FROM tblproducts p
+            LEFT JOIN tblpricing pr ON (pr.type = 'product' AND pr.relid = p.id)
+            WHERE p.hidden = 0 OR p.hidden IS NULL
+            ORDER BY p.id ASC
+        ");
+
+        $productsByCurrency = [];
+        if ($prodSql) {
+            while ($row = $prodSql->fetch_assoc()) {
+                $currId = (int)($row['currency'] ?? $defaultCurrencyId);
+                $pid = (int)$row['pid'];
+                $pName = trim($row['name']);
+
+                $cycles = [
+                    'monthly' => (float)$row['monthly'],
+                    'quarterly' => (float)$row['quarterly'],
+                    'semiannually' => (float)$row['semiannually'],
+                    'annually' => (float)$row['annually'],
+                    'biennially' => (float)$row['biennially'],
+                    'triennially' => (float)$row['triennially']
+                ];
+
+                $parsedCycles = [];
+                foreach ($cycles as $k => $v) {
+                    $parsedCycles[$k] = ($v < 0) ? null : $v;
+                }
+
+                if (!isset($productsByCurrency[$currId])) {
+                    $productsByCurrency[$currId] = [];
+                }
+                $productsByCurrency[$currId][$pid] = array_merge([
+                    'pid' => $pid,
+                    'name' => $pName
+                ], $parsedCycles);
             }
-            $text = preg_replace('~[^-\w]+~', '', $text);
-            $text = trim($text, '-');
-            $text = preg_replace('~-+~', '-', $text);
-            $text = strtolower($text);
-            return empty($text) ? 'item' : $text;
         }
-    }
-
-    // C. Precios de Productos desde WHMCS (con nombres, grupos y slugs para vínculos directos)
-    $hasProductSlug = false;
-    $hasGroupSlug = false;
-    $checkProd = @$conexion->query("SHOW COLUMNS FROM tblproducts LIKE 'slug'");
-    if ($checkProd && $checkProd->num_rows > 0) $hasProductSlug = true;
-    $checkGroup = @$conexion->query("SHOW COLUMNS FROM tblproductgroups LIKE 'slug'");
-    if ($checkGroup && $checkGroup->num_rows > 0) $hasGroupSlug = true;
-
-    $prodSlugCol = $hasProductSlug ? 'p.slug as product_slug,' : "'' as product_slug,";
-    $groupSlugCol = $hasGroupSlug ? 'pg.slug as group_slug,' : "'' as group_slug,";
-
-    $prodSql = $conexion->query("
-        SELECT p.id as pid, p.gid, p.name,
-               {$prodSlugCol}
-               pg.name as group_name,
-               {$groupSlugCol}
-               pr.currency,
-               pr.monthly, pr.quarterly, pr.semiannually, pr.annually, pr.biennially, pr.triennially,
-               pr.msetupfee, pr.qsetupfee, pr.ssetupfee, pr.asetupfee, pr.bsetupfee, pr.tsetupfee
-        FROM tblproducts p
-        LEFT JOIN tblproductgroups pg ON pg.id = p.gid
-        LEFT JOIN tblpricing pr ON (pr.type = 'product' AND pr.relid = p.id)
-        WHERE p.hidden = 0 OR p.hidden IS NULL
-        ORDER BY p.id ASC
-    ");
-
-    $productsByCurrency = [];
-    if ($prodSql) {
-        while ($row = $prodSql->fetch_assoc()) {
-            $currId = (int)($row['currency'] ?? $defaultCurrencyId);
-            $pid = (int)$row['pid'];
-            $pName = trim($row['name']);
-            $gid = (int)($row['gid'] ?? 0);
-            $gName = trim($row['group_name'] ?? '');
-
-            $pSlug = trim($row['product_slug'] ?? '');
-            if (!$pSlug) {
-                $pSlug = netz_slugify($pName);
-            }
-            $gSlug = trim($row['group_slug'] ?? '');
-            if (!$gSlug && $gName) {
-                $gSlug = netz_slugify($gName);
-            }
-            if (!$gSlug) {
-                $gSlug = 'hosting';
-            }
-
-            $cycles = [
-                'monthly' => (float)$row['monthly'],
-                'quarterly' => (float)$row['quarterly'],
-                'semiannually' => (float)$row['semiannually'],
-                'annually' => (float)$row['annually'],
-                'biennially' => (float)$row['biennially'],
-                'triennially' => (float)$row['triennially']
-            ];
-
-            $parsedCycles = [];
-            foreach ($cycles as $k => $v) {
-                $parsedCycles[$k] = ($v < 0) ? null : $v;
-            }
-
-            if (!isset($productsByCurrency[$currId])) {
-                $productsByCurrency[$currId] = [];
-            }
-            $productsByCurrency[$currId][$pid] = array_merge([
-                'pid' => $pid,
-                'gid' => $gid,
-                'name' => $pName,
-                'slug' => $pSlug,
-                'group_name' => $gName,
-                'group_slug' => $gSlug
-            ], $parsedCycles);
-        }
-    }
 
     // D. Precios de Dominios desde WHMCS por Moneda
     $domSql = $conexion->query("
@@ -435,6 +388,14 @@ if ($hasDb) {
         'source' => 'mysql_whmcs'
     ]);
     exit;
+    } catch (\Throwable $e) {
+        http_response_code(500);
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Error al sincronizar desde WHMCS: ' . $e->getMessage() . ' en línea ' . $e->getLine()
+        ]);
+        exit;
+    }
 }
 
 // 5. Fallback si MySQL no está conectado directamente (ej. entorno local estático sin PHP/MySQL)
