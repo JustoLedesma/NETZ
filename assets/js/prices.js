@@ -117,8 +117,19 @@
             clearTimeout(safetyTimeout);
             applyPrices(data);
             htmlEl.classList.remove('prices-loading');
-            if (window.jQuery && jQuery('.owl-domain-prices-previw').length) {
-                jQuery('.owl-domain-prices-previw').trigger('refresh.owl.carousel');
+            if (typeof window.initDomainPricesCarousel === 'function') {
+                window.initDomainPricesCarousel();
+            } else if (window.jQuery && jQuery('.owl-domain-prices-previw').length) {
+                var $owl = jQuery('.owl-domain-prices-previw');
+                var owlData = $owl.data('owl.carousel');
+                if (owlData) {
+                    owlData.invalidate('width');
+                    owlData.invalidate('settings');
+                    owlData.setup();
+                    owlData.refresh();
+                } else {
+                    $owl.trigger('refresh.owl.carousel');
+                }
             }
         })
         .catch(function () {
