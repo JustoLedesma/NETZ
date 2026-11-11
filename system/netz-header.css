@@ -1,0 +1,438 @@
+/* ==========================================================================
+   NETZ Official Navigation Header Styles
+   Scoped specifically for the header component
+   ========================================================================== */
+
+#coodiv-header {
+    width: 100%;
+    position: relative;
+    z-index: 1000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+#coodiv-header * {
+    box-sizing: border-box;
+}
+
+#coodiv-navbar-header {
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+    padding: 0.8rem 1.5rem;
+    position: relative;
+    width: 100%;
+    transition: all 0.25s ease-in-out;
+}
+
+.main-header-coodiv-s {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+}
+
+/* Brand Logo */
+.netz-navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+}
+
+.netz-navbar-brand img {
+    height: 32px;
+    width: auto;
+    display: block;
+}
+
+/* Navigation List */
+.netz-navbar-collapse {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.netz-navbar-nav {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.25rem;
+}
+
+.netz-nav-item {
+    position: relative;
+    list-style: none;
+}
+
+.netz-nav-link {
+    color: #3e484f !important;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 24px;
+    padding: 0.5rem 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    text-decoration: none !important;
+    border-radius: 6px;
+    transition: color 0.18s ease, background 0.18s ease;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.netz-nav-link:hover,
+.netz-nav-item:hover > .netz-nav-link,
+.netz-nav-item.show > .netz-nav-link {
+    color: #0066ff !important;
+}
+
+/* "Nuevo" Badge */
+.netz-nav-link .nav-new-tag {
+    background: #FFEB3B;
+    color: #363542;
+    padding: 1px 7px;
+    border-radius: 12px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    line-height: 14px;
+    position: absolute;
+    top: -4px;
+    right: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown Menus */
+.coodiv-dropdown-header {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 15px 35px rgba(22, 28, 45, 0.12), 0 5px 15px rgba(0, 0, 0, 0.05);
+    min-width: 280px;
+    padding: 8px 0;
+    margin-top: 10px;
+    display: none;
+    z-index: 1050;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+}
+
+/* Invisible bridge so mouse hover doesn't break between link and dropdown */
+.coodiv-dropdown-header::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 0;
+    right: 0;
+    height: 12px;
+    background: transparent;
+}
+
+.netz-nav-item:hover > .coodiv-dropdown-header,
+.netz-nav-item.show > .coodiv-dropdown-header {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Mega / Service Web Menu */
+.coodiv-dropdown-header.web-menu {
+    min-width: 320px;
+    padding: 4px 0;
+}
+
+.web-hosting-menu-header {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.web-hosting-menu-header li {
+    padding: 12px 18px 12px 58px;
+    position: relative;
+    border-bottom: 1px solid #f1f4f8;
+    transition: background 0.15s ease;
+    cursor: pointer;
+}
+
+.web-hosting-menu-header li:last-child {
+    border-bottom: 0;
+}
+
+.web-hosting-menu-header li:hover {
+    background: #f8fafc;
+}
+
+.web-hosting-menu-header li i {
+    position: absolute;
+    left: 18px;
+    top: 16px;
+    font-size: 20px;
+    color: #2563eb;
+    transition: transform 0.15s ease;
+}
+
+.web-hosting-menu-header li:hover i {
+    transform: scale(1.1);
+}
+
+.web-hosting-menu-header li a {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #1e293b !important;
+    text-decoration: none !important;
+    display: block;
+    line-height: 1.25;
+}
+
+.web-hosting-menu-header li a span:not(.nav-new-tag) {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: #64748b;
+    margin-top: 3px;
+    line-height: 1.2;
+}
+
+.web-hosting-menu-header li a span.nav-new-tag {
+    display: inline-block;
+    background: #FEF08A;
+    color: #854D0E;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+/* Pages / Simple Dropdown Menu */
+.pages-dropdown {
+    min-width: 220px;
+}
+
+.pages-dropdown li {
+    list-style: none;
+}
+
+.pages-dropdown .dropdown-item {
+    display: block;
+    padding: 9px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155 !important;
+    text-decoration: none !important;
+    transition: background 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+}
+
+.pages-dropdown .dropdown-item:hover {
+    background: #f1f5f9;
+    color: #2563eb !important;
+    padding-left: 24px;
+}
+
+/* User Info / Login Section (Right Side) */
+.header-user-info-coodiv {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.header-user-info-coodiv li {
+    position: relative;
+    text-align: center;
+}
+
+.header-login-btn {
+    background: #FFEB3B !important;
+    color: #1e293b !important;
+    padding: 6px 24px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none !important;
+    display: inline-block;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.header-login-btn:hover {
+    background: #fde047 !important;
+    box-shadow: 0 5px 12px rgba(234, 179, 8, 0.35);
+    transform: translateY(-1px);
+}
+
+.header-phone-text {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-top: 4px;
+    letter-spacing: 0.3px;
+}
+
+/* User Login Dropdown Form Popup */
+.user-login-dropdown {
+    right: 0 !important;
+    left: auto !important;
+    min-width: 300px;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+.user-login-dropdown-form {
+    padding: 20px;
+    background: #ffffff;
+}
+
+.user-login-dropdown-form .form-group {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.user-login-dropdown-form .form-group input {
+    width: 100%;
+    padding: 10px 38px 10px 14px;
+    font-size: 13px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.15s ease;
+}
+
+.user-login-dropdown-form .form-group input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.user-login-dropdown-form .form-group i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.user-login-dropdown-form-button {
+    width: 100%;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.user-login-dropdown-form-button:hover {
+    background: #1d4ed8;
+}
+
+/* Mobile Toggle Hamburger */
+.netz-navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.netz-navbar-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #334155;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 991px) {
+    .netz-navbar-toggle {
+        display: flex;
+    }
+
+    .netz-navbar-collapse {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        border-bottom: 1px solid #e2e8f0;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        padding: 16px 20px;
+    }
+
+    .netz-navbar-collapse.show {
+        display: block;
+    }
+
+    .netz-navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 0;
+    }
+
+    .netz-nav-item {
+        width: 100%;
+    }
+
+    .netz-nav-link {
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .coodiv-dropdown-header {
+        position: static;
+        box-shadow: none;
+        border: none;
+        padding-left: 12px;
+        margin-top: 0;
+        transform: none;
+    }
+
+    .netz-nav-item:hover > .coodiv-dropdown-header,
+    .netz-nav-item.show > .coodiv-dropdown-header {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .header-user-info-coodiv {
+        margin-top: 12px;
+        width: 100%;
+    }
+
+    .header-login-btn {
+        width: 100%;
+        text-align: center;
+    }
+}

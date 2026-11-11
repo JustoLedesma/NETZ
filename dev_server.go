@@ -60,7 +60,7 @@ func main() {
 		trimmedPath := strings.TrimPrefix(filepath.FromSlash(cleanPath), "\\")
 
 		// 1. Redirigir si es directorio de país sin barra final (ej. /br -> /br/)
-		countryFolders := []string{"br", "ar", "es", "us", "cl", "co", "mx"}
+		countryFolders := []string{"br", "ar", "es", "us", "cl", "co", "mx", "system"}
 		for _, c := range countryFolders {
 			if reqPath == "/"+c {
 				http.Redirect(w, r, "/"+c+"/", http.StatusMovedPermanently)
