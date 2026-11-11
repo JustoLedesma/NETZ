@@ -131,3 +131,4 @@ const manifestStr = JSON.stringify(manifestData, null, 2);
 fs.writeFileSync(path.join(pricesDir, 'manifest.json'), manifestStr, 'utf8');
 fs.writeFileSync(path.join(distPricesDir, 'manifest.json'), manifestStr, 'utf8');
 console.log('✅ manifest.json generado exitosamente con 8 países y 8 monedas.');
+
