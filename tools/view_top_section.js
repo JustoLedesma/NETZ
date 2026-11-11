@@ -5,3 +5,4 @@ const start = c.indexOf('<section class="padding-100-0 position-relative">');
 const end = c.indexOf('<ul id="nuhost-filter-list">');
 
 console.log(c.substring(start, end));
+

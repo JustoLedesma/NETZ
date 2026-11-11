@@ -316,9 +316,10 @@
     function getCountryPrefix() {
         var country = (document.documentElement.getAttribute('data-country') || '').toLowerCase();
         var path = (window.location.pathname || '').toLowerCase();
-        if (country === 'us' || path.startsWith('/us') || path.includes('/us/')) return '/us';
-        if (country === 'br' || path.startsWith('/br') || path.includes('/br/')) return '/br';
-        return (country === 'py') ? '' : (country ? '/' + country : '');
+        var match = path.match(/^\/(ar|br|cl|co|es|mx|us)\b/);
+        if (match) return '/' + match[1];
+        if (country && country !== 'py') return '/' + country;
+        return '';
     }
 
     function prefixNavbarLinks(html) {

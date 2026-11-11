@@ -9,3 +9,4 @@ for (let i = 0; i < Math.min(10, qMatches.length); i++) {
     console.log('--- Q' + (i + 1) + ' ---');
     console.log(qMatches[i].substring(0, 250).replace(/\s+/g, ' '));
 }
+

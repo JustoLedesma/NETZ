@@ -21,3 +21,4 @@ words.forEach(w => {
 });
 
 console.log('Found specific Spanish vocabulary:', found);
+

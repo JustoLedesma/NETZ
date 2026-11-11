@@ -38,3 +38,4 @@ while ((match = regex.exec(c)) !== null) {
 }
 
 console.log(`Total checked: ${count}, flagged: ${spanishCount}`);
+

@@ -95,3 +95,4 @@ for (const file of files) {
 }
 
 console.log('🎉 Todas as páginas BR atualizadas com sucesso!');
+
