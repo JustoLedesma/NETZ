@@ -85,3 +85,4 @@ for (const file of filesToProcess) {
 }
 
 console.log('🎉 Todas as páginas BR 100% finalizadas!');
+

@@ -90,3 +90,4 @@ const legalAboutBrReplacements = [
 module.exports = {
     legalAboutBrReplacements
 };
+

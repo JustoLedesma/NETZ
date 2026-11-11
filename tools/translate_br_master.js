@@ -110,3 +110,4 @@ for (const file of productionFiles) {
 }
 
 console.log('🎉 Todas as páginas BR processadas com sucesso!');
+

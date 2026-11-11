@@ -176,3 +176,4 @@ for (const file of filesToProcess) {
 }
 
 console.log('🎉 Finalizadas as traduções profundas BR!');
+

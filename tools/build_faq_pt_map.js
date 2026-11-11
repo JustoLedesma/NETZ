@@ -330,3 +330,4 @@ const faqPtMap = [
 
 fs.writeFileSync('tools/faq_pt_map.json', JSON.stringify(faqPtMap, null, 2), 'utf8');
 console.log('Salvos 65 itens de FAQ em português para tools/faq_pt_map.json');
+

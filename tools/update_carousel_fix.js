@@ -135,3 +135,4 @@ priceFiles.forEach(p => {
         console.log('✅ Updated prices.js:', p);
     }
 });
+
