@@ -8,3 +8,4 @@ console.log('--- Portuguese footer lang changer (lines 245-275) ---');
 console.log(lines.slice(245, 275).join('\n'));
 console.log('--- English footer lang changer (lines 375-405) ---');
 console.log(lines.slice(375, 405).join('\n'));
+

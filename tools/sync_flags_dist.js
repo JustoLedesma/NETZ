@@ -10,3 +10,4 @@ fs.readdirSync(srcDir).forEach(f => {
     fs.copyFileSync(path.join(srcDir, f), path.join(dstDir, f));
     console.log('Copied flag to dist:', f);
 });
+

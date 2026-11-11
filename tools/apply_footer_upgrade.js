@@ -194,3 +194,4 @@ targetFiles.forEach(targetPath => {
 });
 
 console.log('🎉 Done updating footer.js');
+

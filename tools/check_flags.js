@@ -5,3 +5,4 @@ if (fs.existsSync('assets/img/flags')) {
 } else {
     console.log('No flags dir in assets/img/flags');
 }
+

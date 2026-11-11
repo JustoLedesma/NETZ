@@ -24,3 +24,4 @@ folders.forEach(dir => {
     });
     console.log(`Folder [${dir}]: missing footer div = ${missingFooter}, missing footer.js = ${missingScript}`);
 });
+

@@ -16,3 +16,4 @@ while (idx3 !== -1) {
     console.log(css.substring(Math.max(0, idx3 - 50), idx3 + 250));
     idx3 = css.indexOf('.lang-changer-drop-up', idx3 + 1);
 }
+

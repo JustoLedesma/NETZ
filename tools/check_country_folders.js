@@ -14,3 +14,4 @@ countryDirs.forEach(c => {
         console.log(c, 'DOES NOT EXIST');
     }
 });
+

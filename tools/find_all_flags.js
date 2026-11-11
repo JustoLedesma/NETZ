@@ -15,3 +15,4 @@ function findFiles(dir, filter) {
 }
 
 console.log(findFiles('assets', name => name.endsWith('.svg') || name.includes('flag') || name.includes('py') || name.includes('br') || name.includes('us') || name.includes('es') || name.includes('ar')));
+
