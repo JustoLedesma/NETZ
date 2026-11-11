@@ -44,11 +44,9 @@
     <script src="/system/wire.js" defer></script>
 </head>
 
-<body>
-    <div id="coodiv-header" class="d-flex mx-auto flex-column subpages-header">
-        <div class="bg_overlay_header">
-            <div class="bg-img-header-new-standard">&nbsp;</div>
-        </div>
+<body id="top" class="page-header-white">
+    <!-- Header Blanco Nativo NETZ -->
+    <div id="coodiv-header" class="header-white">
         <div id="navbar-container">
             <nav id="coodiv-navbar-header" class="navbar navbar-expand-md fixed-header-layout">
                 <div class="container main-header-coodiv-s">
@@ -191,13 +189,6 @@
                 </div>
             </nav>
         </div>
-        <div class="mt-auto header-top-height"></div>
-        <main class="container mb-auto">
-            <h3 class="mt-3 main-header-text-title"><span>Soluciones Digitales y Web</span>DESARROLLO DE SOFTWARE
-                <span class="sub-page-breadcrumb"><a href="/co/">Inicio</a> - Desarrollo de Software</span>
-            </h3>
-        </main>
-        <div class="mt-auto"></div>
     </div>
 
     <!-- Bloque de Desarrollo de Software -->
@@ -470,8 +461,21 @@
         </section>
     </main>
 
-    <!-- footer -->
-    <div id="footer-container"></div>
+    <!-- Pie de página original de Relay -->
+    <footer class="colophon">
+        <div class="container colophon__grid">
+            <p class="colophon__mark">Relay</p>
+            <p class="colophon__text">Relay is an API for backend developers.</p>
+            <nav class="colophon__links" aria-label="Footer">
+                <a href="#stream">The console</a>
+                <a href="#does">What it does</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#start">Your handler</a>
+            </nav>
+            <p class="colophon__legal">© 2026 Relay</p>
+        </div>
+        <div class="container"><canvas class="mast" aria-hidden="true"></canvas></div>
+    </footer>
 
     <!-- JavaScript de NETZ -->
     <script src="/assets/js/jquery.min.js"></script>
@@ -479,8 +483,6 @@
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/template-scripts.js"></script>
     <script src="/assets/js/navbar.js"></script>
-    <script src="/assets/js/footer.js"></script>
-    <script src="/assets/js/prices.js"></script>
 
     <!-- Script interactivo del bloque de desarrollo -->
     <script>
@@ -508,4 +510,3 @@
 </body>
 
 </html>
-
