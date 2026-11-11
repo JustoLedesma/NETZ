@@ -1,51 +1,66 @@
 {
   "py": {
     "country": "Paraguay",
+    "name": "Paraguay",
     "locale": "es-PY",
     "currency": "PYG",
-    "status": "active"
+    "status": "active",
+    "whmcsCurrencyId": 2
   },
   "br": {
     "country": "Brasil",
+    "name": "Brasil",
     "locale": "pt-BR",
     "currency": "BRL",
-    "status": "active"
+    "status": "active",
+    "whmcsCurrencyId": 3
   },
   "ar": {
     "country": "Argentina",
+    "name": "Argentina",
     "locale": "es-AR",
     "currency": "ARS",
-    "status": "active"
+    "status": "active",
+    "whmcsCurrencyId": 4
   },
   "es": {
     "country": "España",
+    "name": "España",
     "locale": "es-ES",
     "currency": "EUR",
-    "status": "active"
+    "status": "active",
+    "whmcsCurrencyId": 5
   },
   "us": {
     "country": "Estados Unidos",
+    "name": "Estados Unidos",
     "locale": "en-US",
     "currency": "USD",
-    "status": "active"
+    "status": "active",
+    "whmcsCurrencyId": 1
   },
   "cl": {
     "country": "Chile",
+    "name": "Chile",
     "locale": "es-CL",
     "currency": "CLP",
-    "status": "pending_whmcs"
+    "status": "active",
+    "whmcsCurrencyId": 6
   },
   "co": {
     "country": "Colombia",
+    "name": "Colombia",
     "locale": "es-CO",
     "currency": "COP",
-    "status": "pending_whmcs"
+    "status": "active",
+    "whmcsCurrencyId": 7
   },
   "mx": {
     "country": "México",
+    "name": "México",
     "locale": "es-MX",
     "currency": "MXN",
-    "status": "pending_whmcs"
+    "status": "active",
+    "whmcsCurrencyId": 8
   }
 }
-
