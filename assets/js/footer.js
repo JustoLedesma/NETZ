@@ -463,11 +463,12 @@
             '.footer-lang-changer { display: flex; align-items: center; gap: 15px; }' +
             '.lang-changer-drop-up { position: relative; float: left; }' +
             '.footer-lang-changer .menu-btn-changer { color: #969cc1; font-weight: 500; font-size: 13px; text-decoration: none; text-transform: capitalize; display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 4px; transition: all 0.2s ease; cursor: pointer; }' +
-            '.footer-lang-changer .menu-btn-changer:hover { color: #ffffff; background: rgba(255, 255, 255, 0.08); text-decoration: none; }' +
+            '.footer-lang-changer .menu-btn-changer:hover, .lang-changer-drop-up:hover .menu-btn-changer { color: #ffffff; background: rgba(255, 255, 255, 0.08); text-decoration: none; }' +
             '.footer-lang-changer .menu-btn-changer i { font-size: 14px; margin-right: 6px; }' +
             '.footer-lang-changer .menu-btn-changer img { width: 18px; height: 12px; object-fit: cover; border-radius: 2px; margin-right: 6px; }' +
-            '.dropupmenulagchanger.dropdown-menu { position: absolute !important; bottom: 100% !important; top: auto !important; left: 0 !important; margin-bottom: 12px !important; z-index: 9999 !important; min-width: 175px; background: #ffffff !important; border-radius: 10px !important; border: 1px solid rgba(0, 0, 0, 0.08) !important; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.22) !important; padding: 6px 0 !important; display: none; }' +
-            '.dropupmenulagchanger.dropdown-menu.show { display: block !important; }' +
+            '.dropupmenulagchanger.dropdown-menu { position: absolute !important; bottom: 100% !important; top: auto !important; left: 0 !important; margin-bottom: 8px !important; z-index: 9999 !important; min-width: 175px; background: #ffffff !important; border-radius: 10px !important; border: 1px solid rgba(0, 0, 0, 0.08) !important; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.22) !important; padding: 6px 0 !important; display: none; }' +
+            '.dropupmenulagchanger.dropdown-menu:before { content: \'\'; position: absolute; left: 0; right: 0; bottom: -12px; height: 12px; background: transparent; }' +
+            '.lang-changer-drop-up:hover > .dropupmenulagchanger.dropdown-menu, .dropupmenulagchanger.dropdown-menu.show { display: block !important; }' +
             '.dropupmenulagchanger.dropdown-menu.country-changer-menu { max-height: 270px; overflow-y: auto; min-width: 190px; }' +
             '.dropupmenulagchanger.dropdown-menu:after { content: \'\'; position: absolute; left: 20px; bottom: -6px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 6px solid #ffffff; }' +
             '.dropupmenulagchanger.dropdown-menu .dropdown-item { display: flex !important; align-items: center !important; padding: 8px 16px !important; color: #334155 !important; font-size: 13px !important; font-weight: 500 !important; text-decoration: none !important; transition: background 0.15s ease, color 0.15s ease !important; cursor: pointer !important; }' +
@@ -504,28 +505,54 @@
         var changer = document.querySelector('.footer-lang-changer');
         if (!changer) return;
 
-        var toggles = changer.querySelectorAll('.menu-btn-changer[data-toggle="dropdown"]');
-        toggles.forEach(function (btn) {
-            btn.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var parent = btn.closest('.lang-changer-drop-up');
-                var menu = parent ? parent.querySelector('.dropdown-menu') : null;
-                if (!menu) return;
+        var dropUps = changer.querySelectorAll('.lang-changer-drop-up');
+        dropUps.forEach(function (dropUp) {
+            var menu = dropUp.querySelector('.dropdown-menu');
+            var btn = dropUp.querySelector('.menu-btn-changer');
+            if (!menu) return;
+            var hideTimer = null;
 
-                var isShown = menu.classList.contains('show');
+            // Despliegue al pasar el mouse (hover)
+            dropUp.addEventListener('mouseenter', function () {
+                if (hideTimer) {
+                    clearTimeout(hideTimer);
+                    hideTimer = null;
+                }
                 changer.querySelectorAll('.dropdown-menu').forEach(function (m) {
-                    m.classList.remove('show');
+                    if (m !== menu) m.classList.remove('show');
                 });
                 changer.querySelectorAll('.lang-changer-drop-up').forEach(function (p) {
-                    p.classList.remove('show');
+                    if (p !== dropUp) p.classList.remove('show');
                 });
-
-                if (!isShown) {
-                    menu.classList.add('show');
-                    parent.classList.add('show');
-                }
+                menu.classList.add('show');
+                dropUp.classList.add('show');
             });
+
+            dropUp.addEventListener('mouseleave', function () {
+                hideTimer = setTimeout(function () {
+                    menu.classList.remove('show');
+                    dropUp.classList.remove('show');
+                }, 150);
+            });
+
+            // Compatibilidad para clic o pantallas táctiles
+            if (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var isShown = menu.classList.contains('show');
+                    changer.querySelectorAll('.dropdown-menu').forEach(function (m) {
+                        m.classList.remove('show');
+                    });
+                    changer.querySelectorAll('.lang-changer-drop-up').forEach(function (p) {
+                        p.classList.remove('show');
+                    });
+                    if (!isShown) {
+                        menu.classList.add('show');
+                        dropUp.classList.add('show');
+                    }
+                });
+            }
         });
 
         document.addEventListener('click', function (e) {
