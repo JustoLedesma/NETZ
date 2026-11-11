@@ -1,413 +1,462 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="es" data-country="py">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Relay, typed events from any webhook</title>
-<meta name="description" content="Relay is an API that turns any webhook into a typed event stream, retries failed deliveries and replays any event. Free up to 100,000 events a month.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;text=%E2%94%80%E2%94%82%E2%95%B1%E2%95%B2%E2%94%8A%E2%94%84%E2%94%BC%E2%94%9C%E2%94%A4%E2%94%AC%E2%94%B4%E2%96%B8%E2%86%BB%E2%A0%81%E2%A0%83%E2%A0%87%E2%A1%87%E2%A3%87%E2%A3%A7%E2%A3%B7%E2%A3%BF%E2%96%8A%E2%86%92%E2%9C%93%E2%95%8C&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="../assets/css/fontawesome-all.css">
-<link rel="stylesheet" href="netz-header.css">
-<script>document.documentElement.classList.add('js'); let tick = 0; addEventListener('resize', () => document.documentElement.style.setProperty('--tick', String(tick ^= 1)));</script>
-<script src="wire.js" defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="/assets/img/header/N-SVG.svg" type="image/x-icon">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/main.min.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/fontawesome-all.css" rel="stylesheet">
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+    <link href="/assets/css/typography.css" rel="stylesheet">
+    <link href="/assets/css/whatsapp.css" rel="stylesheet">
+    <title>Desarrollo de Software y APIs | NETZ</title>
+    <meta name="description"
+        content="Servicios avanzados de desarrollo de software a medida, integración de APIs y webhooks con alta disponibilidad y rendimiento en NETZ." />
+    <meta name="keywords" content="desarrollo de software, apis, webhooks, programacion, netz" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://netz.com.py/desarrollo-software">
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://netz.com.py/desarrollo-software">
+    <meta property="og:site_name" content="NETZ">
+    <meta property="og:title" content="Desarrollo de Software y APIs | NETZ">
+    <meta property="og:description"
+        content="Servicios avanzados de desarrollo de software a medida, integración de APIs y webhooks con alta disponibilidad y rendimiento en NETZ.">
+    <meta property="og:image" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+    <meta property="og:image:secure_url" content="https://netz.com.py/assets/img/seo/netz-share-banner.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_LA">
+    <meta property="og:locale:alternate" content="es_ES">
+
+    <!-- Fuentes y estilos para el bloque de desarrollo de software -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;text=%E2%94%80%E2%94%82%E2%95%B1%E2%95%B2%E2%94%8A%E2%94%84%E2%94%BC%E2%94%9C%E2%94%A4%E2%94%AC%E2%94%B4%E2%96%B8%E2%86%BB%E2%A0%81%E2%A0%83%E2%A0%87%E2%A1%87%E2%A3%87%E2%A3%A7%E2%A3%B7%E2%A3%BF%E2%96%8A%E2%86%92%E2%9C%93%E2%95%8C&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/system/style.css">
+    <script>document.documentElement.classList.add('js'); let tick = 0; addEventListener('resize', () => document.documentElement.style.setProperty('--tick', String(tick ^= 1)));</script>
+    <script src="/system/wire.js" defer></script>
 </head>
-<body id="top">
-<a class="skip" href="#main">Skip to content</a>
 
-<header id="coodiv-header">
-    <nav id="coodiv-navbar-header">
-        <div class="main-header-coodiv-s">
-            <a class="netz-navbar-brand" href="../index">
-                <img src="../assets/img/header/NETZ-IA.svg" alt="NETZ Logo" decoding="async">
-            </a>
-
-            <button class="netz-navbar-toggle" type="button" aria-label="Toggle navigation" id="netz-mobile-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-            <div class="netz-navbar-collapse" id="netz-navbar-menu">
-                <ul class="netz-navbar-nav">
-                    <li class="netz-nav-item">
-                        <a class="netz-nav-link" href="../index">Inicio</a>
-                    </li>
-                    <li class="netz-nav-item">
-                        <a class="netz-nav-link" href="#" role="button">Hosting</a>
-                        <div class="coodiv-dropdown-header web-menu">
-                            <ul class="web-hosting-menu-header">
-                                <li>
-                                    <i class="fas fa-infinity"></i>
-                                    <a href="../hosting-ilimitado">Hosting Ilimitado
-                                        <span class="nav-new-tag">Servicio sin límites de recursos</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <i class="fas fa-server"></i>
-                                    <a href="../hosting-exclusivo">Hosting Exclusivo
-                                        <span>Recursos exclusivos</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="netz-nav-item">
-                        <a class="netz-nav-link" href="#" role="button">Vps
-                            <span class="nav-new-tag">Nuevo</span>
-                        </a>
-                        <div class="coodiv-dropdown-header web-menu">
-                            <ul class="web-hosting-menu-header">
-                                <li>
-                                    <i class="fab fa-linux"></i>
-                                    <a href="../vps-linux-no-administrado">Linux no administrado
-                                        <span>¡Administre usted mismo!</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <i class="fab fa-linux"></i>
-                                    <a href="../vps-linux-administrado">Linux Administrado
-                                        <span>Todo el poder <br>NINGUNO de los problemas</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <i class="fab fa-windows"></i>
-                                    <a href="../vps-windows-no-administrado">Windows no Administrado
-                                        <span>¡Administre usted mismo!</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <i class="fab fa-windows"></i>
-                                    <a href="../vps-windows-administrado">Windows Administrado
-                                        <span>Todo el poder <br>NINGUNO de los problemas</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="netz-nav-item">
-                        <a class="netz-nav-link" href="#" role="button">Streaming
-                            <span class="nav-new-tag">Nuevo</span>
-                        </a>
-                        <div class="coodiv-dropdown-header web-menu">
-                            <ul class="web-hosting-menu-header">
-                                <li>
-                                    <i class="fas fa-microphone"></i>
-                                    <a href="../audio-streaming">Radio Streaming
-                                        <span>Sonido limpio y fluido <br>Sonido de Calidad</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <i class="fab fas fa-video"></i>
-                                    <a href="../video-streaming">Video Streaming
-                                        <span>Calidad máxima 720p <br>Streaming SSL</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="netz-nav-item">
-                        <a class="netz-nav-link" href="#" role="button">Reseller
-                            <span class="nav-new-tag">Nuevo</span>
-                        </a>
-                        <div class="coodiv-dropdown-header web-menu">
-                            <ul class="web-hosting-menu-header">
-                                <li>
-                                    <i class="fab fa-cpanel"></i>
-                                    <a href="../reseller-cpanel">cPanel & WHM
-                                        <span>2 CPU - 2Gb Ram, por cPanel</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <i class="fas fa-sign"></i>
-                                    <a href="../reseller-directadmin">DirectAdmin
-                                        <span>2 CPU - 2Gb Ram, por cuenta</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="netz-nav-item">
-                        <a class="netz-nav-link" href="#" role="button">Dominios</a>
-                        <div class="coodiv-dropdown-header web-menu">
-                            <ul class="web-hosting-menu-header">
-                                <li>
-                                    <i class="fas fa-globe-americas"></i>
-                                    <a href="../buscar-dominios">Comprobador de dominio
-                                        <span class="nav-new-tag">Consulta de disponibilidad</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <i class="fas fa-random"></i>
-                                    <a href="https://client.netz.com.py/cart.php?a=add&domain=transfer">Transferencia de dominio
-                                        <span>Transfiera su dominio</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="netz-nav-item">
-                        <a class="netz-nav-link" href="#" role="button">Empresa</a>
-                        <ul class="coodiv-dropdown-header pages-dropdown">
-                            <li><a class="dropdown-item" href="../about">Sobre Nosotros</a></li>
-                            <li><a class="dropdown-item" href="../terminos-del-servicio">Términos de Servicio</a></li>
-                            <li><a class="dropdown-item" href="../politica-de-privacidad">Politica de Privacidad</a></li>
-                            <li><a class="dropdown-item" href="../aviso-legal">Aviso Legal</a></li>
-                            <li><a class="dropdown-item" href="../contact">Cóntactenos</a></li>
+<body>
+    <div id="coodiv-header" class="d-flex mx-auto flex-column subpages-header">
+        <div class="bg_overlay_header">
+            <div class="bg-img-header-new-standard">&nbsp;</div>
+        </div>
+        <div id="navbar-container">
+            <nav id="coodiv-navbar-header" class="navbar navbar-expand-md fixed-header-layout">
+                <div class="container main-header-coodiv-s">
+                    <a class="navbar-brand" href="index"><img src="/assets/img/header/NETZ-IA.svg" width="100px"
+                            alt="Logo" decoding="async" /></a>
+                    <button class="navbar-toggle offcanvas-toggle menu-btn-span-bar ml-auto" data-toggle="offcanvas"
+                        data-target="#offcanvas-menu-home">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="collapse navbar-collapse navbar-offcanvas" id="offcanvas-menu-home">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="index">Inicio<span class="sr-only">(current)</span> </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Hosting</a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="webhosting-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-infinity"></i> <a href="hosting-ilimitado">Hosting
+                                                Ilimitado<span class="nav-new-tag">Servicio sin límites de
+                                                    recursos</span></a></li>
+                                        <li><i class="fas fa-server"></i> <a href="hosting-exclusivo">Hosting
+                                                Exclusivo<span>Recursos exclusivos</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="vps-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Vps<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="vps-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fab fa-linux"></i> <a href="vps-linux-no-administrado">Linux no
+                                                administrado<span>¡Administre usted mismo!</span></a></li>
+                                        <li><i class="fab fa-linux"></i> <a href="vps-linux-administrado">Linux
+                                                Administrado<span>Todo el poder <br>NINGUNO de los problemas</span></a>
+                                        </li>
+                                        <li><i class="fab fa-windows"></i> <a href="vps-windows-no-administrado">Windows
+                                                no Administrado<span>¡Administre usted mismo!</span></a></li>
+                                        <li><i class="fab fa-windows"></i> <a href="vps-windows-administrado">Windows
+                                                Administrado<span>Todo el poder <br>NINGUNO de los problemas</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="streaming-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Streaming<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="streaming-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-microphone"></i> <a href="audio-streaming">Radio
+                                                Streaming<span>Sonido limpio y fluido <br>Sonido de Calidad</span></a>
+                                        </li>
+                                        <li><i class="fab fas fa-video"></i> <a href="video-streaming">Video
+                                                Streaming<span>Calidad máxima 720p <br>Streaming SSL</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="reseller-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Reseller<span
+                                        class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="reseller-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fab fa-cpanel"></i> <a href="reseller-cpanel">cPanel & WHM<span>2
+                                                    CPU - 2Gb Ram, por cPanel</span></a></li>
+                                        <li><i class="fas fa-sign"></i> <a
+                                                href="reseller-directadmin">DirectAdmin<span>2 CPU - 2Gb Ram, por
+                                                    cuenta</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="desarrollo-software">Desarrollo<span class="nav-new-tag">Nuevo</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Dominios</a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="dominios-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-globe-americas"></i> <a href="buscar-dominios">Comprobador
+                                                de dominio<span class="nav-new-tag">Consulta de
+                                                    disponibilidad</span></a></li>
+                                        <li><i class="fas fa-random"></i> <a
+                                                href="https://client.netz.com.py/cart.php?a=add&domain=transfer">Transferencia
+                                                de dominio<span>Transfiera su dominio</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="#" role="button" id="header-pages-drop-down"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresa<span
+                                        class="sr-only">(current)</span></a>
+                                <ul class="dropdown-menu coodiv-dropdown-header"
+                                    aria-labelledby="header-pages-drop-down">
+                                    <li><a class="dropdown-item" href="about">Sobre Nosotros</a></li>
+                                    <li><a class="dropdown-item" href="terminos-del-servicio">Términos de Servicio</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="politica-de-privacidad">Politica de
+                                            Privacidad</a></li>
+                                    <li><a class="dropdown-item" href="aviso-legal">Aviso Legal</a></li>
+                                    <li><a class="dropdown-item" href="contact">Cóntactenos</a></li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
+                    </div>
+
+                    <ul class="header-user-info-coodiv">
+                        <li class="dropdown"><a role="button" id="header-login-dropdown"
+                                href="https://client.netz.com.py/login.php">Iniciar Sesión</a> <span>+595 973 136
+                                822</span>
+                            <div class="dropdown-menu coodiv-dropdown-header user-login-dropdown"
+                                aria-labelledby="header-login-dropdown">
+                                <form class="user-login-dropdown-form" action="https://client.netz.com.py/login.php"
+                                    data-form="validate">
+                                    <div class="form-group username">
+                                        <input type="email" name="username" id="inputEmail" placeholder="E-mail"
+                                            class="form-control" autofocus><i class="fas fa-at"></i>
+                                    </div>
+                                    <div class="form-group password">
+                                        <input type="password" name="password" id="inputPassword"
+                                            placeholder="Contraseña" class="form-control"><i class="fas fa-lock"></i>
+                                    </div>
+                                    <button data-toggle="tooltip" data-placement="left" title="login"
+                                        class="user-login-dropdown-form-button" type="submit"><i
+                                            class="fas fa-angle-right"></i></button>
+                                 </form>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="mt-auto header-top-height"></div>
+        <main class="container mb-auto">
+            <h3 class="mt-3 main-header-text-title"><span>Soluciones Digitales y Web</span>DESARROLLO DE SOFTWARE
+                <span class="sub-page-breadcrumb"><a href="index">Inicio</a> - Desarrollo de Software</span>
+            </h3>
+        </main>
+        <div class="mt-auto"></div>
+    </div>
+
+    <!-- Bloque de Desarrollo de Software -->
+    <main id="main">
+        <section class="hero" aria-labelledby="hero-head">
+            <canvas class="field" aria-hidden="true"></canvas>
+            <div class="container hero__grid">
+                <div class="hero__text">
+                    <h1 id="hero-head">Webhooks in, typed events out.</h1>
+                    <p class="lead">Relay types every payload, retries failed deliveries and replays any event.</p>
+                    <div class="actions">
+                        <a class="key key--primary" href="#pricing">Start free</a>
+                        <a class="key" href="#p-retry" data-tab-link="t-retry">See a retry</a>
+                    </div>
+                    <div class="curl" data-copy="curl --json @evt_1042.json https://relay.example.com/in/billing">
+                        <code class="curl__cmd"><span class="curl__p" aria-hidden="true">$</span>curl --json @evt_1042.json https://relay.example.com/in/billing</code>
+                        <button class="curl__copy" type="button" aria-label="Copy the curl command"><span class="curl__say" aria-live="polite">Copy</span></button>
+                    </div>
+                    <p class="hero__terms">Free up to 100,000 events a month.</p>
+                </div>
+            </div>
+            <div class="container legend-row">
+                <ul class="legend" aria-label="How to read the field">
+                    <li><code class="legend__raw">{"…</code><span>Raw webhook</span></li>
+                    <li><code class="legend__typed">invoice.paid</code><span>Typed event</span></li>
+                    <li><code class="legend__gap">503 ┄┄</code><span>Retry, waiting</span></li>
                 </ul>
             </div>
+        </section>
 
-            <ul class="header-user-info-coodiv">
-                <li>
-                    <a role="button" id="header-login-dropdown" class="header-login-btn" href="https://client.netz.com.py/login.php">Iniciar Sesión</a>
-                    <span class="header-phone-text">+595 973 136 822</span>
-                    <div class="coodiv-dropdown-header user-login-dropdown" aria-labelledby="header-login-dropdown">
-                        <form class="user-login-dropdown-form" action="https://client.netz.com.py/login.php" method="post">
-                            <div class="form-group">
-                                <input type="email" name="username" placeholder="E-mail" required autofocus>
-                                <i class="fas fa-at"></i>
+        <section class="live" id="stream" aria-labelledby="s0">
+            <div class="container">
+                <div class="head">
+                    <h2 id="s0">One stream for every provider</h2>
+                    <p class="lead">Every webhook lands here typed, with its delivery state beside it.</p>
+                </div>
+                <figure class="slot app console" data-slot="hero" data-alt="Your events console, with one delivery retrying and its type open" role="img" aria-label="The Relay events console: nine recent events from four providers; invoice.paid from billing.example.com is retrying on its second attempt, and its inferred type is open beside it.">
+                    <div class="ui" aria-hidden="true">
+                        <div class="ui__bar">
+                            <span class="ui__mark">Relay</span>
+                            <span class="ui__chips"><span class="ui__chip is-on">Events</span><span class="ui__chip">Sources</span><span class="ui__chip">Types</span><span class="ui__chip">Replays</span></span>
+                            <span class="ui__status"><i class="ui__live"></i>Live</span>
+                        </div>
+                        <div class="ui__tools">
+                            <span class="ui__input"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg><code>type:invoice.*</code></span>
+                            <span class="ui__tag">All sources</span>
+                            <span class="ui__tag">Last hour</span>
+                        </div>
+                        <div class="console__body">
+                            <div class="stream">
+                                <div class="stream__row stream__row--head"><span>Time</span><span>Event</span><span>Source</span><span>Status</span></div>
+                                <div class="stream__row"><code>09:42:31</code><code>order.shipped</code><span>shop.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
+                                <div class="stream__row is-on"><code>09:42:18</code><code>invoice.paid</code><span>billing.example.com</span><span class="state state--retry"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>Retrying, attempt 2</span></div>
+                                <div class="stream__row"><code>09:41:55</code><code>customer.updated</code><span>crm.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
+                                <div class="stream__row"><code>09:41:40</code><code>order.created</code><span>shop.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
+                                <div class="stream__row"><code>09:41:12</code><code>refund.issued</code><span>billing.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered, attempt 3</span></div>
+                                <div class="stream__row"><code>09:40:57</code><code>contact.merged</code><span>crm.example.com</span><span class="state state--failed"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>Failed, 410</span></div>
+                                <div class="stream__row"><code>09:40:31</code><code>order.created</code><span>shop.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
+                                <div class="stream__row"><code>09:40:12</code><code>invoice.paid</code><span>billing.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
+                                <div class="stream__row"><code>09:39:40</code><code>form.submitted</code><span>forms.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
                             </div>
-                            <div class="form-group">
-                                <input type="password" name="password" placeholder="Contraseña" required>
-                                <i class="fas fa-lock"></i>
+                            <div class="inspect">
+                                <div class="inspect__head">
+                                    <code class="inspect__event">invoice.paid</code><code class="inspect__id">evt_1042</code>
+                                    <span class="inspect__tabs"><span class="is-on">Type</span><span>Payload</span><span>Attempts</span></span>
+                                    <span class="inspect__replay">Replay</span>
+                                </div>
+                                <pre class="code code--insp" tabindex="0" aria-label="Inferred TypeScript type for invoice.paid"><code><span class="k">interface</span> <span class="t">InvoicePaid</span> {
+  <span class="p">id</span>: <span class="t">string</span>;
+  <span class="p">customer_id</span>: <span class="t">string</span>;
+  <span class="p">amount</span>: <span class="t">number</span>;
+  <span class="p">currency</span>: <span class="s">"usd"</span> | <span class="s">"eur"</span>;
+  <span class="p">paid_at</span>: <span class="t">string</span>; <span class="c">// ISO-8601</span>
+}</code></pre>
                             </div>
-                            <button class="user-login-dropdown-form-button" type="submit">
-                                Iniciar Sesión <i class="fas fa-angle-right" style="margin-left: 5px;"></i>
-                            </button>
-                        </form>
+                        </div>
                     </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
-
-<main id="main">
-  <section class="hero" aria-labelledby="hero-head">
-    <canvas class="field" aria-hidden="true"></canvas>
-    <div class="container hero__grid">
-      <div class="hero__text">
-        <h1 id="hero-head">Webhooks in, typed events out.</h1>
-        <p class="lead">Relay types every payload, retries failed deliveries and replays any event.</p>
-        <div class="actions">
-          <a class="key key--primary" href="#pricing">Start free</a>
-          <a class="key" href="#p-retry" data-tab-link="t-retry">See a retry</a>
-        </div>
-        <div class="curl" data-copy="curl --json @evt_1042.json https://relay.example.com/in/billing">
-          <code class="curl__cmd"><span class="curl__p" aria-hidden="true">$</span>curl --json @evt_1042.json https://relay.example.com/in/billing</code>
-          <button class="curl__copy" type="button" aria-label="Copy the curl command"><span class="curl__say" aria-live="polite">Copy</span></button>
-        </div>
-        <p class="hero__terms">Free up to 100,000 events a month.</p>
-      </div>
-    </div>
-    <div class="container legend-row">
-    <ul class="legend" aria-label="How to read the field">
-      <li><code class="legend__raw">{"…</code><span>Raw webhook</span></li>
-      <li><code class="legend__typed">invoice.paid</code><span>Typed event</span></li>
-      <li><code class="legend__gap">503 ┄┄</code><span>Retry, waiting</span></li>
-    </ul>
-    </div>
-  </section>
-
-  <section class="live" id="stream" aria-labelledby="s0">
-    <div class="container">
-      <div class="head">
-        <h2 id="s0">One stream for every provider</h2>
-        <p class="lead">Every webhook lands here typed, with its delivery state beside it.</p>
-      </div>
-      <figure class="slot app console" data-slot="hero" data-alt="Your events console, with one delivery retrying and its type open" role="img" aria-label="The Relay events console: nine recent events from four providers; invoice.paid from billing.example.com is retrying on its second attempt, and its inferred type is open beside it.">
-        <div class="ui" aria-hidden="true">
-          <div class="ui__bar">
-            <span class="ui__mark">Relay</span>
-            <span class="ui__chips"><span class="ui__chip is-on">Events</span><span class="ui__chip">Sources</span><span class="ui__chip">Types</span><span class="ui__chip">Replays</span></span>
-            <span class="ui__status"><i class="ui__live"></i>Live</span>
-          </div>
-          <div class="ui__tools">
-            <span class="ui__input"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg><code>type:invoice.*</code></span>
-            <span class="ui__tag">All sources</span>
-            <span class="ui__tag">Last hour</span>
-          </div>
-          <div class="console__body">
-          <div class="stream">
-            <div class="stream__row stream__row--head"><span>Time</span><span>Event</span><span>Source</span><span>Status</span></div>
-            <div class="stream__row"><code>09:42:31</code><code>order.shipped</code><span>shop.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
-            <div class="stream__row is-on"><code>09:42:18</code><code>invoice.paid</code><span>billing.example.com</span><span class="state state--retry"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>Retrying, attempt 2</span></div>
-            <div class="stream__row"><code>09:41:55</code><code>customer.updated</code><span>crm.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
-            <div class="stream__row"><code>09:41:40</code><code>order.created</code><span>shop.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
-            <div class="stream__row"><code>09:41:12</code><code>refund.issued</code><span>billing.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered, attempt 3</span></div>
-            <div class="stream__row"><code>09:40:57</code><code>contact.merged</code><span>crm.example.com</span><span class="state state--failed"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>Failed, 410</span></div>
-            <div class="stream__row"><code>09:40:31</code><code>order.created</code><span>shop.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
-            <div class="stream__row"><code>09:40:12</code><code>invoice.paid</code><span>billing.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
-            <div class="stream__row"><code>09:39:40</code><code>form.submitted</code><span>forms.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
-          </div>
-          <div class="inspect">
-            <div class="inspect__head">
-              <code class="inspect__event">invoice.paid</code><code class="inspect__id">evt_1042</code>
-              <span class="inspect__tabs"><span class="is-on">Type</span><span>Payload</span><span>Attempts</span></span>
-              <span class="inspect__replay">Replay</span>
+                </figure>
             </div>
-            <div class="inspect__body">
-<pre class="code"><code><span class="c">// inferred from evt_1042</span>
-<span class="k">type</span> <span class="t">InvoicePaid</span> = {
-  type: <span class="s">"invoice.paid"</span>;
-  id: <span class="t">string</span>;
-  amount: <span class="t">number</span>;
-  currency: <span class="s">"GBP"</span>;
-  paid_at: <span class="t">string</span>;
-};</code></pre>
-              <div class="tries">
-                <span class="tries__row"><b>1</b><code>09:42:18</code><code>503</code></span>
-                <span class="tries__row is-next"><b>2</b><code>09:42:48</code><span>next</span></span>
-              </div>
+        </section>
+
+        <section class="does" id="does" aria-labelledby="s1">
+            <div class="container">
+                <div class="head">
+                    <h2 id="s1">What it does</h2>
+                    <p class="lead">Four things between your webhook sender and your app.</p>
+                </div>
+
+                <div class="tabs-wrap" data-switch>
+                    <div class="tabs" role="tablist" aria-label="The four jobs">
+                        <button role="tab" aria-selected="true" id="t-type" aria-controls="p-type" tabindex="0"><span class="tabs__n" aria-hidden="true">1</span>Infers types</button>
+                        <button role="tab" aria-selected="false" id="t-retry" aria-controls="p-retry" tabindex="-1"><span class="tabs__n" aria-hidden="true">2</span>Retries failed</button>
+                        <button role="tab" aria-selected="false" id="t-replay" aria-controls="p-replay" tabindex="-1"><span class="tabs__n" aria-hidden="true">3</span>Replays any</button>
+                        <button role="tab" aria-selected="false" id="t-verify" aria-controls="p-verify" tabindex="-1"><span class="tabs__n" aria-hidden="true">4</span>Verifies signatures</button>
+                    </div>
+
+                    <article class="tab-panel" role="tabpanel" id="p-type" aria-labelledby="t-type">
+                        <div class="feature">
+                            <div class="feature__text">
+                                <h3>Type inference on ingest</h3>
+                                <p>Relay computes the shape of every event stream as payloads arrive. As schemas drift, Relay spots new optional fields and updates the union without breaking your handler.</p>
+                                <ul class="feature__bullets">
+                                    <li>Zero-config TypeScript, Go and Python definitions</li>
+                                    <li>Breaking changes flagged before they hit your queue</li>
+                                    <li>Historic payloads re-typed on schema migration</li>
+                                </ul>
+                            </div>
+                            <figure class="feature__demo pane" data-reveal>
+                                <p class="pair__file"><code>generated/billing.d.ts</code><span>Updated 3m ago</span></p>
+<pre class="code code--lg" tabindex="0" aria-label="Generated type definition"><code><span class="k">export type</span> <span class="t">BillingEvent</span> =
+  | <span class="t">InvoicePaid</span>
+  | <span class="t">InvoicePaymentFailed</span>
+  | <span class="t">SubscriptionCanceled</span>;
+
+<span class="k">export interface</span> <span class="t">InvoicePaymentFailed</span> {
+  <span class="p">id</span>: <span class="t">string</span>;
+  <span class="p">attempt_count</span>: <span class="t">number</span>;
+  <span class="p">next_retry</span>?: <span class="t">string</span>;
+}</code></pre>
+                            </figure>
+                        </div>
+                    </article>
+
+                    <article class="tab-panel" role="tabpanel" id="p-retry" aria-labelledby="t-retry" hidden>
+                        <div class="feature">
+                            <div class="feature__text">
+                                <h3>Exponential backoff with jitter</h3>
+                                <p>If your destination returns 5xx or drops the connection, Relay holds the line. Retries run up to 72 hours with exponential backoff and jitter to protect cold destinations.</p>
+                                <ul class="feature__bullets">
+                                    <li>Automatic 5xx and timeout retries up to 72 hours</li>
+                                    <li>Circuit breaker opens if your receiver goes down</li>
+                                    <li>Per-source concurrency limits to prevent thundering herds</li>
+                                </ul>
+                            </div>
+                            <figure class="feature__demo tl" data-reveal>
+                                <ol class="tl__list" aria-label="Retry timeline">
+                                    <li class="tl__item"><span class="tl__at">09:42:18</span><span class="tl__state state--failed"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>Attempt 1 · 503</span><span class="tl__desc">Receiver down</span></li>
+                                    <li class="tl__item tl__item--wait"><span class="tl__at">09:42:48</span><span class="tl__gap">Wait 30s + 4s jitter</span></li>
+                                    <li class="tl__item is-on"><span class="tl__at">09:43:22</span><span class="tl__state state--retry"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>Attempt 2 · Retrying</span><span class="tl__desc">Connecting to receiver…</span></li>
+                                    <li class="tl__item tl__item--next"><span class="tl__at">09:45:22</span><span class="tl__state">Attempt 3</span><span class="tl__desc">If attempt 2 fails (backoff: 2m)</span></li>
+                                </ol>
+                            </figure>
+                        </div>
+                    </article>
+
+                    <article class="tab-panel" role="tabpanel" id="p-replay" aria-labelledby="t-replay" hidden>
+                        <div class="feature">
+                            <div class="feature__text">
+                                <h3>One-click replays from any point</h3>
+                                <p>Shipped a bug in your webhook consumer? Fix it, deploy, and replay the last six hours of events directly to your receiver. Relay preserves the original headers and IDs.</p>
+                                <ul class="feature__bullets">
+                                    <li>Replay by time window, provider, or individual event ID</li>
+                                    <li>Dry-run replays locally through Relay's CLI tunnel</li>
+                                    <li>Immutable archive kept 30 days on every plan</li>
+                                </ul>
+                            </div>
+                            <figure class="feature__demo rp" data-reveal>
+                                <div class="rp__card">
+                                    <p class="rp__title"><span>Replay window</span><code>evt_1030 … evt_1042</code></p>
+                                    <dl class="rp__fields">
+                                        <div><dt>Source</dt><dd>billing.example.com</dd></div>
+                                        <div><dt>Events</dt><dd>14 events</dd></div>
+                                        <div><dt>Destination</dt><dd><code>https://app.example.com/api/hooks</code></dd></div>
+                                    </dl>
+                                    <div class="rp__actions">
+                                        <span class="key key--sm key--primary">Replay 14 events</span>
+                                        <span class="rp__note">Tagged <code>X-Relay-Replay: true</code></span>
+                                    </div>
+                                </div>
+                            </figure>
+                        </div>
+                    </article>
+
+                    <article class="tab-panel" role="tabpanel" id="p-verify" aria-labelledby="t-verify" hidden>
+                        <div class="feature">
+                            <div class="feature__text">
+                                <h3>Provider signatures verified at the gate</h3>
+                                <p>Relay verifies Stripe, GitHub, Shopify and Svix signatures before an event touches your servers. Bad signatures are rejected at the edge and never reach your quota.</p>
+                                <ul class="feature__bullets">
+                                    <li>Pre-configured signature verification for 40+ providers</li>
+                                    <li>Zero secrets inside your app handlers</li>
+                                    <li>Replay attacks dropped via timestamp threshold checks</li>
+                                </ul>
+                            </div>
+                            <figure class="feature__demo insp" data-reveal>
+                                <p class="pair__file"><code>Relay Edge Gate</code><span>Signature Verified</span></p>
+<pre class="code code--lg" tabindex="0" aria-label="Signature verification log"><code><span class="c">// Incoming: Stripe webhook</span>
+<span class="p">POST</span> /in/billing
+<span class="p">Stripe-Signature</span>: t=1713098538,v1=9c5b...
+<span class="k">✓ Signature valid</span> <span class="c">(HMAC-SHA256, secret: whsec_***)</span>
+<span class="k">✓ Timestamp fresh</span> <span class="c">(drift: 1.2s &lt; 300s tolerance)</span>
+<span class="k">✓ Transformed</span>    <span class="s">evt_1042</span> &rarr; <span class="t">invoice.paid</span></code></pre>
+                            </figure>
+                        </div>
+                    </article>
+                </div>
             </div>
-          </div>
-          </div>
-        </div>
-      </figure>
-    </div>
-  </section>
+        </section>
 
-  <div class="wire" aria-hidden="true"><canvas class="wire__row"></canvas></div>
+        <section class="offer" id="pricing" aria-labelledby="s5">
+            <div class="container">
+                <div class="head">
+                    <h2 id="s5">Simple pricing that scales</h2>
+                    <p class="lead">100,000 events free every month. No credit card to start.</p>
+                </div>
 
-  <section class="does" id="does" aria-labelledby="s1">
-    <div class="container">
-      <div class="head">
-        <h2 id="s1">Four jobs, one stream</h2>
-        <p class="lead">What Relay does between your providers and your endpoint.</p>
-      </div>
-      <div class="switch" data-switch>
-        <div class="tabs" role="tablist" aria-label="What Relay does">
-          <button role="tab" id="t-typed" aria-controls="p-typed" aria-selected="true"><span class="tabs__n" aria-hidden="true">1</span>Types</button>
-          <button role="tab" id="t-retry" aria-controls="p-retry" aria-selected="false" tabindex="-1"><span class="tabs__n" aria-hidden="true">2</span>Retries</button>
-          <button role="tab" id="t-replay" aria-controls="p-replay" aria-selected="false" tabindex="-1"><span class="tabs__n" aria-hidden="true">3</span>Replay</button>
-          <button role="tab" id="t-in" aria-controls="p-in" aria-selected="false" tabindex="-1"><span class="tabs__n" aria-hidden="true">4</span>Sources</button>
-        </div>
+                <div class="calc" data-calc>
+                    <div class="calc__head">
+                        <label class="calc__label" for="calc-events">Events per day</label>
+                        <span class="calc__out"><b id="per-month">100,000</b><span>/mo</span></span>
+                    </div>
+                    <input class="calc__range" id="calc-events" type="range" min="0" max="10000" step="100" value="3333">
+                    <span class="calc__meter" id="calc-bar" aria-hidden="true"><b>▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊</b>·························</span>
+                    <p class="calc__caption" id="calc-say">Inside the free 100,000, with 0 to spare.</p>
+                </div>
 
-        <div class="panel" role="tabpanel" id="p-typed" aria-labelledby="t-typed" tabindex="0">
-          <p class="panel__say">Relay reads each payload and gives every field a type.</p>
-          <figure class="insp" data-insp>
-            <div class="insp__bar"><code>evt_1042</code><span>Received from billing.example.com</span><span class="insp__to">Inferred by Relay</span></div>
-            <div class="insp__panes">
-              <div class="insp__pane">
-                <p class="insp__file"><code>evt_1042.json</code></p>
-<pre class="code code--insp"><code><span class="p">{</span>
-  <span class="ln" data-k="type"><span class="n">"type"</span><span class="p">:</span> <span class="s">"invoice.paid"</span><span class="p">,</span></span>
-  <span class="ln" data-k="id"><span class="n">"id"</span><span class="p">:</span> <span class="s">"evt_1042"</span><span class="p">,</span></span>
-  <span class="ln" data-k="amount"><span class="n">"amount"</span><span class="p">:</span> <span class="s">4800</span><span class="p">,</span></span>
-  <span class="ln" data-k="currency"><span class="n">"currency"</span><span class="p">:</span> <span class="s">"GBP"</span><span class="p">,</span></span>
-  <span class="ln" data-k="paid_at"><span class="n">"paid_at"</span><span class="p">:</span> <span class="s">"2026-10-08T09:42:16Z"</span></span>
-<span class="p">}</span></code></pre>
-              </div>
-              <div class="insp__pane">
-                <p class="insp__file"><code>invoice-paid.ts</code></p>
-<pre class="code code--insp"><code><span class="c">// inferred from evt_1042</span>
-<span class="k">export type</span> <span class="t">InvoicePaid</span> = {
-  <span class="ln" data-k="type">type: <span class="s">"invoice.paid"</span>;</span>
-  <span class="ln" data-k="id">id: <span class="t">string</span>;</span>
-  <span class="ln" data-k="amount">amount: <span class="t">number</span>;</span>
-  <span class="ln" data-k="currency">currency: <span class="s">"GBP"</span>;</span>
-  <span class="ln" data-k="paid_at">paid_at: <span class="t">string</span>;</span>
-};</code></pre>
-              </div>
-              <div class="insp__wires" aria-hidden="true"></div>
+                <div class="table-wrap">
+                    <table class="grid" aria-label="Plans">
+                        <thead>
+                            <tr>
+                                <th scope="col">Plan</th>
+                                <th scope="col">Events / mo</th>
+                                <th scope="col">Retention</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Free</td>
+                                <td>100,000</td>
+                                <td>7 days</td>
+                                <td>$0</td>
+                            </tr>
+                            <tr>
+                                <td>Pro</td>
+                                <td>1,000,000</td>
+                                <td>30 days</td>
+                                <td>$49/mo</td>
+                            </tr>
+                            <tr>
+                                <td>Enterprise</td>
+                                <td>Unlimited</td>
+                                <td>90 days</td>
+                                <td>Custom</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </figure>
-        </div>
+        </section>
 
-        <div class="panel" role="tabpanel" id="p-retry" aria-labelledby="t-retry" tabindex="0">
-          <p class="panel__say">When your endpoint is down, Relay holds <code>evt_1042</code> and tries again: a 503, a timeout, then 200 OK.</p>
-          <figure class="tl" data-tl>
-            <ol class="tl__at" aria-label="Delivery attempts of evt_1042 to example.com/hooks/billing, spaced by time">
-              <li class="tl__a tl__a--bad" style="--at: 0"><span class="tl__fig">503</span><span class="tl__what">Service Unavailable in 2.1 s</span><code>Attempt 1, 09:42:18</code></li>
-              <li class="tl__a tl__a--bad" style="--at: 0.3333"><span class="tl__fig">10.0 s</span><span class="tl__what">No answer, timed out</span><code>Attempt 2, 09:42:48</code></li>
-              <li class="tl__a tl__a--good" style="--at: 1"><span class="tl__fig">200</span><span class="tl__what">OK in 182 ms</span><code>Attempt 3, 09:43:48</code></li>
-            </ol>
-            <div class="tl__rule" aria-hidden="true"><i class="tl__ink"></i><i class="tl__span tl__span--bad" style="--at: 0; --dur: 0.0233"></i><i class="tl__span tl__span--bad" style="--at: 0.3333; --dur: 0.1111"></i><i class="tl__span tl__span--good" style="--at: 0.998; --dur: 0.002"></i><i class="tl__cursor"></i></div>
-            <div class="tl__dims" aria-hidden="true">
-              <span class="tl__dim" style="--from: 0; --to: 0.3333"><span><code>30 s</code> later</span></span>
-              <span class="tl__dim" style="--from: 0.3333; --to: 1"><span><code>60 s</code> later</span></span>
-            </div>
-          </figure>
-        </div>
-
-        <div class="panel" role="tabpanel" id="p-replay" aria-labelledby="t-replay" tabindex="0">
-          <p class="panel__say">Send any past event to your endpoint again, straight from the stream.</p>
-          <div class="rp" data-replay>
-            <canvas class="rp__field" aria-hidden="true"></canvas>
-            <div class="rp__in">
-              <div class="rp__head"><h3 class="rp__title">Replay</h3><code>invoice.paid</code><code class="rp__id">evt_1042</code></div>
-              <dl class="rp__fields">
-                <dt>Event</dt><dd><code>evt_1042, invoice.paid</code></dd>
-                <dt>Destination</dt><dd><code>https://example.com/hooks/billing</code></dd>
-              </dl>
-              <div class="rp__go">
-                <button class="key key--primary" type="button" data-replay-go><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>Replay event</button>
-                <span class="rp__hint">Sends the stored payload as it arrived</span>
-              </div>
-              <ol class="rp__log" aria-label="Recent replays" aria-live="polite">
-                <li class="rp__line"><code>09:58:14</code><span>Replayed <code>evt_1042</code></span><code class="ok">200 OK</code><code>164 ms</code></li>
-                <li class="rp__line"><code>09:31:02</code><span>Replayed <code>evt_0987</code></span><code class="ok">200 OK</code><code>201 ms</code></li>
-                <li class="rp__line"><code>08:12:40</code><span>Replayed <code>evt_0961</code></span><code class="ok">200 OK</code><code>176 ms</code></li>
-              </ol>
-              <div class="curl curl--dark" data-copy="curl --json @evt_1042.json https://example.com/hooks/billing">
-                <code class="curl__cmd"><span class="curl__p" aria-hidden="true">$</span>curl --json @evt_1042.json https://example.com/hooks/billing</code>
-                <button class="curl__copy" type="button" aria-label="Copy the same request as curl"><span class="curl__say" aria-live="polite">Copy</span></button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel" role="tabpanel" id="p-in" aria-labelledby="t-in" tabindex="0">
-          <p class="panel__say">One address for each provider. Every webhook lands in one stream, whoever sent it.</p>
-          <div class="table-wrap" role="region" aria-label="Sources" tabindex="0">
-            <table class="src">
-              <thead><tr><th scope="col">Source</th><th scope="col">Posts to</th><th scope="col">Event types seen</th><th scope="col" class="r">Last event</th></tr></thead>
-              <tbody>
-                <tr><th scope="row">shop.example.com</th><td><code>relay.example.com/in/shop</code></td><td><code>order.created</code> <code>order.shipped</code></td><td class="r"><code>09:42:31</code></td></tr>
-                <tr class="is-on"><th scope="row">billing.example.com</th><td><code>relay.example.com/in/billing</code></td><td><code>invoice.paid</code> <code>refund.issued</code></td><td class="r"><code>09:42:18</code></td></tr>
-                <tr><th scope="row">crm.example.com</th><td><code>relay.example.com/in/crm</code></td><td><code>customer.updated</code> <code>contact.merged</code></td><td class="r"><code>09:41:55</code></td></tr>
-                <tr><th scope="row">forms.example.com</th><td><code>relay.example.com/in/forms</code></td><td><code>form.submitted</code></td><td class="r"><code>09:39:40</code></td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="src__out">All four deliver to <code>https://example.com/hooks</code></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="offer" id="pricing" aria-labelledby="s5">
-    <div class="container offer__grid">
-      <div class="offer__head">
-        <h2 class="offer__fig" id="s5">100,000 events a month, free.</h2>
-        <div class="actions">
-          <a class="key key--primary" href="#top" data-needs-url="signup">Start free</a>
-        </div>
-      </div>
-      <form class="calc" aria-labelledby="calc-label" onsubmit="return false">
-        <label id="calc-label" for="per-day">Webhooks your providers send a day</label>
-        <input id="per-day" name="per-day" type="number" inputmode="numeric" min="0" step="100" value="1200">
-        <output class="calc__fig" for="per-day" id="per-month">36,000</output>
-        <span class="calc__unit">events in a 30-day month</span>
-        <span class="calc__meter" aria-hidden="true" id="calc-bar"><b>▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊</b>································</span>
-        <p class="calc__say" id="calc-say" aria-live="polite">Inside the free 100,000.</p>
-      </form>
-    </div>
-  </section>
-
-  <section class="band" id="start" aria-labelledby="s6">
-    <div class="container code-close">
-      <div class="code-close__text">
-        <h2 id="s6">Your handler gets a type</h2>
-        <p class="lead">Answer 200 and the event is delivered. Anything else, and Relay tries again.</p>
-      </div>
-      <figure class="pane" data-reveal>
-        <p class="pair__file"><code>app/hooks/billing/route.ts</code><span>Your endpoint</span></p>
+        <section class="band" id="start" aria-labelledby="s6">
+            <div class="container code-close">
+                <div class="code-close__text">
+                    <h2 id="s6">Your handler gets a type</h2>
+                    <p class="lead">Answer 200 and the event is delivered. Anything else, and Relay tries again.</p>
+                </div>
+                <figure class="pane" data-reveal>
+                    <p class="pair__file"><code>app/hooks/billing/route.ts</code><span>Your endpoint</span></p>
 <pre class="code code--lg" tabindex="0" aria-label="The handler, in TypeScript"><code><span class="k">import type</span> { <span class="t">InvoicePaid</span> } <span class="k">from</span> <span class="s">"./invoice-paid"</span>;
 
 <span class="k">export async function</span> POST(req: <span class="t">Request</span>) {
@@ -415,103 +464,47 @@
 <span class="hl">  console.log(event.id, event.amount, event.currency);</span>
   <span class="k">return new</span> <span class="t">Response</span>(<span class="k">null</span>, { status: <span class="s">200</span> });
 }</code></pre>
-        <figcaption>The type file is the one Relay inferred from <code>evt_1042</code>.</figcaption>
-      </figure>
-    </div>
-  </section>
-</main>
+                    <figcaption>The type file is the one Relay inferred from <code>evt_1042</code>.</figcaption>
+                </figure>
+            </div>
+        </section>
+    </main>
 
-<footer class="colophon">
-  <div class="container colophon__grid">
-    <p class="colophon__mark">Relay</p>
-    <p class="colophon__text">Relay is an API for backend developers.</p>
-    <nav class="colophon__links" aria-label="Footer">
-      <a href="#stream">The console</a>
-      <a href="#does">What it does</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#start">Your handler</a>
-    </nav>
-    <p class="colophon__legal">© 2026 Relay</p>
-  </div>
-  <div class="container"><canvas class="mast" aria-hidden="true"></canvas></div>
-</footer>
+    <!-- footer -->
+    <div id="footer-container"></div>
 
-<script>
-window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = document.querySelector(`[data-slot="${k}"]`); if (!s) continue; const im = new Image(); im.src = typeof v === 'string' ? v : v.src; im.alt = (typeof v === 'object' && v.alt) || s.dataset.alt || ''; s.querySelectorAll(':scope > img').forEach((o) => o.remove()); s.prepend(im); } };
-document.querySelectorAll('[data-slot] > img').forEach((i) => { if (i.complete && !i.naturalWidth) i.remove(); else i.addEventListener('error', () => i.remove(), { once: true }); });
-const jump = document.getElementById('jump');
-if (jump && jump.showPopover) {
-  addEventListener('keydown', (e) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); jump.togglePopover(); } });
-  jump.addEventListener('toggle', (e) => { if (e.newState === 'open') jump.querySelector('a').focus(); });
-  jump.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => jump.hidePopover()));
-}
-const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
-document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
-/* The free tier worked out on the visitor's number; the meter is fifty cells, each 2,000 events */
-const perDay = document.getElementById('per-day');
-if (perDay) {
-  const out = document.getElementById('per-month'), bar = document.getElementById('calc-bar'), say = document.getElementById('calc-say'), fmt = new Intl.NumberFormat('en-GB');
-  const run = () => { const n = Math.max(0, Math.round(Number(perDay.value) || 0)) * 30; out.textContent = fmt.format(n); const on = Math.min(50, Math.round(n / 2000)); bar.innerHTML = '<b>' + '▊'.repeat(on) + '</b>' + '·'.repeat(50 - on); bar.classList.toggle('is-over', n > 100000); say.textContent = n <= 100000 ? 'Inside the free 100,000, with ' + fmt.format(100000 - n) + ' to spare.' : fmt.format(n - 100000) + ' over the free 100,000 a month.'; };
-  perDay.addEventListener('input', run); run();
-}
-/* The switcher: four real panels on a tray of keys; arrows, Home, End and the number keys move between them; without script every panel shows in order */
-document.querySelectorAll('[data-switch]').forEach((sw) => {
-  const tabs = [...sw.querySelectorAll('[role="tab"]')];
-  const pick = (t, focus) => { tabs.forEach((x) => { const on = x === t; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute('aria-controls')).hidden = !on; }); if (focus) t.focus(); };
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => pick(t));
-    t.addEventListener('keydown', (e) => { const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); } if (e.key === 'Home') { e.preventDefault(); pick(tabs[0], true); } if (e.key === 'End') { e.preventDefault(); pick(tabs[tabs.length - 1], true); } const n = Number(e.key); if (n >= 1 && n <= tabs.length) { e.preventDefault(); pick(tabs[n - 1], true); } });
-  });
-  pick(tabs[0]);
-  document.querySelectorAll('[data-tab-link]').forEach((a) => a.addEventListener('click', (e) => { const t = document.getElementById(a.dataset.tabLink); if (!t) return; e.preventDefault(); pick(t); sw.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); t.focus({ preventScroll: true }); }));
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var toggleBtn = document.getElementById('netz-mobile-toggle');
-    var menu = document.getElementById('netz-navbar-menu');
-    if (toggleBtn && menu) {
-        toggleBtn.addEventListener('click', function() {
-            menu.classList.toggle('show');
-        });
+    <!-- JavaScript de NETZ -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/template-scripts.js"></script>
+    <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/footer.js"></script>
+    <script src="/assets/js/prices.js"></script>
+
+    <!-- Script interactivo del bloque de desarrollo -->
+    <script>
+    window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = document.querySelector(`[data-slot="${k}"]`); if (!s) continue; const im = new Image(); im.src = typeof v === 'string' ? v : v.src; im.alt = (typeof v === 'object' && v.alt) || s.dataset.alt || ''; s.querySelectorAll(':scope > img').forEach((o) => o.remove()); s.prepend(im); } };
+    document.querySelectorAll('[data-slot] > img').forEach((i) => { if (i.complete && !i.naturalWidth) i.remove(); else i.addEventListener('error', () => i.remove(), { once: true }); });
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+    const perDay = document.getElementById('calc-events');
+    if (perDay) {
+      const out = document.getElementById('per-month'), bar = document.getElementById('calc-bar'), say = document.getElementById('calc-say'), fmt = new Intl.NumberFormat('en-GB');
+      const run = () => { const n = Math.max(0, Math.round(Number(perDay.value) || 0)) * 30; out.textContent = fmt.format(n); const on = Math.min(50, Math.round(n / 2000)); bar.innerHTML = '<b>' + '▊'.repeat(on) + '</b>' + '·'.repeat(50 - on); bar.classList.toggle('is-over', n > 100000); say.textContent = n <= 100000 ? 'Inside the free 100,000, with ' + fmt.format(100000 - n) + ' to spare.' : fmt.format(n - 100000) + ' over the free 100,000 a month.'; };
+      perDay.addEventListener('input', run); run();
     }
-
-    var loginBtn = document.getElementById('header-login-dropdown');
-    var loginDropdown = document.querySelector('.user-login-dropdown');
-    if (loginBtn && loginDropdown) {
-        loginBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            loginDropdown.classList.toggle('show');
-        });
-    }
-
-    document.querySelectorAll('#coodiv-header .netz-nav-item').forEach(function(item) {
-        var link = item.querySelector('.netz-nav-link');
-        var dropdown = item.querySelector('.coodiv-dropdown-header');
-        if (link && dropdown) {
-            link.addEventListener('click', function(e) {
-                if (link.getAttribute('href') === '#') {
-                    e.preventDefault();
-                    var isShown = item.classList.contains('show');
-                    document.querySelectorAll('#coodiv-header .netz-nav-item').forEach(function(other) {
-                        other.classList.remove('show');
-                    });
-                    if (!isShown) item.classList.add('show');
-                }
-            });
-        }
+    document.querySelectorAll('[data-switch]').forEach((sw) => {
+      const tabs = [...sw.querySelectorAll('[role="tab"]')];
+      const pick = (t, focus) => { tabs.forEach((x) => { const on = x === t; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute('aria-controls')).hidden = !on; }); if (focus) t.focus(); };
+      tabs.forEach((t, i) => {
+        t.addEventListener('click', () => pick(t));
+        t.addEventListener('keydown', (e) => { const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); } if (e.key === 'Home') { e.preventDefault(); pick(tabs[0], true); } if (e.key === 'End') { e.preventDefault(); pick(tabs[tabs.length - 1], true); } const n = Number(e.key); if (n >= 1 && n <= tabs.length) { e.preventDefault(); pick(tabs[n - 1], true); } });
+      });
+      pick(tabs[0]);
+      document.querySelectorAll('[data-tab-link]').forEach((a) => a.addEventListener('click', (e) => { const t = document.getElementById(a.dataset.tabLink); if (!t) return; e.preventDefault(); pick(t); sw.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); t.focus({ preventScroll: true }); }));
     });
-
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('#coodiv-header')) {
-            document.querySelectorAll('#coodiv-header .netz-nav-item').forEach(function(item) {
-                item.classList.remove('show');
-            });
-            if (loginDropdown) loginDropdown.classList.remove('show');
-        }
-    });
-});
-</script>
+    </script>
 </body>
+
 </html>

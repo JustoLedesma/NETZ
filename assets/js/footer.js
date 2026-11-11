@@ -48,6 +48,7 @@
                                 <li><a href="vps-windows-administrado">Windows Administrado</a></li>
                                 <li><a href="reseller-cpanel">Reseller cPanel & WHM</a></li>
                                 <li><a href="reseller-directadmin">Reseller DirectAdmin</a></li>
+                                <li><a href="desarrollo-software">Desarrollo de Software</a></li>
                             </ul>
                         </div>
                     </div>
@@ -176,6 +177,7 @@
                                 <li><a href="vps-windows-administrado">Windows Gerenciado</a></li>
                                 <li><a href="reseller-cpanel">Revenda cPanel & WHM</a></li>
                                 <li><a href="reseller-directadmin">Revenda DirectAdmin</a></li>
+                                <li><a href="desarrollo-software">Desenvolvimento de Software</a></li>
                             </ul>
                         </div>
                     </div>
@@ -295,6 +297,7 @@
                                 <li><a href="vps-windows-administrado">Managed Windows VPS</a></li>
                                 <li><a href="reseller-cpanel">cPanel & WHM Reseller</a></li>
                                 <li><a href="reseller-directadmin">DirectAdmin Reseller</a></li>
+                                <li><a href="desarrollo-software">Software Development</a></li>
                             </ul>
                         </div>
                     </div>
@@ -377,6 +380,7 @@
             'vps-linux', 'vps-windows',
             'audio-streaming', 'video-streaming',
             'reseller-cpanel', 'reseller-directadmin',
+            'desarrollo-software',
             'buscar-dominios', 'about', 'contact',
             'centro-de-ayuda', 'terminos-del-servicio',
             'politica-de-privacidad', 'aviso-legal', '404'

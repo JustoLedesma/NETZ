@@ -54,6 +54,9 @@
                                 </ul>
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="desarrollo-software">Desarrollo<span class="nav-new-tag">Nuevo</span></a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Dominios</a>
                             <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="dominios-megamenu">
@@ -146,6 +149,9 @@
                                     <li><i class="fas fa-sign"></i> <a href="reseller-directadmin">DirectAdmin<span>2 CPU - 2Gb RAM por conta</span></a></li>
                                 </ul>
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="desarrollo-software">Desenvolvimento<span class="nav-new-tag">Novo</span></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Domínios</a>
@@ -240,6 +246,9 @@
                                 </ul>
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="desarrollo-software">Development<span class="nav-new-tag">New</span></a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Domains</a>
                             <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="dominios-megamenu">
@@ -332,6 +341,7 @@
             'vps-linux', 'vps-windows',
             'audio-streaming', 'video-streaming',
             'reseller-cpanel', 'reseller-directadmin',
+            'desarrollo-software',
             'buscar-dominios', 'about', 'contact',
             'centro-de-ayuda', 'terminos-del-servicio',
             'politica-de-privacidad', 'aviso-legal', '404'
