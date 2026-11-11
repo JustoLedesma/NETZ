@@ -156,3 +156,4 @@ const hostingReplacements = [
 module.exports = {
     hostingReplacements
 };
+

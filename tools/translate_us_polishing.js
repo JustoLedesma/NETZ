@@ -67,3 +67,4 @@ for (const [file, pairs] of Object.entries(polishingMap)) {
     }
     console.log(`💎 Pulido final aplicado para: ${file}`);
 }
+

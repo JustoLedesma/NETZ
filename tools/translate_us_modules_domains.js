@@ -25,3 +25,4 @@ const domainsReplacements = [
 module.exports = {
     domainsReplacements
 };
+

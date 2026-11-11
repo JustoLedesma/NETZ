@@ -395,3 +395,4 @@ const faqEnglishMap = [
 
 fs.writeFileSync('tools/faq_english_map.json', JSON.stringify(faqEnglishMap, null, 2), 'utf8');
 console.log('Saved 65 FAQ translations to tools/faq_english_map.json');
+

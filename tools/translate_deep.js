@@ -167,3 +167,4 @@ for (const file of files) {
 }
 
 console.log('✨ Limpieza profunda de Navbar y Metas finalizada.');
+

@@ -118,7 +118,7 @@
             applyPrices(data);
             htmlEl.classList.remove('prices-loading');
             if (typeof window.initDomainPricesCarousel === 'function') {
-                window.initDomainPricesCarousel();
+                window.initDomainPricesCarousel(true);
             } else if (window.jQuery && jQuery('.owl-domain-prices-previw').length) {
                 var $owl = jQuery('.owl-domain-prices-previw');
                 var owlData = $owl.data('owl.carousel');

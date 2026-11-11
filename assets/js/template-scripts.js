@@ -77,37 +77,62 @@
 		}
 	});
 
+		function getTargetDomainItems(winW) {
+		if (winW >= 992) return 4;
+		if (winW >= 768) return 3;
+		if (winW >= 480) return 2;
+		return 1;
+	}
+
 	// header slider domains carousel //
-	function initDomainPricesCarousel() {
+	function initDomainPricesCarousel(forceReinit) {
 		var $owl = $('.owl-domain-prices-previw');
 		if (!$owl.length) return;
 
 		// Si owlCarousel aún no está cargado en memoria, reintentar cada 30ms
 		if (typeof $owl.owlCarousel !== 'function') {
-			setTimeout(initDomainPricesCarousel, 30);
+			setTimeout(function () { initDomainPricesCarousel(forceReinit); }, 30);
+			return;
+		}
+
+		var winW = window.innerWidth || $(window).width() || (document.documentElement ? document.documentElement.clientWidth : 0) || (window.screen ? window.screen.width : 0);
+		var currentWidth = $owl.width();
+
+		// Si la ventana o el contenedor aún no tienen ancho medible (cold-start / restore / pestaña oculta)
+		if (winW <= 0 || currentWidth <= 0) {
+			setTimeout(function () { initDomainPricesCarousel(forceReinit); }, 40);
+			return;
+		}
+
+		// En desktop (>= 992px), el contenedor col-md-7 debe tener al menos 400px antes de inicializar
+		if (winW >= 992 && currentWidth < 400) {
+			setTimeout(function () { initDomainPricesCarousel(forceReinit); }, 40);
 			return;
 		}
 
 		var owl = $owl.data('owl.carousel');
-		var currentWidth = $owl.width();
-		var winW = window.innerWidth || $(window).width();
+		var targetItems = getTargetDomainItems(winW);
 
-		// Si ya está inicializado, forzar re-evaluación profunda de viewport y responsive
+		// Si ya está inicializado
 		if (owl) {
-			if (currentWidth > 0) {
+			var currentItems = (owl.settings && owl.settings.items) ? owl.settings.items : 0;
+			var clonesCount = $owl.find('.owl-item.cloned').length;
+
+			// Si la cantidad de items activos no coincide con el breakpoint o faltan clones por cold-start
+			if (forceReinit || currentItems !== targetItems || clonesCount < (targetItems * 2)) {
+				// Destrucción limpia y completa para regenerar clones exactos
+				$owl.trigger('destroy.owl.carousel');
+				$owl.removeClass('owl-loaded owl-hidden owl-drag');
+				$owl.find('.owl-stage-outer').children().unwrap();
+				owl = null;
+			} else {
+				// Mismo breakpoint: ajuste de coordenadas suave
 				owl.invalidate('width');
 				owl.invalidate('settings');
 				owl.setup();
 				owl.refresh();
+				return;
 			}
-			return;
-		}
-
-		// Si el contenedor aún no tiene ancho medible (cold-start / pestaña en segundo plano / restore)
-		// o si estamos en pantalla grande y el contenedor aún no se ha expandido a más de 300px, esperar
-		if (currentWidth <= 0 || (winW >= 992 && currentWidth < 300)) {
-			setTimeout(initDomainPricesCarousel, 40);
-			return;
 		}
 
 		$owl.owlCarousel({
@@ -171,7 +196,8 @@
 	});
 
 	// Asegurar recálculo cuando carguen completamente imágenes, estilos, fuentes o restore de pestaña (pageshow)
-	$(window).on('load resize orientationchange pageshow', function () {
+	$(window).on('load resize orientationchange pageshow focus', function () {
+		initDomainPricesCarousel(true);
 		initDomainPricesCarousel();
 		setTimeout(initDomainPricesCarousel, 80);
 		setTimeout(initDomainPricesCarousel, 300);

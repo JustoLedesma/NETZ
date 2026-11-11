@@ -887,3 +887,4 @@ func translate404(c string) string {
 	}
 	return applyReplacements(c, pairs)
 }
+

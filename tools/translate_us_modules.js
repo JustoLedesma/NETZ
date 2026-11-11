@@ -134,3 +134,4 @@ const hostingCommon = [
 module.exports = {
     hostingCommon
 };
+

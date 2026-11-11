@@ -78,3 +78,4 @@ for (const page of productionPages) {
 }
 
 console.log(`\n✨ Traducción completada con éxito para ${totalTranslated} páginas.`);
+

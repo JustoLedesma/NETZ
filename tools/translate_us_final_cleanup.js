@@ -73,3 +73,4 @@ for (const [file, pairs] of Object.entries(finalReplacementsByFile)) {
     }
     console.log(`🎯 Limpieza de precisión completada para: ${file}`);
 }
+

@@ -14,3 +14,4 @@ while ((match = regex.exec(content)) !== null) {
 console.log('Total extracted QA pairs:', qas.length);
 fs.writeFileSync('tools/extracted_faq.json', JSON.stringify(qas, null, 2), 'utf8');
 console.log('Saved to tools/extracted_faq.json');
+

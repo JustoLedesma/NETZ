@@ -84,3 +84,4 @@ const legalAboutReplacements = [
 module.exports = {
     legalAboutReplacements
 };
+
