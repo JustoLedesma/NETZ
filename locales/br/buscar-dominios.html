@@ -647,7 +647,18 @@
                                 }
                             }
 
-                            var enlaceRegistro = 'https://client.netz.com.py/cart.php?a=add&domain=register&query=' + encodeURIComponent(data.domain || dominio);
+                            var isParaguay = /\.py$/i.test(domConsultado);
+                            var hostingPath = '/br/hosting-ilimitado';
+                            var enlaceRegistro = '';
+                            var textoBoton = 'Registrar';
+
+                            if (isParaguay) {
+                                enlaceRegistro = hostingPath + '?domain=' + encodeURIComponent(domConsultado);
+                                textoBoton = 'Contratar Hospedagem';
+                            } else {
+                                enlaceRegistro = 'https://client.netz.com.py/cart.php?a=add&domain=register&query=' + encodeURIComponent(data.domain || dominio);
+                                textoBoton = 'Registrar';
+                            }
 
                             resultadoContainer.innerHTML = '' +
                                 '<div style="background: #fff; border-radius: 15px; padding: 22px 28px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); border: 2px solid #28a745;">' +
@@ -662,8 +673,8 @@
                                 badgesPrecios +
                                 '</div>' +
                                 '<div class="col-md-3 text-md-right">' +
-                                '<a href="' + enlaceRegistro + '" target="_blank" class="btn" style="background: #28a745; color: #fff; font-weight: 700; border-radius: 25px; padding: 9px 22px; text-transform: uppercase; font-size: 13px;">' +
-                                'Registrar' +
+                                '<a href="' + enlaceRegistro + '" class="btn" style="background: #28a745; color: #fff; font-weight: 700; border-radius: 25px; padding: 9px 22px; text-transform: uppercase; font-size: 13px;">' +
+                                textoBoton +
                                 '</a>' +
                                 '</div>' +
                                 '</div>' +

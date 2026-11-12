@@ -61,11 +61,56 @@
         });
 
         // 2. Enlaces de contratación (data-whmcs-link)
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlDomain = urlParams.get('domain');
+        let domainQuery = '';
+        if (urlDomain) {
+            const cleanDom = urlDomain.trim().toLowerCase();
+            const pyMatch = cleanDom.match(/^(.+?)\.(com\.py|net\.py|org\.py|edu\.py|mil\.py|gov\.py|py)$/i);
+            if (pyMatch) {
+                domainQuery = `&domainoption=owndomain&sld=${encodeURIComponent(pyMatch[1])}&tld=${encodeURIComponent('.' + pyMatch[2])}`;
+            } else {
+                const parts = cleanDom.split('.');
+                if (parts.length > 1) {
+                    const sld = parts.slice(0, -1).join('.');
+                    const tld = '.' + parts[parts.length - 1];
+                    domainQuery = `&domainoption=owndomain&sld=${encodeURIComponent(sld)}&tld=${encodeURIComponent(tld)}`;
+                }
+            }
+
+            // Mostrar banner informativo si la página tiene tabla de planes de hosting
+            if (!document.getElementById('domain-selected-alert')) {
+                const pricingContainer = document.querySelector('.second-pricing-table-container');
+                if (pricingContainer && pricingContainer.parentNode) {
+                    const alertDiv = document.createElement('div');
+                    alertDiv.id = 'domain-selected-alert';
+                    alertDiv.style.cssText = 'background: #e8f5e9; border: 2px solid #28a745; color: #1e7e34; border-radius: 12px; padding: 14px 20px; margin: 0 auto 30px auto; max-width: 800px; text-align: center; font-size: 15px; font-weight: 600; box-shadow: 0 4px 15px rgba(40,167,69,0.1); width: 100%;';
+
+                    let alertText = `Dominio seleccionado: <strong style="color: #155724; font-size: 16px;">${cleanDom}</strong> — Seleccione su plan de hosting para continuar.`;
+                    if (country === 'br') {
+                        alertText = `Domínio selecionado: <strong style="color: #155724; font-size: 16px;">${cleanDom}</strong> — Escolha o seu plano de hospedagem para continuar.`;
+                    } else if (country === 'us') {
+                        alertText = `Selected domain: <strong style="color: #155724; font-size: 16px;">${cleanDom}</strong> — Choose your hosting plan to continue.`;
+                    }
+
+                    alertDiv.innerHTML = `<i class="fas fa-check-circle" style="color: #28a745; margin-right: 8px; font-size: 18px;"></i>${alertText}`;
+                    pricingContainer.parentNode.insertBefore(alertDiv, pricingContainer);
+
+                    setTimeout(function () {
+                        alertDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 300);
+                }
+            }
+        }
+
         document.querySelectorAll('[data-whmcs-link][data-pid]').forEach(function (el) {
             const pid = el.getAttribute('data-pid');
             let link = `https://client.netz.com.py/cart.php?a=add&pid=${encodeURIComponent(pid)}`;
             if (whmcsCurrencyId) {
                 link += `&currency=${encodeURIComponent(whmcsCurrencyId)}`;
+            }
+            if (domainQuery) {
+                link += domainQuery;
             }
             el.setAttribute('href', link);
         });
