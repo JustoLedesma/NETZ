@@ -624,26 +624,27 @@
                         var domConsultado = escapeHtml(data.domain || dominio);
 
                         if (data.available) {
+                            var badgeStyle = 'background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.35); color: #ffffff; font-size: 14px; padding: 7px 14px; font-weight: 700; border-radius: 20px; display: inline-block;';
                             var badgesPrecios = '';
                             if (currentCountry === 'py') {
                                 if (data.precio_gs !== null && data.precio_gs !== undefined) {
-                                    badgesPrecios += '<span style="background: #9057D7; font-size: 14px; padding: 8px 14px; margin-right: 6px; font-weight: 700;" class="badge badge-pill badge-primary">Gs. ' + formatearGs(data.precio_gs) + '</span>';
+                                    badgesPrecios += '<span style="' + badgeStyle + ' margin-right: 6px;">Gs. ' + formatearGs(data.precio_gs) + '</span>';
                                 }
                                 if (data.precio_usd !== null && data.precio_usd !== undefined) {
-                                    badgesPrecios += '<span style="background: #9057D7; font-size: 14px; padding: 8px 14px; font-weight: 700;" class="badge badge-pill badge-info">USD ' + formatearUsd(data.precio_usd) + '</span>';
+                                    badgesPrecios += '<span style="' + badgeStyle + '">USD ' + formatearUsd(data.precio_usd) + '</span>';
                                 }
                             } else if (currentCountry === 'us') {
                                 if (data.precio_usd !== null && data.precio_usd !== undefined) {
-                                    badgesPrecios += '<span style="background: #9057D7; font-size: 14px; padding: 8px 14px; font-weight: 700;" class="badge badge-pill badge-primary">USD ' + formatearUsd(data.precio_usd) + '</span>';
+                                    badgesPrecios += '<span style="' + badgeStyle + '">USD ' + formatearUsd(data.precio_usd) + '</span>';
                                 }
                             } else {
                                 // Países internacionales (BR, AR, ES, etc.)
                                 var sym = data.currency_symbol || (currentCountry === 'br' ? 'R$' : '$');
                                 var localVal = data.precio_local_formatted || ((data.precio_local !== null && data.precio_local !== undefined) ? String(data.precio_local) : data.precio_gs);
-                                badgesPrecios += '<span style="background: #9057D7; font-size: 14px; padding: 8px 14px; margin-right: 6px; font-weight: 700;" class="badge badge-pill badge-primary">' + escapeHtml(sym) + ' ' + escapeHtml(localVal) + '</span>';
+                                badgesPrecios += '<span style="' + badgeStyle + ' margin-right: 6px;">' + escapeHtml(sym) + ' ' + escapeHtml(localVal) + '</span>';
 
                                 if (data.precio_usd !== null && data.precio_usd !== undefined) {
-                                    badgesPrecios += '<span style="background: #9057D7; font-size: 14px; padding: 8px 14px; font-weight: 700;" class="badge badge-pill badge-info">USD ' + formatearUsd(data.precio_usd) + '</span>';
+                                    badgesPrecios += '<span style="' + badgeStyle + '">USD ' + formatearUsd(data.precio_usd) + '</span>';
                                 }
                             }
 
@@ -659,19 +660,19 @@
                             }
 
                             resultadoContainer.innerHTML = '' +
-                                '<div style="background: #fff; border-radius: 15px; padding: 22px 28px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); border: 2px solid #28a745;">' +
+                                '<div style="background: linear-gradient(to bottom right, #5c6bd3, #a358e0); border-radius: 16px; padding: 22px 28px; box-shadow: 0 10px 30px rgba(92, 107, 211, 0.28); color: #ffffff; font-family: \'Quicksand\', sans-serif;">' +
                                 '<div class="row align-items-center">' +
                                 '<div class="col-md-5">' +
-                                '<span style="font-size: 22px; font-weight: 800; color: #2b3940; display: block; word-break: break-all;">' +
-                                '<i class="fas fa-check-circle" style="color: #28a745; margin-right: 8px;"></i>' + domConsultado +
+                                '<span style="font-size: 22px; font-weight: 800; color: #ffffff; display: block; word-break: break-all;">' +
+                                '<i class="fas fa-check-circle" style="color: #ffffff; margin-right: 8px;"></i>' + domConsultado +
                                 '</span>' +
-                                '<small style="color: #28a745; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Disponível!</small>' +
+                                '<small style="color: #e1e6e8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Disponível!</small>' +
                                 '</div>' +
                                 '<div class="col-md-4 text-md-center my-3 my-md-0">' +
                                 badgesPrecios +
                                 '</div>' +
                                 '<div class="col-md-3 text-md-right">' +
-                                '<a href="' + enlaceRegistro + '" class="btn" style="background: #28a745; color: #fff; font-weight: 700; border-radius: 25px; padding: 9px 22px; text-transform: uppercase; font-size: 13px;">' +
+                                '<a href="' + enlaceRegistro + '" class="btn" style="background: transparent; border: 2px solid #ffffff; color: #ffffff; font-weight: 700; border-radius: 25px; padding: 9px 22px; text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px; transition: all 0.2s ease-in-out; text-decoration: none; display: inline-block;" onmouseover="this.style.background=\'#ffffff\'; this.style.color=\'#5c6bd3\';" onmouseout="this.style.background=\'transparent\'; this.style.color=\'#ffffff\';">' +
                                 textoBoton +
                                 '</a>' +
                                 '</div>' +

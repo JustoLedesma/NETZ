@@ -84,20 +84,20 @@
                 if (pricingContainer && pricingContainer.parentNode) {
                     const alertDiv = document.createElement('div');
                     alertDiv.id = 'domain-selected-alert';
-                    alertDiv.style.cssText = 'position: relative; z-index: 20; background: #e8f5e9; border: 2px solid #28a745; color: #1e7e34; border-radius: 14px; padding: 14px 22px; margin: 0 auto 30px auto; max-width: 880px; box-shadow: 0 6px 20px rgba(40,167,69,0.12); width: 100%;';
+                    alertDiv.style.cssText = 'position: relative; z-index: 20; background: linear-gradient(to bottom right, #5c6bd3, #a358e0); border-radius: 16px; padding: 18px 26px; margin: 0 auto 30px auto; max-width: 880px; box-shadow: 0 10px 30px rgba(92, 107, 211, 0.28); width: 100%; color: #ffffff; font-family: "Quicksand", sans-serif;';
 
                     const soloDominioLink = `https://client.netz.com.py/cart.php?a=add&domain=register&domains[]=${encodeURIComponent(cleanDom)}${whmcsCurrencyId ? '&currency=' + encodeURIComponent(whmcsCurrencyId) : ''}`;
 
-                    let titleText = `Dominio seleccionado: <strong style="color: #155724; font-size: 16px;">${cleanDom}</strong>`;
+                    let titleText = `Dominio seleccionado: <strong style="color: #ffffff; font-size: 17px; font-weight: 800;">${cleanDom}</strong>`;
                     let subText = `Seleccione su plan de hosting para continuar, o si lo prefiere contrate solo el dominio:`;
                     let btnText = `Contratar solo dominio &rarr;`;
 
                     if (country === 'br') {
-                        titleText = `Domínio selecionado: <strong style="color: #155724; font-size: 16px;">${cleanDom}</strong>`;
+                        titleText = `Domínio selecionado: <strong style="color: #ffffff; font-size: 17px; font-weight: 800;">${cleanDom}</strong>`;
                         subText = `Escolha seu plano de hospedagem para continuar, ou se preferir contrate apenas o domínio:`;
                         btnText = `Contratar apenas o domínio &rarr;`;
                     } else if (country === 'us') {
-                        titleText = `Selected domain: <strong style="color: #155724; font-size: 16px;">${cleanDom}</strong>`;
+                        titleText = `Selected domain: <strong style="color: #ffffff; font-size: 17px; font-weight: 800;">${cleanDom}</strong>`;
                         subText = `Choose your hosting plan to continue, or purchase only the domain if preferred:`;
                         btnText = `Buy domain only &rarr;`;
                     }
@@ -105,11 +105,11 @@
                     alertDiv.innerHTML = `
                         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; text-align: left;">
                             <div style="font-size: 15px; font-weight: 600; line-height: 1.4;">
-                                <i class="fas fa-check-circle" style="color: #28a745; margin-right: 8px; font-size: 18px;"></i>${titleText}
-                                <span style="display: block; font-size: 13px; color: #2e7d32; font-weight: 500; margin-top: 3px;">${subText}</span>
+                                <i class="fas fa-check-circle" style="color: #ffffff; margin-right: 8px; font-size: 18px;"></i>${titleText}
+                                <span style="display: block; font-size: 13px; color: #e1e6e8; font-weight: 500; margin-top: 3px;">${subText}</span>
                             </div>
                             <div>
-                                <a href="${soloDominioLink}" class="btn" style="background: #28a745; color: #fff; font-weight: 700; border-radius: 20px; padding: 8px 18px; font-size: 13px; text-transform: uppercase; white-space: nowrap; box-shadow: 0 3px 10px rgba(40,167,69,0.3); text-decoration: none; display: inline-block;">
+                                <a href="${soloDominioLink}" class="btn" style="background: transparent; border: 2px solid #ffffff; color: #ffffff; font-weight: 700; border-radius: 25px; padding: 9px 20px; font-size: 13px; text-transform: uppercase; white-space: nowrap; text-decoration: none; display: inline-block; transition: all 0.2s ease-in-out;" onmouseover="this.style.background='#ffffff'; this.style.color='#5c6bd3';" onmouseout="this.style.background='transparent'; this.style.color='#ffffff';">
                                     ${btnText}
                                 </a>
                             </div>
