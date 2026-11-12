@@ -39,6 +39,26 @@
       min-height: 100vh;
     }
 
+    h1, h2, h3, h4 {
+      text-wrap: balance;
+    }
+
+    p {
+      text-wrap: pretty;
+    }
+
+    /* Accesibilidad de teclado: foco visible moderno */
+    :focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    button:focus:not(:focus-visible),
+    a:focus:not(:focus-visible),
+    input:focus:not(:focus-visible) {
+      outline: none;
+    }
+
     /* ========================================================
        PANTALLA DE LOGIN
        ======================================================== */
@@ -124,6 +144,22 @@
       border-color: var(--primary);
       background: #fff;
       box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    /* Modern Web Guidance: Validación con :user-invalid y :user-valid */
+    .form-input-wrap input:user-invalid {
+      border-color: #ef4444;
+      background-color: #fef2f2;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+
+    .form-input-wrap input:user-valid:not(:placeholder-shown) {
+      border-color: #10b981;
+      background-color: #f0fdf4;
+    }
+
+    .form-group:has(input:user-invalid) label {
+      color: #dc2626;
     }
 
     .toggle-pass-btn {
@@ -549,6 +585,8 @@
       overflow-x: auto;
       margin-bottom: 30px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      overscroll-behavior-x: contain;
+      scrollbar-gutter: stable;
     }
 
     table {
@@ -691,6 +729,8 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
     }
 
     .modal-link-item {
@@ -882,6 +922,18 @@
       border-radius: 4px;
       font-size: 11px;
     }
+
+    /* Modern Web Guidance: Respeto a preferencias del usuario contra mareo/movimiento */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -898,18 +950,18 @@
         Usuario o contraseña incorrectos.
       </div>
 
-      <form id="admin-login-form" onsubmit="handleLogin(event)">
+      <form id="admin-login-form" method="POST" onsubmit="handleLogin(event)">
         <div class="form-group">
           <label for="admin-user">Usuario</label>
           <div class="form-input-wrap">
-            <input type="text" id="admin-user" required placeholder="admin" autofocus autocomplete="username">
+            <input type="text" id="admin-user" name="username" required placeholder="admin" autofocus autocomplete="username">
           </div>
         </div>
 
         <div class="form-group">
           <label for="admin-pass">Contraseña</label>
           <div class="form-input-wrap">
-            <input type="password" id="admin-pass" required placeholder="••••••••••••" autocomplete="current-password">
+            <input type="password" id="admin-pass" name="password" required placeholder="••••••••••••" autocomplete="current-password">
             <button type="button" class="toggle-pass-btn" onclick="togglePasswordVisibility()" title="Mostrar/ocultar">👁️</button>
           </div>
         </div>
@@ -981,18 +1033,18 @@
 
           <div id="settings-alert" class="settings-alert"></div>
 
-          <form id="settings-form" onsubmit="handleSaveSettings(event)">
+          <form id="settings-form" method="POST" onsubmit="handleSaveSettings(event)">
             <div class="form-group">
               <label for="settings-username">Nombre de Usuario</label>
               <div class="form-input-wrap">
-                <input type="text" id="settings-username" required placeholder="admin" autocomplete="username">
+                <input type="text" id="settings-username" name="username" required placeholder="admin" autocomplete="username">
               </div>
             </div>
 
             <div class="form-group">
               <label for="settings-current-pass">Contraseña Actual</label>
               <div class="form-input-wrap">
-                <input type="password" id="settings-current-pass" required placeholder="Ingresa tu contraseña actual" autocomplete="current-password">
+                <input type="password" id="settings-current-pass" name="current_password" required placeholder="Ingresa tu contraseña actual" autocomplete="current-password">
                 <button type="button" class="toggle-pass-btn" onclick="toggleFieldVisibility('settings-current-pass')" title="Mostrar/ocultar">👁️</button>
               </div>
             </div>
@@ -1000,7 +1052,7 @@
             <div class="form-group">
               <label for="settings-new-pass">Nueva Contraseña</label>
               <div class="form-input-wrap">
-                <input type="password" id="settings-new-pass" required minlength="6" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+                <input type="password" id="settings-new-pass" name="new_password" required minlength="6" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
                 <button type="button" class="toggle-pass-btn" onclick="toggleFieldVisibility('settings-new-pass')" title="Mostrar/ocultar">👁️</button>
               </div>
             </div>
@@ -1008,7 +1060,7 @@
             <div class="form-group">
               <label for="settings-confirm-pass">Confirmar Nueva Contraseña</label>
               <div class="form-input-wrap">
-                <input type="password" id="settings-confirm-pass" required minlength="6" placeholder="Repite la nueva contraseña" autocomplete="new-password">
+                <input type="password" id="settings-confirm-pass" name="confirm_password" required minlength="6" placeholder="Repite la nueva contraseña" autocomplete="new-password">
                 <button type="button" class="toggle-pass-btn" onclick="toggleFieldVisibility('settings-confirm-pass')" title="Mostrar/ocultar">👁️</button>
               </div>
             </div>
@@ -1586,7 +1638,9 @@
                 <strong>${Object.keys(extendedDomains).length}</strong> de la base de datos completa
               </p>
             </div>
-            <input type="text" placeholder="🔍 Filtrar extensión (ej: .store, .com)..." oninput="filterDomainTable(this, 'table-domains-${country.code}')" style="padding: 7px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; outline: none; width: 280px; max-width: 100%; background: #fff;">
+            <search role="search">
+              <input type="search" placeholder="🔍 Filtrar extensión (ej: .store, .com)..." oninput="filterDomainTable(this, 'table-domains-${country.code}')" style="padding: 7px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; outline: none; width: 280px; max-width: 100%; background: #fff;">
+            </search>
           </div>
           <div class="table-container">
             <table id="table-domains-${country.code}">

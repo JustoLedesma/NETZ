@@ -1,0 +1,4 @@
+{
+  "include": ["revision-precios.html"],
+  "exclude": ["*.html"]
+}
