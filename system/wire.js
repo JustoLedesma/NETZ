@@ -258,7 +258,7 @@
       ctx.globalAlpha = 1;
       ctx.font = `500 13.333px ${MONO}`; ctx.textBaseline = 'middle';
       if (wide) { caption('www.netz.com.py', gate, gTop - 1, 'center'); caption('tu empresa →', cols - 3, gTop - 1, 'right'); }
-      else caption('relay', gate, gTop - 1, 'center');
+      else caption('netz.com.py', gate, gTop - 1, 'center');
       for (const p of packets) drawPacket(p, now);
     }
 
@@ -624,11 +624,24 @@
     const paint = () => {
       const box = cv.parentElement.getBoundingClientRect();
       const pad = parseFloat(getComputedStyle(cv.parentElement).paddingLeft) || 0;
-      const W = Math.round(box.width - pad * 2);
-      if (W < 100) return;
-      const rows = W < 700 ? 8 : 13, H = rows * CH;
+      const rawW = Math.round(box.width - pad * 2);
+      if (rawW < 100) return;
+      const isNarrow = rawW < 1120;
+      const W = Math.max(1120, rawW);
+      const rows = 13, H = rows * CH;
       const dpr = Math.min(2, window.devicePixelRatio || 1);
-      cv.width = W * dpr; cv.height = H * dpr; cv.style.setProperty('width', W + 'px', 'important'); cv.style.setProperty('height', H + 'px', 'important');
+      cv.width = W * dpr; cv.height = H * dpr;
+      if (isNarrow) {
+        cv.style.setProperty('width', '100%', 'important');
+        cv.style.setProperty('height', 'auto', 'important');
+        cv.style.setProperty('max-width', '100%', 'important');
+        cv.style.setProperty('display', 'block', 'important');
+      } else {
+        cv.style.setProperty('width', W + 'px', 'important');
+        cv.style.setProperty('height', H + 'px', 'important');
+        cv.style.setProperty('max-width', '100%', 'important');
+        cv.style.setProperty('display', 'block', 'important');
+      }
       const ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       /* rasterise the wordmark once, then read it back cell by cell */
       const off = document.createElement('canvas'); off.width = W; off.height = H;
@@ -639,7 +652,7 @@
       const wordmark = cv.dataset.wordmark || 'NETZ';
       const mt = o.measureText(wordmark);
       const inkH = mt.actualBoundingBoxAscent + mt.actualBoundingBoxDescent, inkW = mt.actualBoundingBoxLeft + mt.actualBoundingBoxRight;
-      const size = Math.min(((H - CH) / inkH) * 100, ((W * (W < 700 ? 0.9 : 0.58)) / inkW) * 100);
+      const size = Math.min(((H - CH) / inkH) * 100, ((W * 0.58) / inkW) * 100);
       o.font = `600 ${size}px ${FAM}`;
       try { o.letterSpacing = `${-0.02 * size}px`; } catch {}
       const m2 = o.measureText(wordmark);

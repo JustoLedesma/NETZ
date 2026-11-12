@@ -80,8 +80,7 @@
 		function getTargetDomainItems(winW) {
 		if (winW >= 992) return 4;
 		if (winW >= 768) return 3;
-		if (winW >= 480) return 2;
-		return 1;
+		return 2;
 	}
 
 	// header slider domains carousel //
@@ -140,7 +139,7 @@
 			margin: 20,
 			autoplay: true,
 			autoplayTimeout: 3000,
-			autoplayHoverPause: true,
+			autoplayHoverPause: false,
 			responsiveClass: true,
 			responsiveBaseElement: window,
 			dots: false,
@@ -148,7 +147,7 @@
 			navText: ['', ''],
 			responsive: {
 				0: {
-					items: 1,
+					items: 2,
 					margin: 10
 				},
 				480: {
@@ -165,6 +164,12 @@
 				}
 			}
 		});
+
+		// Asegurar que autoplay siga cambiando solo continuamente tras swipe o interacción
+		$owl.off('touchend.autoplay drag.owl.carousel.autoplay translated.owl.carousel.autoplay')
+			.on('touchend.autoplay drag.owl.carousel.autoplay translated.owl.carousel.autoplay', function () {
+				$owl.trigger('play.owl.autoplay', [3000]);
+			});
 	}
 
 	// Exponer globalmente para que prices.js y eventos externos puedan invocarlo
@@ -221,6 +226,7 @@
 	
 	// pertners carousel //
 	$(document).ready(function() {
+	if ($.fn.owlCarousel && $('.pertners-carousel').length) {
 	$('.pertners-carousel').owlCarousel({
     loop: false,
     nav: false,
@@ -238,20 +244,24 @@
         }
     }
     });
+	}
 	});
 	
 	 $(document).ready(function() {
+    if ($.fn.owlCarousel && $('.owl-carousel').length) {
     $('.owl-carousel').owlCarousel({
     loop: true,
     margin: 10,
     responsiveClass: true,
 	items: 3,
 	nav: false,
-    })
+    });
+    }
     });
 	
 	// support carousel //
 	$(document).ready(function() {
+	if ($.fn.owlCarousel && $('.support-carousel').length) {
 	$('.support-carousel').owlCarousel({
     loop: false,
     nav: false,
@@ -269,6 +279,7 @@
         }
     }
     });
+	}
 	});
 	
 		

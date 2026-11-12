@@ -16,6 +16,9 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="index">Inicio<span class="sr-only">(current)</span> </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="desarrollo-software">Sistemas<span class="nav-new-tag">Nuevo</span></a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Hosting</a>
                             <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="webhosting-megamenu">
@@ -53,9 +56,6 @@
                                     <li><i class="fas fa-sign"></i> <a href="reseller-directadmin">DirectAdmin<span>2 CPU - 2Gb Ram, por cuenta</span></a></li>
                                 </ul>
                             </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="desarrollo-software">Desarrollo<span class="nav-new-tag">Nuevo</span></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Dominios</a>
@@ -112,6 +112,9 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="index">Início<span class="sr-only">(current)</span> </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="desarrollo-software">Sistemas<span class="nav-new-tag">Novo</span></a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Hospedagem</a>
                             <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="webhosting-megamenu">
@@ -149,9 +152,6 @@
                                     <li><i class="fas fa-sign"></i> <a href="reseller-directadmin">DirectAdmin<span>2 CPU - 2Gb RAM por conta</span></a></li>
                                 </ul>
                             </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="desarrollo-software">Desenvolvimento<span class="nav-new-tag">Novo</span></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Domínios</a>
@@ -208,6 +208,9 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="index">Home<span class="sr-only">(current)</span> </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="desarrollo-software">Systems<span class="nav-new-tag">New</span></a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Hosting</a>
                             <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="webhosting-megamenu">
@@ -245,9 +248,6 @@
                                     <li><i class="fas fa-sign"></i> <a href="reseller-directadmin">DirectAdmin<span>2 CPU - 2GB RAM per account</span></a></li>
                                 </ul>
                             </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="desarrollo-software">Development<span class="nav-new-tag">New</span></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Domains</a>
@@ -363,6 +363,13 @@
         var isBr = country === 'br' || path.startsWith('/br') || path.includes('/br/');
         var template = isBr ? navbarHTML_pt : (isUs ? navbarHTML_en : navbarHTML);
         var finalNavbarHTML = prefixNavbarLinks(template);
+        var isDesarrollo = path.includes('desarrollo-software');
+        if (isDesarrollo) {
+            finalNavbarHTML = finalNavbarHTML.replace(
+                /<li class="nav-item">(\s*<a class="nav-link" href="[^"]*desarrollo-software)/,
+                '<li class="nav-item active">$1'
+            );
+        }
         const headerContainer = document.getElementById('navbar-container') || document.getElementById('header-navbar-container');
         if (headerContainer) {
             if (headerContainer.children.length === 0 || isBr || isUs) {
@@ -381,7 +388,22 @@
         }
         initOffcanvas();
         initDropdownHover();
+        handleScrollNavbar();
     }
+
+    // Manejo de scroll para sombra de navbar idéntica al index
+    function handleScrollNavbar() {
+        var nav = document.getElementById('coodiv-navbar-header') || document.querySelector('.fixed-header-layout');
+        if (!nav) return;
+        var scroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+        if (scroll >= 20) {
+            nav.classList.add('top-header-fixed');
+        } else {
+            nav.classList.remove('top-header-fixed');
+        }
+    }
+
+    window.addEventListener('scroll', handleScrollNavbar, { passive: true });
 
     // Inicializar inmediatamente
     initOffcanvas();

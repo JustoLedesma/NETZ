@@ -416,14 +416,14 @@ html:not(.js) .mast { display: none; }
   box-shadow: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  -webkit-transition: box-shadow 0.25s ease-in-out;
-  transition: box-shadow 0.25s ease-in-out;
+  -webkit-transition: box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
   display: flex;
   align-items: center;
 }
 #coodiv-header.header-white .navbar.top-header-fixed {
-  box-shadow: 0 7px 17px rgba(0, 0, 0, 0.06) !important;
-  -webkit-box-shadow: 0 7px 17px rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 9px 18px rgba(0, 0, 0, 0.08) !important;
+  -webkit-box-shadow: 0 9px 18px rgba(0, 0, 0, 0.08) !important;
 }
 
 /* Tipografía Poppins para textos del header, preservando FontAwesome en iconos */
@@ -620,10 +620,21 @@ body.page-header-white {
 .mast,
 canvas.field,
 canvas.rp__field,
-canvas.mast,
 canvas.wire__row {
   max-width: none !important;
   max-height: none !important;
+}
+
+canvas.mast {
+  display: block;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+@media (max-width: 1119px) {
+  canvas.mast {
+    width: 100% !important;
+  }
 }
 
 .hero canvas,
