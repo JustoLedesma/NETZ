@@ -130,6 +130,21 @@
                                     </ul>
                                 </div>
                             </li>
+                            <li class="nav-item dropdown active">
+                                <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" href="#">Domínios</a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu"
+                                    aria-labelledby="dominios-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-globe-americas"></i> <a
+                                                href="/br/buscar-dominios">Verificador de Domínio<span
+                                                    class="nav-new-tag">Consulta de Disponibilidade</span></a></li>
+                                        <li><i class="fas fa-random"></i> <a
+                                                href="https://client.netz.com.py/cart.php?a=add&domain=transfer">Transferencia
+                                                de dominio<span>Transfira seu domínio</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="#" role="button" id="header-pages-drop-down"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresa<span
@@ -513,7 +528,7 @@
                     '</div>' +
                     '<div class="col-md-3 ltd-name-small-phone-styles">' +
                     '<small class="ltd-name-small-phone">Renovação</small>' +
-                    '<span style="background: #9057D7" class="badge badge-pill badge-info">USD ' + escapeHtml(dominio.usd) + '</span>' +
+                    '<span style="background: #9057D7" class="badge badge-pill badge-info">USD ' + escapeHtml(dominio.renew_usd || dominio.usd) + '</span>' +
                     '</div>' +
                     '<div class="col-md-2 ltd-name-small-phone-styles">' +
                     '<small class="ltd-name-small-phone">' + escapeHtml(colLabel) + '</small>' +
