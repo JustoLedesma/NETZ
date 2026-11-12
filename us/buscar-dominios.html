@@ -645,14 +645,12 @@
                             var isParaguay = /\.py$/i.test(domConsultado);
                             var hostingPath = '/us/hosting-ilimitado';
                             var enlaceRegistro = '';
-                            var textoBoton = 'Register';
+                            var textoBoton = 'Register Domain';
 
                             if (isParaguay) {
                                 enlaceRegistro = hostingPath + '?domain=' + encodeURIComponent(domConsultado);
-                                textoBoton = 'Get Hosting';
                             } else {
                                 enlaceRegistro = 'https://client.netz.com.py/cart.php?a=add&domain=register&query=' + encodeURIComponent(data.domain || dominio);
-                                textoBoton = 'Register';
                             }
 
                             resultadoContainer.innerHTML = '' +

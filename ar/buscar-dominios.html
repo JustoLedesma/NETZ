@@ -661,14 +661,12 @@
                             var isParaguay = /\.py$/i.test(domConsultado);
                             var hostingPath = (currentCountry === 'py') ? '/hosting-ilimitado' : '/' + currentCountry + '/hosting-ilimitado';
                             var enlaceRegistro = '';
-                            var textoBoton = 'Registrar';
+                            var textoBoton = (currentCountry === 'br') ? 'Registrar Domínio' : (currentCountry === 'us' ? 'Register Domain' : 'Registrar Dominio');
 
                             if (isParaguay) {
                                 enlaceRegistro = hostingPath + '?domain=' + encodeURIComponent(domConsultado);
-                                textoBoton = (currentCountry === 'br') ? 'Contratar Hospedagem' : (currentCountry === 'us' ? 'Get Hosting' : 'Contratar Hosting');
                             } else {
                                 enlaceRegistro = 'https://client.netz.com.py/cart.php?a=add&domain=register&query=' + encodeURIComponent(data.domain || dominio);
-                                textoBoton = (currentCountry === 'br') ? 'Registrar' : (currentCountry === 'us' ? 'Register' : 'Registrar');
                             }
 
                             resultadoContainer.innerHTML = '' +

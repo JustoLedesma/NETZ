@@ -84,16 +84,37 @@
                 if (pricingContainer && pricingContainer.parentNode) {
                     const alertDiv = document.createElement('div');
                     alertDiv.id = 'domain-selected-alert';
-                    alertDiv.style.cssText = 'background: #e8f5e9; border: 2px solid #28a745; color: #1e7e34; border-radius: 12px; padding: 14px 20px; margin: 0 auto 30px auto; max-width: 800px; text-align: center; font-size: 15px; font-weight: 600; box-shadow: 0 4px 15px rgba(40,167,69,0.1); width: 100%;';
+                    alertDiv.style.cssText = 'position: relative; z-index: 20; background: #e8f5e9; border: 2px solid #28a745; color: #1e7e34; border-radius: 14px; padding: 14px 22px; margin: 0 auto 30px auto; max-width: 880px; box-shadow: 0 6px 20px rgba(40,167,69,0.12); width: 100%;';
 
-                    let alertText = `Dominio seleccionado: <strong style="color: #155724; font-size: 16px;">${cleanDom}</strong> — Seleccione su plan de hosting para continuar.`;
+                    const soloDominioLink = `https://client.netz.com.py/cart.php?a=add&domain=register&domains[]=${encodeURIComponent(cleanDom)}${whmcsCurrencyId ? '&currency=' + encodeURIComponent(whmcsCurrencyId) : ''}`;
+
+                    let titleText = `Dominio seleccionado: <strong style="color: #155724; font-size: 16px;">${cleanDom}</strong>`;
+                    let subText = `Seleccione su plan de hosting para continuar, o si lo prefiere contrate solo el dominio:`;
+                    let btnText = `Contratar solo dominio &rarr;`;
+
                     if (country === 'br') {
-                        alertText = `Domínio selecionado: <strong style="color: #155724; font-size: 16px;">${cleanDom}</strong> — Escolha o seu plano de hospedagem para continuar.`;
+                        titleText = `Domínio selecionado: <strong style="color: #155724; font-size: 16px;">${cleanDom}</strong>`;
+                        subText = `Escolha seu plano de hospedagem para continuar, ou se preferir contrate apenas o domínio:`;
+                        btnText = `Contratar apenas o domínio &rarr;`;
                     } else if (country === 'us') {
-                        alertText = `Selected domain: <strong style="color: #155724; font-size: 16px;">${cleanDom}</strong> — Choose your hosting plan to continue.`;
+                        titleText = `Selected domain: <strong style="color: #155724; font-size: 16px;">${cleanDom}</strong>`;
+                        subText = `Choose your hosting plan to continue, or purchase only the domain if preferred:`;
+                        btnText = `Buy domain only &rarr;`;
                     }
 
-                    alertDiv.innerHTML = `<i class="fas fa-check-circle" style="color: #28a745; margin-right: 8px; font-size: 18px;"></i>${alertText}`;
+                    alertDiv.innerHTML = `
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; text-align: left;">
+                            <div style="font-size: 15px; font-weight: 600; line-height: 1.4;">
+                                <i class="fas fa-check-circle" style="color: #28a745; margin-right: 8px; font-size: 18px;"></i>${titleText}
+                                <span style="display: block; font-size: 13px; color: #2e7d32; font-weight: 500; margin-top: 3px;">${subText}</span>
+                            </div>
+                            <div>
+                                <a href="${soloDominioLink}" class="btn" style="background: #28a745; color: #fff; font-weight: 700; border-radius: 20px; padding: 8px 18px; font-size: 13px; text-transform: uppercase; white-space: nowrap; box-shadow: 0 3px 10px rgba(40,167,69,0.3); text-decoration: none; display: inline-block;">
+                                    ${btnText}
+                                </a>
+                            </div>
+                        </div>
+                    `;
                     pricingContainer.parentNode.insertBefore(alertDiv, pricingContainer);
 
                     setTimeout(function () {
@@ -103,17 +124,32 @@
             }
         }
 
-        document.querySelectorAll('[data-whmcs-link][data-pid]').forEach(function (el) {
-            const pid = el.getAttribute('data-pid');
-            let link = `https://client.netz.com.py/cart.php?a=add&pid=${encodeURIComponent(pid)}`;
-            if (whmcsCurrencyId) {
-                link += `&currency=${encodeURIComponent(whmcsCurrencyId)}`;
-            }
-            if (domainQuery) {
-                link += domainQuery;
-            }
-            el.setAttribute('href', link);
-        });
+        function updateWhmcsLinks() {
+            const isYearly = document.querySelector('#monthly-yearly-chenge .yearli-price.active') !== null;
+            const cycleParam = isYearly ? '&billingcycle=annually' : '&billingcycle=monthly';
+
+            document.querySelectorAll('[data-whmcs-link][data-pid]').forEach(function (el) {
+                const pid = el.getAttribute('data-pid');
+                let link = `https://client.netz.com.py/cart.php?a=add&pid=${encodeURIComponent(pid)}${cycleParam}`;
+                if (whmcsCurrencyId) {
+                    link += `&currency=${encodeURIComponent(whmcsCurrencyId)}`;
+                }
+                if (domainQuery) {
+                    link += domainQuery;
+                }
+                el.setAttribute('href', link);
+            });
+        }
+
+        const switcher = document.getElementById('monthly-yearly-chenge');
+        if (switcher) {
+            switcher.querySelectorAll('a').forEach(function (a) {
+                a.addEventListener('click', function () {
+                    setTimeout(updateWhmcsLinks, 60);
+                });
+            });
+        }
+        updateWhmcsLinks();
 
         // 3. Dominios (data-domain)
         const domains = data.domains || {};
