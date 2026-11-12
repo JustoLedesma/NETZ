@@ -37,8 +37,12 @@
     <!-- Fuentes y estilos para el bloque de desarrollo de software -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;text=%E2%94%80%E2%94%82%E2%95%B1%E2%95%B2%E2%94%8A%E2%94%84%E2%94%BC%E2%94%9C%E2%94%A4%E2%94%AC%E2%94%B4%E2%96%B8%E2%86%BB%E2%A0%81%E2%A0%83%E2%A0%87%E2%A1%87%E2%A3%87%E2%A3%A7%E2%A3%B7%E2%A3%BF%E2%96%8A%E2%86%92%E2%9C%93%E2%95%8C&amp;display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Familjen+Grotesk:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;text=%E2%94%80%E2%94%82%E2%95%B1%E2%95%B2%E2%94%8A%E2%94%84%E2%94%BC%E2%94%9C%E2%94%A4%E2%94%AC%E2%94%B4%E2%96%B8%E2%86%BB%E2%A0%81%E2%A0%83%E2%A0%87%E2%A1%87%E2%A3%87%E2%A3%A7%E2%A3%B7%E2%A3%BF%E2%96%8A%E2%86%92%E2%9C%93%E2%95%8C&amp;display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/system/style.css">
     <script>document.documentElement.classList.add('js'); let tick = 0; addEventListener('resize', () => document.documentElement.style.setProperty('--tick', String(tick ^= 1)));</script>
     <script src="/system/wire.js" defer></script>
@@ -62,6 +66,10 @@
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="/cl/">Inicio<span class="sr-only">(current)</span> </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/cl/desarrollo-software">Sistemas<span
+                                        class="nav-new-tag">Nuevo</span></a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown"
@@ -126,9 +134,6 @@
                                                     cuenta</span></a></li>
                                     </ul>
                                 </div>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/cl/desarrollo-software">Desarrollo<span class="nav-new-tag">Nuevo</span></a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link" role="button" id="dominios-megamenu" data-toggle="dropdown"
@@ -197,24 +202,26 @@
             <canvas class="field" aria-hidden="true"></canvas>
             <div class="container hero__grid">
                 <div class="hero__text">
-                    <h1 id="hero-head">Webhooks in, typed events out.</h1>
-                    <p class="lead">Relay types every payload, retries failed deliveries and replays any event.</p>
+                    <h1 id="hero-head">Tu empresa en orden, tu sistema a medida.</h1>
+                    <p class="lead">Ordenamos tus datos, automatizamos tus procesos y adaptamos el sistema a cómo
+                        trabaja tu empresa.</p>
                     <div class="actions">
-                        <a class="key key--primary" href="#pricing">Start free</a>
-                        <a class="key" href="#p-retry" data-tab-link="t-retry">See a retry</a>
+                        <a class="key key--primary" href="#pricing">Cotizar mi sistema</a>
+                        <a class="key" href="#p-retry" data-tab-link="t-retry">Ver cómo funciona</a>
                     </div>
-                    <div class="curl" data-copy="curl --json @evt_1042.json https://relay.example.com/in/billing">
-                        <code class="curl__cmd"><span class="curl__p" aria-hidden="true">$</span>curl --json @evt_1042.json https://relay.example.com/in/billing</code>
-                        <button class="curl__copy" type="button" aria-label="Copy the curl command"><span class="curl__say" aria-live="polite">Copy</span></button>
+                    <div class="curl" data-copy="+595 973 136 822">
+                        <code
+                            class="curl__cmd"><span class="curl__p" aria-hidden="true">$</span>Contanos qué necesita tu empresa: +595 973 136 822</code>
+                        <button class="curl__copy" type="button" aria-label="WhatsApp"><span class="curl__say" aria-live="polite">WhatsApp</span></button>
                     </div>
-                    <p class="hero__terms">Free up to 100,000 events a month.</p>
+                    <p class="hero__terms">Te presentamos una propuesta sin compromiso.</p>
                 </div>
             </div>
             <div class="container legend-row">
-                <ul class="legend" aria-label="How to read the field">
-                    <li><code class="legend__raw">{"…</code><span>Raw webhook</span></li>
-                    <li><code class="legend__typed">invoice.paid</code><span>Typed event</span></li>
-                    <li><code class="legend__gap">503 ┄┄</code><span>Retry, waiting</span></li>
+                <ul class="legend" aria-label="Cómo funciona el sistema">
+                    <li><code class="legend__raw">{"…</code><span>Dato suelto</span></li>
+                    <li><code class="legend__typed">venta.registrada</code><span>Dato ordenado</span></li>
+                    <li><code class="legend__gap">✓ ┄┄</code><span>Reporte listo</span></li>
                 </ul>
             </div>
         </section>
@@ -222,47 +229,90 @@
         <section class="live" id="stream" aria-labelledby="s0">
             <div class="container">
                 <div class="head">
-                    <h2 id="s0">One stream for every provider</h2>
-                    <p class="lead">Every webhook lands here typed, with its delivery state beside it.</p>
+                    <h2 id="s0">Todo tu negocio en un solo lugar</h2>
+                    <p class="lead">Ventas, clientes, stock y facturación conectados en un solo sistema, cada dato con su estado al lado.</p>
                 </div>
-                <figure class="slot app console" data-slot="hero" data-alt="Your events console, with one delivery retrying and its type open" role="img" aria-label="The Relay events console: nine recent events from four providers; invoice.paid from billing.example.com is retrying on its second attempt, and its inferred type is open beside it.">
+                <figure class="slot app console" data-slot="hero"
+                    data-alt="Your events console, with one delivery retrying and its type open" role="img"
+                    aria-label="The Relay events console: nine recent events from four providers; invoice.paid from billing.example.com is retrying on its second attempt, and its inferred type is open beside it.">
                     <div class="ui" aria-hidden="true">
                         <div class="ui__bar">
-                            <span class="ui__mark">Relay</span>
-                            <span class="ui__chips"><span class="ui__chip is-on">Events</span><span class="ui__chip">Sources</span><span class="ui__chip">Types</span><span class="ui__chip">Replays</span></span>
-                            <span class="ui__status"><i class="ui__live"></i>Live</span>
+                            <span class="ui__mark">Netz Sistemas</span>
+                            <span class="ui__chips"><span class="ui__chip is-on">Actividad</span><span class="ui__chip">Módulos</span><span class="ui__chip">Reportes</span><span class="ui__chip">Historial</span></span>
+                            <span class="ui__status"><i class="ui__live"></i>En vivo</span>
                         </div>
                         <div class="ui__tools">
-                            <span class="ui__input"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg><code>type:invoice.*</code></span>
-                            <span class="ui__tag">All sources</span>
-                            <span class="ui__tag">Last hour</span>
+                            <span class="ui__input"><svg aria-hidden="true" viewBox="0 0 24 24">
+                                    <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
+                                </svg><code>tipo:venta.*</code></span>
+                            <span class="ui__tag">Todos los módulos</span>
+                            <span class="ui__tag">Última hora</span>
                         </div>
                         <div class="console__body">
                             <div class="stream">
-                                <div class="stream__row stream__row--head"><span>Time</span><span>Event</span><span>Source</span><span>Status</span></div>
-                                <div class="stream__row"><code>09:42:31</code><code>order.shipped</code><span>shop.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
-                                <div class="stream__row is-on"><code>09:42:18</code><code>invoice.paid</code><span>billing.example.com</span><span class="state state--retry"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>Retrying, attempt 2</span></div>
-                                <div class="stream__row"><code>09:41:55</code><code>customer.updated</code><span>crm.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
-                                <div class="stream__row"><code>09:41:40</code><code>order.created</code><span>shop.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
-                                <div class="stream__row"><code>09:41:12</code><code>refund.issued</code><span>billing.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered, attempt 3</span></div>
-                                <div class="stream__row"><code>09:40:57</code><code>contact.merged</code><span>crm.example.com</span><span class="state state--failed"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>Failed, 410</span></div>
-                                <div class="stream__row"><code>09:40:31</code><code>order.created</code><span>shop.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
-                                <div class="stream__row"><code>09:40:12</code><code>invoice.paid</code><span>billing.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
-                                <div class="stream__row"><code>09:39:40</code><code>form.submitted</code><span>forms.example.com</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Delivered</span></div>
+                                <div class="stream__row stream__row--head">
+                                    <span>Hora</span><span>Evento</span><span>Módulo</span><span>Estado</span></div>
+                                <div class="stream__row">
+                                    <code>09:42:31</code><code>pedido.enviado</code><span>Ventas</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24">
+                                            <path d="M20 6 9 17l-5-5" />
+                                        </svg>Completado</span></div>
+                                <div class="stream__row is-on">
+                                    <code>09:42:18</code><code>factura.pagada</code><span>Facturación</span><span class="state state--retry"><svg aria-hidden="true" viewBox="0 0 24 24">
+                                            <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+                                            <path d="M21 3v6h-6" />
+                                        </svg>Procesando</span></div>
+                                <div class="stream__row">
+                                    <code>09:41:55</code><code>cliente.actualizado</code><span>Clientes</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24">
+                                            <path d="M20 6 9 17l-5-5" />
+                                        </svg>Completado</span></div>
+                                <div class="stream__row">
+                                    <code>09:41:40</code><code>venta.registrada</code><span>Ventas</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24">
+                                            <path d="M20 6 9 17l-5-5" />
+                                        </svg>Completado</span></div>
+                                <div class="stream__row">
+                                    <code>09:41:12</code><code>stock.actualizado</code><span>Facturación</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24">
+                                            <path d="M20 6 9 17l-5-5" />
+                                        </svg>Completado con ajuste</span></div>
+                                <div class="stream__row">
+                                    <code>09:40:57</code><code>reclamo.resuelto</code><span>Clientes</span><span class="state state--failed"><svg aria-hidden="true" viewBox="0 0 24 24">
+                                            <path d="M18 6 6 18" />
+                                            <path d="m6 6 12 12" />
+                                        </svg>Requiere revisión</span></div>
+                                <div class="stream__row">
+                                    <code>09:40:31</code><code>venta.registrada</code><span>Ventas</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24">
+                                            <path d="M20 6 9 17l-5-5" />
+                                        </svg>Completado</span></div>
+                                <div class="stream__row">
+                                    <code>09:40:12</code><code>invoice.paid</code><span>billing.example.com</span><span
+                                        class="state"><svg aria-hidden="true" viewBox="0 0 24 24">
+                                            <path d="M20 6 9 17l-5-5" />
+                                        </svg>Delivered</span></div>
+                                <div class="stream__row">
+                                    <code>09:39:40</code><code>formulario.recibido</code><span>Formularios</span><span class="state"><svg aria-hidden="true" viewBox="0 0 24 24">
+                                            <path d="M20 6 9 17l-5-5" />
+                                        </svg>Completado</span></div>
                             </div>
                             <div class="inspect">
                                 <div class="inspect__head">
-                                    <code class="inspect__event">invoice.paid</code><code class="inspect__id">evt_1042</code>
-                                    <span class="inspect__tabs"><span class="is-on">Type</span><span>Payload</span><span>Attempts</span></span>
-                                    <span class="inspect__replay">Replay</span>
+                                    <code class="inspect__event">factura.pagada</code><code class="inspect__id">#1042</code>
+                                    <span class="inspect__tabs"><span class="is-on">Estructura</span><span>Datos</span><span>Historial</span></span>
+                                    <span class="inspect__replay">Reprocesar</span>
                                 </div>
-                                <pre class="code code--insp" tabindex="0" aria-label="Inferred TypeScript type for invoice.paid"><code><span class="k">interface</span> <span class="t">InvoicePaid</span> {
-  <span class="p">id</span>: <span class="t">string</span>;
-  <span class="p">customer_id</span>: <span class="t">string</span>;
-  <span class="p">amount</span>: <span class="t">number</span>;
-  <span class="p">currency</span>: <span class="s">"usd"</span> | <span class="s">"eur"</span>;
-  <span class="p">paid_at</span>: <span class="t">string</span>; <span class="c">// ISO-8601</span>
-}</code></pre>
+                                <div class="inspect__body">
+                                    <pre class="code"><code><span class="c">// estructura creada a medida para #1042</span>
+<span class="k">type</span> <span class="t">FacturaPagada</span> = {
+  tipo: <span class="s">"factura.pagada"</span>;
+  id: <span class="t">string</span>;
+  monto: <span class="t">number</span>;
+  moneda: <span class="s">"PYG"</span>;
+  fecha: <span class="t">string</span>;
+};</code></pre>
+                                    <div class="tries">
+                                        <span class="tries__row"><b>1</b><code>09:42:18</code><code>Recibido</code></span>
+                                        <span
+                                            class="tries__row is-next"><b>2</b><code>09:42:48</code><span>Siguiente</span></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -270,192 +320,151 @@
             </div>
         </section>
 
+        <div class="wire" aria-hidden="true"><canvas class="wire__row"></canvas></div>
+
         <section class="does" id="does" aria-labelledby="s1">
-            <div class="container">
-                <div class="head">
-                    <h2 id="s1">What it does</h2>
-                    <p class="lead">Four things between your webhook sender and your app.</p>
-                </div>
+    <div class="container">
+      <div class="head">
+        <h2 id="s1">Cuatro etapas, un sistema a tu medida</h2>
+        <p class="lead">Cómo trabajamos, desde tu idea hasta que el sistema funciona en tu empresa.</p>
+      </div>
+      <div class="switch" data-switch>
+        <div class="tabs" role="tablist" aria-label="What Relay does">
+          <button role="tab" id="t-typed" aria-controls="p-typed" aria-selected="true"><span class="tabs__n" aria-hidden="true">1</span>Ordenar</button>
+          <button role="tab" id="t-retry" aria-controls="p-retry" aria-selected="false" tabindex="-1"><span class="tabs__n" aria-hidden="true">2</span>Desarrollar</button>
+          <button role="tab" id="t-replay" aria-controls="p-replay" aria-selected="false" tabindex="-1"><span class="tabs__n" aria-hidden="true">3</span>Ajustar</button>
+          <button role="tab" id="t-in" aria-controls="p-in" aria-selected="false" tabindex="-1"><span class="tabs__n" aria-hidden="true">4</span>Integrar</button>
+        </div>
 
-                <div class="tabs-wrap" data-switch>
-                    <div class="tabs" role="tablist" aria-label="The four jobs">
-                        <button role="tab" aria-selected="true" id="t-type" aria-controls="p-type" tabindex="0"><span class="tabs__n" aria-hidden="true">1</span>Infers types</button>
-                        <button role="tab" aria-selected="false" id="t-retry" aria-controls="p-retry" tabindex="-1"><span class="tabs__n" aria-hidden="true">2</span>Retries failed</button>
-                        <button role="tab" aria-selected="false" id="t-replay" aria-controls="p-replay" tabindex="-1"><span class="tabs__n" aria-hidden="true">3</span>Replays any</button>
-                        <button role="tab" aria-selected="false" id="t-verify" aria-controls="p-verify" tabindex="-1"><span class="tabs__n" aria-hidden="true">4</span>Verifies signatures</button>
-                    </div>
-
-                    <article class="tab-panel" role="tabpanel" id="p-type" aria-labelledby="t-type">
-                        <div class="feature">
-                            <div class="feature__text">
-                                <h3>Type inference on ingest</h3>
-                                <p>Relay computes the shape of every event stream as payloads arrive. As schemas drift, Relay spots new optional fields and updates the union without breaking your handler.</p>
-                                <ul class="feature__bullets">
-                                    <li>Zero-config TypeScript, Go and Python definitions</li>
-                                    <li>Breaking changes flagged before they hit your queue</li>
-                                    <li>Historic payloads re-typed on schema migration</li>
-                                </ul>
-                            </div>
-                            <figure class="feature__demo pane" data-reveal>
-                                <p class="pair__file"><code>generated/billing.d.ts</code><span>Updated 3m ago</span></p>
-<pre class="code code--lg" tabindex="0" aria-label="Generated type definition"><code><span class="k">export type</span> <span class="t">BillingEvent</span> =
-  | <span class="t">InvoicePaid</span>
-  | <span class="t">InvoicePaymentFailed</span>
-  | <span class="t">SubscriptionCanceled</span>;
-
-<span class="k">export interface</span> <span class="t">InvoicePaymentFailed</span> {
-  <span class="p">id</span>: <span class="t">string</span>;
-  <span class="p">attempt_count</span>: <span class="t">number</span>;
-  <span class="p">next_retry</span>?: <span class="t">string</span>;
-}</code></pre>
-                            </figure>
-                        </div>
-                    </article>
-
-                    <article class="tab-panel" role="tabpanel" id="p-retry" aria-labelledby="t-retry" hidden>
-                        <div class="feature">
-                            <div class="feature__text">
-                                <h3>Exponential backoff with jitter</h3>
-                                <p>If your destination returns 5xx or drops the connection, Relay holds the line. Retries run up to 72 hours with exponential backoff and jitter to protect cold destinations.</p>
-                                <ul class="feature__bullets">
-                                    <li>Automatic 5xx and timeout retries up to 72 hours</li>
-                                    <li>Circuit breaker opens if your receiver goes down</li>
-                                    <li>Per-source concurrency limits to prevent thundering herds</li>
-                                </ul>
-                            </div>
-                            <figure class="feature__demo tl" data-reveal>
-                                <ol class="tl__list" aria-label="Retry timeline">
-                                    <li class="tl__item"><span class="tl__at">09:42:18</span><span class="tl__state state--failed"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>Attempt 1 · 503</span><span class="tl__desc">Receiver down</span></li>
-                                    <li class="tl__item tl__item--wait"><span class="tl__at">09:42:48</span><span class="tl__gap">Wait 30s + 4s jitter</span></li>
-                                    <li class="tl__item is-on"><span class="tl__at">09:43:22</span><span class="tl__state state--retry"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>Attempt 2 · Retrying</span><span class="tl__desc">Connecting to receiver…</span></li>
-                                    <li class="tl__item tl__item--next"><span class="tl__at">09:45:22</span><span class="tl__state">Attempt 3</span><span class="tl__desc">If attempt 2 fails (backoff: 2m)</span></li>
-                                </ol>
-                            </figure>
-                        </div>
-                    </article>
-
-                    <article class="tab-panel" role="tabpanel" id="p-replay" aria-labelledby="t-replay" hidden>
-                        <div class="feature">
-                            <div class="feature__text">
-                                <h3>One-click replays from any point</h3>
-                                <p>Shipped a bug in your webhook consumer? Fix it, deploy, and replay the last six hours of events directly to your receiver. Relay preserves the original headers and IDs.</p>
-                                <ul class="feature__bullets">
-                                    <li>Replay by time window, provider, or individual event ID</li>
-                                    <li>Dry-run replays locally through Relay's CLI tunnel</li>
-                                    <li>Immutable archive kept 30 days on every plan</li>
-                                </ul>
-                            </div>
-                            <figure class="feature__demo rp" data-reveal>
-                                <div class="rp__card">
-                                    <p class="rp__title"><span>Replay window</span><code>evt_1030 … evt_1042</code></p>
-                                    <dl class="rp__fields">
-                                        <div><dt>Source</dt><dd>billing.example.com</dd></div>
-                                        <div><dt>Events</dt><dd>14 events</dd></div>
-                                        <div><dt>Destination</dt><dd><code>https://app.example.com/api/hooks</code></dd></div>
-                                    </dl>
-                                    <div class="rp__actions">
-                                        <span class="key key--sm key--primary">Replay 14 events</span>
-                                        <span class="rp__note">Tagged <code>X-Relay-Replay: true</code></span>
-                                    </div>
-                                </div>
-                            </figure>
-                        </div>
-                    </article>
-
-                    <article class="tab-panel" role="tabpanel" id="p-verify" aria-labelledby="t-verify" hidden>
-                        <div class="feature">
-                            <div class="feature__text">
-                                <h3>Provider signatures verified at the gate</h3>
-                                <p>Relay verifies Stripe, GitHub, Shopify and Svix signatures before an event touches your servers. Bad signatures are rejected at the edge and never reach your quota.</p>
-                                <ul class="feature__bullets">
-                                    <li>Pre-configured signature verification for 40+ providers</li>
-                                    <li>Zero secrets inside your app handlers</li>
-                                    <li>Replay attacks dropped via timestamp threshold checks</li>
-                                </ul>
-                            </div>
-                            <figure class="feature__demo insp" data-reveal>
-                                <p class="pair__file"><code>Relay Edge Gate</code><span>Signature Verified</span></p>
-<pre class="code code--lg" tabindex="0" aria-label="Signature verification log"><code><span class="c">// Incoming: Stripe webhook</span>
-<span class="p">POST</span> /in/billing
-<span class="p">Stripe-Signature</span>: t=1713098538,v1=9c5b...
-<span class="k">✓ Signature valid</span> <span class="c">(HMAC-SHA256, secret: whsec_***)</span>
-<span class="k">✓ Timestamp fresh</span> <span class="c">(drift: 1.2s &lt; 300s tolerance)</span>
-<span class="k">✓ Transformed</span>    <span class="s">evt_1042</span> &rarr; <span class="t">invoice.paid</span></code></pre>
-                            </figure>
-                        </div>
-                    </article>
-                </div>
+        <div class="panel" role="tabpanel" id="p-typed" aria-labelledby="t-typed" tabindex="0">
+          <p class="panel__say">Analizamos cómo trabaja tu empresa y le damos a cada dato su lugar.</p>
+          <figure class="insp" data-insp>
+            <div class="insp__bar"><code>#1042</code><span>Recibido desde tu empresa</span><span class="insp__to">Estructurado por Netz</span></div>
+            <div class="insp__panes">
+              <div class="insp__pane">
+                <p class="insp__file"><code>ventas_actuales.json</code></p>
+<pre class="code code--insp"><code><span class="p">{</span>
+  <span class="ln" data-k="tipo"><span class="n">"tipo"</span><span class="p">:</span> <span class="s">"venta.registrada"</span><span class="p">,</span></span>
+  <span class="ln" data-k="id"><span class="n">"id"</span><span class="p">:</span> <span class="s">"v_1042"</span><span class="p">,</span></span>
+  <span class="ln" data-k="monto"><span class="n">"monto"</span><span class="p">:</span> <span class="s">4800000</span><span class="p">,</span></span>
+  <span class="ln" data-k="moneda"><span class="n">"moneda"</span><span class="p">:</span> <span class="s">"PYG"</span><span class="p">,</span></span>
+  <span class="ln" data-k="fecha"><span class="n">"fecha"</span><span class="p">:</span> <span class="s">"2026-10-08T09:42:16Z"</span></span>
+<span class="p">}</span></code></pre>
+              </div>
+              <div class="insp__pane">
+                <p class="insp__file"><code>sistema_a_medida.ts</code></p>
+<pre class="code code--insp"><code><span class="c">// estructura creada a medida</span>
+<span class="k">export type</span> <span class="t">VentaRegistrada</span> = {
+  <span class="ln" data-k="tipo">tipo: <span class="s">"venta.registrada"</span>;</span>
+  <span class="ln" data-k="id">id: <span class="t">string</span>;</span>
+  <span class="ln" data-k="monto">monto: <span class="t">number</span>;</span>
+  <span class="ln" data-k="moneda">moneda: <span class="s">"PYG"</span>;</span>
+  <span class="ln" data-k="fecha">fecha: <span class="t">string</span>;</span>
+};</code></pre>
+              </div>
+              <div class="insp__wires" aria-hidden="true"></div>
             </div>
-        </section>
+          </figure>
+        </div>
 
-        <section class="offer" id="pricing" aria-labelledby="s5">
-            <div class="container">
-                <div class="head">
-                    <h2 id="s5">Simple pricing that scales</h2>
-                    <p class="lead">100,000 events free every month. No credit card to start.</p>
-                </div>
+        <div class="panel" role="tabpanel" id="p-retry" aria-labelledby="t-retry" tabindex="0">
+          <p class="panel__say">Desarrollamos por etapas: relevamiento, prototipo y, al final, tu sistema funcionando.</p>
+          <figure class="tl" data-tl>
+            <ol class="tl__at" aria-label="Delivery attempts of evt_1042 to example.com/hooks/billing, spaced by time">
+              <li class="tl__a tl__a--bad" style="--at: 0"><span class="tl__fig">Sem. 1</span><span class="tl__what">Relevamos tu empresa</span><code>Etapa 1 · Análisis</code></li>
+              <li class="tl__a tl__a--bad" style="--at: 0.3333"><span class="tl__fig">Sem. 3</span><span class="tl__what">Prototipo para probar</span><code>Etapa 2 · Diseño</code></li>
+              <li class="tl__a tl__a--good" style="--at: 1"><span class="tl__fig">Sem. 6</span><span class="tl__what">Sistema en funcionamiento</span><code>Etapa 3 · Entrega</code></li>
+            </ol>
+            <div class="tl__rule" aria-hidden="true"><i class="tl__ink"></i><i class="tl__span tl__span--bad" style="--at: 0; --dur: 0.0233"></i><i class="tl__span tl__span--bad" style="--at: 0.3333; --dur: 0.1111"></i><i class="tl__span tl__span--good" style="--at: 0.998; --dur: 0.002"></i><i class="tl__cursor"></i></div>
+            <div class="tl__dims" aria-hidden="true">
+              <span class="tl__dim" style="--from: 0; --to: 0.3333"><span><code>2 semanas</code> después</span></span>
+              <span class="tl__dim" style="--from: 0.3333; --to: 1"><span><code>3 semanas</code> después</span></span>
+            </div>
+          </figure>
+        </div>
 
-                <div class="calc" data-calc>
-                    <div class="calc__head">
-                        <label class="calc__label" for="calc-events">Events per day</label>
-                        <span class="calc__out"><b id="per-month">100,000</b><span>/mo</span></span>
+        <div class="panel" role="tabpanel" id="p-replay" aria-labelledby="t-replay" tabindex="0">
+          <p class="panel__say">Tu empresa cambia y tu sistema también: lo mejoramos sin empezar de cero.</p>
+          <div class="rp" data-replay>
+            <canvas class="rp__field" aria-hidden="true"></canvas>
+            <div class="rp__in">
+              <div class="rp__head"><h3 class="rp__title">Ajustar</h3><code>factura.pagada</code><code class="rp__id">#1042</code></div>
+              <dl class="rp__fields">
+                <dt>Proceso</dt><dd><code>#1042, factura.pagada</code></dd>
+                <dt>Integración</dt><dd><code>WhatsApp, correo, facturación</code></dd>
+              </dl>
+              <div class="rp__go">
+                <button class="key key--primary" type="button" data-replay-go><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>Mejorar proceso</button>
+                <span class="rp__hint">Adaptamos la lógica según crece tu equipo</span>
+              </div>
+              <ol class="rp__log" aria-label="Recent replays" aria-live="polite">
+                <li class="rp__line"><code>09:58:14</code><span>Actualizado módulo de stock</span><code class="ok">200 OK</code><code>164 ms</code></li>
+                <li class="rp__line"><code>09:31:02</code><span>Nueva pasarela de pago activa</span><code class="ok">200 OK</code><code>201 ms</code></li>
+                <li class="rp__line"><code>08:12:40</code><span>Reporte mensual optimizado</span><code class="ok">200 OK</code><code>176 ms</code></li>
+              </ol>
+              <div class="curl curl--dark" data-copy="+595 973 136 822">
+                <code class="curl__cmd"><span class="curl__p" aria-hidden="true">$</span>Contanos tu requerimiento: +595 973 136 822</code>
+                <button class="curl__copy" type="button" aria-label="WhatsApp"><span class="curl__say" aria-live="polite">WhatsApp</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" role="tabpanel" id="p-in" aria-labelledby="t-in" tabindex="0">
+          <p class="panel__say">Conectamos tu sistema con lo que ya usás: WhatsApp, facturación, planillas y tienda online.</p>
+          <div class="table-wrap" role="region" aria-label="Sources" tabindex="0">
+            <table class="src">
+              <thead><tr><th scope="col">Fuente</th><th scope="col">Canal</th><th scope="col">Procesos conectados</th><th scope="col" class="r">Estado</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">WhatsApp API</th><td><code>Mensajes y pedidos automáticos</code></td><td><code>pedidos</code> <code>consultas</code></td><td class="r"><code>Activo</code></td></tr>
+                <tr class="is-on"><th scope="row">Facturación Electrónica</th><td><code>Emisión de facturas SIFEN</code></td><td><code>facturas</code> <code>recibos</code></td><td class="r"><code>Activo</code></td></tr>
+                <tr><th scope="row">Planillas / Excel</th><td><code>Sincronización de inventario</code></td><td><code>stock</code> <code>precios</code></td><td class="r"><code>Activo</code></td></tr>
+                <tr><th scope="row">Tienda Online</th><td><code>Recepción de compras y pagos</code></td><td><code>ventas</code> <code>clientes</code></td><td class="r"><code>Activo</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="src__out">Todo centralizado en tu sistema a medida NETZ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+                <section class="offer" id="pricing" aria-labelledby="s5">
+            <div class="container offer__grid">
+                <div class="offer__head">
+                    <h2 class="offer__fig" id="s5">Menos tareas repetidas, más tiempo para crecer.</h2>
+                    <div class="actions">
+                        <a class="key key--primary" href="#" data-needs-url="signup">Cotizar mi sistema</a>
                     </div>
-                    <input class="calc__range" id="calc-events" type="range" min="0" max="10000" step="100" value="3333">
-                    <span class="calc__meter" id="calc-bar" aria-hidden="true"><b>▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊</b>·························</span>
-                    <p class="calc__caption" id="calc-say">Inside the free 100,000, with 0 to spare.</p>
                 </div>
-
-                <div class="table-wrap">
-                    <table class="grid" aria-label="Plans">
-                        <thead>
-                            <tr>
-                                <th scope="col">Plan</th>
-                                <th scope="col">Events / mo</th>
-                                <th scope="col">Retention</th>
-                                <th scope="col">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Free</td>
-                                <td>100,000</td>
-                                <td>7 days</td>
-                                <td>$0</td>
-                            </tr>
-                            <tr>
-                                <td>Pro</td>
-                                <td>1,000,000</td>
-                                <td>30 days</td>
-                                <td>$49/mo</td>
-                            </tr>
-                            <tr>
-                                <td>Enterprise</td>
-                                <td>Unlimited</td>
-                                <td>90 days</td>
-                                <td>Custom</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <form class="calc" aria-labelledby="calc-label" onsubmit="return false">
+                    <label id="calc-label" for="per-day">Tareas manuales que hace tu equipo por día</label>
+                    <input id="per-day" name="per-day" type="number" inputmode="numeric" min="0" step="5" value="40">
+                    <output class="calc__fig" for="per-day" id="per-month">1,200</output>
+                    <span class="calc__unit">tareas en un mes de 30 días</span>
+                    <span class="calc__meter" aria-hidden="true"
+                        id="calc-bar"><b>▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊▊</b>································</span>
+                    <p class="calc__say" id="calc-say" aria-live="polite">Cada una es tiempo que un sistema a medida puede devolverle a tu equipo.</p>
+                </form>
             </div>
         </section>
 
         <section class="band" id="start" aria-labelledby="s6">
             <div class="container code-close">
                 <div class="code-close__text">
-                    <h2 id="s6">Your handler gets a type</h2>
-                    <p class="lead">Answer 200 and the event is delivered. Anything else, and Relay tries again.</p>
+                    <h2 id="s6">Tu sistema habla tu idioma</h2>
+                    <p class="lead">Pantallas, reportes y procesos usan los nombres y reglas de tu empresa.</p>
                 </div>
                 <figure class="pane" data-reveal>
-                    <p class="pair__file"><code>app/hooks/billing/route.ts</code><span>Your endpoint</span></p>
-<pre class="code code--lg" tabindex="0" aria-label="The handler, in TypeScript"><code><span class="k">import type</span> { <span class="t">InvoicePaid</span> } <span class="k">from</span> <span class="s">"./invoice-paid"</span>;
+                    <p class="pair__file"><code>app/ventas/registrar.ts</code><span>Tu sistema</span></p>
+                    <pre class="code code--lg" tabindex="0" aria-label="El código en TypeScript"><code><span class="k">import type</span> { <span class="t">VentaRegistrada</span> } <span class="k">from</span> <span class="s">"./venta-registrada"</span>;
 
 <span class="k">export async function</span> POST(req: <span class="t">Request</span>) {
-  <span class="k">const</span> event = (<span class="k">await</span> req.json()) <span class="k">as</span> <span class="t">InvoicePaid</span>;
-<span class="hl">  console.log(event.id, event.amount, event.currency);</span>
+  <span class="k">const</span> event = (<span class="k">await</span> req.json()) <span class="k">as</span> <span class="t">VentaRegistrada</span>;
+<span class="hl">  console.log(event.id, event.monto, event.moneda);</span>
   <span class="k">return new</span> <span class="t">Response</span>(<span class="k">null</span>, { status: <span class="s">200</span> });
 }</code></pre>
-                    <figcaption>The type file is the one Relay inferred from <code>evt_1042</code>.</figcaption>
+                    <figcaption>Este código se genera a medida, a partir de cómo trabaja tu empresa.</figcaption>
                 </figure>
             </div>
         </section>
@@ -464,15 +473,15 @@
     <!-- Pie de página original de Relay -->
     <footer class="colophon">
         <div class="container colophon__grid">
-            <p class="colophon__mark">Relay</p>
-            <p class="colophon__text">Relay is an API for backend developers.</p>
+            <a class="colophon__mark" href="/cl/" aria-label="NETZ"><img src="/assets/img/header/NETZ-IA.svg" alt="NETZ" width="100px"></a>
+            <p class="colophon__text">Desarrollamos sistemas a medida para empresas que quieren crecer con orden.</p>
             <nav class="colophon__links" aria-label="Footer">
-                <a href="#stream">The console</a>
-                <a href="#does">What it does</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#start">Your handler</a>
+                <a href="#stream">Inicio</a>
+                <a href="#does">Qué hacemos</a>
+                <a href="#pricing">Ahorro</a>
+                <a href="#start">A tu medida</a>
             </nav>
-            <p class="colophon__legal">© 2026 Relay</p>
+            <p class="colophon__legal">© 2026 NETZ</p>
         </div>
         <div class="container"><canvas class="mast" aria-hidden="true"></canvas></div>
     </footer>
@@ -486,26 +495,43 @@
 
     <!-- Script interactivo del bloque de desarrollo -->
     <script>
-    window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = document.querySelector(`[data-slot="${k}"]`); if (!s) continue; const im = new Image(); im.src = typeof v === 'string' ? v : v.src; im.alt = (typeof v === 'object' && v.alt) || s.dataset.alt || ''; s.querySelectorAll(':scope > img').forEach((o) => o.remove()); s.prepend(im); } };
-    document.querySelectorAll('[data-slot] > img').forEach((i) => { if (i.complete && !i.naturalWidth) i.remove(); else i.addEventListener('error', () => i.remove(), { once: true }); });
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
-    document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
-    const perDay = document.getElementById('calc-events');
-    if (perDay) {
-      const out = document.getElementById('per-month'), bar = document.getElementById('calc-bar'), say = document.getElementById('calc-say'), fmt = new Intl.NumberFormat('en-GB');
-      const run = () => { const n = Math.max(0, Math.round(Number(perDay.value) || 0)) * 30; out.textContent = fmt.format(n); const on = Math.min(50, Math.round(n / 2000)); bar.innerHTML = '<b>' + '▊'.repeat(on) + '</b>' + '·'.repeat(50 - on); bar.classList.toggle('is-over', n > 100000); say.textContent = n <= 100000 ? 'Inside the free 100,000, with ' + fmt.format(100000 - n) + ' to spare.' : fmt.format(n - 100000) + ' over the free 100,000 a month.'; };
-      perDay.addEventListener('input', run); run();
-    }
-    document.querySelectorAll('[data-switch]').forEach((sw) => {
-      const tabs = [...sw.querySelectorAll('[role="tab"]')];
-      const pick = (t, focus) => { tabs.forEach((x) => { const on = x === t; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute('aria-controls')).hidden = !on; }); if (focus) t.focus(); };
-      tabs.forEach((t, i) => {
-        t.addEventListener('click', () => pick(t));
-        t.addEventListener('keydown', (e) => { const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); } if (e.key === 'Home') { e.preventDefault(); pick(tabs[0], true); } if (e.key === 'End') { e.preventDefault(); pick(tabs[tabs.length - 1], true); } const n = Number(e.key); if (n >= 1 && n <= tabs.length) { e.preventDefault(); pick(tabs[n - 1], true); } });
-      });
-      pick(tabs[0]);
-      document.querySelectorAll('[data-tab-link]').forEach((a) => a.addEventListener('click', (e) => { const t = document.getElementById(a.dataset.tabLink); if (!t) return; e.preventDefault(); pick(t); sw.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); t.focus({ preventScroll: true }); }));
-    });
+        window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = document.querySelector(`[data-slot="${k}"]`); if (!s) continue; const im = new Image(); im.src = typeof v === 'string' ? v : v.src; im.alt = (typeof v === 'object' && v.alt) || s.dataset.alt || ''; s.querySelectorAll(':scope > img').forEach((o) => o.remove()); s.prepend(im); } };
+        document.querySelectorAll('[data-slot] > img').forEach((i) => { if (i.complete && !i.naturalWidth) i.remove(); else i.addEventListener('error', () => i.remove(), { once: true }); });
+        const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
+        document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+        const perDay = document.getElementById('per-day') || document.getElementById('calc-events');
+        if (perDay) {
+            const out = document.getElementById('per-month'), bar = document.getElementById('calc-bar'), say = document.getElementById('calc-say'), fmt = new Intl.NumberFormat('en-GB');
+            const run = () => {
+                const val = Math.max(0, Math.round(Number(perDay.value) || 0));
+                const n = val * 30;
+                out.textContent = fmt.format(n);
+                const on = Math.min(50, Math.max(2, Math.round(n / 60)));
+                bar.innerHTML = '<b>' + '▊'.repeat(on) + '</b>' + '·'.repeat(50 - on);
+                say.textContent = 'Cada una es tiempo que un sistema a medida puede devolverle a tu equipo.';
+            };
+            perDay.addEventListener('input', run); run();
+        }
+        document.querySelectorAll('[data-switch]').forEach((sw) => {
+            const tabs = [...sw.querySelectorAll('[role="tab"]')];
+            const pick = (t, focus) => {
+                tabs.forEach((x) => {
+                    const on = x === t;
+                    x.setAttribute('aria-selected', String(on));
+                    x.tabIndex = on ? 0 : -1;
+                    const p = document.getElementById(x.getAttribute('aria-controls'));
+                    if (p) p.hidden = !on;
+                });
+                window.dispatchEvent(new Event('resize'));
+                if (focus) t.focus();
+            };
+            tabs.forEach((t, i) => {
+                t.addEventListener('click', () => pick(t));
+                t.addEventListener('keydown', (e) => { const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); } if (e.key === 'Home') { e.preventDefault(); pick(tabs[0], true); } if (e.key === 'End') { e.preventDefault(); pick(tabs[tabs.length - 1], true); } const n = Number(e.key); if (n >= 1 && n <= tabs.length) { e.preventDefault(); pick(tabs[n - 1], true); } });
+            });
+            pick(tabs[0]);
+            document.querySelectorAll('[data-tab-link]').forEach((a) => a.addEventListener('click', (e) => { const t = document.getElementById(a.dataset.tabLink); if (!t) return; e.preventDefault(); pick(t); sw.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); t.focus({ preventScroll: true }); }));
+        });
     </script>
 </body>
 

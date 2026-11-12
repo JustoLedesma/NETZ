@@ -42,13 +42,13 @@
   }
 
   const EVENTS = [
-    { name: 'invoice.paid', raw: '{"type":"invoice.paid","id":"evt_1042","amount":4800}' },
-    { name: 'order.shipped', raw: '{"type":"order.shipped","id":"evt_1043"}' },
-    { name: 'customer.updated', raw: '{"type":"customer.updated","source":"crm"}' },
-    { name: 'order.created', raw: '{"type":"order.created","id":"evt_1039"}' },
-    { name: 'refund.issued', raw: '{"type":"refund.issued","currency":"GBP"}' },
-    { name: 'form.submitted', raw: '{"type":"form.submitted","id":"evt_1031"}' },
-    { name: 'contact.merged', raw: '{"type":"contact.merged","id":"evt_1036"}' },
+    { name: 'factura.pagada', raw: '{"tipo":"factura.pagada","id":"v_1042","monto":4800000}' },
+    { name: 'pedido.enviado', raw: '{"tipo":"pedido.enviado","id":"v_1043"}' },
+    { name: 'cliente.actualizado', raw: '{"tipo":"cliente.actualizado","origen":"crm"}' },
+    { name: 'venta.registrada', raw: '{"tipo":"venta.registrada","id":"v_1039"}' },
+    { name: 'stock.actualizado', raw: '{"tipo":"stock.actualizado","moneda":"PYG"}' },
+    { name: 'formulario.recibido', raw: '{"tipo":"formulario.recibido","id":"v_1031"}' },
+    { name: 'reclamo.resuelto', raw: '{"tipo":"reclamo.resuelto","id":"v_1036"}' },
   ];
 
   /* ---------- The hero field ---------- */
@@ -86,32 +86,44 @@
       wide = W >= 900;
       dpr = Math.min(2, window.devicePixelRatio || 1);
       cv.width = W * dpr; cv.height = H * dpr;
-      cv.style.width = W + 'px'; cv.style.height = H + 'px';
+      cv.style.setProperty('width', W + 'px', 'important');
+      cv.style.setProperty('height', H + 'px', 'important');
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       cols = Math.ceil(W / CW); rows = Math.ceil(H / CH);
       sheet = atlas(GLYPHS, TINTS, dpr);
       /* the calm patch hugs every line of text, so the head always sits on quiet paper */
       const boxes = [];
       let tb = 0;
-      [...text.children].forEach((el) => {
-        let list = [el.getBoundingClientRect()];
-        if (/^(H1|P)$/.test(el.tagName)) { const rg = document.createRange(); rg.selectNodeContents(el); list = [...rg.getClientRects()]; }
-        list.forEach((rc) => { if (!rc.width) return; boxes.push({ l: rc.left - r.left - 20, rt: rc.right - r.left + 28, tp: rc.top - r.top - 12, b: rc.bottom - r.top + 12 }); tb = Math.max(tb, rc.bottom - r.top); });
-      });
+      if (text) {
+        const tr = text.getBoundingClientRect();
+        tb = Math.max(tb, tr.bottom - r.top);
+      }
+      if (text && text.children) {
+        [...text.children].forEach((el) => {
+          let list = [el.getBoundingClientRect()];
+          if (/^(H1|P)$/.test(el.tagName)) { const rg = document.createRange(); rg.selectNodeContents(el); list = [...rg.getClientRects()]; }
+          list.forEach((rc) => { if (!rc.width) return; boxes.push({ l: rc.left - r.left - 20, rt: rc.right - r.left + 28, tp: rc.top - r.top - 12, b: rc.bottom - r.top + 12 }); tb = Math.max(tb, rc.bottom - r.top); });
+        });
+      }
+      if (!wide && tb < 320) tb = 420;
       const lg = legend && legend.offsetParent ? legend.getBoundingClientRect() : null;
       if (lg) boxes.push({ l: lg.left - r.left - 12, rt: lg.right - r.left + 12, tp: lg.top - r.top - 12, b: lg.bottom - r.top + 12 });
       CALM = new Float32Array(cols * rows); QUIET = new Float32Array(cols * rows);
       for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
         const px = x * CW + CW / 2, py = y * CH + CH / 2;
         let m = 0, q = 0;
-        for (const bx of boxes) { const d = Math.hypot(Math.max(bx.l - px, 0, px - bx.rt), Math.max(bx.tp - py, 0, py - bx.b)); const k = d <= 0 ? 1 : Math.max(0, 1 - d / 64); if (k > m) m = k; const kq = d <= 0 ? 1 : Math.max(0, 1 - d / 20); if (kq > q) q = kq; }
+        if (!wide && py < tb + 24) {
+          m = 1; q = 1;
+        } else {
+          for (const bx of boxes) { const d = Math.hypot(Math.max(bx.l - px, 0, px - bx.rt), Math.max(bx.tp - py, 0, py - bx.b)); const k = d <= 0 ? 1 : Math.max(0, 1 - d / 64); if (k > m) m = k; const kq = d <= 0 ? 1 : Math.max(0, 1 - d / 20); if (kq > q) q = kq; }
+        }
         CALM[y * cols + x] = m * m * (3 - 2 * m); QUIET[y * cols + x] = q;
       }
       /* the gate sits on the content grid: the left edge of the legend, which spans columns 8 to 12 */
       gate = Math.round((wide && lg ? lg.left - r.left : W * 0.3) / CW);
       /* bands: spread across the field on the left, a sorted bundle at the gate and on the right */
       nb = wide ? (H > 760 ? 6 : 5) : 4;
-      const top = wide ? H * 0.1 : tb + 40, bottom = wide ? H * 0.9 : H - 24;
+      const top = wide ? H * 0.1 : tb + 36, bottom = wide ? H * 0.9 : Math.max(tb + 400, H - 24);
       const spacing = (wide ? (H >= 820 ? 5 : 4) : 3) * CH;
       const mid = wide ? H * 0.47 : (top + bottom) / 2;
       yLeft = []; yGate = []; laneRow = [];
@@ -245,7 +257,7 @@
       }
       ctx.globalAlpha = 1;
       ctx.font = `500 13.333px ${MONO}`; ctx.textBaseline = 'middle';
-      if (wide) { caption('relay.example.com', gate, gTop - 1, 'center'); caption('example.com/hooks →', cols - 3, gTop - 1, 'right'); }
+      if (wide) { caption('www.netz.com.py', gate, gTop - 1, 'center'); caption('tu empresa →', cols - 3, gTop - 1, 'right'); }
       else caption('relay', gate, gTop - 1, 'center');
       for (const p of packets) drawPacket(p, now);
     }
@@ -344,7 +356,11 @@
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(hero);
     reduce.addEventListener('change', () => (reduce.matches ? still() : start()));
     let rz = 0;
-    new ResizeObserver(() => { cancelAnimationFrame(rz); rz = requestAnimationFrame(() => { layout(); if (reduce.matches || !running) still(); }); }).observe(hero);
+    const ro = new ResizeObserver(() => { cancelAnimationFrame(rz); rz = requestAnimationFrame(() => { layout(); if (reduce.matches || !running) still(); }); });
+    ro.observe(hero);
+    if (text) ro.observe(text);
+    window.addEventListener('resize', () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(() => { layout(); if (reduce.matches || !running) still(); }); });
+    window.addEventListener('load', () => { layout(); if (reduce.matches || !running) still(); });
     const fonts = document.fonts ? Promise.race([document.fonts.load(`400 13.333px ${MONO}`, '┊⣿').then(() => document.fonts.ready), new Promise((r) => setTimeout(r, 1500))]) : Promise.resolve();
     fonts.then(boot);
   }
@@ -354,7 +370,7 @@
     const box = cv.parentElement.getBoundingClientRect();
     if (!box.width) return false;
     const W = Math.round(box.width), H = Math.round(box.height), dpr = Math.min(2, window.devicePixelRatio || 1);
-    cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    cv.width = W * dpr; cv.height = H * dpr; cv.style.setProperty('width', W + 'px', 'important'); cv.style.setProperty('height', H + 'px', 'important');
     const ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.font = `400 13.333px ${MONO}`; ctx.textBaseline = 'middle'; ctx.textAlign = 'center';
     const cols = Math.ceil(W / CW), rows = Math.ceil(H / CH);
@@ -385,10 +401,10 @@
       const d = new Date(), p2 = (v) => String(v).padStart(2, '0');
       const li = document.createElement('li');
       li.className = 'rp__line is-new';
-      li.innerHTML = `<code>${p2(d.getHours())}:${p2(d.getMinutes())}:${p2(d.getSeconds())}</code><span>Replaying <code>evt_1042</code></span><code class="wait">sent</code><code></code>`;
+      li.innerHTML = `<code>${p2(d.getHours())}:${p2(d.getMinutes())}:${p2(d.getSeconds())}</code><span>Reprocesando <code>#1042</code></span><code class="wait">sent</code><code></code>`;
       log.prepend(li);
       while (log.children.length > 3) log.lastElementChild.remove();
-      setTimeout(() => { li.querySelector('span').innerHTML = 'Replayed <code>evt_1042</code>'; const c = li.querySelectorAll('code'); c[2].className = 'ok'; c[2].textContent = '200 OK'; c[3].textContent = ms[n++ % ms.length] + ' ms'; go.removeAttribute('aria-busy'); }, reduce.matches ? 0 : 700);
+      setTimeout(() => { li.querySelector('span').innerHTML = 'Reprocesado <code>#1042</code>'; const c = li.querySelectorAll('code'); c[2].className = 'ok'; c[2].textContent = '200 OK'; c[3].textContent = ms[n++ % ms.length] + ' ms'; go.removeAttribute('aria-busy'); }, reduce.matches ? 0 : 700);
     });
   }
 
@@ -439,7 +455,7 @@
           svg.append(g);
         });
         if (!drawn) { drawn = true; requestAnimationFrame(() => requestAnimationFrame(() => fig.classList.add('is-wired'))); }
-        mark(fig.dataset.on || 'amount');
+        mark(fig.dataset.on || 'monto');
       };
       const mark = (k) => { fig.dataset.on = k; fig.querySelectorAll('[data-k]').forEach((e) => e.classList.toggle('is-on', e.dataset.k === k)); };
       fig.addEventListener('pointerover', (e) => { const t = e.target.closest('[data-k]'); if (t) mark(t.dataset.k); });
@@ -454,26 +470,150 @@
     document.querySelectorAll('[data-tl]').forEach((t) => io.observe(t));
   }
 
-  /* ---------- One row of the field as a divider, and the footer mast drawn in characters ---------- */
+  /* ---------- One row of the field as an animated divider, moving rightwards across the gate ---------- */
   function divider() {
-    document.querySelectorAll('canvas.wire__row').forEach((cv) => {
-      const W = cv.parentElement.clientWidth, H = CH, dpr = Math.min(2, window.devicePixelRatio || 1);
-      cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
-      const ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.textBaseline = 'middle'; ctx.textAlign = 'center';
-      const n = Math.ceil(W / CW), gate = Math.floor(n * 0.5);
-      const name = ' order.shipped ', raw = '{"type":"order.', r0 = gate - raw.length;
-      const tint = [tok('--color-glyph-1'), tok('--color-glyph-2'), tok('--color-glyph-3'), tok('--color-glyph-4')];
-      const put = (ch, x, color, weight) => { ctx.font = `${weight || 400} 13.333px ${MONO}`; ctx.fillStyle = color; ctx.fillText(ch, x * CW + CW / 2, CH / 2 + 1); };
-      for (let x = 0; x < n; x++) {
-        if (x === gate) { put('┊', x, tok('--color-accent')); continue; }
-        if (x >= r0 - 7 && x < r0) { put(x < r0 - 3 ? '-' : '=', x, tint[3]); continue; }
-        if (x >= r0 && x < gate) { put(raw[x - r0], x, tok('--color-accent')); continue; }
-        if (x > gate && x <= gate + name.length) { put(name[x - gate - 1], x, tok('--color-ink'), 500); continue; }
-        if (x > gate + name.length && x <= gate + name.length + 8) { put('─', x, tok('--color-accent')); continue; }
-        const v = fieldAt(x * CW, 40, 9);
-        const lv = Math.max(0, Math.min(9, Math.floor(Math.max(0, (v - 0.26) / 0.74) * 10)));
-        if (lv) put(x > gate ? BRAILLE[lv] : RAMP[lv], x, tint[lv < 3 ? 0 : lv < 6 ? 1 : 2]);
+    const canvases = document.querySelectorAll('canvas.wire__row');
+    if (!canvases.length) return;
+
+    canvases.forEach((cv) => {
+      let raf = 0, running = false, visible = false;
+      let W = 0, H = CH, dpr = 1, n = 0, gate = 0;
+      const ctx = cv.getContext('2d');
+
+      const rawText = '{"tipo":"pedido.';
+      const typedText = ' pedido.enviado ';
+      const lineText = '───────';
+
+      function resize() {
+        if (!cv.parentElement) return;
+        W = cv.parentElement.clientWidth;
+        if (!W) return;
+        H = CH;
+        dpr = Math.min(2, window.devicePixelRatio || 1);
+        cv.width = W * dpr;
+        cv.height = H * dpr;
+        cv.style.setProperty('width', W + 'px', 'important');
+        cv.style.setProperty('height', H + 'px', 'important');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center';
+        n = Math.ceil(W / CW);
+        gate = Math.floor(n * 0.5);
+      }
+
+      function draw(clock) {
+        if (!W) resize();
+        if (!W) return;
+        ctx.clearRect(0, 0, W, H);
+
+        const tint = [tok('--color-glyph-1'), tok('--color-glyph-2'), tok('--color-glyph-3'), tok('--color-glyph-4')];
+        const accent = tok('--color-accent');
+        const ink = tok('--color-ink');
+        const put = (ch, x, color, weight) => {
+          if (x < 0 || x >= n) return;
+          ctx.font = `${weight || 400} 13.333px ${MONO}`;
+          ctx.fillStyle = color;
+          ctx.fillText(ch, x * CW + CW / 2, CH / 2 + 1);
+        };
+
+        const speed = 9; // columns per second for an elegant, readable pace
+        const spacing = 80; // distance between consecutive packets in columns
+        const minSpan = n + 140;
+        const numPackets = Math.max(2, Math.ceil(minSpan / spacing));
+        const totalCycle = numPackets * spacing;
+        const totalDist = clock * speed;
+
+        const rawLen = rawText.length;
+        const typedLen = typedText.length;
+        const lineLen = lineText.length;
+        const packetTotalLen = rawLen + typedLen + lineLen;
+
+        // Occupied cells map: col -> { ch, color, weight }
+        const occupied = new Map();
+
+        for (let p = 0; p < numPackets; p++) {
+          // Progress from -packetTotalLen to totalCycle - packetTotalLen
+          // Wrapping happens strictly when head is far beyond right screen edge
+          const headX = Math.floor(((totalDist + p * spacing) % totalCycle) - 40);
+          const tailX = headX - packetTotalLen;
+
+          // If completely offscreen, skip
+          if (headX < -10 || tailX > n + 10) continue;
+
+          for (let x = Math.max(0, tailX - 6); x <= Math.min(n - 1, headX); x++) {
+            if (x === gate) continue; // Gate '┊' is fixed
+
+            if (x < gate) {
+              const rawEnd = Math.min(gate - 1, headX);
+              const rIdx = x - (rawEnd - rawLen + 1);
+              if (rIdx >= 0 && rIdx < rawLen) {
+                occupied.set(x, { ch: rawText[rIdx], color: accent });
+              } else if (rIdx < 0 && rIdx >= -6) {
+                occupied.set(x, { ch: rIdx < -3 ? '-' : '=', color: tint[3] });
+              }
+            } else {
+              const typedStart = Math.max(gate + 1, tailX + rawLen);
+              const tIdx = x - typedStart;
+              if (tIdx >= 0 && tIdx < typedLen) {
+                occupied.set(x, { ch: typedText[tIdx], color: ink, weight: 500 });
+              } else if (tIdx >= typedLen && tIdx < typedLen + lineLen) {
+                occupied.set(x, { ch: lineText[tIdx - typedLen], color: accent });
+              }
+            }
+          }
+        }
+
+        // Ambient field wave drifting smoothly to the right
+        const waveShift = clock * 14;
+        for (let x = 0; x < n; x++) {
+          if (x === gate) {
+            put('┊', x, accent);
+            continue;
+          }
+          if (occupied.has(x)) {
+            const cell = occupied.get(x);
+            put(cell.ch, x, cell.color, cell.weight);
+          } else {
+            const v = fieldAt(x * CW - waveShift, 40, clock * 0.4);
+            const lv = Math.max(0, Math.min(9, Math.floor(Math.max(0, (v - 0.26) / 0.74) * 10)));
+            if (lv) put(x > gate ? BRAILLE[lv] : RAMP[lv], x, tint[lv < 3 ? 0 : lv < 6 ? 1 : 2]);
+          }
+        }
+      }
+
+      function loop(ms) {
+        if (!running) return;
+        draw(ms / 1000);
+        raf = requestAnimationFrame(loop);
+      }
+
+      function start() {
+        if (running || !visible || reduce.matches) return;
+        running = true;
+        raf = requestAnimationFrame(loop);
+      }
+
+      function stop() {
+        running = false;
+        if (raf) cancelAnimationFrame(raf);
+        raf = 0;
+      }
+
+      resize();
+      new ResizeObserver(() => { resize(); draw(performance.now() / 1000); }).observe(cv.parentElement);
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          visible = e.isIntersecting;
+          if (visible) start(); else stop();
+        });
+      }, { threshold: 0.05 });
+      io.observe(cv);
+
+      if (reduce.matches) {
+        draw(0);
+      } else {
+        start();
       }
     });
   }
@@ -486,9 +626,9 @@
       const pad = parseFloat(getComputedStyle(cv.parentElement).paddingLeft) || 0;
       const W = Math.round(box.width - pad * 2);
       if (W < 100) return;
-      const rows = W < 700 ? 10 : 18, H = rows * CH;
+      const rows = W < 700 ? 8 : 13, H = rows * CH;
       const dpr = Math.min(2, window.devicePixelRatio || 1);
-      cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px';
+      cv.width = W * dpr; cv.height = H * dpr; cv.style.setProperty('width', W + 'px', 'important'); cv.style.setProperty('height', H + 'px', 'important');
       const ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       /* rasterise the wordmark once, then read it back cell by cell */
       const off = document.createElement('canvas'); off.width = W; off.height = H;
@@ -496,13 +636,14 @@
       o.fillStyle = '#000'; o.textBaseline = 'alphabetic';
       const FAM = '"Familjen Grotesk", system-ui, sans-serif';
       o.font = `600 100px ${FAM}`;
-      const mt = o.measureText('Relay');
+      const wordmark = cv.dataset.wordmark || 'NETZ';
+      const mt = o.measureText(wordmark);
       const inkH = mt.actualBoundingBoxAscent + mt.actualBoundingBoxDescent, inkW = mt.actualBoundingBoxLeft + mt.actualBoundingBoxRight;
-      const size = Math.min(((H - CH) / inkH) * 100, ((W * (W < 700 ? 0.98 : 0.72)) / inkW) * 100);
+      const size = Math.min(((H - CH) / inkH) * 100, ((W * (W < 700 ? 0.9 : 0.58)) / inkW) * 100);
       o.font = `600 ${size}px ${FAM}`;
       try { o.letterSpacing = `${-0.02 * size}px`; } catch {}
-      const m2 = o.measureText('Relay');
-      o.fillText('Relay', m2.actualBoundingBoxLeft, CH * 0.5 + m2.actualBoundingBoxAscent);
+      const m2 = o.measureText(wordmark);
+      o.fillText(wordmark, m2.actualBoundingBoxLeft, CH * 0.5 + m2.actualBoundingBoxAscent);
       const wordRight = Math.ceil((m2.actualBoundingBoxLeft + m2.actualBoundingBoxRight) / CW) + 2;
       const baseRow = Math.floor((CH * 0.5 + m2.actualBoundingBoxAscent) / CH);
       const px = o.getImageData(0, 0, W, H).data;
@@ -528,7 +669,7 @@
         if (g) { ctx.fillStyle = c; ctx.fillText(g, x * CW + CW / 2, y * CH + CH / 2 + 1); }
       }
       /* one typed event resting on the baseline lane, past the wordmark */
-      const label = ' invoice.paid ✓ ', start = cols - label.length - 2;
+      const label = ' venta.registrada ✓ ', start = cols - label.length - 2;
       if (start <= wordRight) return;
       ctx.fillStyle = tok('--color-paper'); ctx.fillRect(start * CW, lane * CH, label.length * CW, CH);
       ctx.fillStyle = accent;
