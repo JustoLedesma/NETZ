@@ -16,8 +16,12 @@
 
     function formatNumber(val, locale, currency) {
         if (val === null || val === undefined || isNaN(val)) return null;
+        if (currency === 'PYG') {
+            const formatted = Math.round(val).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return `Gs. ${formatted}`;
+        }
         try {
-            const noDecimals = (currency === 'CLP' || currency === 'COP' || currency === 'PYG');
+            const noDecimals = (currency === 'CLP' || currency === 'COP');
             return new Intl.NumberFormat(locale, {
                 style: 'currency',
                 currency: currency,
@@ -188,35 +192,39 @@
         }
     }
 
-    // Petición al JSON del país
-    fetch(jsonUrl)
-        .then(function (res) {
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            return res.json();
-        })
-        .then(function (data) {
-            clearTimeout(safetyTimeout);
-            applyPrices(data);
-            htmlEl.classList.remove('prices-loading');
-            if (typeof window.initDomainPricesCarousel === 'function') {
-                window.initDomainPricesCarousel(true);
-            } else if (window.jQuery && jQuery('.owl-domain-prices-previw').length) {
-                var $owl = jQuery('.owl-domain-prices-previw');
-                var owlData = $owl.data('owl.carousel');
-                if (owlData) {
-                    owlData.invalidate('width');
-                    owlData.invalidate('settings');
-                    owlData.setup();
-                    owlData.refresh();
-                } else {
-                    $owl.trigger('refresh.owl.carousel');
-                }
+    const extJsonUrl = `/assets/data/prices/domains_extended_${country}.json?v=${version}`;
+
+    // Petición al JSON del país y al archivo extendido de dominios en paralelo
+    Promise.all([
+        fetch(jsonUrl).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+        fetch(extJsonUrl).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+    ]).then(function (results) {
+        clearTimeout(safetyTimeout);
+        const data = results[0] || {};
+        const extData = results[1] || {};
+        if (extData && extData.domains) {
+            data.domains = Object.assign({}, extData.domains, data.domains || {});
+        }
+        applyPrices(data);
+        htmlEl.classList.remove('prices-loading');
+        if (typeof window.initDomainPricesCarousel === 'function') {
+            window.initDomainPricesCarousel(true);
+        } else if (window.jQuery && jQuery('.owl-domain-prices-previw').length) {
+            var $owl = jQuery('.owl-domain-prices-previw');
+            var owlData = $owl.data('owl.carousel');
+            if (owlData) {
+                owlData.invalidate('width');
+                owlData.invalidate('settings');
+                owlData.setup();
+                owlData.refresh();
+            } else {
+                $owl.trigger('refresh.owl.carousel');
             }
-        })
-        .catch(function () {
-            // Si falla la carga, no se tocan los precios (queda el base en USD)
-            clearTimeout(safetyTimeout);
-            htmlEl.classList.remove('prices-loading');
-        });
+        }
+    }).catch(function () {
+        // Si falla la carga, no se tocan los precios (queda el base)
+        clearTimeout(safetyTimeout);
+        htmlEl.classList.remove('prices-loading');
+    });
 })();
 
