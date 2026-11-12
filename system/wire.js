@@ -258,7 +258,7 @@
       ctx.globalAlpha = 1;
       ctx.font = `500 13.333px ${MONO}`; ctx.textBaseline = 'middle';
       if (wide) { caption('www.netz.com.py', gate, gTop - 1, 'center'); caption('tu empresa →', cols - 3, gTop - 1, 'right'); }
-      else caption('netz.com.py', gate, gTop - 1, 'center');
+      else caption('netz', gate, gTop - 1, 'center');
       for (const p of packets) drawPacket(p, now);
     }
 
@@ -411,7 +411,7 @@
   /* ---------- Copyable curl chips ---------- */
   function copies() {
     document.querySelectorAll('[data-copy]').forEach((chip) => {
-      const b = chip.querySelector('.curl__copy'), say = chip.querySelector('.curl__say');
+      const b = chip.querySelector('button.curl__copy'), say = chip.querySelector('.curl__say');
       if (!b) return;
       let t = 0;
       b.addEventListener('click', async () => {

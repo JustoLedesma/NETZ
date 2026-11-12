@@ -57,17 +57,40 @@
 .curl { display: flex; align-items: stretch; max-width: 100%; min-height: 44px; border: var(--rule-hair) solid var(--color-rule-2); background: var(--color-paper); overflow: hidden; }
 .curl__cmd { flex: 1; min-width: 0; display: flex; align-items: center; gap: var(--cell-w); padding: 0 var(--space-md); font: 400 13.333px/1 var(--font-outlier); color: var(--color-ink); white-space: nowrap; overflow: hidden; mask-image: linear-gradient(to left, transparent, var(--color-ink) var(--space-lg)); }
 .curl__p { color: var(--color-muted); }
-.curl__copy { flex: none; min-width: 80px; padding: 0 var(--space-md); border: 0; border-left: var(--rule-hair) solid var(--color-rule-2); background: var(--color-paper-2); color: var(--color-ink); font: 500 var(--text-sm)/1 var(--font-display); cursor: pointer; transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
-.curl__copy:hover { background: var(--color-paper-3); }
+.curl__copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  flex: none;
+  min-width: 80px;
+  padding: 0 var(--space-md);
+  border: 0;
+  border-left: var(--rule-hair) solid var(--color-rule-2);
+  background: var(--color-paper-2);
+  color: var(--color-ink);
+  font: 500 var(--text-sm)/1 var(--font-display);
+  cursor: pointer;
+  transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+}
+.curl__copy:hover { background: var(--color-paper-3); color: var(--color-ink); text-decoration: none; }
 .curl__copy:active { background: var(--color-rule); }
 .curl__copy:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -3px; }
 .curl.is-done .curl__copy { color: var(--color-accent); }
-html:not(.js) .curl__copy { display: none; }
+html:not(.js) button.curl__copy { display: none; }
 .curl--dark { border-color: var(--color-graphite-2); background: var(--color-graphite); color: var(--color-graphite-ink); }
 .curl--dark .curl__cmd { color: var(--color-graphite-ink); }
 .curl--dark .curl__p { color: var(--color-graphite-muted); }
-.curl--dark .curl__copy { border-left-color: var(--color-graphite-2); background: var(--color-graphite-2); color: var(--color-graphite-ink); }
-.curl--dark .curl__copy:hover { background: var(--color-graphite-3); }
+.curl--dark .curl__copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-left-color: var(--color-graphite-2);
+  background: var(--color-graphite-2);
+  color: var(--color-graphite-ink);
+}
+.curl--dark .curl__copy:hover { background: var(--color-graphite-3); color: var(--color-graphite-ink); text-decoration: none; }
 .curl--dark.is-done .curl__copy { color: var(--color-accent-2); }
 
 /* Hero: the field. One screen; the wire behind, the text on a calm patch of it */
