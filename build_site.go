@@ -227,6 +227,12 @@ func main() {
 		_ = syncAssets("system", filepath.Join(distDir, "system"))
 	}
 
+	// Copiar carpeta conexion si existe
+	if fi, err := os.Stat("conexion"); err == nil && fi.IsDir() {
+		fmt.Println("📦 Sincronizando /conexion/...")
+		_ = syncAssets("conexion", filepath.Join(distDir, "conexion"))
+	}
+
 	// 3. Procesar las 21 páginas para cada país
 	fmt.Println("\n🌐 Generando páginas HTML para cada país...")
 	generatedCount := 0

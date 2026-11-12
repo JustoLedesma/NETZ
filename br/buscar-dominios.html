@@ -611,7 +611,7 @@
                     .then(function (data) {
                         if (!resultadoContainer) return;
 
-                        if (data.error && !data.domain) {
+                        if (data.error) {
                             resultadoContainer.innerHTML = '' +
                                 '<div style="background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #ffc107; text-align: center;">' +
                                 '<span style="color: #856404; font-weight: 600;">' +
