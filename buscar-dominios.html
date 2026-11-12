@@ -590,6 +590,86 @@
                 });
             }
 
+            function obtenerSugerenciaDominio(dom) {
+                var raw = String(dom || '').trim().toLowerCase();
+                var lastDot = raw.lastIndexOf('.');
+                if (lastDot === -1) {
+                    return { name: raw, tld: '', suggested: raw + '.com', hasTypo: true };
+                }
+                var name = raw.substring(0, lastDot);
+                var ext = raw.substring(lastDot + 1);
+
+                var typoMap = {
+                    'con': 'com',
+                    'cmo': 'com',
+                    'ocm': 'com',
+                    'co': 'com',
+                    'cm': 'com',
+                    'om': 'com',
+                    'comm': 'com',
+                    'xom': 'com',
+                    'vom': 'com',
+                    'cpm': 'com',
+                    'ney': 'net',
+                    'ner': 'net',
+                    'nte': 'net',
+                    'nett': 'net',
+                    'ogr': 'org',
+                    'or': 'org',
+                    'orgg': 'org',
+                    'pr': 'py',
+                    'pt': 'py',
+                    'pyg': 'com.py',
+                    'con.py': 'com.py',
+                    'cpm.py': 'com.py',
+                    'om.py': 'com.py'
+                };
+
+                var suggestedExt = typoMap[ext] || 'com';
+                var isCommon = (ext === 'com' || ext === 'net' || ext === 'org' || ext === 'py' || ext === 'com.py');
+                return {
+                    name: name,
+                    tld: '.' + ext,
+                    suggested: name + '.' + suggestedExt,
+                    hasTypo: !isCommon
+                };
+            }
+
+            window.buscarDominioSugerido = function (domSugerido) {
+                if (!domSugerido) return;
+                if (domainInput) domainInput.value = domSugerido;
+                if (window.history && window.history.pushState) {
+                    var newUrl = window.location.pathname + '?domain=' + encodeURIComponent(domSugerido);
+                    window.history.pushState(null, '', newUrl);
+                }
+                consultarDisponibilidad(domSugerido);
+            };
+
+            function renderizarTarjetaSugerencia(sug, lang) {
+                var msgTld = (lang === 'br') ? 'A extensão <strong style="color: #ffd166;">' + escapeHtml(sug.tld) + '</strong> não está disponível.' : ((lang === 'us') ? 'The extension <strong style="color: #ffd166;">' + escapeHtml(sug.tld) + '</strong> is not available.' : 'La extensión <strong style="color: #ffd166;">' + escapeHtml(sug.tld) + '</strong> no está disponible.');
+                var msgDidYouMean = (lang === 'br') ? 'Você quis dizer' : ((lang === 'us') ? 'Did you mean' : '¿Quisiste decir');
+                var btnSearchText = (lang === 'br') ? 'Buscar ' + escapeHtml(sug.suggested) : ((lang === 'us') ? 'Search ' + escapeHtml(sug.suggested) : 'Buscar ' + escapeHtml(sug.suggested));
+
+                return '' +
+                    '<div style="background: linear-gradient(to bottom right, #5c6bd3, #a358e0); border-radius: 16px; padding: 22px 28px; box-shadow: 0 10px 30px rgba(92, 107, 211, 0.28); color: #ffffff; font-family: \'Quicksand\', sans-serif;">' +
+                    '<div class="row align-items-center">' +
+                    '<div class="col-md-8 text-md-left mb-3 mb-md-0">' +
+                    '<span style="font-size: 19px; font-weight: 700; color: #ffffff; display: block; line-height: 1.4;">' +
+                    '<i class="fas fa-info-circle" style="color: #ffd166; margin-right: 10px; font-size: 20px;"></i>' + msgTld +
+                    '</span>' +
+                    '<span style="display: block; font-size: 15px; color: #e1e6e8; margin-top: 6px;">' +
+                    msgDidYouMean + ' <a href="javascript:void(0)" onclick="buscarDominioSugerido(\'' + escapeHtml(sug.suggested) + '\')" style="color: #ffffff; font-weight: 800; text-decoration: underline; cursor: pointer;">' + escapeHtml(sug.suggested) + '</a>?' +
+                    '</span>' +
+                    '</div>' +
+                    '<div class="col-md-4 text-md-right">' +
+                    '<button type="button" class="btn" onclick="buscarDominioSugerido(\'' + escapeHtml(sug.suggested) + '\')" style="background: transparent; border: 2px solid #ffffff; color: #ffffff; font-weight: 700; border-radius: 25px; padding: 9px 22px; text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px; transition: all 0.2s ease-in-out; cursor: pointer;" onmouseover="this.style.background=\'#ffffff\'; this.style.color=\'#5c6bd3\';" onmouseout="this.style.background=\'transparent\'; this.style.color=\'#ffffff\';">' +
+                    btnSearchText + ' &rarr;' +
+                    '</button>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+            }
+
             function consultarDisponibilidad(dominio) {
                 if (!dominio) return;
 
@@ -617,12 +697,21 @@
                     body: 'domain=' + encodeURIComponent(dominio) + '&country=' + encodeURIComponent(currentCountry)
                 })
                     .then(function (res) {
-                        return res.json();
+                        return res.json().catch(function () {
+                            return { error: 'Error de respuesta del servidor', status: res.status };
+                        });
                     })
                     .then(function (data) {
                         if (!resultadoContainer) return;
 
                         if (data.error) {
+                            var isTldError = data.tld_unsupported || /TLD is not supported/i.test(data.error) || /not supported for WHOIS/i.test(data.error) || /TLD/i.test(data.error);
+                            if (isTldError) {
+                                var sug = obtenerSugerenciaDominio(data.domain || dominio);
+                                resultadoContainer.innerHTML = renderizarTarjetaSugerencia(sug, currentCountry);
+                                return;
+                            }
+
                             resultadoContainer.innerHTML = '' +
                                 '<div style="background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #ffc107; text-align: center;">' +
                                 '<span style="color: #856404; font-weight: 600;">' +
@@ -659,16 +748,9 @@
                                 }
                             }
 
-                            var isParaguay = /\.py$/i.test(domConsultado);
                             var hostingPath = (currentCountry === 'py') ? '/hosting-ilimitado' : '/' + currentCountry + '/hosting-ilimitado';
-                            var enlaceRegistro = '';
+                            var enlaceRegistro = hostingPath + '?domain=' + encodeURIComponent(domConsultado);
                             var textoBoton = (currentCountry === 'br') ? 'Registrar Domínio' : (currentCountry === 'us' ? 'Register Domain' : 'Registrar Dominio');
-
-                            if (isParaguay) {
-                                enlaceRegistro = hostingPath + '?domain=' + encodeURIComponent(domConsultado);
-                            } else {
-                                enlaceRegistro = 'https://client.netz.com.py/cart.php?a=add&domain=register&query=' + encodeURIComponent(data.domain || dominio);
-                            }
 
                             resultadoContainer.innerHTML = '' +
                                 '<div style="background: linear-gradient(to bottom right, #5c6bd3, #a358e0); border-radius: 16px; padding: 22px 28px; box-shadow: 0 10px 30px rgba(92, 107, 211, 0.28); color: #ffffff; font-family: \'Quicksand\', sans-serif;">' +
@@ -704,6 +786,11 @@
                     .catch(function (err) {
                         console.error('Error al verificar dominio:', err);
                         if (!resultadoContainer) return;
+                        var sug = obtenerSugerenciaDominio(dominio);
+                        if (sug && sug.hasTypo) {
+                            resultadoContainer.innerHTML = renderizarTarjetaSugerencia(sug, currentCountry);
+                            return;
+                        }
                         resultadoContainer.innerHTML = '' +
                             '<div style="background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #ffc107; text-align: center;">' +
                             '<span style="color: #856404; font-weight: 600;">' +

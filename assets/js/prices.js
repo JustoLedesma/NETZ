@@ -74,7 +74,7 @@
                 if (parts.length > 1) {
                     const sld = parts.slice(0, -1).join('.');
                     const tld = '.' + parts[parts.length - 1];
-                    domainQuery = `&domainoption=owndomain&sld=${encodeURIComponent(sld)}&tld=${encodeURIComponent(tld)}`;
+                    domainQuery = `&domainoption=register&sld=${encodeURIComponent(sld)}&tld=${encodeURIComponent(tld)}`;
                 }
             }
 
@@ -86,7 +86,7 @@
                     alertDiv.id = 'domain-selected-alert';
                     alertDiv.style.cssText = 'position: relative; z-index: 20; background: linear-gradient(to bottom right, #5c6bd3, #a358e0); border-radius: 16px; padding: 18px 26px; margin: 0 auto 30px auto; max-width: 880px; box-shadow: 0 10px 30px rgba(92, 107, 211, 0.28); width: 100%; color: #ffffff; font-family: "Quicksand", sans-serif;';
 
-                    const soloDominioLink = `https://client.netz.com.py/cart.php?a=add&domain=register&domains[]=${encodeURIComponent(cleanDom)}${whmcsCurrencyId ? '&currency=' + encodeURIComponent(whmcsCurrencyId) : ''}`;
+                    const soloDominioLink = `https://client.netz.com.py/cart.php?a=add&domain=register&query=${encodeURIComponent(cleanDom)}&domains[]=${encodeURIComponent(cleanDom)}${whmcsCurrencyId ? '&currency=' + encodeURIComponent(whmcsCurrencyId) : ''}`;
 
                     let titleText = `Dominio seleccionado: <strong style="color: #ffffff; font-size: 17px; font-weight: 800;">${cleanDom}</strong>`;
                     let subText = `Seleccione su plan de hosting para continuar, o si lo prefiere contrate solo el dominio:`;
