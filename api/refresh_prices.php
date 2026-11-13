@@ -464,12 +464,6 @@ $manifestJson = json_encode($manifestData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UN
 if (is_dir($distOutputDir)) {
     @file_put_contents($distOutputDir . "/manifest.json", $manifestJson);
 }
-            if (is_dir($distOutputDir)) {
-                @file_put_contents($distOutputDir . "/domains_extended_{$cCode}.json", $newExtJson);
-            }
-        }
-    }
-}
 
 echo json_encode([
     'status' => 'ok',

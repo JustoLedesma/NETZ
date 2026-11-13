@@ -93,16 +93,16 @@ if ($pricesDir) {
     }
 }
 
-// Fallback a conexion/precios-dominios.php si existiera y localDomains estuviera vacío
-if (empty($localDomains)) {
-    try {
-        if (file_exists(__DIR__ . '/../conexion/precios-dominios.php')) {
-            @include_once __DIR__ . '/../conexion/precios-dominios.php';
-            if (function_exists('obtenerPreciosDominiosBD')) {
-                $dbPrecios = obtenerPreciosDominiosBD($conexion ?? null, $country);
-                if (!empty($dbPrecios)) {
-                    foreach ($dbPrecios as $ext => $p) {
-                        $clean = ltrim($ext, '.');
+// Conectar a BD MySQL de WHMCS si está disponible para unir el catálogo completo (>500 TLDs)
+try {
+    if (file_exists(__DIR__ . '/../conexion/precios-dominios.php')) {
+        @include_once __DIR__ . '/../conexion/precios-dominios.php';
+        if (function_exists('obtenerPreciosDominiosBD')) {
+            $dbPrecios = obtenerPreciosDominiosBD($conexion ?? null, $country);
+            if (!empty($dbPrecios)) {
+                foreach ($dbPrecios as $ext => $p) {
+                    $clean = ltrim($ext, '.');
+                    if (!isset($localDomains[$clean])) {
                         $localDomains[$clean] = [
                             'register' => $p['local'] ?? ($country === 'py' ? $p['gs'] : $p['usd']),
                             'renew'    => $p['renew_local'] ?? $p['local'] ?? ($country === 'py' ? $p['gs'] : $p['renew_usd']),
@@ -112,8 +112,8 @@ if (empty($localDomains)) {
                 }
             }
         }
-    } catch (\Throwable $e) {}
-}
+    }
+} catch (\Throwable $e) {}
 
 $destacados = [
     '.com', '.net', '.org', '.biz', '.info', '.xyz',

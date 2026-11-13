@@ -1,136 +1,71 @@
 {
-  "updatedAt": "2026-11-11T01:44:17.673Z",
-  "totalCountries": 8,
-  "currencies": [
-    {
-      "id": 1,
-      "code": "USD",
-      "prefix": "$",
-      "suffix": " USD",
-      "rate": 1,
-      "default": true
-    },
-    {
-      "id": 2,
-      "code": "PYG",
-      "prefix": "Gs. ",
-      "suffix": "",
-      "rate": 7500,
-      "default": false
-    },
-    {
-      "id": 3,
-      "code": "BRL",
-      "prefix": "R$ ",
-      "suffix": "",
-      "rate": 5.6,
-      "default": false
-    },
-    {
-      "id": 4,
-      "code": "ARS",
-      "prefix": "$ ",
-      "suffix": " ARS",
-      "rate": 1200,
-      "default": false
-    },
-    {
-      "id": 5,
-      "code": "EUR",
-      "prefix": "€ ",
-      "suffix": "",
-      "rate": 0.92,
-      "default": false
-    },
-    {
-      "id": 6,
-      "code": "CLP",
-      "prefix": "$ ",
-      "suffix": " CLP",
-      "rate": 950,
-      "default": false
-    },
-    {
-      "id": 7,
-      "code": "COP",
-      "prefix": "$ ",
-      "suffix": " COP",
-      "rate": 4200,
-      "default": false
-    },
-    {
-      "id": 8,
-      "code": "MXN",
-      "prefix": "$ ",
-      "suffix": " MXN",
-      "rate": 20,
-      "default": false
-    }
-  ],
-  "countries": [
-    {
-      "code": "py",
-      "name": "Paraguay",
-      "icon": "fas fa-map-marker-alt",
-      "currency": "PYG",
-      "locale": "es-PY",
-      "whmcsCurrencyId": 2
-    },
-    {
-      "code": "br",
-      "name": "Brasil",
-      "icon": "fas fa-globe-americas",
-      "currency": "BRL",
-      "locale": "pt-BR",
-      "whmcsCurrencyId": 3
-    },
-    {
-      "code": "ar",
-      "name": "Argentina",
-      "icon": "fas fa-globe-americas",
-      "currency": "ARS",
-      "locale": "es-AR",
-      "whmcsCurrencyId": 4
-    },
-    {
-      "code": "es",
-      "name": "España",
-      "icon": "fas fa-globe-europe",
-      "currency": "EUR",
-      "locale": "es-ES",
-      "whmcsCurrencyId": 5
-    },
-    {
-      "code": "us",
-      "name": "Estados Unidos",
-      "icon": "fas fa-globe-americas",
-      "currency": "USD",
-      "locale": "en-US",
-      "whmcsCurrencyId": 1
-    },
-    {
-      "code": "cl",
-      "name": "Chile",
-      "icon": "fas fa-globe-americas",
-      "currency": "CLP",
-      "locale": "es-CL",
-      "whmcsCurrencyId": 6
-    },
-    {
-      "code": "co",
-      "name": "Colombia",
-      "icon": "fas fa-globe-americas",
-      "currency": "COP",
-      "locale": "es-CO",
-      "whmcsCurrencyId": 7
-    },
-    {
-      "code": "mx",
-      "name": "México",
-      "icon": "fas fa-globe-americas",
-      "currency": "MXN",
-      "locale": "es-MX",
-      "whmcsCurrencyId": 8
-    }
-  ]
+    "updatedAt": "2026-11-12T22:05:44-03:00",
+    "totalCountries": 8,
+    "currencies": [],
+    "countries": [
+        {
+            "code": "py",
+            "name": "Paraguay",
+            "flag": "🇵🇾",
+            "currency": "PYG",
+            "locale": "es-PY",
+            "whmcsCurrencyId": null
+        },
+        {
+            "code": "br",
+            "name": "Brasil",
+            "flag": "🇧🇷",
+            "currency": "BRL",
+            "locale": "pt-BR",
+            "whmcsCurrencyId": null
+        },
+        {
+            "code": "ar",
+            "name": "Argentina",
+            "flag": "🇦🇷",
+            "currency": "ARS",
+            "locale": "es-AR",
+            "whmcsCurrencyId": null
+        },
+        {
+            "code": "es",
+            "name": "España",
+            "flag": "🇪🇸",
+            "currency": "EUR",
+            "locale": "es-ES",
+            "whmcsCurrencyId": null
+        },
+        {
+            "code": "us",
+            "name": "Estados Unidos",
+            "flag": "🇺🇸",
+            "currency": "USD",
+            "locale": "en-US",
+            "whmcsCurrencyId": null
+        },
+        {
+            "code": "cl",
+            "name": "Chile",
+            "flag": "🇨🇱",
+            "currency": "CLP",
+            "locale": "es-CL",
+            "whmcsCurrencyId": null
+        },
+        {
+            "code": "co",
+            "name": "Colombia",
+            "flag": "🇨🇴",
+            "currency": "COP",
+            "locale": "es-CO",
+            "whmcsCurrencyId": null
+        },
+        {
+            "code": "mx",
+            "name": "México",
+            "flag": "🇲🇽",
+            "currency": "MXN",
+            "locale": "es-MX",
+            "whmcsCurrencyId": null
+        }
+    ]
 }

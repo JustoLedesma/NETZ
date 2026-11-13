@@ -1,331 +1,331 @@
 {
-  "country": "España",
-  "countryCode": "es",
-  "locale": "es-ES",
-  "currency": "EUR",
-  "whmcsCurrencyId": 5,
-  "generatedAt": "2026-11-11T01:44:17.673Z",
-  "products": {
-    "1": {
-      "name": "Web Hosting Básico",
-      "monthly": 2.3,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": 23,
-      "biennially": null,
-      "triennially": null
+    "country": "España",
+    "countryCode": "es",
+    "locale": "es-ES",
+    "currency": "EUR",
+    "whmcsCurrencyId": 5,
+    "generatedAt": "2026-11-12T22:05:44-03:00",
+    "products": {
+        "1": {
+            "name": "Web Hosting Básico",
+            "monthly": 2.3,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": 23,
+            "biennially": null,
+            "triennially": null
+        },
+        "2": {
+            "name": "Web Hosting Pro",
+            "monthly": 3.86,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": 38.64,
+            "biennially": null,
+            "triennially": null
+        },
+        "3": {
+            "name": "Web Hosting Pro+",
+            "monthly": 6.62,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": 66.24,
+            "biennially": null,
+            "triennially": null
+        },
+        "4": {
+            "name": "Radio Stream Mini",
+            "monthly": 2.85,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": 34.22,
+            "biennially": null,
+            "triennially": null
+        },
+        "5": {
+            "name": "Radio Stream Junior",
+            "monthly": 6.57,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": 78.83,
+            "biennially": null,
+            "triennially": null
+        },
+        "6": {
+            "name": "Radio Stream Junior II",
+            "monthly": 9.84,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": 118.13,
+            "biennially": null,
+            "triennially": null
+        },
+        "7": {
+            "name": "Reseller cPanel 1",
+            "monthly": 18.54,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": 222.46,
+            "biennially": null,
+            "triennially": null
+        },
+        "8": {
+            "name": "Reseller cPanel 2",
+            "monthly": 32.84,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "9": {
+            "name": "Reseller cPanel 3",
+            "monthly": 47.47,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "10": {
+            "name": "Reseller cPanel 4",
+            "monthly": 80.87,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "11": {
+            "name": "Video Streaming 1",
+            "monthly": 7.36,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "12": {
+            "name": "Video Streaming 2",
+            "monthly": 13.14,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "13": {
+            "name": "Video Streaming 3",
+            "monthly": 23.52,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "14": {
+            "name": "Video Streaming 4",
+            "monthly": 39.42,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "15": {
+            "name": "Hosting Exclusivo 1",
+            "monthly": 19.58,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "16": {
+            "name": "Hosting Exclusivo 2",
+            "monthly": 35.7,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "17": {
+            "name": "Hosting Exclusivo 3",
+            "monthly": 69.06,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "18": {
+            "name": "Hosting Exclusivo 4",
+            "monthly": 128.98,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "19": {
+            "name": "Reseller DirectAdmin 1",
+            "monthly": 18.37,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "20": {
+            "name": "Reseller DirectAdmin 2",
+            "monthly": 36.33,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        },
+        "21": {
+            "name": "Radio Streaming Plan Adicional",
+            "monthly": 20.24,
+            "quarterly": null,
+            "semiannually": null,
+            "annually": null,
+            "biennially": null,
+            "triennially": null
+        }
     },
-    "2": {
-      "name": "Web Hosting Pro",
-      "monthly": 3.86,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": 38.64,
-      "biennially": null,
-      "triennially": null
-    },
-    "3": {
-      "name": "Web Hosting Pro+",
-      "monthly": 6.62,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": 66.24,
-      "biennially": null,
-      "triennially": null
-    },
-    "4": {
-      "name": "Radio Stream Mini",
-      "monthly": 2.85,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": 34.22,
-      "biennially": null,
-      "triennially": null
-    },
-    "5": {
-      "name": "Radio Stream Junior",
-      "monthly": 6.57,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": 78.83,
-      "biennially": null,
-      "triennially": null
-    },
-    "6": {
-      "name": "Radio Stream Junior II",
-      "monthly": 9.84,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": 118.13,
-      "biennially": null,
-      "triennially": null
-    },
-    "7": {
-      "name": "Reseller cPanel 1",
-      "monthly": 18.54,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": 222.46,
-      "biennially": null,
-      "triennially": null
-    },
-    "8": {
-      "name": "Reseller cPanel 2",
-      "monthly": 32.84,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "9": {
-      "name": "Reseller cPanel 3",
-      "monthly": 47.47,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "10": {
-      "name": "Reseller cPanel 4",
-      "monthly": 80.87,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "11": {
-      "name": "Video Streaming 1",
-      "monthly": 7.36,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "12": {
-      "name": "Video Streaming 2",
-      "monthly": 13.14,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "13": {
-      "name": "Video Streaming 3",
-      "monthly": 23.52,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "14": {
-      "name": "Video Streaming 4",
-      "monthly": 39.42,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "15": {
-      "name": "Hosting Exclusivo 1",
-      "monthly": 19.58,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "16": {
-      "name": "Hosting Exclusivo 2",
-      "monthly": 35.7,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "17": {
-      "name": "Hosting Exclusivo 3",
-      "monthly": 69.06,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "18": {
-      "name": "Hosting Exclusivo 4",
-      "monthly": 128.98,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "19": {
-      "name": "Reseller DirectAdmin 1",
-      "monthly": 18.37,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "20": {
-      "name": "Reseller DirectAdmin 2",
-      "monthly": 36.33,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
-    },
-    "21": {
-      "name": "Radio Streaming Plan Adicional",
-      "monthly": 20.24,
-      "quarterly": null,
-      "semiannually": null,
-      "annually": null,
-      "biennially": null,
-      "triennially": null
+    "domains": {
+        "com": {
+            "register": 3.67,
+            "renew": 13.79,
+            "transfer": 13.79
+        },
+        "net": {
+            "register": 5.43,
+            "renew": 15.63,
+            "transfer": 15.63
+        },
+        "org": {
+            "register": 5.43,
+            "renew": 14.71,
+            "transfer": 14.71
+        },
+        "online": {
+            "register": 21.15,
+            "renew": 33.11,
+            "transfer": 33.11
+        },
+        "info": {
+            "register": 3.59,
+            "renew": 17.47,
+            "transfer": 17.47
+        },
+        "biz": {
+            "register": 7.27,
+            "renew": 18.39,
+            "transfer": 18.39
+        },
+        "click": {
+            "register": 1.83,
+            "renew": 11.95,
+            "transfer": 11.95
+        },
+        "us": {
+            "register": 5.43,
+            "renew": 13.79,
+            "transfer": 13.79
+        },
+        "tv": {
+            "register": 24.84,
+            "renew": 32.2,
+            "transfer": 32.2
+        },
+        "la": {
+            "register": 23.92,
+            "renew": 34.96,
+            "transfer": 34.96
+        },
+        "srl": {
+            "register": 23,
+            "renew": 27.6,
+            "transfer": 27.6
+        },
+        "top": {
+            "register": 2.76,
+            "renew": 11.04,
+            "transfer": 11.04
+        },
+        "vip": {
+            "register": 7.36,
+            "renew": 16.56,
+            "transfer": 16.56
+        },
+        "fun": {
+            "register": 11.96,
+            "renew": 22.08,
+            "transfer": 22.08
+        },
+        "pro": {
+            "register": 10.12,
+            "renew": 17.48,
+            "transfer": 17.48
+        },
+        "app": {
+            "register": 15.18,
+            "renew": 20.24,
+            "transfer": 20.24
+        },
+        "pet": {
+            "register": 8.28,
+            "renew": 18.4,
+            "transfer": 18.4
+        },
+        "bet": {
+            "register": 10.12,
+            "renew": 23,
+            "transfer": 23
+        },
+        "blog": {
+            "register": 16.56,
+            "renew": 25.76,
+            "transfer": 25.76
+        },
+        "club": {
+            "register": 12.88,
+            "renew": 18.4,
+            "transfer": 18.4
+        },
+        "com.py": {
+            "register": 22.99,
+            "renew": 22.99,
+            "transfer": 22.99
+        },
+        "org.py": {
+            "register": 22.99,
+            "renew": 22.99,
+            "transfer": 22.99
+        },
+        "net.py": {
+            "register": 22.99,
+            "renew": 22.99,
+            "transfer": 22.99
+        },
+        "edu.py": {
+            "register": 22.99,
+            "renew": 22.99,
+            "transfer": 22.99
+        },
+        "coop.py": {
+            "register": 22.99,
+            "renew": 22.99,
+            "transfer": 22.99
+        },
+        "mil.py": {
+            "register": 22.99,
+            "renew": 22.99,
+            "transfer": 22.99
+        }
     }
-  },
-  "domains": {
-    "com": {
-      "register": 3.67,
-      "renew": 13.79,
-      "transfer": 13.79
-    },
-    "net": {
-      "register": 5.43,
-      "renew": 15.63,
-      "transfer": 15.63
-    },
-    "org": {
-      "register": 5.43,
-      "renew": 14.71,
-      "transfer": 14.71
-    },
-    "online": {
-      "register": 21.15,
-      "renew": 33.11,
-      "transfer": 33.11
-    },
-    "info": {
-      "register": 3.59,
-      "renew": 17.47,
-      "transfer": 17.47
-    },
-    "biz": {
-      "register": 7.27,
-      "renew": 18.39,
-      "transfer": 18.39
-    },
-    "click": {
-      "register": 1.83,
-      "renew": 11.95,
-      "transfer": 11.95
-    },
-    "us": {
-      "register": 5.43,
-      "renew": 13.79,
-      "transfer": 13.79
-    },
-    "tv": {
-      "register": 24.84,
-      "renew": 32.2,
-      "transfer": 32.2
-    },
-    "la": {
-      "register": 23.92,
-      "renew": 34.96,
-      "transfer": 34.96
-    },
-    "srl": {
-      "register": 23,
-      "renew": 27.6,
-      "transfer": 27.6
-    },
-    "top": {
-      "register": 2.76,
-      "renew": 11.04,
-      "transfer": 11.04
-    },
-    "vip": {
-      "register": 7.36,
-      "renew": 16.56,
-      "transfer": 16.56
-    },
-    "fun": {
-      "register": 11.96,
-      "renew": 22.08,
-      "transfer": 22.08
-    },
-    "pro": {
-      "register": 10.12,
-      "renew": 17.48,
-      "transfer": 17.48
-    },
-    "app": {
-      "register": 15.18,
-      "renew": 20.24,
-      "transfer": 20.24
-    },
-    "pet": {
-      "register": 8.28,
-      "renew": 18.4,
-      "transfer": 18.4
-    },
-    "bet": {
-      "register": 10.12,
-      "renew": 23,
-      "transfer": 23
-    },
-    "blog": {
-      "register": 16.56,
-      "renew": 25.76,
-      "transfer": 25.76
-    },
-    "club": {
-      "register": 12.88,
-      "renew": 18.4,
-      "transfer": 18.4
-    },
-    "com.py": {
-      "register": 22.99,
-      "renew": 22.99,
-      "transfer": 22.99
-    },
-    "org.py": {
-      "register": 22.99,
-      "renew": 22.99,
-      "transfer": 22.99
-    },
-    "net.py": {
-      "register": 22.99,
-      "renew": 22.99,
-      "transfer": 22.99
-    },
-    "edu.py": {
-      "register": 22.99,
-      "renew": 22.99,
-      "transfer": 22.99
-    },
-    "coop.py": {
-      "register": 22.99,
-      "renew": 22.99,
-      "transfer": 22.99
-    },
-    "mil.py": {
-      "register": 22.99,
-      "renew": 22.99,
-      "transfer": 22.99
-    }
-  }
 }

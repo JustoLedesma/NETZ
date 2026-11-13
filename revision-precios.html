@@ -1510,7 +1510,28 @@
           }
         } catch (e) {}
 
-        const out = { success: true, data, extendedData };
+        // Consultar el catálogo completo de dominios en tiempo real desde la API (MySQL WHMCS >500 TLDs)
+        let apiDomains = {};
+        try {
+          const resApi = await fetch(`/api/precios-dominios.php?country=${country.code}&_=${Date.now()}`);
+          if (resApi.ok) {
+            const apiList = await resApi.json();
+            if (Array.isArray(apiList)) {
+              apiList.forEach(item => {
+                if (item && item.extension) {
+                  const clean = item.extension.replace(/^\./, '').toLowerCase();
+                  apiDomains[clean] = {
+                    register: item.register || item.local_price || item.gs || item.usd,
+                    renew: item.renew || item.renew_usd || item.register,
+                    transfer: item.transfer || item.renew || item.register
+                  };
+                }
+              });
+            }
+          }
+        } catch (e) {}
+
+        const out = { success: true, data, extendedData, apiDomains };
         loadedCountryData[country.code] = out;
         return out;
       } catch (err) {
@@ -1568,10 +1589,11 @@
         `;
       }).join('') : `<tr><td colspan="8" style="text-align:center; padding: 20px; color: var(--text-muted);">No se encontraron productos registrados en este archivo.</td></tr>`;
 
-      // Unión de Dominios: 26 del index/web pública + los extendidos de la base
+      // Unión de Dominios: 26 del index/web pública + los extendidos de la base + API en vivo (>500 TLDs)
       const publicDomains = d.domains || {};
       const extendedDomains = (result.extendedData && result.extendedData.domains) ? result.extendedData.domains : {};
-      const allDomains = Object.assign({}, extendedDomains, publicDomains);
+      const apiDomains = result.apiDomains || {};
+      const allDomains = Object.assign({}, apiDomains, extendedDomains, publicDomains);
       const domainKeys = Object.keys(allDomains).sort();
 
       const domainsRows = domainKeys.length > 0 ? domainKeys.map(ext => {
@@ -1653,7 +1675,7 @@
               <h2 class="section-title" style="margin: 0;"><i class="fas fa-globe-americas" style="color: var(--primary); font-size: 1.1rem; margin-right: 6px;"></i> Precios de Dominios (${domainKeys.length})</h2>
               <p style="margin: 3px 0 0; font-size: 12px; color: var(--text-muted);">
                 <strong>${Object.keys(publicDomains).length}</strong> cargados en index/web pública + 
-                <strong>${Object.keys(extendedDomains).length}</strong> de la base de datos completa
+                <strong>${Math.max(0, domainKeys.length - Object.keys(publicDomains).length)}</strong> de la base de datos completa
               </p>
             </div>
             <search role="search">
