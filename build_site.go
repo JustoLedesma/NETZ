@@ -211,7 +211,7 @@ func main() {
 	}
 
 	// 2. Copiar archivos de soporte de producción
-	supportFiles := []string{".htaccess", "robots.txt", "revision-precios.html", "mailer.php"}
+	supportFiles := []string{".htaccess", "robots.txt", "sitemap.xml", "revision-precios.html", "mailer.php"}
 	for _, f := range supportFiles {
 		if _, err := os.Stat(f); err == nil {
 			fmt.Printf("📄 Copiando %s...\n", f)

@@ -6,6 +6,7 @@
   <title>Panel Interno de Revisión de Precios | NETZ</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="shortcut icon" href="/assets/img/header/N-SVG.svg" type="image/x-icon">
+  <link href="/assets/css/fontawesome-all.css" rel="stylesheet">
   <style>
     :root {
       --bg: #f4f6f9;
@@ -943,7 +944,7 @@
        ======================================================== -->
   <div id="login-screen" class="login-overlay">
     <div class="login-box">
-      <div class="login-header-icon">🔒</div>
+      <div class="login-header-icon"><i class="fas fa-lock"></i></div>
       <h2>Acceso</h2>
 
       <div id="login-error-msg" class="login-error">
@@ -962,7 +963,7 @@
           <label for="admin-pass">Contraseña</label>
           <div class="form-input-wrap">
             <input type="password" id="admin-pass" name="password" required placeholder="••••••••••••" autocomplete="current-password">
-            <button type="button" class="toggle-pass-btn" onclick="togglePasswordVisibility()" title="Mostrar/ocultar">👁️</button>
+            <button type="button" class="toggle-pass-btn" onclick="togglePasswordVisibility(this)" title="Mostrar/ocultar"><i class="far fa-eye"></i></button>
           </div>
         </div>
 
@@ -980,22 +981,22 @@
     <header>
       <div>
         <h1 id="header-main-title">
-          <span>📊</span> Revisión de Precios por País
+          <i class="fas fa-chart-line" style="color: var(--primary); margin-right: 6px;"></i> Revisión de Precios por País
         </h1>
         <p id="header-main-desc">Precios oficiales sincronizados desde WHMCS con unión de dominios en tiempo real.</p>
       </div>
       <div class="header-actions">
         <div class="admin-pill" id="admin-session-pill">
-          <span>●</span> <span id="admin-user-display">admin</span>
+          <i class="fas fa-circle" style="font-size: 8px; color: #10b981; margin-right: 4px;"></i> <span id="admin-user-display">admin</span>
         </div>
         <button class="btn-refresh" id="btn-top-refresh" onclick="handleRefreshPrices()">
-          <span>🔄</span> Recargar Precios
+          <i class="fas fa-sync-alt"></i> Recargar Precios
         </button>
         <button class="btn-settings" id="btn-top-settings" onclick="toggleView('settings')">
-          <span>⚙️</span> Ajustes
+          <i class="fas fa-cog"></i> Ajustes
         </button>
         <button class="btn-logout" onclick="handleLogout()">
-          <span>🚪</span> Salir
+          <i class="fas fa-sign-out-alt"></i> Salir
         </button>
       </div>
     </header>
@@ -1012,7 +1013,7 @@
           <span>Sincronización en menos de 24 horas</span>
         </div>
         <div class="legend-item">
-          <span class="sync-badge warn" style="padding: 2px 6px;">⚠️ Advertencia</span>
+          <span class="sync-badge warn" style="padding: 2px 6px;"><i class="fas fa-exclamation-triangle" style="margin-right: 4px;"></i> Advertencia</span>
           <span>Más de 24 horas sin sincronizar (revisar cron)</span>
         </div>
       </div>
@@ -1028,7 +1029,7 @@
     <div id="view-settings" style="display: none;">
       <div class="settings-container">
         <div class="settings-card">
-          <h3><span>⚙️</span> Cambiar Credenciales de Acceso</h3>
+          <h3><i class="fas fa-cog" style="color: var(--primary); margin-right: 8px;"></i> Cambiar Credenciales de Acceso</h3>
           <p class="subtitle">Actualiza el usuario o contraseña para el acceso a este panel.</p>
 
           <div id="settings-alert" class="settings-alert"></div>
@@ -1045,7 +1046,7 @@
               <label for="settings-current-pass">Contraseña Actual</label>
               <div class="form-input-wrap">
                 <input type="password" id="settings-current-pass" name="current_password" required placeholder="Ingresa tu contraseña actual" autocomplete="current-password">
-                <button type="button" class="toggle-pass-btn" onclick="toggleFieldVisibility('settings-current-pass')" title="Mostrar/ocultar">👁️</button>
+                <button type="button" class="toggle-pass-btn" onclick="toggleFieldVisibility('settings-current-pass', this)" title="Mostrar/ocultar"><i class="far fa-eye"></i></button>
               </div>
             </div>
 
@@ -1053,7 +1054,7 @@
               <label for="settings-new-pass">Nueva Contraseña</label>
               <div class="form-input-wrap">
                 <input type="password" id="settings-new-pass" name="new_password" required minlength="6" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
-                <button type="button" class="toggle-pass-btn" onclick="toggleFieldVisibility('settings-new-pass')" title="Mostrar/ocultar">👁️</button>
+                <button type="button" class="toggle-pass-btn" onclick="toggleFieldVisibility('settings-new-pass', this)" title="Mostrar/ocultar"><i class="far fa-eye"></i></button>
               </div>
             </div>
 
@@ -1061,13 +1062,13 @@
               <label for="settings-confirm-pass">Confirmar Nueva Contraseña</label>
               <div class="form-input-wrap">
                 <input type="password" id="settings-confirm-pass" name="confirm_password" required minlength="6" placeholder="Repite la nueva contraseña" autocomplete="new-password">
-                <button type="button" class="toggle-pass-btn" onclick="toggleFieldVisibility('settings-confirm-pass')" title="Mostrar/ocultar">👁️</button>
+                <button type="button" class="toggle-pass-btn" onclick="toggleFieldVisibility('settings-confirm-pass', this)" title="Mostrar/ocultar"><i class="far fa-eye"></i></button>
               </div>
             </div>
 
             <div style="display: flex; gap: 12px; margin-top: 24px; align-items: center; flex-wrap: wrap;">
               <button type="submit" class="btn-save-settings" id="btn-save-settings">
-                <span>💾</span> Guardar Nuevas Credenciales
+                <i class="fas fa-save" style="margin-right: 6px;"></i> Guardar Nuevas Credenciales
               </button>
               <button type="button" class="btn-settings" onclick="toggleView('prices')">
                 Volver a Precios
@@ -1077,7 +1078,7 @@
         </div>
 
         <div class="settings-card">
-          <h3><span>🛡️</span> Estado de Almacenamiento y Seguridad</h3>
+          <h3><i class="fas fa-shield-alt" style="color: var(--primary); margin-right: 8px;"></i> Estado de Almacenamiento y Seguridad</h3>
           <p class="subtitle">Detalles técnicos del almacenamiento de credenciales.</p>
           <div class="settings-meta-row">
             <span class="settings-meta-label">Persistencia en Servidor:</span>
@@ -1116,7 +1117,7 @@
             Vínculos directos oficiales generados exactamente con la misma nomenclatura y configuración de WHMCS.
           </p>
         </div>
-        <button type="button" class="modal-close-btn" onclick="closeProductLinksModal()" title="Cerrar (Esc)">✕</button>
+        <button type="button" class="modal-close-btn" onclick="closeProductLinksModal()" title="Cerrar (Esc)"><i class="fas fa-times"></i></button>
       </div>
 
       <div class="modal-body" id="modal-links-container">
@@ -1125,7 +1126,7 @@
 
       <div class="modal-footer">
         <span style="font-size: 12px; color: var(--text-muted);">
-          💡 Haz clic en <strong>"Copiar"</strong> para copiar la URL al portapapeles o en <strong>"Abrir"</strong> para probar el link en una nueva pestaña.
+          <i class="fas fa-lightbulb" style="color: #f59e0b; margin-right: 4px;"></i> Haz clic en <strong>"Copiar"</strong> para copiar la URL al portapapeles o en <strong>"Abrir"</strong> para probar el link en una nueva pestaña.
         </span>
         <button type="button" class="btn-modal-close" onclick="closeProductLinksModal()">Cerrar</button>
       </div>
@@ -1218,14 +1219,19 @@
       }
     }
 
-    function togglePasswordVisibility() {
-      toggleFieldVisibility('admin-pass');
+    function togglePasswordVisibility(btn) {
+      toggleFieldVisibility('admin-pass', btn);
     }
 
-    function toggleFieldVisibility(fieldId) {
+    function toggleFieldVisibility(fieldId, btn) {
       const input = document.getElementById(fieldId);
       if (input) {
-        input.type = (input.type === 'password') ? 'text' : 'password';
+        const isPass = input.type === 'password';
+        input.type = isPass ? 'text' : 'password';
+        const button = btn || (input.parentElement ? input.parentElement.querySelector('.toggle-pass-btn') : null);
+        if (button) {
+          button.innerHTML = isPass ? '<i class="far fa-eye-slash"></i>' : '<i class="far fa-eye"></i>';
+        }
       }
     }
 
@@ -1280,10 +1286,10 @@
         viewPrices.style.display = 'none';
         viewSettings.style.display = 'block';
         btnSettings.classList.add('active');
-        btnSettings.innerHTML = '<span>📊</span> Ver Precios';
+        btnSettings.innerHTML = '<i class="fas fa-chart-line"></i> Ver Precios';
         btnSettings.setAttribute('onclick', "toggleView('prices')");
         btnRefresh.style.display = 'none';
-        title.innerHTML = '<span>⚙️</span> Ajustes de Seguridad y Acceso';
+        title.innerHTML = '<i class="fas fa-cog" style="color: var(--primary); margin-right: 6px;"></i> Ajustes de Seguridad y Acceso';
         desc.textContent = 'Modifica el usuario y la contraseña del panel de administración.';
         updateUserDisplay();
         document.getElementById('settings-alert').style.display = 'none';
@@ -1294,10 +1300,10 @@
         viewPrices.style.display = 'block';
         viewSettings.style.display = 'none';
         btnSettings.classList.remove('active');
-        btnSettings.innerHTML = '<span>⚙️</span> Ajustes';
+        btnSettings.innerHTML = '<i class="fas fa-cog"></i> Ajustes';
         btnSettings.setAttribute('onclick', "toggleView('settings')");
         btnRefresh.style.display = 'inline-flex';
-        title.innerHTML = '<span>📊</span> Revisión de Precios por País';
+        title.innerHTML = '<i class="fas fa-chart-line" style="color: var(--primary); margin-right: 6px;"></i> Revisión de Precios por País';
         desc.textContent = 'Precios oficiales sincronizados desde WHMCS con unión de dominios en tiempo real.';
       }
     }
@@ -1336,7 +1342,7 @@
 
       const saveBtn = document.getElementById('btn-save-settings');
       saveBtn.disabled = true;
-      saveBtn.innerHTML = '<span>⏳</span> Guardando...';
+      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 6px;"></i> Guardando...';
 
       let serverUpdated = false;
       try {
@@ -1358,7 +1364,7 @@
           if (res.status === 401) {
             showSettingsAlert('error', errData.message || 'La contraseña actual no es correcta en el servidor.');
             saveBtn.disabled = false;
-            saveBtn.innerHTML = '<span>💾</span> Guardar Nuevas Credenciales';
+            saveBtn.innerHTML = '<i class="fas fa-save" style="margin-right: 6px;"></i> Guardar Nuevas Credenciales';
             return;
           }
         }
@@ -1378,18 +1384,19 @@
       document.getElementById('settings-confirm-pass').value = '';
 
       saveBtn.disabled = false;
-      saveBtn.innerHTML = '<span>💾</span> Guardar Nuevas Credenciales';
+      saveBtn.innerHTML = '<i class="fas fa-save" style="margin-right: 6px;"></i> Guardar Nuevas Credenciales';
 
       const successMsg = serverUpdated
-        ? '✅ ¡Credenciales actualizadas exitosamente en el servidor (config/admin_credentials.php) y en este navegador!'
-        : '✅ ¡Credenciales actualizadas exitosamente! Usa tus nuevos datos en tu próximo inicio de sesión.';
+        ? '¡Credenciales actualizadas exitosamente en el servidor (config/admin_credentials.php) y en este navegador!'
+        : '¡Credenciales actualizadas exitosamente! Usa tus nuevos datos en tu próximo inicio de sesión.';
       showSettingsAlert('success', successMsg);
     }
 
     function showSettingsAlert(type, text) {
       const alertBox = document.getElementById('settings-alert');
       alertBox.className = 'settings-alert ' + type;
-      alertBox.textContent = text;
+      const icon = type === 'success' ? '<i class="fas fa-check-circle" style="color: #059669; margin-right: 6px;"></i>' : '<i class="fas fa-exclamation-triangle" style="color: #dc2626; margin-right: 6px;"></i>';
+      alertBox.innerHTML = `${icon} ${escapeHtml(text)}`;
       alertBox.style.display = 'block';
       alertBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
@@ -1397,15 +1404,26 @@
     // ========================================================
     // LÓGICA DE PRECIOS, UNIÓN DE DOMINIOS Y VÍNCULOS WHMCS
     // ========================================================
+    const COUNTRY_ICONS = {
+      py: 'fas fa-map-marker-alt',
+      br: 'fas fa-globe-americas',
+      ar: 'fas fa-globe-americas',
+      es: 'fas fa-globe-europe',
+      us: 'fas fa-globe-americas',
+      cl: 'fas fa-globe-americas',
+      co: 'fas fa-globe-americas',
+      mx: 'fas fa-globe-americas'
+    };
+
     let COUNTRIES = [
-      { code: 'py', name: 'Paraguay', flag: '🇵🇾', defaultCurrency: 'PYG', defaultLocale: 'es-PY', whmcsCurrencyId: 2 },
-      { code: 'br', name: 'Brasil', flag: '🇧🇷', defaultCurrency: 'BRL', defaultLocale: 'pt-BR', whmcsCurrencyId: 3 },
-      { code: 'ar', name: 'Argentina', flag: '🇦🇷', defaultCurrency: 'ARS', defaultLocale: 'es-AR', whmcsCurrencyId: 4 },
-      { code: 'es', name: 'España', flag: '🇪🇸', defaultCurrency: 'EUR', defaultLocale: 'es-ES', whmcsCurrencyId: 5 },
-      { code: 'us', name: 'Estados Unidos', flag: '🇺🇸', defaultCurrency: 'USD', defaultLocale: 'en-US', whmcsCurrencyId: 1 },
-      { code: 'cl', name: 'Chile', flag: '🇨🇱', defaultCurrency: 'CLP', defaultLocale: 'es-CL', whmcsCurrencyId: null },
-      { code: 'co', name: 'Colombia', flag: '🇨🇴', defaultCurrency: 'COP', defaultLocale: 'es-CO', whmcsCurrencyId: null },
-      { code: 'mx', name: 'México', flag: '🇲🇽', defaultCurrency: 'MXN', defaultLocale: 'es-MX', whmcsCurrencyId: null }
+      { code: 'py', name: 'Paraguay', icon: 'fas fa-map-marker-alt', defaultCurrency: 'PYG', defaultLocale: 'es-PY', whmcsCurrencyId: 2 },
+      { code: 'br', name: 'Brasil', icon: 'fas fa-globe-americas', defaultCurrency: 'BRL', defaultLocale: 'pt-BR', whmcsCurrencyId: 3 },
+      { code: 'ar', name: 'Argentina', icon: 'fas fa-globe-americas', defaultCurrency: 'ARS', defaultLocale: 'es-AR', whmcsCurrencyId: 4 },
+      { code: 'es', name: 'España', icon: 'fas fa-globe-europe', defaultCurrency: 'EUR', defaultLocale: 'es-ES', whmcsCurrencyId: 5 },
+      { code: 'us', name: 'Estados Unidos', icon: 'fas fa-globe-americas', defaultCurrency: 'USD', defaultLocale: 'en-US', whmcsCurrencyId: 1 },
+      { code: 'cl', name: 'Chile', icon: 'fas fa-globe-americas', defaultCurrency: 'CLP', defaultLocale: 'es-CL', whmcsCurrencyId: null },
+      { code: 'co', name: 'Colombia', icon: 'fas fa-globe-americas', defaultCurrency: 'COP', defaultLocale: 'es-CO', whmcsCurrencyId: null },
+      { code: 'mx', name: 'México', icon: 'fas fa-globe-americas', defaultCurrency: 'MXN', defaultLocale: 'es-MX', whmcsCurrencyId: null }
     ];
 
     let activeCountry = 'py';
@@ -1464,9 +1482,9 @@
         });
 
         if (diffHours > 24) {
-          return { ok: false, text: `⚠️ Desactualizado: ${dateFormatted} (${Math.round(diffHours)}h atrás)`, label: 'warn' };
+          return { ok: false, text: `<i class="fas fa-exclamation-triangle" style="margin-right: 4px;"></i> Desactualizado: ${dateFormatted} (${Math.round(diffHours)}h atrás)`, label: 'warn' };
         }
-        return { ok: true, text: `✅ Sincronizado: ${dateFormatted}`, label: 'ok' };
+        return { ok: true, text: `<i class="fas fa-check-circle" style="margin-right: 4px;"></i> Sincronizado: ${dateFormatted}`, label: 'ok' };
       } catch (e) {
         return { ok: false, text: generatedAtStr, label: 'none' };
       }
@@ -1505,7 +1523,7 @@
         return `
           <div class="tab-content ${country.code === activeCountry ? 'active' : ''}" id="pane-${country.code}">
             <div class="alert-box error">
-              <span style="font-size: 1.5rem;">⚠️</span>
+              <span style="font-size: 1.5rem; color: #dc2626;"><i class="fas fa-exclamation-triangle"></i></span>
               <div>
                 <strong>No se pudo cargar el archivo de precios para ${country.name} (/assets/data/prices/${country.code}.json).</strong>
                 <p style="margin-top: 4px; font-size: 0.85rem;">
@@ -1537,7 +1555,7 @@
             <td>
               <div class="product-name-wrap">
                 <span class="product-name-link">${escapeHtml(safeName)}</span>
-                <span class="badge-vinc">🔗 Vínculos</span>
+                <span class="badge-vinc"><i class="fas fa-link" style="margin-right: 3px;"></i> Vínculos</span>
               </div>
             </td>
             <td>${formatPrice(p.monthly, locale, currency)}</td>
@@ -1580,7 +1598,7 @@
           <div class="meta-card">
             <div class="meta-item">
               <span class="meta-label">País / Región</span>
-              <span class="meta-val">${country.flag} ${d.country || country.name} (${country.code.toUpperCase()})</span>
+              <span class="meta-val"><i class="${country.icon || COUNTRY_ICONS[country.code] || 'fas fa-globe'}" style="color: var(--primary); margin-right: 6px;"></i> ${d.country || country.name} <span style="background: #e0e7ff; color: #4338ca; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: 4px;">${country.code.toUpperCase()}</span></span>
             </div>
             <div class="meta-item">
               <span class="meta-label">Moneda Asignada</span>
@@ -1604,9 +1622,9 @@
 
           <!-- Tabla de Productos / Planes -->
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-            <h2 class="section-title" style="margin: 0;">📦 Planes y Productos (${productIds.length})</h2>
+            <h2 class="section-title" style="margin: 0;"><i class="fas fa-boxes" style="color: var(--primary); font-size: 1.1rem; margin-right: 6px;"></i> Planes y Productos (${productIds.length})</h2>
             <span style="font-size: 12px; color: var(--text-muted); background: #f8fafc; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border);">
-              💡 Haz clic en cualquier fila para ver y copiar sus <strong>Vínculos oficiales de WHMCS</strong>
+              <i class="fas fa-lightbulb" style="color: #eab308; margin-right: 4px;"></i> Haz clic en cualquier fila para ver y copiar sus <strong>Vínculos oficiales de WHMCS</strong>
             </span>
           </div>
           <div class="table-container">
@@ -1632,14 +1650,14 @@
           <!-- Tabla de Dominios con Buscador y Desglose -->
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 35px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
             <div>
-              <h2 class="section-title" style="margin: 0;">🌐 Precios de Dominios (${domainKeys.length})</h2>
+              <h2 class="section-title" style="margin: 0;"><i class="fas fa-globe-americas" style="color: var(--primary); font-size: 1.1rem; margin-right: 6px;"></i> Precios de Dominios (${domainKeys.length})</h2>
               <p style="margin: 3px 0 0; font-size: 12px; color: var(--text-muted);">
                 <strong>${Object.keys(publicDomains).length}</strong> cargados en index/web pública + 
                 <strong>${Object.keys(extendedDomains).length}</strong> de la base de datos completa
               </p>
             </div>
             <search role="search">
-              <input type="search" placeholder="🔍 Filtrar extensión (ej: .store, .com)..." oninput="filterDomainTable(this, 'table-domains-${country.code}')" style="padding: 7px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; outline: none; width: 280px; max-width: 100%; background: #fff;">
+              <input type="search" placeholder="Filtrar extensión (ej: .store, .com)..." oninput="filterDomainTable(this, 'table-domains-${country.code}')" style="padding: 7px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; outline: none; width: 280px; max-width: 100%; background: #fff;">
             </search>
           </div>
           <div class="table-container">
@@ -1675,7 +1693,7 @@
       const p = products[pid] || {};
       const countryMeta = COUNTRIES.find(c => c.code === countryCode) || {
         name: countryResult.data.country || 'Paraguay',
-        flag: '🇵🇾',
+        icon: 'fas fa-map-marker-alt',
         defaultCurrency: countryResult.data.currency || 'PYG'
       };
 
@@ -1735,7 +1753,7 @@
         },
         {
           id: 'link-currency',
-          title: `Link directo con Moneda Activa (${countryMeta.flag} ${countryMeta.name} · ${currency})`,
+          title: `Link directo con Moneda Activa (${countryMeta.name} · ${currency} · ${countryCode.toUpperCase()})`,
           tag: 'Moneda Preseleccionada',
           desc: `Fuerza a WHMCS a cargar el carrito directamente en ${currency} (Currency ID #${whmcsCurrencyId}).`,
           url: `${whmcsBase}/cart.php?a=add&pid=${pid}&currency=${whmcsCurrencyId}`
@@ -1755,10 +1773,10 @@
           <div class="modal-link-input-row">
             <input type="text" id="${lnk.id}" class="modal-link-input" value="${escapeHtml(lnk.url)}" readonly onclick="this.select()">
             <button type="button" class="btn-copy-link" onclick="copyLink('${lnk.id}', this)">
-              <span>📋</span> Copiar
+              <span><i class="far fa-copy"></i></span> Copiar
             </button>
             <a href="${escapeHtml(lnk.url)}" target="_blank" rel="noopener noreferrer" class="btn-open-link" title="Abrir en pestaña nueva">
-              <span>🔗</span> Abrir
+              <span><i class="fas fa-external-link-alt"></i></span> Abrir
             </a>
           </div>
           ${lnk.altUrl ? `
@@ -1801,7 +1819,7 @@
       try {
         await navigator.clipboard.writeText(input.value);
         const origHtml = btnEl.innerHTML;
-        btnEl.innerHTML = `<span>✅</span> ¡Copiado!`;
+        btnEl.innerHTML = `<span><i class="fas fa-check" style="color: #10b981;"></i></span> ¡Copiado!`;
         btnEl.classList.add('copied');
         showSyncToast('success', '¡Vínculo copiado al portapapeles!');
         setTimeout(() => {
@@ -1844,7 +1862,7 @@
         document.body.appendChild(toast);
       }
       toast.className = 'sync-toast ' + type;
-      toast.innerHTML = `<span>${type === 'success' ? '✅' : (type === 'warn' ? '⚠️' : 'ℹ️')}</span> <div>${message}</div>`;
+      toast.innerHTML = `<span>${type === 'success' ? '<i class="fas fa-check-circle" style="color:#10b981;"></i>' : (type === 'warn' ? '<i class="fas fa-exclamation-triangle" style="color:#f59e0b;"></i>' : '<i class="fas fa-info-circle" style="color:#3b82f6;"></i>')}</span> <div>${message}</div>`;
       toast.style.display = 'flex';
 
       if (activeSyncToastTimer) clearTimeout(activeSyncToastTimer);
@@ -1857,7 +1875,7 @@
       const btn = document.getElementById('btn-top-refresh');
       const originalHtml = btn.innerHTML;
       btn.disabled = true;
-      btn.innerHTML = `<span style="display:inline-block; animation: spin 0.8s linear infinite;">🔄</span> Sincronizando BD...`;
+      btn.innerHTML = `<span style="display:inline-block; animation: spin 0.8s linear infinite;"><i class="fas fa-sync-alt"></i></span> Sincronizando BD...`;
 
       showSyncToast('info', 'Consultando base de datos de WHMCS y regenerando JSONs...');
 
@@ -1907,7 +1925,7 @@
             COUNTRIES = manifest.countries.map(c => ({
               code: c.code,
               name: c.name,
-              flag: c.flag || '💵',
+              icon: c.icon || COUNTRY_ICONS[c.code] || 'fas fa-globe',
               defaultCurrency: c.currency,
               defaultLocale: c.locale || 'es-PY',
               whmcsCurrencyId: c.whmcsCurrencyId
@@ -1932,7 +1950,7 @@
       const navContainer = document.getElementById('tabs-nav');
       navContainer.innerHTML = COUNTRIES.map(c => `
         <button class="tab-btn ${c.code === activeCountry ? 'active' : ''}" onclick="switchTab('${c.code}')">
-          <span>${c.flag}</span> ${c.name}
+          <i class="${c.icon || COUNTRY_ICONS[c.code] || 'fas fa-globe'}" style="margin-right: 6px; font-size: 13px;"></i> ${c.name}
         </button>
       `).join('');
 

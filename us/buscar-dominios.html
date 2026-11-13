@@ -503,10 +503,24 @@
             }
 
             function renderFila(dominio) {
-                var sym = dominio.currency_symbol || 'USD';
-                var regVal = escapeHtml(dominio.register_formatted || (sym + ' ' + (dominio.register || dominio.usd)));
-                var renVal = escapeHtml(dominio.renew_formatted || (sym + ' ' + (dominio.renew || dominio.renew_usd)));
-                var traVal = escapeHtml(dominio.transfer_formatted || (sym + ' ' + (dominio.transfer || dominio.renew_usd)));
+                var sym = dominio.currency_symbol || '$';
+
+                function extractPrice(formatted, raw1, raw2, raw3) {
+                    var str = (formatted && typeof formatted === 'string') ? formatted.trim() : '';
+                    if (str && str !== sym) {
+                        return str.indexOf(sym) !== -1 ? str : (sym + ' ' + str);
+                    }
+                    var fallback = raw1 || raw2 || raw3 || '';
+                    if (fallback) {
+                        var fStr = String(fallback).trim();
+                        return fStr.indexOf(sym) !== -1 ? fStr : (sym + ' ' + fStr);
+                    }
+                    return sym + ' 0.00';
+                }
+
+                var regVal = escapeHtml(extractPrice(dominio.register_formatted, dominio.register, dominio.usd, dominio.local_price));
+                var renVal = escapeHtml(extractPrice(dominio.renew_formatted, dominio.renew, dominio.renew_usd, dominio.usd));
+                var traVal = escapeHtml(extractPrice(dominio.transfer_formatted, dominio.transfer, dominio.renew_usd, dominio.usd));
 
                 return '' +
                     '<div class="row justify-content-left domain-search-page-table-body">' +

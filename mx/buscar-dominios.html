@@ -520,10 +520,24 @@
             }
 
             function renderFila(dominio) {
-                var sym = (currentCountry === 'py') ? 'Gs.' : (dominio.currency_symbol || 'Gs.');
-                var regVal = escapeHtml(dominio.register_formatted || (sym + ' ' + (dominio.register || dominio.local_price || dominio.gs)));
-                var renVal = escapeHtml(dominio.renew_formatted || (sym + ' ' + (dominio.renew || dominio.renew_usd || dominio.usd)));
-                var traVal = escapeHtml(dominio.transfer_formatted || (sym + ' ' + (dominio.transfer || dominio.renew || dominio.usd)));
+                var sym = (currentCountry === 'py') ? 'Gs.' : (dominio.currency_symbol || (currentCountry === 'br' ? 'R$' : (currentCountry === 'es' ? '€' : '$')));
+
+                function extractPrice(formatted, raw1, raw2, raw3) {
+                    var str = (formatted && typeof formatted === 'string') ? formatted.trim() : '';
+                    if (str && str !== sym) {
+                        return str.indexOf(sym) !== -1 ? str : (sym + ' ' + str);
+                    }
+                    var fallback = raw1 || raw2 || raw3 || '';
+                    if (fallback) {
+                        var fStr = String(fallback).trim();
+                        return fStr.indexOf(sym) !== -1 ? fStr : (sym + ' ' + fStr);
+                    }
+                    return sym + ' 0';
+                }
+
+                var regVal = escapeHtml(extractPrice(dominio.register_formatted, dominio.register, dominio.local_price, (currentCountry === 'py' ? dominio.gs : dominio.usd)));
+                var renVal = escapeHtml(extractPrice(dominio.renew_formatted, dominio.renew, dominio.renew_usd, dominio.usd));
+                var traVal = escapeHtml(extractPrice(dominio.transfer_formatted, dominio.transfer, dominio.renew, dominio.usd));
 
                 return '' +
                     '<div class="row justify-content-left domain-search-page-table-body">' +
