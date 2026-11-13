@@ -935,6 +935,417 @@
         scroll-behavior: auto !important;
       }
     }
+
+    /* ========================================================
+       VISTA 3: ACTUALIZACIÓN MASIVA DE PRECIOS WHMCS
+       ======================================================== */
+    .mass-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .mass-hero-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+      border: 1px solid #e0e7ff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(79, 70, 229, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .mass-hero-info h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #1e1b4b;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .mass-hero-info p {
+      color: #4b5563;
+      font-size: 0.92rem;
+      max-width: 720px;
+      margin: 0;
+    }
+
+    .mass-badges-wrap {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .mass-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .mass-badge.db-ok {
+      background: #ecfdf5;
+      color: #065f46;
+      border-color: #a7f3d0;
+    }
+
+    .mass-badge.base-cur {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #fde68a;
+    }
+
+    .mass-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .mass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .mass-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .mass-card-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .mass-settings-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      align-items: start;
+    }
+
+    .margin-input-box {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .margin-input-box label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #374151;
+    }
+
+    .input-with-symbol {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-with-symbol input {
+      width: 100%;
+      padding: 10px 40px 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1e1b4b;
+      outline: none;
+      transition: all 0.2s ease;
+      background: #fff;
+    }
+
+    .input-with-symbol input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .input-with-symbol .symbol-addon {
+      position: absolute;
+      right: 14px;
+      font-weight: 700;
+      color: #6b7280;
+      pointer-events: none;
+    }
+
+    .margin-presets {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .preset-pill {
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .preset-pill:hover {
+      background: #e0e7ff;
+      color: #3730a3;
+      border-color: #c7d2fe;
+    }
+
+    .rounding-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .rounding-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      background: #fafafa;
+    }
+
+    .rounding-option:hover {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+
+    .rounding-option input[type="radio"] {
+      margin-top: 3px;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    .rounding-option-text strong {
+      display: block;
+      font-size: 0.88rem;
+      color: #1f2937;
+    }
+
+    .rounding-option-text span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Tabla de Monedas WHMCS */
+    .mass-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .mass-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    .mass-table th {
+      background: #1e3a8a; /* Azul WHMCS oficial */
+      color: #ffffff;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .mass-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: middle;
+    }
+
+    .mass-table tr:hover td {
+      background-color: #f8fafc;
+    }
+
+    .mass-curr-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: #111827;
+      font-size: 0.95rem;
+    }
+
+    .mass-rate-input {
+      width: 140px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #111827;
+      background: #f9fafb;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .mass-rate-input:focus {
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .mass-preview-cell {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: #047857;
+      background: #ecfdf5;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      font-size: 0.88rem;
+      transition: all 0.15s ease;
+    }
+
+    /* Botón de Acción Masiva */
+    .btn-mass-execute {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .btn-mass-execute:hover:not(:disabled) {
+      filter: brightness(1.08);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(16, 185, 129, 0.45);
+    }
+
+    .btn-mass-execute:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .mass-actions-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Card de Reporte de Éxito */
+    .mass-report-card {
+      border-radius: 14px;
+      padding: 22px;
+      margin-top: 8px;
+      animation: fadeIn 0.3s ease-out;
+      border: 1px solid transparent;
+    }
+
+    .mass-report-card.success {
+      background: #f0fdf4;
+      border-color: #86efac;
+      color: #14532d;
+    }
+
+    .mass-report-card.error {
+      background: #fef2f2;
+      border-color: #fca5a5;
+      color: #991b1b;
+    }
+
+    .mass-report-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .mass-report-header i {
+      font-size: 26px;
+    }
+
+    .mass-report-header h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .mass-report-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .mass-stat-box {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .mass-stat-box .stat-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      opacity: 0.75;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .mass-stat-box .stat-val {
+      font-size: 1.3rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+    }
+
+    .mass-report-details {
+      background: #fff;
+      border: 1px solid #dcfce7;
+      border-radius: 8px;
+      overflow: hidden;
+    }
   </style>
 </head>
 <body>
@@ -989,6 +1400,9 @@
         <div class="admin-pill" id="admin-session-pill">
           <i class="fas fa-circle" style="font-size: 8px; color: #10b981; margin-right: 4px;"></i> <span id="admin-user-display">admin</span>
         </div>
+        <button class="btn-settings" id="btn-top-mass-update" onclick="toggleView('mass-update')" title="Actualizar precios masivamente en WHMCS (tbldomainpricing)">
+          <i class="fas fa-bolt" style="color: #4f46e5;"></i> Actualizar Precios Masivamente
+        </button>
         <button class="btn-refresh" id="btn-top-refresh" onclick="handleRefreshPrices()">
           <i class="fas fa-sync-alt"></i> Recargar Precios
         </button>
@@ -1097,6 +1511,147 @@
             <span class="settings-meta-val" style="color: #059669;">Activa (Acceso directo denegado)</span>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- VISTA 3: ACTUALIZACIÓN MASIVA DE PRECIOS EN WHMCS (TBLDOMAINPRICING) -->
+    <div id="view-mass-update" style="display: none;">
+      <div class="mass-container">
+        
+        <!-- Tarjeta Hero Informativa -->
+        <div class="mass-hero-card">
+          <div class="mass-hero-info">
+            <h2>
+              <i class="fas fa-bolt" style="color: #4f46e5;"></i> Actualizador Masivo de Precios de Dominios
+            </h2>
+            <p>
+              Herramienta de un solo clic conectada directamente a la base de datos MySQL de WHMCS (<code>tbldomainpricing</code> / <code>tblpricing</code>).
+              Calcula y actualiza masivamente los precios de <strong>Registro (1 año)</strong>, <strong>Renovación</strong> y <strong>Transferencia</strong>
+              para todas las monedas activas aplicando margen de ganancia global y redondeo psicológico a <code>.99</code>.
+            </p>
+          </div>
+          <div class="mass-badges-wrap">
+            <span class="mass-badge db-ok"><i class="fas fa-database"></i> BD: Conectada (WHMCS)</span>
+            <span class="mass-badge" id="mass-total-tlds-badge"><i class="fas fa-globe"></i> TLDs en BD: Detectando...</span>
+            <span class="mass-badge base-cur" id="mass-base-curr-badge"><i class="fas fa-dollar-sign"></i> Moneda Base: USD (ID 1)</span>
+          </div>
+        </div>
+
+        <div class="mass-grid">
+          
+          <!-- Tarjeta 1: Margen y Modo de Redondeo -->
+          <div class="mass-card">
+            <div class="mass-card-title">
+              <i class="fas fa-percentage" style="color: var(--primary);"></i> Parámetros Globales de Precios
+            </div>
+            <div class="mass-card-desc">
+              Define el margen de ganancia comercial a sumar sobre el costo convertido y la regla de terminación en .99.
+            </div>
+
+            <div class="mass-settings-row">
+              <div class="margin-input-box">
+                <label for="mass-margin-input">Porcentaje de Margen Global</label>
+                <div class="input-with-symbol">
+                  <input type="number" id="mass-margin-input" min="0" max="500" step="0.5" value="15" oninput="recalculateMassUpdatePreviews()">
+                  <span class="symbol-addon">%</span>
+                </div>
+                <div class="margin-presets">
+                  <span style="font-size: 11px; color: var(--text-muted); align-self: center;">Presets:</span>
+                  <button type="button" class="preset-pill" onclick="setMarginPreset(0)">0% (Costo)</button>
+                  <button type="button" class="preset-pill" onclick="setMarginPreset(10)">+10%</button>
+                  <button type="button" class="preset-pill" onclick="setMarginPreset(15)">+15% (Std)</button>
+                  <button type="button" class="preset-pill" onclick="setMarginPreset(20)">+20%</button>
+                  <button type="button" class="preset-pill" onclick="setMarginPreset(25)">+25%</button>
+                  <button type="button" class="preset-pill" onclick="setMarginPreset(30)">+30%</button>
+                </div>
+              </div>
+
+              <div class="margin-input-box">
+                <label>Estrategia de Redondeo a .99</label>
+                <div class="rounding-options">
+                  <label class="rounding-option">
+                    <input type="radio" name="mass_rounding" value="nearest" checked onchange="recalculateMassUpdatePreviews()">
+                    <div class="rounding-option-text">
+                      <strong>Redondeo al .99 más cercano (Recomendado)</strong>
+                      <span>Ajusta matemáticamente al .99 más próximo (ej. 13.15 → 12.99 / 13.80 → 13.99).</span>
+                    </div>
+                  </label>
+                  <label class="rounding-option">
+                    <input type="radio" name="mass_rounding" value="ceil" onchange="recalculateMassUpdatePreviews()">
+                    <div class="rounding-option-text">
+                      <strong>Redondeo al .99 superior</strong>
+                      <span>Asegura que el precio nunca quede por debajo del margen estricto (ej. 13.05 → 13.99).</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 16px; padding: 12px 14px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; font-size: 0.86rem; color: #334155;">
+              <i class="fas fa-info-circle" style="color: #3b82f6; margin-right: 6px;"></i>
+              <strong>Simulación en vivo (TLD .com base $13.99 USD):</strong>
+              <span id="mass-sample-calculation" style="font-family: var(--font-mono); font-weight: 700; color: #1e3a8a; margin-left: 6px;">
+                Calculando...
+              </span>
+            </div>
+          </div>
+
+          <!-- Tarjeta 2: Detección Dinámica de Monedas WHMCS -->
+          <div class="mass-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 6px;">
+              <div class="mass-card-title" style="margin-bottom: 0;">
+                <i class="fas fa-coins" style="color: #d97706;"></i> Divisas Activas en WHMCS (tblcurrencies)
+              </div>
+              <button type="button" class="btn-settings" onclick="loadMassUpdateCurrencies()" style="padding: 5px 12px; font-size: 0.8rem;">
+                <i class="fas fa-sync-alt"></i> Recargar Divisas de BD
+              </button>
+            </div>
+            <div class="mass-card-desc">
+              Ingresa la tasa de cambio manual del día para cada moneda activa. Los precios se calcularán automáticamente respetando el formato y redondeo .99 de WHMCS.
+            </div>
+
+            <div class="mass-table-wrap">
+              <table class="mass-table">
+                <thead>
+                  <tr>
+                    <th>Moneda</th>
+                    <th style="text-align: center;">Habilitar</th>
+                    <th>Tasa de Cambio Manual (1 USD = X)</th>
+                    <th>Tasa Actual en WHMCS</th>
+                    <th>Vista Previa (.com 1 Año)</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="mass-currencies-tbody">
+                  <tr>
+                    <td colspan="6" style="text-align: center; padding: 24px; color: var(--text-muted);">
+                      <i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Cargando monedas activas desde MySQL...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Barra de Acciones Principales -->
+            <div class="mass-actions-bar">
+              <button type="button" class="btn-mass-execute" id="btn-execute-mass-update" onclick="executeMassUpdate()">
+                <i class="fas fa-bolt"></i> Actualizar Precios Masivamente
+              </button>
+              <button type="button" class="btn-settings" onclick="toggleView('prices')" style="padding: 12px 20px;">
+                <i class="fas fa-arrow-left"></i> Volver a Revisión de Precios
+              </button>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-left: auto; display: flex; align-items: center; gap: 6px;">
+                <i class="fas fa-shield-alt" style="color: #10b981;"></i> Actualiza simultáneamente Registro, Renovación y Transferencia
+              </div>
+            </div>
+
+            <!-- Tarjeta de Reporte de Éxito / Error -->
+            <div id="mass-report-container" style="display: none;"></div>
+
+          </div>
+
+        </div>
+
       </div>
     </div>
   </div>
@@ -1271,40 +1826,80 @@
       if (settingsUserInput) settingsUserInput.value = currentUser;
     }
 
-    // Alternar entre Vista de Precios y Vista de Ajustes
+    // Alternar entre Vista de Precios, Vista de Ajustes y Vista de Actualizador Masivo
     let currentActiveView = 'prices';
     function toggleView(viewName) {
       currentActiveView = viewName;
       const viewPrices = document.getElementById('view-prices');
       const viewSettings = document.getElementById('view-settings');
+      const viewMassUpdate = document.getElementById('view-mass-update');
       const btnSettings = document.getElementById('btn-top-settings');
+      const btnMassUpdate = document.getElementById('btn-top-mass-update');
       const btnRefresh = document.getElementById('btn-top-refresh');
       const title = document.getElementById('header-main-title');
       const desc = document.getElementById('header-main-desc');
 
       if (viewName === 'settings') {
-        viewPrices.style.display = 'none';
-        viewSettings.style.display = 'block';
-        btnSettings.classList.add('active');
-        btnSettings.innerHTML = '<i class="fas fa-chart-line"></i> Ver Precios';
-        btnSettings.setAttribute('onclick', "toggleView('prices')");
-        btnRefresh.style.display = 'none';
-        title.innerHTML = '<i class="fas fa-cog" style="color: var(--primary); margin-right: 6px;"></i> Ajustes de Seguridad y Acceso';
-        desc.textContent = 'Modifica el usuario y la contraseña del panel de administración.';
+        if (viewPrices) viewPrices.style.display = 'none';
+        if (viewSettings) viewSettings.style.display = 'block';
+        if (viewMassUpdate) viewMassUpdate.style.display = 'none';
+        if (btnSettings) {
+          btnSettings.classList.add('active');
+          btnSettings.innerHTML = '<i class="fas fa-chart-line"></i> Ver Precios';
+          btnSettings.setAttribute('onclick', "toggleView('prices')");
+        }
+        if (btnMassUpdate) {
+          btnMassUpdate.classList.remove('active');
+          btnMassUpdate.innerHTML = '<i class="fas fa-bolt" style="color: #4f46e5;"></i> Actualizar Precios Masivamente';
+          btnMassUpdate.setAttribute('onclick', "toggleView('mass-update')");
+        }
+        if (btnRefresh) btnRefresh.style.display = 'none';
+        if (title) title.innerHTML = '<i class="fas fa-cog" style="color: var(--primary); margin-right: 6px;"></i> Ajustes de Seguridad y Acceso';
+        if (desc) desc.textContent = 'Modifica el usuario y la contraseña del panel de administración.';
         updateUserDisplay();
-        document.getElementById('settings-alert').style.display = 'none';
-        document.getElementById('settings-current-pass').value = '';
-        document.getElementById('settings-new-pass').value = '';
-        document.getElementById('settings-confirm-pass').value = '';
+        const sAlert = document.getElementById('settings-alert');
+        if (sAlert) sAlert.style.display = 'none';
+        const curP = document.getElementById('settings-current-pass');
+        if (curP) curP.value = '';
+        const newP = document.getElementById('settings-new-pass');
+        if (newP) newP.value = '';
+        const confP = document.getElementById('settings-confirm-pass');
+        if (confP) confP.value = '';
+      } else if (viewName === 'mass-update') {
+        if (viewPrices) viewPrices.style.display = 'none';
+        if (viewSettings) viewSettings.style.display = 'none';
+        if (viewMassUpdate) viewMassUpdate.style.display = 'block';
+        if (btnMassUpdate) {
+          btnMassUpdate.classList.add('active');
+          btnMassUpdate.innerHTML = '<i class="fas fa-chart-line"></i> Ver Precios';
+          btnMassUpdate.setAttribute('onclick', "toggleView('prices')");
+        }
+        if (btnSettings) {
+          btnSettings.classList.remove('active');
+          btnSettings.innerHTML = '<i class="fas fa-cog"></i> Ajustes';
+          btnSettings.setAttribute('onclick', "toggleView('settings')");
+        }
+        if (btnRefresh) btnRefresh.style.display = 'none';
+        if (title) title.innerHTML = '<i class="fas fa-bolt" style="color: #10b981; margin-right: 6px;"></i> Actualización Masiva de Precios de Dominios (WHMCS)';
+        if (desc) desc.textContent = 'Aplica tasas de cambio manuales, margen de beneficio y redondeo a .99 directamente en tbldomainpricing de WHMCS.';
+        loadMassUpdateCurrencies();
       } else {
-        viewPrices.style.display = 'block';
-        viewSettings.style.display = 'none';
-        btnSettings.classList.remove('active');
-        btnSettings.innerHTML = '<i class="fas fa-cog"></i> Ajustes';
-        btnSettings.setAttribute('onclick', "toggleView('settings')");
-        btnRefresh.style.display = 'inline-flex';
-        title.innerHTML = '<i class="fas fa-chart-line" style="color: var(--primary); margin-right: 6px;"></i> Revisión de Precios por País';
-        desc.textContent = 'Precios oficiales sincronizados desde WHMCS con unión de dominios en tiempo real.';
+        if (viewPrices) viewPrices.style.display = 'block';
+        if (viewSettings) viewSettings.style.display = 'none';
+        if (viewMassUpdate) viewMassUpdate.style.display = 'none';
+        if (btnSettings) {
+          btnSettings.classList.remove('active');
+          btnSettings.innerHTML = '<i class="fas fa-cog"></i> Ajustes';
+          btnSettings.setAttribute('onclick', "toggleView('settings')");
+        }
+        if (btnMassUpdate) {
+          btnMassUpdate.classList.remove('active');
+          btnMassUpdate.innerHTML = '<i class="fas fa-bolt" style="color: #4f46e5;"></i> Actualizar Precios Masivamente';
+          btnMassUpdate.setAttribute('onclick', "toggleView('mass-update')");
+        }
+        if (btnRefresh) btnRefresh.style.display = 'inline-flex';
+        if (title) title.innerHTML = '<i class="fas fa-chart-line" style="color: var(--primary); margin-right: 6px;"></i> Revisión de Precios por País';
+        if (desc) desc.textContent = 'Precios oficiales sincronizados desde WHMCS con unión de dominios en tiempo real.';
       }
     }
 
@@ -1974,7 +2569,11 @@
         <button class="tab-btn ${c.code === activeCountry ? 'active' : ''}" onclick="switchTab('${c.code}')">
           <i class="${c.icon || COUNTRY_ICONS[c.code] || 'fas fa-globe'}" style="margin-right: 6px; font-size: 13px;"></i> ${c.name}
         </button>
-      `).join('');
+      `).join('') + `
+        <button class="tab-btn" onclick="toggleView('mass-update')" title="Actualizador Masivo de Precios en WHMCS" style="background: #eef2ff; color: #4338ca; border-color: #c7d2fe; font-weight: 600;">
+          <i class="fas fa-bolt" style="color: #4f46e5; margin-right: 6px;"></i> Actualizador Masivo
+        </button>
+      `;
 
       // Renderizar Paneles
       container.innerHTML = results.map(r => renderCountryPane(r.country, r.result)).join('');
@@ -1988,6 +2587,391 @@
       document.querySelectorAll('.tab-content').forEach(pane => {
         pane.classList.toggle('active', pane.id === `pane-${code}`);
       });
+    }
+
+    // ========================================================
+    // HERRAMIENTA DE ACTUALIZACIÓN MASIVA DE PRECIOS WHMCS
+    // ========================================================
+    let massUpdateCurrenciesData = [];
+    let massUpdateBaseCurrency = null;
+
+    // Redondeo inteligente al .99 más cercano
+    function calculateSmartPoint99(val, mode = 'nearest') {
+      if (!val || val <= 0) return 0.99;
+      const floor = Math.floor(val);
+      const c1 = floor - 1 + 0.99; // Ej: 13.99 cuando val es 14.15
+      const c2 = floor + 0.99;     // Ej: 14.99 cuando val es 14.15
+
+      if (mode === 'ceil') {
+        return (val > c1) ? parseFloat(c2.toFixed(2)) : parseFloat(c1.toFixed(2));
+      }
+      if (c1 > 0 && Math.abs(val - c1) < Math.abs(val - c2)) {
+        return parseFloat(c1.toFixed(2));
+      }
+      return parseFloat(c2.toFixed(2));
+    }
+
+    function setMarginPreset(val) {
+      const input = document.getElementById('mass-margin-input');
+      if (input) {
+        input.value = val;
+        recalculateMassUpdatePreviews();
+      }
+    }
+
+    async function loadMassUpdateCurrencies() {
+      const tbody = document.getElementById('mass-currencies-tbody');
+      const badgeTlds = document.getElementById('mass-total-tlds-badge');
+      const badgeBase = document.getElementById('mass-base-curr-badge');
+      if (tbody) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align: center; padding: 24px; color: var(--text-muted);">
+              <i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Conectando a WHMCS (tblcurrencies)...
+            </td>
+          </tr>
+        `;
+      }
+
+      try {
+        const res = await fetch('api/actualizar-precios-dominios.php?action=get_currencies', {
+          cache: 'no-store'
+        });
+
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}: Error al cargar divisas desde el servidor`);
+        }
+
+        const data = await res.json();
+        if (data.status !== 'success') {
+          throw new Error(data.message || 'Error desconocido al consultar tblcurrencies');
+        }
+
+        massUpdateCurrenciesData = data.currencies || [];
+        massUpdateBaseCurrency = data.base_currency || { id: 1, code: 'USD', rate: 1.0 };
+
+        if (badgeTlds && data.total_tlds) {
+          badgeTlds.innerHTML = `<i class="fas fa-globe"></i> ${data.total_tlds} TLDs en tbldomainpricing`;
+        }
+        if (badgeBase && massUpdateBaseCurrency) {
+          badgeBase.innerHTML = `<i class="fas fa-dollar-sign"></i> Base: ${massUpdateBaseCurrency.code} (ID ${massUpdateBaseCurrency.id})`;
+        }
+
+        renderMassCurrenciesTable();
+      } catch (err) {
+        console.error('Error loadMassUpdateCurrencies:', err);
+        if (tbody) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 20px; color: #dc2626; background: #fef2f2;">
+                <i class="fas fa-exclamation-triangle" style="margin-right: 6px;"></i> ${err.message}
+                <div style="margin-top: 10px;">
+                  <button type="button" class="btn-settings" onclick="loadMassUpdateCurrencies()">Reintentar</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }
+      }
+    }
+
+    function renderMassCurrenciesTable() {
+      const tbody = document.getElementById('mass-currencies-tbody');
+      if (!tbody) return;
+
+      if (!massUpdateCurrenciesData.length) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 20px;">No se encontraron divisas activas en WHMCS.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = massUpdateCurrenciesData.map((curr) => {
+        const isDefault = curr.default;
+        const defaultChecked = !isDefault; // habilitar todas las secundarias por defecto
+        const currRate = parseFloat(curr.rate) || 1.0;
+        const prefix = curr.prefix || '';
+        const suffix = curr.suffix || '';
+
+        return `
+          <tr data-currency-id="${curr.id}" data-currency-code="${curr.code}">
+            <td>
+              <div class="mass-curr-cell">
+                <span style="font-size: 1.05rem;">${curr.code}</span>
+                ${isDefault ? '<span class="mass-badge base-cur" style="padding: 2px 7px; font-size: 10px;">BASE</span>' : ''}
+              </div>
+              <div style="font-size: 11px; color: var(--text-muted);">${prefix} ... ${suffix}</div>
+            </td>
+            <td style="text-align: center;">
+              <input type="checkbox" id="mass-enable-${curr.id}" class="mass-curr-check" ${defaultChecked ? 'checked' : ''} ${isDefault ? 'disabled title="La moneda base se usa como referencia de costos"' : ''} onchange="recalculateMassUpdatePreviews()" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary);">
+            </td>
+            <td>
+              <input type="number" step="any" min="0.000001" id="mass-rate-${curr.id}" class="mass-rate-input" value="${currRate}" ${isDefault ? 'readonly style="background: #f1f5f9; cursor: not-allowed;"' : ''} oninput="recalculateMassUpdatePreviews()" placeholder="Tasa manual">
+            </td>
+            <td>
+              <span class="sync-badge ok" style="padding: 3px 8px; font-family: var(--font-mono); font-size: 12px;">
+                ${currRate}
+              </span>
+            </td>
+            <td>
+              <span class="mass-preview-cell" id="mass-preview-${curr.id}">
+                Cálculo...
+              </span>
+            </td>
+            <td>
+              <span id="mass-status-${curr.id}" style="font-size: 12px; color: #059669; font-weight: 600;">
+                <i class="fas fa-check-circle"></i> Lista
+              </span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      recalculateMassUpdatePreviews();
+    }
+
+    function recalculateMassUpdatePreviews() {
+      const marginInput = document.getElementById('mass-margin-input');
+      const margin = parseFloat(marginInput ? marginInput.value : 15) || 0;
+      const roundingRadios = document.getElementsByName('mass_rounding');
+      let roundingMode = 'nearest';
+      for (const r of roundingRadios) {
+        if (r.checked) roundingMode = r.value;
+      }
+
+      // Costo de dominio base de ejemplo: .com a $13.99 USD
+      const sampleBaseCost = 13.99;
+
+      // Actualizar cálculo de muestra
+      const sampleCalcSpan = document.getElementById('mass-sample-calculation');
+      if (sampleCalcSpan) {
+        const sampleWithMargin = sampleBaseCost * (1 + margin / 100);
+        const sampleRounded = calculateSmartPoint99(sampleWithMargin, roundingMode);
+        sampleCalcSpan.textContent = `$${sampleBaseCost.toFixed(2)} + ${margin}% margen = $${sampleWithMargin.toFixed(4)} → $${sampleRounded.toFixed(2)}`;
+      }
+
+      massUpdateCurrenciesData.forEach(curr => {
+        const check = document.getElementById(`mass-enable-${curr.id}`);
+        const rateIn = document.getElementById(`mass-rate-${curr.id}`);
+        const prevSpan = document.getElementById(`mass-preview-${curr.id}`);
+        const statusSpan = document.getElementById(`mass-status-${curr.id}`);
+
+        if (!prevSpan) return;
+
+        const isEnabled = check ? check.checked : false;
+        const rate = rateIn ? (parseFloat(rateIn.value) || 0) : curr.rate;
+
+        if (!isEnabled && !curr.default) {
+          prevSpan.style.opacity = '0.4';
+          prevSpan.textContent = 'Omitida';
+          if (statusSpan) statusSpan.innerHTML = '<span style="color:#9ca3af;"><i class="fas fa-minus-circle"></i> No seleccionada</span>';
+          return;
+        }
+
+        prevSpan.style.opacity = '1';
+
+        const converted = sampleBaseCost * rate;
+        const withMargin = converted * (1 + margin / 100);
+        const finalPrice = calculateSmartPoint99(withMargin, roundingMode);
+
+        const prefix = curr.prefix || '';
+        const suffix = curr.suffix || '';
+        prevSpan.textContent = `${prefix}${finalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}${suffix}`;
+
+        if (statusSpan) {
+          statusSpan.innerHTML = '<span style="color:#059669;"><i class="fas fa-check-circle"></i> Se actualizará</span>';
+        }
+      });
+    }
+
+    async function executeMassUpdate() {
+      const btn = document.getElementById('btn-execute-mass-update');
+      const reportBox = document.getElementById('mass-report-container');
+      const marginInput = document.getElementById('mass-margin-input');
+      const margin = parseFloat(marginInput ? marginInput.value : 15) || 0;
+
+      const roundingRadios = document.getElementsByName('mass_rounding');
+      let roundingMode = 'nearest';
+      for (const r of roundingRadios) {
+        if (r.checked) roundingMode = r.value;
+      }
+
+      // Recopilar tasas seleccionadas
+      const ratesPayload = [];
+      massUpdateCurrenciesData.forEach(curr => {
+        const check = document.getElementById(`mass-enable-${curr.id}`);
+        const rateIn = document.getElementById(`mass-rate-${curr.id}`);
+        const isEnabled = check ? check.checked : false;
+        const rate = rateIn ? (parseFloat(rateIn.value) || 0) : curr.rate;
+
+        if (isEnabled && rate > 0) {
+          ratesPayload.push({
+            id: curr.id,
+            code: curr.code,
+            rate: rate,
+            enabled: true
+          });
+        }
+      });
+
+      if (!ratesPayload.length) {
+        alert('Por favor selecciona al menos una moneda secundaria e ingresa una tasa de cambio válida.');
+        return;
+      }
+
+      const confirmMsg = `¿Confirmas la actualización masiva de precios en WHMCS?\n\n` +
+        `• Monedas a actualizar: ${ratesPayload.map(r => r.code + ' (' + r.rate + ')').join(', ')}\n` +
+        `• Margen de Ganancia Global: +${margin}%\n` +
+        `• Modo de Redondeo: .99 (${roundingMode === 'nearest' ? 'Más cercano' : 'Superior'})\n\n` +
+        `Esto ejecutará el UPDATE masivo para Registro (1 año), Renovación y Transferencia de TODOS los TLDs en la base de datos de WHMCS.`;
+
+      if (!confirm(confirmMsg)) {
+        return;
+      }
+
+      // Bloquear botón y mostrar spinner
+      const originalBtnHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Actualizando base de datos de WHMCS...`;
+      showSyncToast('info', 'Ejecutando UPDATE masivo en tbldomainpricing / tblpricing...');
+
+      if (reportBox) {
+        reportBox.style.display = 'none';
+        reportBox.innerHTML = '';
+      }
+
+      try {
+        const response = await fetch('api/actualizar-precios-dominios.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'update_prices',
+            margin: margin,
+            rounding: roundingMode,
+            rates: ratesPayload
+          })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || result.status !== 'success') {
+          throw new Error(result.message || 'Error en el servidor al ejecutar la actualización masiva');
+        }
+
+        // Renderizar reporte de éxito
+        renderMassSuccessReport(result);
+        showSyncToast('success', '¡Precios actualizados con éxito en WHMCS!');
+
+        // Recargar datos del panel de precios en segundo plano
+        if (typeof loadAllData === 'function') {
+          loadAllData();
+        }
+      } catch (err) {
+        console.error('Error executeMassUpdate:', err);
+        showSyncToast('warn', 'Error: ' + err.message);
+        if (reportBox) {
+          reportBox.style.display = 'block';
+          reportBox.className = 'mass-report-card error';
+          reportBox.innerHTML = `
+            <div class="mass-report-header">
+              <i class="fas fa-times-circle" style="color: #dc2626;"></i>
+              <div>
+                <h3>Error al Actualizar Precios</h3>
+                <p style="margin: 0; font-size: 0.9rem;">${err.message}</p>
+              </div>
+            </div>
+          `;
+        }
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalBtnHtml;
+      }
+    }
+
+    function renderMassSuccessReport(res) {
+      const reportBox = document.getElementById('mass-report-container');
+      if (!reportBox) return;
+
+      reportBox.style.display = 'block';
+      reportBox.className = 'mass-report-card success';
+
+      const currenciesList = res.currencies_updated || [];
+      const totalTlds = res.total_tlds || 0;
+      const totalOps = res.total_operations || 0;
+      const margin = res.margin_percent || 0;
+
+      reportBox.innerHTML = `
+        <div class="mass-report-header">
+          <i class="fas fa-check-circle" style="color: #16a34a;"></i>
+          <div>
+            <h3>${res.message || '¡Actualización Masiva Completada con Éxito!'}</h3>
+            <p style="margin: 0; font-size: 0.9rem; color: #166534;">
+              Los precios en la tabla <code>tblpricing</code> (vinculada a <code>tbldomainpricing</code>) y las tasas en <code>tblcurrencies</code> han sido actualizados en la base de datos de WHMCS.
+            </p>
+          </div>
+        </div>
+
+        <div class="mass-report-stats">
+          <div class="mass-stat-box">
+            <span class="stat-label">Total TLDs Procesados</span>
+            <span class="stat-val" style="color: #1e3a8a;">${totalTlds}</span>
+          </div>
+          <div class="mass-stat-box">
+            <span class="stat-label">Operaciones en BD</span>
+            <span class="stat-val" style="color: #16a34a;">${totalOps.toLocaleString()}</span>
+          </div>
+          <div class="mass-stat-box">
+            <span class="stat-label">Margen Aplicado</span>
+            <span class="stat-val" style="color: #7c3aed;">+${margin}%</span>
+          </div>
+          <div class="mass-stat-box">
+            <span class="stat-label">Caché JSON Sincronizado</span>
+            <span class="stat-val" style="color: #059669; font-size: 1.1rem;">
+              <i class="fas fa-check"></i> ${res.json_synced ? 'Sincronizado' : 'En proceso'}
+            </span>
+          </div>
+        </div>
+
+        <div class="mass-report-details">
+          <table class="mass-table" style="margin: 0;">
+            <thead>
+              <tr>
+                <th>Moneda</th>
+                <th>Tasa Guardada</th>
+                <th>Margen Global</th>
+                <th>TLDs Actualizados</th>
+                <th>Registros Afectados (Reg / Ren / Tra)</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${currenciesList.map(c => `
+                <tr>
+                  <td><strong>${c.code}</strong></td>
+                  <td style="font-family: var(--font-mono); font-weight: 700;">${c.rate}</td>
+                  <td>+${c.margin}%</td>
+                  <td style="font-weight: 700; color: #1e3a8a;">${c.tlds_updated} TLDs</td>
+                  <td style="font-family: var(--font-mono);">${c.operations_count} campos</td>
+                  <td>
+                    <span class="sync-badge ok" style="padding: 2px 8px;">
+                      <i class="fas fa-check" style="font-size: 10px;"></i> Éxito
+                    </span>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 18px; align-items: center; flex-wrap: wrap;">
+          <button type="button" class="btn-refresh" onclick="toggleView('prices')" style="background: #16a34a;">
+            <i class="fas fa-chart-line"></i> Ir a Revisión de Precios para Ver Resultados
+          </button>
+          <button type="button" class="btn-settings" onclick="loadMassUpdateCurrencies()">
+            <i class="fas fa-sync-alt"></i> Refrescar Divisas
+          </button>
+        </div>
+      `;
+
+      reportBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     // Inicialización con verificación de sesión
