@@ -105,11 +105,73 @@ if ($action === 'get_currencies') {
             $totalTlds = (int)$row['total'];
         }
 
+        // Consultar catálogo completo de dominios con precios ya creados en WHMCS y costo Brixly / Base USD
+        $baseCurrencyId = $baseCurrency ? (int)$baseCurrency['id'] : 1;
+        $domainsCatalog = [];
+        $domQuery = $conexion->query("
+            SELECT dp.id as dpid, dp.extension, dp.autoreg,
+                   pr.currency, pr.type, pr.msetupfee
+            FROM tbldomainpricing dp
+            LEFT JOIN tblpricing pr ON (pr.relid = dp.id AND pr.type IN ('domainregister', 'domainrenew', 'domaintransfer'))
+            ORDER BY dp.id ASC
+        ");
+
+        if ($domQuery) {
+            while ($row = $domQuery->fetch_assoc()) {
+                $dpid = (int)$row['dpid'];
+                $ext = strtolower(trim($row['extension']));
+                if ($ext !== '' && substr($ext, 0, 1) !== '.') {
+                    $ext = '.' . $ext;
+                }
+                $autoreg = trim($row['autoreg'] ?? '');
+                $currId = (int)($row['currency'] ?? 0);
+                $type = $row['type'] ?? '';
+                $mfee = isset($row['msetupfee']) ? (float)$row['msetupfee'] : null;
+
+                if (!isset($domainsCatalog[$dpid])) {
+                    $domainsCatalog[$dpid] = [
+                        'id' => $dpid,
+                        'extension' => $ext,
+                        'autoreg' => $autoreg ?: 'brixly',
+                        'cost_brixly' => null,
+                        'prices' => []
+                    ];
+                }
+
+                if ($currId > 0 && $type !== '') {
+                    if (!isset($domainsCatalog[$dpid]['prices'][$currId])) {
+                        $domainsCatalog[$dpid]['prices'][$currId] = [
+                            'register' => null,
+                            'renew' => null,
+                            'transfer' => null
+                        ];
+                    }
+                    if ($type === 'domainregister') $domainsCatalog[$dpid]['prices'][$currId]['register'] = $mfee;
+                    if ($type === 'domainrenew')    $domainsCatalog[$dpid]['prices'][$currId]['renew'] = $mfee;
+                    if ($type === 'domaintransfer') $domainsCatalog[$dpid]['prices'][$currId]['transfer'] = $mfee;
+
+                    // Si es la moneda base (USD), asignar como costo de proveedor (Brixly)
+                    if ($currId === $baseCurrencyId && $type === 'domainregister' && $mfee !== null && $mfee > 0) {
+                        $domainsCatalog[$dpid]['cost_brixly'] = $mfee;
+                    }
+                }
+            }
+        }
+
+        // Fallback de cost_brixly si faltara para algún TLD específico
+        foreach ($domainsCatalog as &$dItem) {
+            if ($dItem['cost_brixly'] === null) {
+                $dItem['cost_brixly'] = $dItem['prices'][$baseCurrencyId]['renew'] ?? ($dItem['prices'][$baseCurrencyId]['transfer'] ?? 13.99);
+            }
+        }
+        unset($dItem);
+
         echo json_encode([
             'status' => 'success',
             'total_tlds' => $totalTlds,
             'base_currency' => $baseCurrency,
             'currencies' => $currencies,
+            'domains' => array_values($domainsCatalog),
             'server_time' => date('Y-m-d H:i:s')
         ]);
         exit;

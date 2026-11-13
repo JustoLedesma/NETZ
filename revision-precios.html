@@ -1650,8 +1650,140 @@
 
           </div>
 
+          <!-- Tarjeta 3: Catálogo Completo de Dominios (Costo Brixly como primer campo) -->
+          <div class="mass-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 16px;">
+              <div>
+                <div class="mass-card-title" style="margin-bottom: 4px;">
+                  <i class="fas fa-list-alt" style="color: var(--primary);"></i> Precios de Dominios Ya Creados en WHMCS
+                  <span id="mass-domains-count-badge" class="mass-badge" style="font-size: 11px; margin-left: 6px;">0 TLDs</span>
+                </div>
+                <p class="mass-card-desc" style="margin-bottom: 0;">
+                  Lista completa de dominios configurados en la base de datos de WHMCS. El <strong>Costo Brixly (USD)</strong> se muestra como primer campo de referencia.
+                </p>
+              </div>
+
+              <!-- Controles: Selector de moneda para ver precios creados + Buscador en tiempo real -->
+              <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <label for="mass-domain-currency-select" style="font-size: 0.82rem; font-weight: 700; color: #374151; text-transform: uppercase;">Ver en:</label>
+                  <select id="mass-domain-currency-select" onchange="changeMassDomainCurrency(this.value)" style="padding: 7px 12px; border: 1px solid var(--border); border-radius: 8px; font-weight: 700; font-size: 13px; color: #1e1b4b; background: #f8fafc; outline: none; cursor: pointer;">
+                    <!-- Se llena con las divisas activas -->
+                  </select>
+                </div>
+
+                <div style="position: relative;">
+                  <input type="search" id="mass-domain-search" placeholder="Filtrar TLD (ej: .com, .store, .py)..." oninput="filterMassDomainsTable(this.value)" style="padding: 8px 12px 8px 32px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; outline: none; width: 260px; max-width: 100%; background: #fff;">
+                  <i class="fas fa-search" style="position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 12px; color: #9ca3af;"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="mass-table-wrap">
+              <table class="mass-table" id="table-mass-all-domains">
+                <thead>
+                  <tr>
+                    <th style="background: #0f172a; width: 170px;">
+                      <i class="fas fa-server" style="color: #38bdf8; margin-right: 5px;"></i> Costo Brixly (USD)
+                    </th>
+                    <th style="width: 160px;">Extensión (TLD)</th>
+                    <th>Registrar (Actual)</th>
+                    <th>Renovación (Actual)</th>
+                    <th>Transferencia (Actual)</th>
+                    <th style="background: #065f46;">
+                      <i class="fas fa-calculator" style="margin-right: 5px;"></i> Proyectado (+Margen .99)
+                    </th>
+                    <th>Registrador</th>
+                  </tr>
+                </thead>
+                <tbody id="mass-domains-catalog-tbody">
+                  <tr>
+                    <td colspan="7" style="text-align: center; padding: 28px; color: var(--text-muted);">
+                      <i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Cargando dominios y costos Brixly...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Paginación dinámica y selector de cantidad -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; flex-wrap: wrap; gap: 10px; font-size: 0.86rem; color: #475569;">
+              <div id="mass-domains-pagination-info">Mostrando 0 dominios</div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <label style="font-size: 12px;">Mostrar:
+                  <select id="mass-domains-per-page" onchange="changeMassDomainsPerPage(this.value)" style="padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px; font-size: 12px;">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="250">250</option>
+                    <option value="all">Todos</option>
+                  </select>
+                </label>
+                <div id="mass-domains-pagination-controls" style="display: flex; gap: 4px;"></div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL DE CONFIRMACIÓN DE ACTUALIZACIÓN MASIVA DE PRECIOS
+       ======================================================== -->
+  <div id="modal-confirm-mass-update" class="modal-overlay" style="display: none;" onclick="handleMassConfirmModalBackdropClick(event)">
+    <div class="modal-card" style="max-width: 580px;">
+      <div class="modal-header" style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 44px; height: 44px; border-radius: 12px; background: #ecfdf5; color: #059669; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.15);">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <div>
+            <h2 style="margin: 0; font-size: 1.25rem; font-weight: 700; color: #111827;">Confirmar Actualización en WHMCS</h2>
+            <p style="margin: 2px 0 0; font-size: 0.84rem; color: var(--text-muted);">Revisa los parámetros antes de aplicar los cambios en la base de datos.</p>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeMassConfirmModal()" title="Cerrar"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="modal-body" style="padding: 20px 0;">
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed #cbd5e1;">
+            <span style="font-size: 0.86rem; color: #475569; font-weight: 600;">Margen de Ganancia Global:</span>
+            <span id="modal-confirm-margin" style="font-weight: 700; color: #4f46e5; font-size: 0.95rem;">+15%</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed #cbd5e1;">
+            <span style="font-size: 0.86rem; color: #475569; font-weight: 600;">Estrategia de Redondeo:</span>
+            <span id="modal-confirm-rounding" style="font-weight: 700; color: #059669; font-size: 0.88rem;">Al .99 más cercano</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="font-size: 0.86rem; color: #475569; font-weight: 600;">Alcance en BD (1 año):</span>
+            <span style="font-weight: 700; color: #1e3a8a; font-size: 0.88rem;">Registro, Renovación y Transferencia</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <label style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: #374151; letter-spacing: 0.5px; display: block; margin-bottom: 8px;">
+            Monedas y Tasas que serán actualizadas:
+          </label>
+          <div id="modal-confirm-currencies-list" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+        </div>
+
+        <div style="background: #fffbeb; border: 1px solid #fef3c7; border-left: 4px solid #f59e0b; padding: 12px 14px; border-radius: 6px; font-size: 0.84rem; color: #92400e; line-height: 1.45;">
+          <i class="fas fa-exclamation-triangle" style="margin-right: 6px;"></i>
+          Esta operación ejecutará el <code>UPDATE</code> en <code>tblpricing</code> y <code>tblcurrencies</code> para todos los TLDs y regenerará automáticamente el caché JSON en tiempo real.
+        </div>
+      </div>
+
+      <div class="modal-footer" style="border-top: 1px solid var(--border); padding-top: 14px; display: flex; justify-content: flex-end; gap: 12px;">
+        <button type="button" class="btn-settings" onclick="closeMassConfirmModal()" style="padding: 10px 18px;">
+          Cancelar
+        </button>
+        <button type="button" class="btn-mass-execute" id="btn-modal-confirm-execute" onclick="proceedExecuteMassUpdate()" style="padding: 10px 24px; font-size: 0.95rem;">
+          <i class="fas fa-check-circle"></i> Sí, Actualizar Masivamente
+        </button>
       </div>
     </div>
   </div>
@@ -2425,6 +2557,7 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeProductLinksModal();
+        closeMassConfirmModal();
       }
     });
 
@@ -2594,6 +2727,13 @@
     // ========================================================
     let massUpdateCurrenciesData = [];
     let massUpdateBaseCurrency = null;
+    let massUpdateDomainsCatalog = [];
+    let massDomainsFiltered = [];
+    let selectedDomainCurrencyId = 1;
+    let massDomainsSearchQuery = '';
+    let massDomainsCurrentPage = 1;
+    let massDomainsPerPage = 50;
+    let pendingMassUpdatePayload = null;
 
     // Redondeo inteligente al .99 más cercano
     function calculateSmartPoint99(val, mode = 'nearest') {
@@ -2611,11 +2751,29 @@
       return parseFloat(c2.toFixed(2));
     }
 
+    function formatCurrencyVal(val, curr) {
+      if (val === null || val === undefined || isNaN(val)) return '-';
+      const prefix = (curr && curr.prefix) ? curr.prefix : '';
+      const suffix = (curr && curr.suffix) ? curr.suffix : '';
+      return `${prefix}${Number(val).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}${suffix}`;
+    }
+
+    function getActiveCurrencyRate(currId) {
+      const rateInput = document.getElementById(`mass-rate-${currId}`);
+      if (rateInput && rateInput.value) {
+        const val = parseFloat(rateInput.value);
+        if (!isNaN(val) && val > 0) return val;
+      }
+      const c = massUpdateCurrenciesData.find(item => item.id === currId);
+      return c ? (parseFloat(c.rate) || 1.0) : 1.0;
+    }
+
     function setMarginPreset(val) {
       const input = document.getElementById('mass-margin-input');
       if (input) {
         input.value = val;
         recalculateMassUpdatePreviews();
+        renderMassDomainsTable();
       }
     }
 
@@ -2627,7 +2785,7 @@
         tbody.innerHTML = `
           <tr>
             <td colspan="6" style="text-align: center; padding: 24px; color: var(--text-muted);">
-              <i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Conectando a WHMCS (tblcurrencies)...
+              <i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Conectando a WHMCS (tblcurrencies y tbldomainpricing)...
             </td>
           </tr>
         `;
@@ -2649,15 +2807,22 @@
 
         massUpdateCurrenciesData = data.currencies || [];
         massUpdateBaseCurrency = data.base_currency || { id: 1, code: 'USD', rate: 1.0 };
+        massUpdateDomainsCatalog = data.domains || [];
 
-        if (badgeTlds && data.total_tlds) {
-          badgeTlds.innerHTML = `<i class="fas fa-globe"></i> ${data.total_tlds} TLDs en tbldomainpricing`;
+        if (badgeTlds) {
+          const totalCount = data.total_tlds || massUpdateDomainsCatalog.length;
+          badgeTlds.innerHTML = `<i class="fas fa-globe"></i> ${totalCount} TLDs en tbldomainpricing`;
         }
         if (badgeBase && massUpdateBaseCurrency) {
           badgeBase.innerHTML = `<i class="fas fa-dollar-sign"></i> Base: ${massUpdateBaseCurrency.code} (ID ${massUpdateBaseCurrency.id})`;
         }
 
+        // Popular selector de moneda para el catálogo de dominios
+        populateDomainCurrencySelector();
+
+        // Renderizar tablas
         renderMassCurrenciesTable();
+        renderMassDomainsTable();
       } catch (err) {
         console.error('Error loadMassUpdateCurrencies:', err);
         if (tbody) {
@@ -2675,6 +2840,17 @@
       }
     }
 
+    function populateDomainCurrencySelector() {
+      const select = document.getElementById('mass-domain-currency-select');
+      if (!select) return;
+
+      select.innerHTML = massUpdateCurrenciesData.map(c => `
+        <option value="${c.id}" ${c.id === selectedDomainCurrencyId ? 'selected' : ''}>
+          ${c.code} (${c.prefix || c.suffix || '$'})${c.default ? ' - Base' : ''}
+        </option>
+      `).join('');
+    }
+
     function renderMassCurrenciesTable() {
       const tbody = document.getElementById('mass-currencies-tbody');
       if (!tbody) return;
@@ -2686,7 +2862,7 @@
 
       tbody.innerHTML = massUpdateCurrenciesData.map((curr) => {
         const isDefault = curr.default;
-        const defaultChecked = !isDefault; // habilitar todas las secundarias por defecto
+        const defaultChecked = !isDefault;
         const currRate = parseFloat(curr.rate) || 1.0;
         const prefix = curr.prefix || '';
         const suffix = curr.suffix || '';
@@ -2701,10 +2877,10 @@
               <div style="font-size: 11px; color: var(--text-muted);">${prefix} ... ${suffix}</div>
             </td>
             <td style="text-align: center;">
-              <input type="checkbox" id="mass-enable-${curr.id}" class="mass-curr-check" ${defaultChecked ? 'checked' : ''} ${isDefault ? 'disabled title="La moneda base se usa como referencia de costos"' : ''} onchange="recalculateMassUpdatePreviews()" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary);">
+              <input type="checkbox" id="mass-enable-${curr.id}" class="mass-curr-check" ${defaultChecked ? 'checked' : ''} ${isDefault ? 'disabled title="La moneda base se usa como referencia de costos"' : ''} onchange="recalculateMassUpdatePreviews(); renderMassDomainsTable();" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary);">
             </td>
             <td>
-              <input type="number" step="any" min="0.000001" id="mass-rate-${curr.id}" class="mass-rate-input" value="${currRate}" ${isDefault ? 'readonly style="background: #f1f5f9; cursor: not-allowed;"' : ''} oninput="recalculateMassUpdatePreviews()" placeholder="Tasa manual">
+              <input type="number" step="any" min="0.000001" id="mass-rate-${curr.id}" class="mass-rate-input" value="${currRate}" ${isDefault ? 'readonly style="background: #f1f5f9; cursor: not-allowed;"' : ''} oninput="recalculateMassUpdatePreviews(); renderMassDomainsTable();" placeholder="Tasa manual">
             </td>
             <td>
               <span class="sync-badge ok" style="padding: 3px 8px; font-family: var(--font-mono); font-size: 12px;">
@@ -2740,7 +2916,6 @@
       // Costo de dominio base de ejemplo: .com a $13.99 USD
       const sampleBaseCost = 13.99;
 
-      // Actualizar cálculo de muestra
       const sampleCalcSpan = document.getElementById('mass-sample-calculation');
       if (sampleCalcSpan) {
         const sampleWithMargin = sampleBaseCost * (1 + margin / 100);
@@ -2782,9 +2957,195 @@
       });
     }
 
-    async function executeMassUpdate() {
-      const btn = document.getElementById('btn-execute-mass-update');
-      const reportBox = document.getElementById('mass-report-container');
+    // ========================================================
+    // TABLA COMPLETA DE DOMINIOS CON COSTO BRIXLY Y PRECIOS
+    // ========================================================
+    function changeMassDomainCurrency(currId) {
+      selectedDomainCurrencyId = parseInt(currId, 10);
+      renderMassDomainsTable();
+    }
+
+    function filterMassDomainsTable(query) {
+      massDomainsSearchQuery = (query || '').toLowerCase().trim();
+      massDomainsCurrentPage = 1;
+      renderMassDomainsTable();
+    }
+
+    function changeMassDomainsPerPage(val) {
+      massDomainsPerPage = (val === 'all') ? 999999 : parseInt(val, 10);
+      massDomainsCurrentPage = 1;
+      renderMassDomainsTable();
+    }
+
+    function goToMassDomainPage(pageNum) {
+      massDomainsCurrentPage = pageNum;
+      renderMassDomainsTable();
+    }
+
+    function renderMassDomainsTable() {
+      const tbody = document.getElementById('mass-domains-catalog-tbody');
+      const countBadge = document.getElementById('mass-domains-count-badge');
+      const infoDiv = document.getElementById('mass-domains-pagination-info');
+      const controlsDiv = document.getElementById('mass-domains-pagination-controls');
+      if (!tbody) return;
+
+      if (!massUpdateDomainsCatalog.length) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 24px;">No hay dominios cargados en el catálogo.</td></tr>`;
+        return;
+      }
+
+      // Parámetros de proyección
+      const marginInput = document.getElementById('mass-margin-input');
+      const margin = parseFloat(marginInput ? marginInput.value : 15) || 0;
+      const roundingRadios = document.getElementsByName('mass_rounding');
+      let roundingMode = 'nearest';
+      for (const r of roundingRadios) {
+        if (r.checked) roundingMode = r.value;
+      }
+
+      const activeCurr = massUpdateCurrenciesData.find(c => c.id === selectedDomainCurrencyId) || massUpdateBaseCurrency || { id: 1, code: 'USD', rate: 1.0 };
+      const currentRate = getActiveCurrencyRate(selectedDomainCurrencyId);
+
+      // Filtrar dominios
+      let filtered = massUpdateDomainsCatalog;
+      if (massDomainsSearchQuery) {
+        filtered = massUpdateDomainsCatalog.filter(d => {
+          return d.extension.toLowerCase().includes(massDomainsSearchQuery) ||
+                 (d.autoreg && d.autoreg.toLowerCase().includes(massDomainsSearchQuery));
+        });
+      }
+
+      if (countBadge) {
+        countBadge.textContent = `${filtered.length} TLDs`;
+      }
+
+      // Paginación
+      const totalItems = filtered.length;
+      const totalPages = Math.ceil(totalItems / massDomainsPerPage) || 1;
+      if (massDomainsCurrentPage > totalPages) massDomainsCurrentPage = totalPages;
+      if (massDomainsCurrentPage < 1) massDomainsCurrentPage = 1;
+
+      const startIndex = (massDomainsCurrentPage - 1) * massDomainsPerPage;
+      const pageItems = filtered.slice(startIndex, startIndex + massDomainsPerPage);
+
+      if (infoDiv) {
+        const endRange = Math.min(startIndex + pageItems.length, totalItems);
+        infoDiv.innerHTML = `Mostrando <strong>${pageItems.length ? startIndex + 1 : 0}</strong> a <strong>${endRange}</strong> de <strong>${totalItems}</strong> dominios`;
+      }
+
+      if (controlsDiv) {
+        if (totalPages <= 1) {
+          controlsDiv.innerHTML = '';
+        } else {
+          controlsDiv.innerHTML = `
+            <button type="button" class="preset-pill" onclick="goToMassDomainPage(${massDomainsCurrentPage - 1})" ${massDomainsCurrentPage <= 1 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+              <i class="fas fa-chevron-left"></i> Anterior
+            </button>
+            <span style="align-self: center; font-weight: 700; padding: 0 4px; font-size: 12px;">${massDomainsCurrentPage} / ${totalPages}</span>
+            <button type="button" class="preset-pill" onclick="goToMassDomainPage(${massDomainsCurrentPage + 1})" ${massDomainsCurrentPage >= totalPages ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+              Siguiente <i class="fas fa-chevron-right"></i>
+            </button>
+          `;
+        }
+      }
+
+      if (!pageItems.length) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 24px; color: var(--text-muted);">No se encontraron dominios con el filtro "${massDomainsSearchQuery}".</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = pageItems.map(d => {
+        const costBrixlyNum = (d.cost_brixly !== null && !isNaN(d.cost_brixly)) ? parseFloat(d.cost_brixly) : null;
+        const brixlyBadge = (costBrixlyNum !== null)
+          ? `<span style="font-family: var(--font-mono); font-weight: 800; color: #0284c7; background: #f0f9ff; padding: 4px 10px; border-radius: 6px; border: 1px solid #bae6fd; font-size: 0.92rem;">$${costBrixlyNum.toFixed(2)} USD</span>`
+          : `<span class="pending-cell" style="padding: 2px 6px;">PENDIENTE</span>`;
+
+        // Precios actuales para la moneda seleccionada
+        const currPrices = (d.prices && d.prices[selectedDomainCurrencyId]) || {};
+        const regVal = currPrices.register;
+        const renVal = currPrices.renew;
+        const traVal = currPrices.transfer;
+
+        const regFmt = (regVal !== null && regVal !== undefined && regVal >= 0)
+          ? `<span style="font-family: var(--font-mono); font-weight: 700; color: #1f2937;">${formatCurrencyVal(regVal, activeCurr)}</span>`
+          : `<span class="pending-cell" style="padding: 2px 6px;">PENDIENTE</span>`;
+
+        const renFmt = (renVal !== null && renVal !== undefined && renVal >= 0)
+          ? `<span style="font-family: var(--font-mono); color: #374151;">${formatCurrencyVal(renVal, activeCurr)}</span>`
+          : `<span class="pending-cell" style="padding: 2px 6px;">PENDIENTE</span>`;
+
+        const traFmt = (traVal !== null && traVal !== undefined && traVal >= 0)
+          ? `<span style="font-family: var(--font-mono); color: #374151;">${formatCurrencyVal(traVal, activeCurr)}</span>`
+          : `<span class="pending-cell" style="padding: 2px 6px;">PENDIENTE</span>`;
+
+        // Proyección con tasa y margen
+        let projFmt = '-';
+        if (costBrixlyNum !== null) {
+          const converted = costBrixlyNum * currentRate;
+          const withMargin = converted * (1 + margin / 100);
+          const finalProj = calculateSmartPoint99(withMargin, roundingMode);
+          projFmt = `<span style="font-family: var(--font-mono); font-weight: 800; color: #059669; background: #ecfdf5; padding: 3px 8px; border-radius: 6px; border: 1px solid #a7f3d0;">${formatCurrencyVal(finalProj, activeCurr)}</span>`;
+        }
+
+        const autoregTag = `<span class="mass-badge" style="background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; font-size: 11px; padding: 2px 8px;"><i class="fas fa-server" style="color:#0284c7; margin-right: 4px;"></i>${d.autoreg || 'brixly'}</span>`;
+
+        return `
+          <tr>
+            <td>${brixlyBadge}</td>
+            <td><strong style="color: #1e1b4b; font-size: 0.98rem;">${d.extension}</strong></td>
+            <td>${regFmt}</td>
+            <td>${renFmt}</td>
+            <td>${traFmt}</td>
+            <td>${projFmt}</td>
+            <td>${autoregTag}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // ========================================================
+    // CONTROL DEL MODAL DE CONFIRMACIÓN (SIN CONFIRM NATIVO)
+    // ========================================================
+    function openMassConfirmModal(payload) {
+      pendingMassUpdatePayload = payload;
+
+      const modal = document.getElementById('modal-confirm-mass-update');
+      const marginSpan = document.getElementById('modal-confirm-margin');
+      const roundingSpan = document.getElementById('modal-confirm-rounding');
+      const currListDiv = document.getElementById('modal-confirm-currencies-list');
+
+      if (marginSpan) marginSpan.textContent = `+${payload.margin}%`;
+      if (roundingSpan) roundingSpan.textContent = (payload.rounding === 'nearest') ? 'Al .99 más cercano' : 'Al .99 superior';
+
+      if (currListDiv) {
+        currListDiv.innerHTML = payload.rates.map(r => `
+          <span class="mass-badge" style="background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; font-size: 12px; font-weight: 700; padding: 4px 10px;">
+            <i class="fas fa-coins" style="margin-right: 4px;"></i> ${r.code}: ${r.rate}
+          </span>
+        `).join('');
+      }
+
+      if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeMassConfirmModal() {
+      const modal = document.getElementById('modal-confirm-mass-update');
+      if (modal) modal.style.display = 'none';
+      document.body.style.overflow = '';
+      pendingMassUpdatePayload = null;
+    }
+
+    function handleMassConfirmModalBackdropClick(e) {
+      if (e.target && e.target.id === 'modal-confirm-mass-update') {
+        closeMassConfirmModal();
+      }
+    }
+
+    // Al hacer clic en "Actualizar Precios Masivamente" en el formulario
+    function executeMassUpdate() {
       const marginInput = document.getElementById('mass-margin-input');
       const margin = parseFloat(marginInput ? marginInput.value : 15) || 0;
 
@@ -2813,24 +3174,34 @@
       });
 
       if (!ratesPayload.length) {
-        alert('Por favor selecciona al menos una moneda secundaria e ingresa una tasa de cambio válida.');
+        showSyncToast('warn', 'Por favor selecciona al menos una moneda secundaria e ingresa una tasa válida.');
         return;
       }
 
-      const confirmMsg = `¿Confirmas la actualización masiva de precios en WHMCS?\n\n` +
-        `• Monedas a actualizar: ${ratesPayload.map(r => r.code + ' (' + r.rate + ')').join(', ')}\n` +
-        `• Margen de Ganancia Global: +${margin}%\n` +
-        `• Modo de Redondeo: .99 (${roundingMode === 'nearest' ? 'Más cercano' : 'Superior'})\n\n` +
-        `Esto ejecutará el UPDATE masivo para Registro (1 año), Renovación y Transferencia de TODOS los TLDs en la base de datos de WHMCS.`;
+      // Abrir modal personalizado (NO confirm nativo)
+      openMassConfirmModal({
+        margin: margin,
+        rounding: roundingMode,
+        rates: ratesPayload
+      });
+    }
 
-      if (!confirm(confirmMsg)) {
-        return;
+    // Ejecución real tras confirmar en el modal
+    async function proceedExecuteMassUpdate() {
+      if (!pendingMassUpdatePayload) return;
+
+      const payload = { ...pendingMassUpdatePayload };
+      closeMassConfirmModal();
+
+      const btn = document.getElementById('btn-execute-mass-update');
+      const reportBox = document.getElementById('mass-report-container');
+      const originalBtnHtml = btn ? btn.innerHTML : '';
+
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Actualizando base de datos de WHMCS...`;
       }
 
-      // Bloquear botón y mostrar spinner
-      const originalBtnHtml = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Actualizando base de datos de WHMCS...`;
       showSyncToast('info', 'Ejecutando UPDATE masivo en tbldomainpricing / tblpricing...');
 
       if (reportBox) {
@@ -2844,9 +3215,9 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             action: 'update_prices',
-            margin: margin,
-            rounding: roundingMode,
-            rates: ratesPayload
+            margin: payload.margin,
+            rounding: payload.rounding,
+            rates: payload.rates
           })
         });
 
@@ -2859,6 +3230,9 @@
         // Renderizar reporte de éxito
         renderMassSuccessReport(result);
         showSyncToast('success', '¡Precios actualizados con éxito en WHMCS!');
+
+        // Recargar datos y catálogo completo para reflejar precios nuevos
+        await loadMassUpdateCurrencies();
 
         // Recargar datos del panel de precios en segundo plano
         if (typeof loadAllData === 'function') {
@@ -2881,8 +3255,10 @@
           `;
         }
       } finally {
-        btn.disabled = false;
-        btn.innerHTML = originalBtnHtml;
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = originalBtnHtml;
+        }
       }
     }
 
@@ -2966,7 +3342,7 @@
             <i class="fas fa-chart-line"></i> Ir a Revisión de Precios para Ver Resultados
           </button>
           <button type="button" class="btn-settings" onclick="loadMassUpdateCurrencies()">
-            <i class="fas fa-sync-alt"></i> Refrescar Divisas
+            <i class="fas fa-sync-alt"></i> Refrescar Divisas y Catálogo
           </button>
         </div>
       `;
