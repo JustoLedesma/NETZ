@@ -7,7 +7,8 @@
     <link rel="shortcut icon" href="/assets/img/header/N-SVG.svg" type="image/x-icon">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/main.min.css" rel="stylesheet">
-    <link href="/assets/css/animate.css" rel="stylesheet">
+    <link href="/assets/css/animate.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="/assets/css/animate.css" rel="stylesheet"></noscript>
     <link href="/assets/css/fontawesome-all.css" rel="stylesheet">
     <link href="/assets/css/responsive.css" rel="stylesheet">
     <link href="/assets/css/typography.css" rel="stylesheet">
@@ -39,11 +40,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Familjen+Grotesk:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
     <link
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;text=%E2%94%80%E2%94%82%E2%95%B1%E2%95%B2%E2%94%8A%E2%94%84%E2%94%BC%E2%94%9C%E2%94%A4%E2%94%AC%E2%94%B4%E2%96%B8%E2%86%BB%E2%A0%81%E2%A0%83%E2%A0%87%E2%A1%87%E2%A3%87%E2%A3%A7%E2%A3%B7%E2%A3%BF%E2%96%8A%E2%86%92%E2%9C%93%E2%95%8C&amp;display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Familjen+Grotesk:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;text=%E2%94%80%E2%94%82%E2%95%B1%E2%95%B2%E2%94%8A%E2%94%84%E2%94%BC%E2%94%9C%E2%94%A4%E2%94%AC%E2%94%B4%E2%96%B8%E2%86%BB%E2%A0%81%E2%A0%83%E2%A0%87%E2%A1%87%E2%A3%87%E2%A3%A7%E2%A3%B7%E2%A3%BF%E2%96%8A%E2%86%92%E2%9C%93%E2%95%8C&amp;display=swap" rel="stylesheet">
+    </noscript>
     <link rel="stylesheet" href="/system/style.css">
+    <style>
+        #pricing, #start, .colophon {
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 700px;
+        }
+    </style>
     <script>document.documentElement.classList.add('js'); let tick = 0; addEventListener('resize', () => document.documentElement.style.setProperty('--tick', String(tick ^= 1)));</script>
     <script src="/system/wire.js" defer></script>
 </head>
@@ -487,11 +498,11 @@
     </footer>
 
     <!-- JavaScript de NETZ -->
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/popper.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/template-scripts.js"></script>
-    <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/jquery.min.js" defer></script>
+    <script src="/assets/js/popper.min.js" defer></script>
+    <script src="/assets/js/bootstrap.min.js" defer></script>
+    <script src="/assets/js/template-scripts.js" defer></script>
+    <script src="/assets/js/navbar.js" defer></script>
 
     <!-- Script interactivo del bloque de desarrollo -->
     <script>

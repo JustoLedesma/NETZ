@@ -18,6 +18,15 @@
     <style>
         .prices-loading [data-pid], .prices-loading [data-domain], .prices-loading [data-price] { opacity: 0; }
         [data-pid], [data-domain], [data-price] { transition: opacity 0.15s ease-in; }
+        .coodiv-features-box-black-color-carousel,
+        .coodiv-content-section-f-server,
+        .our-service-first-section,
+        .wp-section-contact,
+        .map-server-places-section,
+        .footer-section {
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 600px;
+        }
     </style>
 
     <!-- Open Graph / Facebook / WhatsApp -->
@@ -116,7 +125,7 @@
             <nav id="coodiv-navbar-header" class="navbar navbar-expand-md fixed-header-layout">
                 <div class="container main-header-coodiv-s">
                     <a class="navbar-brand" href="index"><img src="/assets/img/header/NETZ-IA.svg" width="100px"
-                            alt="Logo" decoding="async" /></a>
+                            alt="Logo" decoding="async" fetchpriority="high" /></a>
                     <button class="navbar-toggle offcanvas-toggle menu-btn-span-bar ml-auto" data-toggle="offcanvas"
                         data-target="#offcanvas-menu-home">
                         <span></span>
@@ -843,7 +852,7 @@
                 <div class="wpb_raw_code wpb_content_element wpb_raw_html">
                     <div class="wpb_wrapper">
                         <center><img class="hosting-header-slider-cell-img" src="/assets/img/header/slider/popcast.svg"
-                                width="180px" / loading="lazy" decoding="async"></center><br>
+                                width="180px" alt="Podcast" loading="lazy" decoding="async"></center><br>
                         <center><audio id="stream" controls preload="none" style="width: 400px;">
                                 <source src="https://cloudstream2036.conectarhosting.com/8342/stream" type="audio/mpeg">
                             </audio></center>
@@ -859,7 +868,7 @@
                             <i class="monthly" data-pid="4" data-cycle="monthly"><label>USD.</label> 3.10<b>Mensual</b></i>
                             <i class="yearly" data-pid="4" data-cycle="annually"><label>USD.</label> 37.20<b>Año</b></i>
                         </span>
-                        <img src="/assets/img/header/slider/audifonos.svg" width="120px" / loading="lazy"
+                        <img src="/assets/img/header/slider/audifonos.svg" width="120px" alt="Stream Mini" loading="lazy"
                             decoding="async">
                         <br>
                         <br>
@@ -883,7 +892,7 @@
                             <i class="monthly" data-pid="5" data-cycle="monthly"><label>USD.</label> 7.14<b>Mensual</b></i>
                             <i class="yearly" data-pid="5" data-cycle="annually"><label>USD.</label> 85.68<b>Año</b></i>
                         </span>
-                        <img src="/assets/img/header/slider/audifonos4.svg" width="120px" / loading="lazy"
+                        <img src="/assets/img/header/slider/audifonos4.svg" width="120px" alt="Stream Junior" loading="lazy"
                             decoding="async">
                         <!--   <i class="fab fa-teamspeak"></i> -->
                         <!--  <span class="voice-plan-price"><label>USD.</label> 10.70<b>Mensual</b></span> -->
@@ -908,7 +917,7 @@
                         <span class="voice-plan-price second-pricing-table-price monthly">
                             <i class="monthly" data-pid="6" data-cycle="monthly"><label>USD.</label> 10.70<b>Mensual</b></i>
                             <i class="yearly" data-pid="6" data-cycle="annually"><label>USD.</label> 128.40<b>Año</b></i></span>
-                        <img src="/assets/img/header/slider/audifonos5.svg" width="120px" / loading="lazy"
+                        <img src="/assets/img/header/slider/audifonos5.svg" width="120px" alt="Stream Junior II" loading="lazy"
                             decoding="async">
                         <!--   <i class="fab fa-teamspeak"></i> -->
                         <!--  <span class="voice-plan-price"><label>USD.</label> 10.70<b>Mensual</b></span> -->
@@ -1075,7 +1084,7 @@
     <section class="map-server-places-section position-relative">
         <div class="container">
             <div class="map-gene-server-place">
-                <img src="/assets/img/maps/map.png" alt="" / loading="lazy" decoding="async">
+                <img src="/assets/img/maps/map.png" alt="Servidores mundiales" loading="lazy" decoding="async">
                 <div class="server-places-spans">
                     <span style="top: 34%;left: 17%;"> <b>E.E.U.U.</b> <small class="good">99.99%</small></span>
                     <span style="top: 82%;left: 30%;"> <b>PY.</b> <small class="avrage">99.99%</small></span>
