@@ -1537,6 +1537,244 @@
       margin-bottom: 8px;
     }
 
+  
+    /* ========================================================
+       BARRA DE NAVEGACIÓN OFICIAL DE NETZ (NAVBAR STYLES)
+       ======================================================== */
+    #navbar-container {
+      position: sticky;
+      top: 0;
+      z-index: 99999;
+      background: #ffffff;
+      width: 100%;
+    }
+
+    #coodiv-navbar-header {
+      background: #ffffff;
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      -webkit-box-shadow: 0 7px 17px rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 7px 17px rgba(0, 0, 0, 0.06) !important;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .main-header-coodiv-s {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 15px;
+      position: relative;
+      width: 100%;
+    }
+
+    .navbar-brand {
+      display: inline-flex;
+      align-items: center;
+      padding: 0;
+      margin-right: 2.5rem;
+      text-decoration: none;
+    }
+
+    .navbar-brand img {
+      height: 28px;
+      width: auto;
+      display: block;
+    }
+
+    .navbar-collapse {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 12px;
+    }
+
+    .navbar-nav .nav-item {
+      position: relative;
+      list-style: none;
+    }
+
+    .navbar-nav .nav-link {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #4e585d;
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      position: relative;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #1e1b4b;
+      background: #f8fafc;
+    }
+
+    .navbar-nav .nav-item.active .nav-link {
+      color: #4f46e5;
+      background: #eef2ff;
+      font-weight: 700;
+    }
+
+    .nav-new-tag {
+      background: #FFEB3B;
+      padding: 1px 7px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #363542;
+      position: absolute;
+      line-height: 14px;
+      top: -4px;
+      right: 0px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+
+    /* Lateral Derecho: Botón Salir Amarillo & Usuario Activo */
+    .header-user-info-coodiv {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0 0 0 20px;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .header-user-info-coodiv li {
+      list-style: none;
+      text-align: center;
+    }
+
+    .header-user-info-coodiv li #header-login-dropdown {
+      background: #FFEB3B;
+      padding: 7px 28px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #363542;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      box-shadow: 0 3px 8px rgba(255, 235, 59, 0.35);
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .header-user-info-coodiv li #header-login-dropdown:hover {
+      background: #f5e23c;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 235, 59, 0.45);
+      color: #111827;
+    }
+
+    .header-user-info-coodiv li span {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #8898aa !important;
+      margin-top: 4px;
+    }
+
+    /* Botón Hamburguesa Responsive para Móviles */
+    .menu-btn-span-bar {
+      display: none;
+      background: 0;
+      border: 0;
+      outline: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .menu-btn-span-bar span {
+      transition: all 0.2s ease-in-out;
+    }
+
+    .menu-btn-span-bar span:nth-child(1) {
+      height: 2px;
+      display: block;
+      width: 22px;
+      background: #2f3538;
+      border-radius: 4px;
+    }
+    .menu-btn-span-bar span:nth-child(2) {
+      height: 2px;
+      display: block;
+      width: 22px;
+      background: #2f3538;
+      border-radius: 4px;
+      margin-top: 5px;
+    }
+    .menu-btn-span-bar span:nth-child(3) {
+      height: 2px;
+      display: block;
+      width: 14px;
+      background: #2f3538;
+      border-radius: 4px;
+      margin-top: 5px;
+      float: right;
+    }
+
+    .menu-btn-span-bar.is-open span:nth-child(1) {
+      transform: rotate(-45deg) translate(-4px, 5px);
+    }
+    .menu-btn-span-bar.is-open span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-btn-span-bar.is-open span:nth-child(3) {
+      width: 22px;
+      transform: rotate(45deg) translate(-4px, -6px);
+      float: none;
+    }
+
+    @media (max-width: 991px) {
+      .menu-btn-span-bar {
+        display: block;
+      }
+      .navbar-collapse {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        padding: 16px 20px;
+        border-bottom: 1px solid #e2e8f0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      }
+      .navbar-collapse.show {
+        display: block;
+      }
+      .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 6px;
+      }
+      .navbar-nav .nav-link {
+        width: 100%;
+        padding: 10px 14px;
+      }
+      .nav-new-tag {
+        position: static;
+        margin-left: 8px;
+      }
+    }
+
   </style>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
@@ -1580,32 +1818,78 @@
   <!-- ========================================================
        DASHBOARD DE REVISIÓN DE PRECIOS Y AJUSTES (PROTEGIDO)
        ======================================================== -->
-  <div id="dashboard-app" class="container" style="display: none;">
-    <header>
-      <div>
-        <h1 id="header-main-title">
-          <i class="fas fa-chart-line" style="color: var(--primary); margin-right: 6px;"></i> Revisión de Precios por País
-        </h1>
-        <p id="header-main-desc">Precios oficiales sincronizados desde WHMCS con unión de dominios en tiempo real.</p>
-      </div>
-      <div class="header-actions">
-        <div class="admin-pill" id="admin-session-pill">
-          <i class="fas fa-circle" style="font-size: 8px; color: #10b981; margin-right: 4px;"></i> <span id="admin-user-display">admin</span>
+  <div id="dashboard-app" style="display: none;">
+    <!-- NAVBAR OFICIAL DE NETZ (Sticky con Sombra idéntica al original) -->
+    <header id="navbar-container">
+      <nav id="coodiv-navbar-header" class="navbar navbar-expand-md fixed-header-layout top-header-fixed">
+        <div class="main-header-coodiv-s">
+          <!-- Logo Oficial NETZ -->
+          <a class="navbar-brand" href="index">
+            <img src="/assets/img/header/NETZ-IA.svg" alt="NETZ Logo" decoding="async" fetchpriority="high">
+          </a>
+
+          <!-- Botón Hamburguesa Responsive para Móviles -->
+          <button type="button" id="mobile-nav-toggle" class="menu-btn-span-bar" onclick="toggleMobileNavMenu()" aria-label="Abrir menú de navegación">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <!-- Menú Central: Las 3 Pestañas Principales -->
+          <div class="navbar-collapse" id="offcanvas-menu-home">
+            <ul class="navbar-nav">
+              <li class="nav-item active" id="nav-item-prices">
+                <a class="nav-link" href="javascript:void(0)" onclick="toggleView('prices')">
+                  <i class="fas fa-chart-line" style="margin-right: 6px; font-size: 13px;"></i> Precios por País
+                </a>
+              </li>
+              <li class="nav-item" id="nav-item-mass-update">
+                <a class="nav-link" href="javascript:void(0)" onclick="toggleView('mass-update')">
+                  <i class="fas fa-bolt" style="margin-right: 6px; font-size: 13px; color: #4f46e5;"></i> Actualizador Masivo
+                  <span class="nav-new-tag">WHMCS</span>
+                </a>
+              </li>
+              <li class="nav-item" id="nav-item-settings">
+                <a class="nav-link" href="javascript:void(0)" onclick="toggleView('settings')">
+                  <i class="fas fa-cog" style="margin-right: 6px; font-size: 13px;"></i> Ajustes
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Lateral Derecho: Botón Salir Amarillo & Usuario Activo -->
+          <ul class="header-user-info-coodiv">
+            <li>
+              <a role="button" id="header-login-dropdown" onclick="handleLogout()" title="Cerrar sesión de administración">
+                <i class="fas fa-sign-out-alt"></i> Salir
+              </a>
+              <span id="nav-user-display">
+                <i class="fas fa-circle" style="color: #10b981; font-size: 8px; margin-right: 3px;"></i> admin
+              </span>
+            </li>
+          </ul>
         </div>
-        <button class="btn-settings" id="btn-top-mass-update" onclick="toggleView('mass-update')" title="Actualizar precios masivamente en WHMCS (tbldomainpricing)">
-          <i class="fas fa-bolt" style="color: #4f46e5;"></i> Actualizar Precios Masivamente
-        </button>
-        <button class="btn-refresh" id="btn-top-refresh" onclick="handleRefreshPrices()">
-          <i class="fas fa-sync-alt"></i> Recargar Precios
-        </button>
-        <button class="btn-settings" id="btn-top-settings" onclick="toggleView('settings')">
-          <i class="fas fa-cog"></i> Ajustes
-        </button>
-        <button class="btn-logout" onclick="handleLogout()">
-          <i class="fas fa-sign-out-alt"></i> Salir
-        </button>
-      </div>
+      </nav>
     </header>
+
+    <!-- CONTENEDOR PRINCIPAL DE CONTENIDOS -->
+    <div class="container" style="padding-top: 24px; padding-bottom: 40px;">
+      <!-- Subcabecera Informativa con Título Dinámico y Botón Recargar Precios -->
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border);">
+        <div>
+          <h1 id="header-main-title" style="margin: 0; font-size: 1.4rem; font-weight: 700; color: #1e1b4b;">
+            <i class="fas fa-chart-line" style="color: var(--primary); margin-right: 6px;"></i> Revisión de Precios por País
+          </h1>
+          <p id="header-main-desc" style="margin: 4px 0 0; color: var(--text-muted); font-size: 0.88rem;">
+            Precios oficiales sincronizados desde WHMCS con unión de dominios en tiempo real.
+          </p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button type="button" class="btn-refresh" id="btn-top-refresh" onclick="handleRefreshPrices()" style="margin: 0;">
+            <i class="fas fa-sync-alt"></i> Recargar Precios
+          </button>
+        </div>
+      </div>
 
     <!-- VISTA 1: TABLAS DE PRECIOS Y DOMINIOS -->
     <div id="view-prices">
@@ -1937,14 +2221,60 @@
             </div>
 
             <!-- Navegación de Pestañas de Países (como en la primera foto) -->
-            <nav class="tabs-nav" id="mass-country-tabs-nav" style="margin-bottom: 16px; border-bottom: 2px solid var(--border); display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px;" aria-label="Selección de país para dominios"></nav>
+            <nav class="tabs-nav" id="mass-country-tabs-nav" style="margin-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px;" aria-label="Selección de país para dominios"></nav>
+
+            <!-- Barra de Cálculo Dinámico de Costos Brixly (Base EUR €) -->
+            <div id="mass-eur-calc-toolbar" class="mass-calc-toolbar" style="background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.05);">
+              <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; background: #2563eb; color: #fff; font-size: 16px; font-weight: 800; box-shadow: 0 2px 6px rgba(37,99,235,0.25);">€</span>
+                  <div>
+                    <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #1e40af; letter-spacing: 0.5px;">Cálculo de Costos Brixly (EUR €)</div>
+                    <div style="font-size: 13px; font-weight: 700; color: #1e293b;" id="mass-calc-country-title">País: 🇵🇾 Paraguay (PYG)</div>
+                  </div>
+                </div>
+
+                <!-- Input Tasa 1 EUR para esta moneda -->
+                <div style="display: flex; align-items: center; gap: 6px; background: #ffffff; border: 1px solid #93c5fd; padding: 5px 10px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+                  <span style="font-size: 12px; font-weight: 700; color: #1e40af;">1 € EUR =</span>
+                  <input type="number" id="mass-eur-rate-input" step="any" min="0" value="6200" 
+                         oninput="handleEurRateChange(this.value)" 
+                         style="width: 100px; padding: 3px 6px; border: 1px solid #cbd5e1; border-radius: 6px; font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: #1e1b4b; outline: none; text-align: right;" 
+                         title="Cotización de 1 Euro en esta moneda. Modifícala para recalcular en tiempo real." />
+                  <span id="mass-eur-target-curr-label" style="font-size: 12px; font-weight: 700; color: #475569; font-family: var(--font-mono);">PYG</span>
+                </div>
+
+                <!-- Margen de Ganancia -->
+                <div style="display: flex; align-items: center; gap: 6px; background: #ffffff; border: 1px solid #cbd5e1; padding: 5px 10px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+                  <span style="font-size: 12px; font-weight: 600; color: #475569;">Margen:</span>
+                  <input type="number" id="mass-eur-margin-input" step="1" min="0" max="200" value="15" 
+                         oninput="handleEurMarginChange(this.value)" 
+                         style="width: 55px; padding: 3px 6px; border: 1px solid #cbd5e1; border-radius: 6px; font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: #1e1b4b; outline: none; text-align: right;" 
+                         title="Margen de ganancia comercial porcentual (+15%)" />
+                  <span style="font-size: 12px; font-weight: 700; color: #475569;">%</span>
+                </div>
+
+                <!-- Nota informativa de vista previa -->
+                <div id="mass-eur-preview-note" style="font-size: 12px; color: #1e40af; background: rgba(37,99,235,0.08); padding: 4px 10px; border-radius: 6px;">
+                  10 € = <strong>₲ 62.000 PYG</strong> (Costo) → <strong>₲ 71.300 PYG</strong> (+15%)
+                </div>
+              </div>
+
+              <!-- Botón Aplicar a Todo -->
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <button type="button" class="btn-primary" id="btn-apply-eur-to-all" onclick="confirmApplyEurCostsToAll()" style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: #fff; border: none; padding: 9px 18px; border-radius: 8px; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(37,99,235,0.25); cursor: pointer; transition: all 0.2s;">
+                  <i class="fas fa-bolt" style="color: #fde047;"></i>
+                  <span id="btn-apply-eur-label">⚡ Aplicar a Todo (Precios de Venta PYG)</span>
+                </button>
+              </div>
+            </div>
 
             <div class="mass-table-wrap">
               <table class="mass-table" id="table-mass-all-domains">
                 <thead>
                   <tr>
                     <th style="width: 170px;">
-                      <i class="fas fa-server" style="color: #38bdf8; margin-right: 5px;"></i> Costo Brixly (USD)
+                      <i class="fas fa-server" style="color: #38bdf8; margin-right: 5px;"></i> Costo Brixly (EUR / €)
                     </th>
                     <th style="width: 150px;">Extensión (TLD)</th>
                     <th>
@@ -1994,7 +2324,8 @@
 
       </div>
     </div>
-  </div>
+    </div> <!-- /container -->
+  </div> <!-- /dashboard-app -->
 
   <!-- ========================================================
        MODAL DE CONFIRMACIÓN DE ACTUALIZACIÓN MASIVA DE PRECIOS
@@ -2049,6 +2380,73 @@
         </button>
         <button type="button" class="btn-mass-execute" id="btn-modal-confirm-execute" onclick="proceedExecuteMassUpdate()" style="padding: 10px 24px; font-size: 0.95rem;">
           <i class="fas fa-check-circle"></i> Sí, Actualizar Masivamente
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL DE CONFIRMACIÓN PARA APLICAR COSTOS BRIXLY EUR A PRECIOS DE VENTA (⚡ APLICAR A TODO)
+       ======================================================== -->
+  <div id="modal-confirm-apply-eur" class="modal-overlay" style="display: none;" onclick="handleApplyEurModalBackdropClick(event)">
+    <div class="modal-card" style="max-width: 580px;">
+      <div class="modal-header" style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 44px; height: 44px; border-radius: 12px; background: #eff6ff; color: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.15);">
+            <i class="fas fa-bolt" style="color: #eab308;"></i>
+          </div>
+          <div>
+            <h2 style="margin: 0; font-size: 1.25rem; font-weight: 700; color: #111827;">Aplicar Costos Brixly a Precios de Venta</h2>
+            <p style="margin: 2px 0 0; font-size: 0.84rem; color: var(--text-muted);">Calcular y actualizar masivamente los precios de venta en WHMCS.</p>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeApplyEurModal()" title="Cerrar"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="modal-body" style="padding: 20px 0;">
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed #cbd5e1;">
+            <span style="font-size: 0.86rem; color: #475569; font-weight: 600;">Moneda y País Destino:</span>
+            <span id="modal-eur-target-country" style="font-weight: 700; color: #1e40af; font-size: 0.95rem;">🇵🇾 Paraguay (PYG)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed #cbd5e1;">
+            <span style="font-size: 0.86rem; color: #475569; font-weight: 600;">Cotización de 1 EUR (€):</span>
+            <span id="modal-eur-rate-summary" style="font-weight: 700; color: #2563eb; font-size: 0.95rem; font-family: var(--font-mono);">1 € = 6.200 PYG</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed #cbd5e1;">
+            <span style="font-size: 0.86rem; color: #475569; font-weight: 600;">Margen Comercial Adicional:</span>
+            <span id="modal-eur-margin-summary" style="font-weight: 700; color: #059669; font-size: 0.92rem;">+15% de ganancia</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed #cbd5e1;">
+            <span style="font-size: 0.86rem; color: #475569; font-weight: 600;">Estrategia de Redondeo:</span>
+            <span id="modal-eur-rounding-summary" style="font-weight: 700; color: #475569; font-size: 0.88rem;">Al .99 más cercano</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="font-size: 0.86rem; color: #475569; font-weight: 600;">Alcance en BD:</span>
+            <span style="font-weight: 700; color: #1e1b4b; font-size: 0.88rem;">Todos los TLDs (~513) - Registro, Renovación y Transferencia</span>
+          </div>
+        </div>
+
+        <!-- Ejemplo real dinámico -->
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 12px 14px; border-radius: 8px; margin-bottom: 16px; font-size: 0.85rem; color: #1e40af;">
+          <div style="font-weight: 700; margin-bottom: 4px;"><i class="fas fa-calculator" style="margin-right: 6px;"></i>Ejemplo con .com (Costo Brixly: 9,26 €):</div>
+          <div id="modal-eur-sample-calc" style="font-family: var(--font-mono); font-size: 13px; color: #1d4ed8;">
+            9,26 € × 6.200 = ₲ 57.412 (+15%) → <strong>₲ 65.999 PYG</strong>
+          </div>
+        </div>
+
+        <div style="background: #fffbeb; border: 1px solid #fef3c7; border-left: 4px solid #f59e0b; padding: 12px 14px; border-radius: 6px; font-size: 0.84rem; color: #92400e; line-height: 1.45;">
+          <i class="fas fa-info-circle" style="margin-right: 6px;"></i>
+          Al confirmar, se actualizarán directamente en <code>tblpricing</code> los precios de venta de todos los dominios para esta moneda y se actualizará automáticamente el catálogo y el caché JSON.
+        </div>
+      </div>
+
+      <div class="modal-footer" style="border-top: 1px solid var(--border); padding-top: 14px; display: flex; justify-content: flex-end; gap: 12px;">
+        <button type="button" class="btn-settings" onclick="closeApplyEurModal()" style="padding: 10px 18px;">
+          Cancelar
+        </button>
+        <button type="button" class="btn-mass-execute" id="btn-modal-apply-eur-execute" onclick="proceedExecuteApplyEurCosts()" style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 10px 24px; font-size: 0.95rem;">
+          <i class="fas fa-bolt" style="color: #fde047; margin-right: 6px;"></i> Sí, Aplicar a Todo
         </button>
       </div>
     </div>
@@ -2218,16 +2616,42 @@
       const currentUser = sessionStorage.getItem('netz_admin_user') || activeAdminConfig.username || 'admin';
       const userDisplay = document.getElementById('admin-user-display');
       if (userDisplay) userDisplay.textContent = currentUser;
+      const navUser = document.getElementById('nav-user-display');
+      if (navUser) navUser.innerHTML = '<i class="fas fa-circle" style="color:#10b981; font-size:8px; margin-right:4px;"></i> ' + escapeHtml(currentUser);
       const metaUser = document.getElementById('meta-current-user');
       if (metaUser) metaUser.textContent = currentUser;
       const settingsUserInput = document.getElementById('settings-username');
       if (settingsUserInput) settingsUserInput.value = currentUser;
     }
 
+    function toggleMobileNavMenu() {
+      const menu = document.getElementById('offcanvas-menu-home');
+      const toggleBtn = document.getElementById('mobile-nav-toggle');
+      if (menu) menu.classList.toggle('show');
+      if (toggleBtn) toggleBtn.classList.toggle('is-open');
+    }
+
+    function updateNavbarActive(viewName) {
+      const itemPrices = document.getElementById('nav-item-prices');
+      const itemMass = document.getElementById('nav-item-mass-update');
+      const itemSettings = document.getElementById('nav-item-settings');
+
+      if (itemPrices) itemPrices.classList.toggle('active', viewName === 'prices');
+      if (itemMass) itemMass.classList.toggle('active', viewName === 'mass-update');
+      if (itemSettings) itemSettings.classList.toggle('active', viewName === 'settings');
+
+      // Cerrar menú móvil si está desplegado
+      const menu = document.getElementById('offcanvas-menu-home');
+      const toggleBtn = document.getElementById('mobile-nav-toggle');
+      if (menu) menu.classList.remove('show');
+      if (toggleBtn) toggleBtn.classList.remove('is-open');
+    }
+
     // Alternar entre Vista de Precios, Vista de Ajustes y Vista de Actualizador Masivo
     let currentActiveView = 'prices';
     function toggleView(viewName) {
       currentActiveView = viewName;
+      updateNavbarActive(viewName);
       const viewPrices = document.getElementById('view-prices');
       const viewSettings = document.getElementById('view-settings');
       const viewMassUpdate = document.getElementById('view-mass-update');
@@ -2824,6 +3248,7 @@
       if (e.key === 'Escape') {
         closeProductLinksModal();
         closeMassConfirmModal();
+        closeApplyEurModal();
       }
     });
 
@@ -3097,8 +3522,9 @@
         // Inicializar listeners del drop zone
         initExcelDropZone();
 
-        // Renderizar tablas
+        // Renderizar tablas y calculadora dinámica
         renderMassCurrenciesTable();
+        updateEurCalcToolbar();
         renderMassDomainsTable();
       } catch (err) {
         console.error('Error loadMassUpdateCurrencies:', err);
@@ -3128,6 +3554,197 @@
       `).join('');
     }
 
+
+    // ========================================================
+    // COTIZACIONES Y CÁLCULOS DINÁMICOS DE BRIXLY (BASE EUR €)
+    // ========================================================
+    let massEurRates = {
+      'PYG': 6200,   // 1 EUR = 6.200 Guaraníes
+      'BRL': 6.10,   // 1 EUR = 6.10 Reais
+      'ARS': 1150,   // 1 EUR = 1.150 Pesos AR
+      'EUR': 1.0,    // 1 EUR = 1.00 Euro
+      'USD': 1.08,   // 1 EUR = 1.08 Dólar USD
+      'CLP': 1050,   // 1 EUR = 1.050 Pesos CLP
+      'COP': 4400,   // 1 EUR = 4.400 Pesos COP
+      'MXN': 21.50   // 1 EUR = 21.50 Pesos MXN
+    };
+
+    try {
+      const savedRates = localStorage.getItem('netz_mass_eur_rates_v2');
+      if (savedRates) {
+        massEurRates = Object.assign(massEurRates, JSON.parse(savedRates));
+      }
+    } catch(e) {}
+
+    function getActiveEurCurrencyCode() {
+      const activeCurr = massUpdateCurrenciesData.find(c => c.id === selectedDomainCurrencyId) || massUpdateBaseCurrency || { id: 1, code: 'USD' };
+      return (activeCurr.code || 'USD').toUpperCase();
+    }
+
+    function handleEurRateChange(val) {
+      const num = parseFloat(val) || 0;
+      const code = getActiveEurCurrencyCode();
+      massEurRates[code] = num;
+      try {
+        localStorage.setItem('netz_mass_eur_rates_v2', JSON.stringify(massEurRates));
+      } catch(e) {}
+      updateEurCalcToolbar();
+      renderMassDomainsTable();
+    }
+
+    function handleEurMarginChange(val) {
+      updateEurCalcToolbar();
+      renderMassDomainsTable();
+    }
+
+    function updateEurCalcToolbar() {
+      const activeCurr = massUpdateCurrenciesData.find(c => c.id === selectedDomainCurrencyId) || massUpdateBaseCurrency || { id: 1, code: 'USD' };
+      const code = (activeCurr.code || 'USD').toUpperCase();
+      
+      const countryObj = MASS_COUNTRY_CURRENCIES.find(c => c.currCode.toUpperCase() === code) || { flag: '🌐', name: code, currCode: code };
+      
+      const titleElem = document.getElementById('mass-calc-country-title');
+      if (titleElem) {
+        titleElem.innerHTML = `País: <strong>${countryObj.flag} ${countryObj.name} (${code})</strong>`;
+      }
+      
+      const targetLabel = document.getElementById('mass-eur-target-curr-label');
+      if (targetLabel) {
+        targetLabel.textContent = code;
+      }
+      
+      const rateInput = document.getElementById('mass-eur-rate-input');
+      if (rateInput && document.activeElement !== rateInput) {
+        const currentRate = massEurRates[code] !== undefined ? massEurRates[code] : 1.0;
+        rateInput.value = currentRate;
+      }
+      
+      const btnLabel = document.getElementById('btn-apply-eur-label');
+      if (btnLabel) {
+        btnLabel.textContent = `⚡ Aplicar a Todo (Precios de Venta ${code})`;
+      }
+      
+      const previewNote = document.getElementById('mass-eur-preview-note');
+      if (previewNote) {
+        const rate = (rateInput ? parseFloat(rateInput.value) : massEurRates[code]) || 1.0;
+        const marginInput = document.getElementById('mass-eur-margin-input');
+        const margin = parseFloat(marginInput ? marginInput.value : 15) || 0;
+        const sampleBase = 10.0;
+        const sampleCost = sampleBase * rate;
+        const sampleSale = sampleCost * (1 + margin / 100);
+        previewNote.innerHTML = `Referencia 10 € = <strong>${formatPriceClean(sampleCost, activeCurr)}</strong> (Costo) → <strong>${formatPriceClean(sampleSale, activeCurr)}</strong> (Venta ${margin > 0 ? '+' + margin + '%' : ''})`;
+      }
+    }
+
+    // Modal de confirmación para "⚡ Aplicar a Todo"
+    function confirmApplyEurCostsToAll() {
+      const activeCurr = massUpdateCurrenciesData.find(c => c.id === selectedDomainCurrencyId) || massUpdateBaseCurrency || { id: 1, code: 'USD' };
+      const code = (activeCurr.code || 'USD').toUpperCase();
+      const countryObj = MASS_COUNTRY_CURRENCIES.find(c => c.currCode.toUpperCase() === code) || { flag: '🌐', name: code, currCode: code };
+
+      const rateInput = document.getElementById('mass-eur-rate-input');
+      const rate = (rateInput ? parseFloat(rateInput.value) : massEurRates[code]) || 1.0;
+
+      const marginInput = document.getElementById('mass-eur-margin-input');
+      const margin = parseFloat(marginInput ? marginInput.value : 15) || 0;
+
+      const roundingRadios = document.getElementsByName('mass_rounding');
+      let roundingMode = 'nearest';
+      for (const r of roundingRadios) {
+        if (r.checked) roundingMode = r.value;
+      }
+
+      const modal = document.getElementById('modal-confirm-apply-eur');
+      const targetCountrySpan = document.getElementById('modal-eur-target-country');
+      const rateSummarySpan = document.getElementById('modal-eur-rate-summary');
+      const marginSummarySpan = document.getElementById('modal-eur-margin-summary');
+      const roundingSummarySpan = document.getElementById('modal-eur-rounding-summary');
+      const sampleCalcDiv = document.getElementById('modal-eur-sample-calc');
+
+      if (targetCountrySpan) targetCountrySpan.innerHTML = `${countryObj.flag} ${countryObj.name} (${code})`;
+      if (rateSummarySpan) rateSummarySpan.textContent = `1 € EUR = ${rate.toLocaleString()} ${code}`;
+      if (marginSummarySpan) marginSummarySpan.textContent = (margin > 0) ? `+${margin}% de ganancia comercial` : `0% (Precio de costo directo sin margen)`;
+      if (roundingSummarySpan) roundingSummarySpan.textContent = (roundingMode === 'nearest') ? 'Al .99 más cercano' : 'Al .99 superior';
+
+      if (sampleCalcDiv) {
+        const sampleCost = 9.26 * rate;
+        const sampleWithMargin = sampleCost * (1 + margin / 100);
+        const sampleFinal = calculateSmartPoint99(sampleWithMargin, roundingMode);
+        sampleCalcDiv.innerHTML = `9,26 € × ${rate.toLocaleString()} = <strong>${formatPriceClean(sampleCost, activeCurr)}</strong> (+${margin}%) → <strong style="color:#059669; font-size:14px;">${formatPriceClean(sampleFinal, activeCurr)}</strong>`;
+      }
+
+      if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeApplyEurModal() {
+      const modal = document.getElementById('modal-confirm-apply-eur');
+      if (modal) modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    function handleApplyEurModalBackdropClick(e) {
+      if (e.target && e.target.id === 'modal-confirm-apply-eur') {
+        closeApplyEurModal();
+      }
+    }
+
+    async function proceedExecuteApplyEurCosts() {
+      const activeCurr = massUpdateCurrenciesData.find(c => c.id === selectedDomainCurrencyId) || massUpdateBaseCurrency || { id: 1, code: 'USD' };
+      const code = (activeCurr.code || 'USD').toUpperCase();
+      const rateInput = document.getElementById('mass-eur-rate-input');
+      const rate = (rateInput ? parseFloat(rateInput.value) : massEurRates[code]) || 1.0;
+      const marginInput = document.getElementById('mass-eur-margin-input');
+      const margin = parseFloat(marginInput ? marginInput.value : 15) || 0;
+
+      const roundingRadios = document.getElementsByName('mass_rounding');
+      let roundingMode = 'nearest';
+      for (const r of roundingRadios) {
+        if (r.checked) roundingMode = r.value;
+      }
+
+      const btn = document.getElementById('btn-modal-apply-eur-execute');
+      const originalText = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:6px;"></i> Aplicando en WHMCS...';
+      }
+
+      try {
+        const res = await fetch('api/actualizar-precios-dominios.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'apply_eur_costs_to_currency',
+            currency_id: selectedDomainCurrencyId,
+            eur_rate: rate,
+            margin: margin,
+            rounding: roundingMode
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok || data.status !== 'success') {
+          throw new Error(data.message || 'Error al aplicar costos en WHMCS');
+        }
+
+        closeApplyEurModal();
+        showSyncToast('success', `¡Éxito! Precios de venta para ${code} actualizados en WHMCS (${data.updated_tlds || 0} TLDs).`);
+
+        // Recargar catálogo desde WHMCS para reflejar los precios exactos actualizados
+        await loadMassUpdateCurrencies();
+      } catch (err) {
+        console.error('Error proceedExecuteApplyEurCosts:', err);
+        showSyncToast('error', 'Error al aplicar precios: ' + err.message);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+        }
+      }
+    }
 
     // ========================================================
     // PESTAÑAS DE PAÍS / MONEDA Y FORMATEADOR LIMPIO DE PRECIOS
@@ -3195,6 +3812,7 @@
       }
       selectedDomainCurrencyId = parseInt(currId, 10);
       renderMassCountryTabs();
+      updateEurCalcToolbar();
       renderMassDomainsTable();
     }
 
@@ -3415,39 +4033,36 @@
       }
 
       tbody.innerHTML = pageItems.map(d => {
-        // Costos mayoristas de referencia Brixly guardados en BD
-        const bCosts = d.brixly_costs || { register: d.cost_brixly || 13.99, renew: d.cost_brixly || 13.99, transfer: d.cost_brixly || 13.99 };
+        // Costos mayoristas de referencia Brixly guardados en BD (en EUROS €)
+        const bCosts = d.brixly_costs || { register: d.cost_brixly || 9.26, renew: d.cost_brixly || 9.26, transfer: d.cost_brixly || 9.26 };
         const hasBrixly = (d.has_brixly === true);
 
-        const brixlyRegUsd = parseFloat(bCosts.register) || 0.0;
-        const brixlyRenUsd = parseFloat(bCosts.renew) || 0.0;
-        const brixlyTraUsd = parseFloat(bCosts.transfer) || 0.0;
+        const brixlyRegEur = parseFloat(bCosts.register) || 0.0;
+        const brixlyRenEur = parseFloat(bCosts.renew) || 0.0;
+        const brixlyTraEur = parseFloat(bCosts.transfer) || 0.0;
 
-        // Equivalencias en moneda activa si no es USD
-        let regEquivText = '';
-        let renEquivText = '';
-        let traEquivText = '';
-        if (activeCurr.code !== 'USD' && currentRate > 0) {
-          const regEquiv = brixlyRegUsd * currentRate;
-          const renEquiv = brixlyRenUsd * currentRate;
-          const traEquiv = brixlyTraUsd * currentRate;
-          regEquivText = ` <span class="brixly-ref-equiv">(≈ ${formatPriceClean(regEquiv, activeCurr)})</span>`;
-          renEquivText = ` <span class="brixly-ref-equiv">(≈ ${formatPriceClean(renEquiv, activeCurr)})</span>`;
-          traEquivText = ` <span class="brixly-ref-equiv">(≈ ${formatPriceClean(traEquiv, activeCurr)})</span>`;
-        }
+        // Tasa de cambio de EUR para la moneda seleccionada
+        const currCode = (activeCurr.code || 'USD').toUpperCase();
+        const eurRate = (massEurRates[currCode] !== undefined) ? massEurRates[currCode] : (currCode === 'EUR' ? 1.0 : 1.0);
+        const marginEur = parseFloat(document.getElementById('mass-eur-margin-input') ? document.getElementById('mass-eur-margin-input').value : margin) || 0;
 
-        // 1. Costo Brixly (USD) primera columna
-        const brixlyBadge = (brixlyRegUsd > 0)
-          ? `<span style="font-family: var(--font-mono); font-weight: 800; color: #0284c7; background: #f0f9ff; padding: 4px 10px; border-radius: 6px; border: 1px solid #bae6fd; font-size: 0.92rem;">$${brixlyRegUsd.toFixed(2)} USD</span>`
+        // Costos calculados en la moneda activa: brixly_eur * eurRate
+        const localCostReg = brixlyRegEur * eurRate;
+        const localCostRen = brixlyRenEur * eurRate;
+        const localCostTra = brixlyTraEur * eurRate;
+
+        // 1. Costo Brixly (EUR / €) primera columna
+        const brixlyBadge = (brixlyRegEur > 0)
+          ? `<span style="font-family: var(--font-mono); font-weight: 800; color: #0284c7; background: #f0f9ff; padding: 4px 10px; border-radius: 6px; border: 1px solid #bae6fd; font-size: 0.92rem;">€ ${brixlyRegEur.toFixed(2)} EUR</span>`
           : '<span class="inline-price-badge pending"><i class="fas fa-clock" style="font-size:10px; margin-right:4px;"></i>PENDIENTE</span>';
 
-        // Precios actuales para la moneda seleccionada
+        // Precios actuales para la moneda seleccionada en WHMCS
         const currPrices = (d.prices && d.prices[selectedDomainCurrencyId]) || {};
         const regVal = currPrices.register;
         const renVal = currPrices.renew;
         const traVal = currPrices.transfer;
 
-        // 2. Registrar (Actual) con referencia Brixly debajo
+        // 2. Registrar (Actual) con referencia Brixly calculada debajo + original en EUR
         const regCell = `
           <div class="price-cell-stacked">
             <div class="inline-price-cell-wrap" id="inline-price-cell-${d.id}-${selectedDomainCurrencyId}-register">
@@ -3458,14 +4073,17 @@
                 <i class="fas fa-pencil-alt edit-hint-icon"></i>
               </span>
             </div>
-            <div class="brixly-ref-row ${hasBrixly ? 'exact-match' : ''}" title="Costo mayorista de Registro de Brixly">
-              <span class="brixly-ref-label">Brixly:</span>
-              <span class="brixly-ref-val">$${brixlyRegUsd.toFixed(2)} USD</span>${regEquivText}
+            <div class="brixly-ref-row ${hasBrixly ? 'exact-match' : ''}" style="display:flex; flex-direction:column; align-items:center; gap:1px; margin-top:4px;" title="Costo mayorista calculado según cotización EUR: €${brixlyRegEur.toFixed(2)} × ${eurRate}">
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span class="brixly-ref-label">Brixly:</span>
+                <span class="brixly-ref-val" style="color: #1d4ed8; font-weight: 700;">${formatPriceClean(localCostReg, activeCurr)}</span>
+              </div>
+              <div style="font-size: 10.5px; color: #64748b; font-family: var(--font-mono);">(Original: €${brixlyRegEur.toFixed(2)})</div>
             </div>
           </div>
         `;
 
-        // 3. Renovación (Actual) con referencia Brixly debajo
+        // 3. Renovación (Actual) con referencia Brixly calculada debajo + original en EUR
         const renCell = `
           <div class="price-cell-stacked">
             <div class="inline-price-cell-wrap" id="inline-price-cell-${d.id}-${selectedDomainCurrencyId}-renew">
@@ -3476,14 +4094,17 @@
                 <i class="fas fa-pencil-alt edit-hint-icon"></i>
               </span>
             </div>
-            <div class="brixly-ref-row ${hasBrixly ? 'exact-match' : ''}" title="Costo mayorista de Renovación de Brixly">
-              <span class="brixly-ref-label">Brixly:</span>
-              <span class="brixly-ref-val">$${brixlyRenUsd.toFixed(2)} USD</span>${renEquivText}
+            <div class="brixly-ref-row ${hasBrixly ? 'exact-match' : ''}" style="display:flex; flex-direction:column; align-items:center; gap:1px; margin-top:4px;" title="Costo mayorista calculado según cotización EUR: €${brixlyRenEur.toFixed(2)} × ${eurRate}">
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span class="brixly-ref-label">Brixly:</span>
+                <span class="brixly-ref-val" style="color: #1d4ed8; font-weight: 700;">${formatPriceClean(localCostRen, activeCurr)}</span>
+              </div>
+              <div style="font-size: 10.5px; color: #64748b; font-family: var(--font-mono);">(Original: €${brixlyRenEur.toFixed(2)})</div>
             </div>
           </div>
         `;
 
-        // 4. Transferencia (Actual) con referencia Brixly debajo
+        // 4. Transferencia (Actual) con referencia Brixly calculada debajo + original en EUR
         const traCell = `
           <div class="price-cell-stacked">
             <div class="inline-price-cell-wrap" id="inline-price-cell-${d.id}-${selectedDomainCurrencyId}-transfer">
@@ -3494,27 +4115,32 @@
                 <i class="fas fa-pencil-alt edit-hint-icon"></i>
               </span>
             </div>
-            <div class="brixly-ref-row ${hasBrixly ? 'exact-match' : ''}" title="Costo mayorista de Transferencia de Brixly">
-              <span class="brixly-ref-label">Brixly:</span>
-              <span class="brixly-ref-val">$${brixlyTraUsd.toFixed(2)} USD</span>${traEquivText}
+            <div class="brixly-ref-row ${hasBrixly ? 'exact-match' : ''}" style="display:flex; flex-direction:column; align-items:center; gap:1px; margin-top:4px;" title="Costo mayorista calculado según cotización EUR: €${brixlyTraEur.toFixed(2)} × ${eurRate}">
+              <div style="display:flex; align-items:center; gap:4px;">
+                <span class="brixly-ref-label">Brixly:</span>
+                <span class="brixly-ref-val" style="color: #1d4ed8; font-weight: 700;">${formatPriceClean(localCostTra, activeCurr)}</span>
+              </div>
+              <div style="font-size: 10.5px; color: #64748b; font-family: var(--font-mono);">(Original: €${brixlyTraEur.toFixed(2)})</div>
             </div>
           </div>
         `;
 
-        // 5. Proyección con tasa y margen con costo base debajo
+        // 5. Proyección con cotización EUR y margen configurado
         let projCell = '-';
-        if (brixlyRegUsd > 0) {
-          const converted = brixlyRegUsd * currentRate;
-          const withMargin = converted * (1 + margin / 100);
+        if (brixlyRegEur > 0) {
+          const withMargin = localCostReg * (1 + marginEur / 100);
           const finalProj = calculateSmartPoint99(withMargin, roundingMode);
           projCell = `
             <div class="price-cell-stacked">
               <span style="font-family: var(--font-mono); font-weight: 800; color: #059669; background: #ecfdf5; padding: 4px 10px; border-radius: 6px; border: 1px solid #a7f3d0; font-size: 0.92rem;">
                 ${formatPriceClean(finalProj, activeCurr)}
               </span>
-              <div class="brixly-ref-row" title="Base de costo Brixly sobre la que se calculó el margen">
-                <span class="brixly-ref-label">Base Costo:</span>
-                <span class="brixly-ref-val">$${brixlyRegUsd.toFixed(2)} USD</span>
+              <div class="brixly-ref-row" style="display:flex; flex-direction:column; align-items:center; gap:1px; margin-top:4px;" title="Base de costo calculada sobre la que se proyectó el margen">
+                <div style="display:flex; align-items:center; gap:4px;">
+                  <span class="brixly-ref-label">Base Costo:</span>
+                  <span class="brixly-ref-val" style="color: #059669; font-weight: 700;">${formatPriceClean(localCostReg, activeCurr)}</span>
+                </div>
+                <div style="font-size: 10.5px; color: #64748b; font-family: var(--font-mono);">(Original: €${brixlyRegEur.toFixed(2)})</div>
               </div>
             </div>
           `;

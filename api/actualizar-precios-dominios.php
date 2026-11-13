@@ -529,6 +529,194 @@ if ($action === 'save_single_price') {
     }
 }
 
+// Función auxiliar de redondeo a .99
+if (!function_exists('roundPriceToPoint99')) {
+    function roundPriceToPoint99($val, $mode = 'nearest') {
+        if ($val <= 0) return 0.99;
+        $floor = floor($val);
+        $c1 = $floor - 1 + 0.99; // Ej: 13.99 cuando val es 14.15
+        $c2 = $floor + 0.99;     // Ej: 14.99 cuando val es 14.15
+
+        if ($mode === 'ceil') {
+            return ($val > $c1) ? round($c2, 2) : round($c1, 2);
+        }
+
+        // 'nearest': redondeo al .99 con menor distancia absoluta
+        if ($c1 > 0 && abs($val - $c1) < abs($val - $c2)) {
+            return round($c1, 2);
+        }
+        return round($c2, 2);
+    }
+}
+
+// ========================================================
+// ACCIÓN: APLICAR COSTOS BRIXLY EUR x TASA A UNA MONEDA (⚡ APLICAR A TODO)
+// ========================================================
+if ($action === 'apply_eur_costs_to_currency') {
+    try {
+        $currId = (int)($inputData['currency_id'] ?? 0);
+        $eurRate = (float)($inputData['eur_rate'] ?? 0);
+        $margin = isset($inputData['margin']) ? (float)$inputData['margin'] : 0.0;
+        if ($margin < 0) $margin = 0.0;
+        $roundingMode = trim($inputData['rounding'] ?? 'nearest');
+
+        if ($currId <= 0 || $eurRate <= 0) {
+            http_response_code(400);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Moneda o tasa de cambio de EUR inválida para aplicar los costos.'
+            ]);
+            exit;
+        }
+
+        // Obtener código de la moneda
+        $currCode = '';
+        $currRes = $conexion->query("SELECT code FROM tblcurrencies WHERE id = {$currId} LIMIT 1");
+        if ($currRes && $cRow = $currRes->fetch_assoc()) {
+            $currCode = strtoupper(trim($cRow['code']));
+        }
+
+        // 1. Obtener catálogo completo de TLDs
+        $tldCatalog = [];
+        $tldSql = $conexion->query("SELECT id as dpid, extension FROM tbldomainpricing ORDER BY id ASC");
+        if ($tldSql) {
+            while ($row = $tldSql->fetch_assoc()) {
+                $ext = strtolower(trim($row['extension']));
+                if ($ext !== '' && substr($ext, 0, 1) !== '.') {
+                    $ext = '.' . $ext;
+                }
+                $tldCatalog[(int)$row['dpid']] = $ext;
+            }
+        }
+
+        if (empty($tldCatalog)) {
+            http_response_code(400);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'No se encontraron extensiones en tbldomainpricing de WHMCS.'
+            ]);
+            exit;
+        }
+
+        // 2. Costos Brixly en EUR desde tblbrixly_domain_costs
+        ensureBrixlyTablesExist($conexion);
+        $brixlyCosts = [];
+        $brixlyRes = $conexion->query("SELECT extension, register_cost, transfer_cost, renew_cost FROM tblbrixly_domain_costs");
+        if ($brixlyRes) {
+            while ($b = $brixlyRes->fetch_assoc()) {
+                $extClean = strtolower(trim($b['extension']));
+                if ($extClean !== '' && substr($extClean, 0, 1) !== '.') {
+                    $extClean = '.' . $extClean;
+                }
+                $brixlyCosts[$extClean] = [
+                    'register' => (float)$b['register_cost'],
+                    'transfer' => (float)$b['transfer_cost'],
+                    'renew'    => (float)$b['renew_cost']
+                ];
+            }
+        }
+
+        // 3. Preparar Statements SQL
+        $stmtCheck = $conexion->prepare("SELECT id FROM tblpricing WHERE type = ? AND currency = ? AND relid = ? LIMIT 1");
+        $stmtUpdate = $conexion->prepare("UPDATE tblpricing SET msetupfee = ? WHERE type = ? AND currency = ? AND relid = ?");
+        $stmtInsert = $conexion->prepare("
+            INSERT INTO tblpricing 
+            (type, currency, relid, msetupfee, qsetupfee, ssetupfee, asetupfee, bsetupfee, monthly, quarterly, semiannually, annually, biennially)
+            VALUES (?, ?, ?, ?, -1, -1, -1, -1, -1, -1, -1, -1, -1)
+        ");
+
+        $updatedTlds = 0;
+        $totalOperations = 0;
+
+        foreach ($tldCatalog as $dpid => $extKey) {
+            $bData = $brixlyCosts[$extKey] ?? null;
+            $regEur = ($bData && $bData['register'] > 0) ? $bData['register'] : 9.26;
+            $renEur = ($bData && $bData['renew'] > 0) ? $bData['renew'] : $regEur;
+            $traEur = ($bData && $bData['transfer'] > 0) ? $bData['transfer'] : $regEur;
+
+            $types = [
+                'domainregister' => $regEur,
+                'domainrenew'    => $renEur,
+                'domaintransfer' => $traEur
+            ];
+
+            $tldOk = false;
+            foreach ($types as $pType => $eurCost) {
+                // FÓRMULA: Costo EUR * Tasa EUR * (1 + Margen %)
+                $converted = $eurCost * $eurRate;
+                $withMargin = $converted * (1 + ($margin / 100.0));
+                
+                if ($roundingMode === 'raw' || $roundingMode === 'none') {
+                    $finalPrice = round($withMargin, 2);
+                } else {
+                    $finalPrice = roundPriceToPoint99($withMargin, $roundingMode);
+                }
+
+                // Intentar UPDATE
+                $stmtUpdate->bind_param("dsii", $finalPrice, $pType, $currId, $dpid);
+                $stmtUpdate->execute();
+
+                if ($stmtUpdate->affected_rows > 0) {
+                    $totalOperations++;
+                    $tldOk = true;
+                } else {
+                    // Verificar si existe o INSERTAR
+                    $stmtCheck->bind_param("sii", $pType, $currId, $dpid);
+                    $stmtCheck->execute();
+                    $stmtCheck->store_result();
+
+                    if ($stmtCheck->num_rows === 0) {
+                        $stmtInsert->bind_param("siid", $pType, $currId, $dpid, $finalPrice);
+                        $stmtInsert->execute();
+                        $totalOperations++;
+                        $tldOk = true;
+                    } else {
+                        $totalOperations++;
+                        $tldOk = true;
+                    }
+                }
+            }
+
+            if ($tldOk) {
+                $updatedTlds++;
+            }
+        }
+
+        // Sincronizar automáticamente el caché JSON en disco ejecutando refresh_prices.php
+        $refreshScript = __DIR__ . '/refresh_prices.php';
+        if (file_exists($refreshScript)) {
+            try {
+                ob_start();
+                include $refreshScript;
+                ob_end_clean();
+            } catch (\Throwable $t) {
+                ob_end_clean();
+            }
+        }
+
+        echo json_encode([
+            'status' => 'success',
+            'message' => "¡Precios de venta para {$currCode} actualizados masivamente con éxito a partir de costos Brixly EUR!",
+            'currency_id' => $currId,
+            'currency_code' => $currCode,
+            'eur_rate' => $eurRate,
+            'margin' => $margin,
+            'rounding' => $roundingMode,
+            'updated_tlds' => $updatedTlds,
+            'total_operations' => $totalOperations,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]);
+        exit;
+    } catch (\Throwable $t) {
+        http_response_code(500);
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Error al aplicar costos EUR masivamente: ' . $t->getMessage()
+        ]);
+        exit;
+    }
+}
+
 // ========================================================
 // ACCIÓN C: ACTUALIZACIÓN MASIVA DE PRECIOS
 // ========================================================
@@ -549,24 +737,6 @@ if ($action === 'update_prices') {
                 'message' => 'No se enviaron tasas de cambio para actualizar.'
             ]);
             exit;
-        }
-
-        // Función de redondeo al .99 más cercano
-        function roundPriceToPoint99($val, $mode = 'nearest') {
-            if ($val <= 0) return 0.99;
-            $floor = floor($val);
-            $c1 = $floor - 1 + 0.99; // Ej: 13.99 cuando val es 14.15
-            $c2 = $floor + 0.99;     // Ej: 14.99 cuando val es 14.15
-
-            if ($mode === 'ceil') {
-                return ($val > $c1) ? round($c2, 2) : round($c1, 2);
-            }
-
-            // 'nearest': redondeo al .99 con menor distancia absoluta
-            if ($c1 > 0 && abs($val - $c1) < abs($val - $c2)) {
-                return round($c1, 2);
-            }
-            return round($c2, 2);
         }
 
         // 1. Identificar la Moneda Base (default = 1, o ID 1 USD)
