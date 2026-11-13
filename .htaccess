@@ -66,8 +66,8 @@ DirectoryIndex index.html index.php
     <FilesMatch "\.(css|js|png|jpe?g|gif|ico|svg|woff2?|ttf|eot)$">
         Header set Cache-Control "max-age=31536000, public"
     </FilesMatch>
-    # Precios JSON: no-cache para reflejar cambios inmediatos
-    <FilesMatch "\.json$">
+    # Precios JSON y prices.js: no-cache para reflejar cambios inmediatos
+    <FilesMatch "(prices\.js|\.json)$">
         Header set Cache-Control "no-cache, no-store, must-revalidate"
         Header set Pragma "no-cache"
         Header set Expires 0
