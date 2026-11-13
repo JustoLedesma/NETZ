@@ -529,10 +529,15 @@ if ($action === 'save_single_price') {
     }
 }
 
-// Función auxiliar de redondeo a .99
+// Función auxiliar de redondeo a .99 o millar limpio para Guaraníes
 if (!function_exists('roundPriceToPoint99')) {
-    function roundPriceToPoint99($val, $mode = 'nearest') {
+    function roundPriceToPoint99($val, $mode = 'nearest', $currCode = '') {
         if ($val <= 0) return 0.99;
+        $currUpper = strtoupper(trim($currCode));
+        if ($currUpper === 'PYG' || ($val >= 1000 && in_array($currUpper, ['CLP', 'COP']))) {
+            return (float)(round($val / 1000) * 1000);
+        }
+
         $floor = floor($val);
         $c1 = $floor - 1 + 0.99; // Ej: 13.99 cuando val es 14.15
         $c2 = $floor + 0.99;     // Ej: 14.99 cuando val es 14.15
@@ -649,7 +654,7 @@ if ($action === 'apply_eur_costs_to_currency') {
                 if ($roundingMode === 'raw' || $roundingMode === 'none') {
                     $finalPrice = round($withMargin, 2);
                 } else {
-                    $finalPrice = roundPriceToPoint99($withMargin, $roundingMode);
+                    $finalPrice = roundPriceToPoint99($withMargin, $roundingMode, $currCode);
                 }
 
                 // Intentar UPDATE
@@ -866,7 +871,7 @@ if ($action === 'update_prices') {
                     // APLICAR FÓRMULA: Costo Base * Tasa * (1 + Margen %)
                     $converted = $baseCost * $rate;
                     $withMargin = $converted * (1 + ($margin / 100.0));
-                    $finalRounded = roundPriceToPoint99($withMargin, $roundingMode);
+                    $finalRounded = roundPriceToPoint99($withMargin, $roundingMode, $code);
 
                     // 1. Intentar UPDATE
                     $stmtUpdate->bind_param("dsii", $finalRounded, $pType, $currId, $dpid);

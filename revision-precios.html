@@ -36,7 +36,8 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.5;
-      padding: 16px;
+      padding: 0;
+      margin: 0;
       min-height: 100vh;
     }
 
@@ -1544,19 +1545,33 @@
     #navbar-container {
       position: sticky;
       top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
       z-index: 99999;
       background: #ffffff;
-      width: 100%;
+      padding: 0;
+      margin: 0;
+      border: none !important;
+      border-radius: 0 !important;
+      -webkit-box-shadow: 0 7px 17px rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 7px 17px rgba(0, 0, 0, 0.06) !important;
     }
 
     #coodiv-navbar-header {
       background: #ffffff;
       width: 100%;
-      padding: 0.9rem 1.5rem;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-      -webkit-box-shadow: 0 7px 17px rgba(0, 0, 0, 0.06) !important;
-      box-shadow: 0 7px 17px rgba(0, 0, 0, 0.06) !important;
+      padding: 0.85rem 1.5rem;
+      border: none !important;
+      box-shadow: none !important;
+      margin: 0;
       transition: all 0.2s ease-in-out;
+    }
+
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 24px 20px 48px;
     }
 
     .main-header-coodiv-s {
@@ -1820,7 +1835,7 @@
        ======================================================== -->
   <div id="dashboard-app" style="display: none;">
     <!-- NAVBAR OFICIAL DE NETZ (Sticky con Sombra idéntica al original) -->
-    <header id="navbar-container">
+    <div id="navbar-container">
       <nav id="coodiv-navbar-header" class="navbar navbar-expand-md fixed-header-layout top-header-fixed">
         <div class="main-header-coodiv-s">
           <!-- Logo Oficial NETZ -->
@@ -1870,7 +1885,7 @@
           </ul>
         </div>
       </nav>
-    </header>
+    </div>
 
     <!-- CONTENEDOR PRINCIPAL DE CONTENIDOS -->
     <div class="container" style="padding-top: 24px; padding-bottom: 40px;">
@@ -3426,9 +3441,15 @@
     let massDomainsPerPage = 50;
     let pendingMassUpdatePayload = null;
 
-    // Redondeo inteligente al .99 más cercano
-    function calculateSmartPoint99(val, mode = 'nearest') {
+    // Redondeo inteligente al .99 más cercano (o millar limpio para Guaraníes)
+    function calculateSmartPoint99(val, mode = 'nearest', currCode = '') {
       if (!val || val <= 0) return 0.99;
+      const code = (currCode || (typeof getActiveEurCurrencyCode === 'function' ? getActiveEurCurrencyCode() : '')).toUpperCase();
+
+      if (code === 'PYG' || (val >= 1000 && (code === 'CLP' || code === 'COP'))) {
+        return Math.round(val / 1000) * 1000;
+      }
+
       const floor = Math.floor(val);
       const c1 = floor - 1 + 0.99; // Ej: 13.99 cuando val es 14.15
       const c2 = floor + 0.99;     // Ej: 14.99 cuando val es 14.15
