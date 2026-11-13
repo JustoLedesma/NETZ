@@ -56,7 +56,102 @@ if (!isset($conexion) || !($conexion instanceof mysqli) || $conexion->connect_er
     exit;
 }
 
+
 $conexion->set_charset("utf8mb4");
+
+/**
+ * Asegurar que las tablas de persistencia para costos de Brixly existan en MySQL
+ */
+function ensureBrixlyTablesExist($conexion) {
+    static $checked = false;
+    if ($checked) return;
+
+    $sql1 = "
+        CREATE TABLE IF NOT EXISTS `tblbrixly_domain_costs` (
+            `extension` VARCHAR(64) NOT NULL PRIMARY KEY,
+            `register_cost` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+            `transfer_cost` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+            `renew_cost` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+            `register_retail` DECIMAL(10,2) DEFAULT NULL,
+            `transfer_retail` DECIMAL(10,2) DEFAULT NULL,
+            `renew_retail` DECIMAL(10,2) DEFAULT NULL,
+            `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ";
+    $conexion->query($sql1);
+
+    $sql2 = "
+        CREATE TABLE IF NOT EXISTS `tblbrixly_product_costs` (
+            `id` INT AUTO_INCREMENT PRIMARY KEY,
+            `product_name` VARCHAR(255) NOT NULL,
+            `billing_cycle` VARCHAR(64) DEFAULT NULL,
+            `setup_fee` DECIMAL(10,2) DEFAULT 0.00,
+            `recurring_cost` DECIMAL(10,2) DEFAULT 0.00,
+            `retail_rec` DECIMAL(10,2) DEFAULT 0.00,
+            `saving_percent` VARCHAR(32) DEFAULT NULL,
+            `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            UNIQUE KEY `uniq_prod_cycle` (`product_name`, `billing_cycle`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ";
+    $conexion->query($sql2);
+
+    $checked = true;
+}
+
+/**
+ * Parser de respaldo en PHP para archivos CSV/TXT de Brixly si se envían directamente
+ */
+function parseBrixlyUploadedFile($filePath, $fileName) {
+    $tlds = [];
+    $products = [];
+    $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+    if ($ext === 'csv' || $ext === 'txt') {
+        $handle = fopen($filePath, 'r');
+        if ($handle) {
+            $isTldSection = false;
+            $isProductSection = false;
+            while (($row = fgetcsv($handle, 4000, ',')) !== false) {
+                if (empty($row) || (count($row) === 1 && trim($row[0]) === '')) continue;
+                $col0 = strtolower(trim($row[0] ?? ''));
+                if ($col0 === 'product') {
+                    $isProductSection = true;
+                    $isTldSection = false;
+                    continue;
+                }
+                if ($col0 === 'tld') {
+                    $isTldSection = true;
+                    $isProductSection = false;
+                    continue;
+                }
+                if ($isProductSection && !empty($row[0])) {
+                    $products[] = [
+                        'product_name' => trim($row[0]),
+                        'billing_cycle' => trim($row[1] ?? ''),
+                        'setup_fee' => (float)($row[2] ?? 0),
+                        'recurring_cost' => (float)($row[3] ?? 0),
+                        'retail_rec' => (float)($row[4] ?? 0),
+                        'saving_percent' => trim($row[6] ?? '')
+                    ];
+                }
+                if ($isTldSection && !empty($row[0])) {
+                    $tlds[] = [
+                        'extension' => trim($row[0]),
+                        'register_cost' => (float)($row[1] ?? 0),
+                        'register_retail' => (float)($row[2] ?? 0),
+                        'transfer_cost' => (float)($row[4] ?? 0),
+                        'transfer_retail' => (float)($row[5] ?? 0),
+                        'renew_cost' => (float)($row[7] ?? 0),
+                        'renew_retail' => (float)($row[8] ?? 0)
+                    ];
+                }
+            }
+            fclose($handle);
+        }
+    }
+    return ['tlds' => $tlds, 'products' => $products];
+}
+
 
 // 2. Determinar la acción solicitada (GET o POST)
 $rawInput = file_get_contents('php://input');
@@ -158,10 +253,55 @@ if ($action === 'get_currencies') {
             }
         }
 
-        // Fallback de cost_brixly si faltara para algún TLD específico
+        // Consultar costos de referencia Brixly guardados en MySQL
+        ensureBrixlyTablesExist($conexion);
+        $brixlyCosts = [];
+        $brixlyRes = $conexion->query("SELECT extension, register_cost, transfer_cost, renew_cost, register_retail, transfer_retail, renew_retail FROM tblbrixly_domain_costs");
+        if ($brixlyRes) {
+            while ($b = $brixlyRes->fetch_assoc()) {
+                $extClean = strtolower(trim($b['extension']));
+                if ($extClean !== '' && substr($extClean, 0, 1) !== '.') {
+                    $extClean = '.' . $extClean;
+                }
+                $brixlyCosts[$extClean] = [
+                    'register' => (float)$b['register_cost'],
+                    'transfer' => (float)$b['transfer_cost'],
+                    'renew'    => (float)$b['renew_cost'],
+                    'register_retail' => $b['register_retail'] !== null ? (float)$b['register_retail'] : null,
+                    'transfer_retail' => $b['transfer_retail'] !== null ? (float)$b['transfer_retail'] : null,
+                    'renew_retail'    => $b['renew_retail'] !== null ? (float)$b['renew_retail'] : null
+                ];
+            }
+        }
+
+        // Conteo de productos Cloud en MySQL
+        $cloudCount = 0;
+        $cloudCountRes = $conexion->query("SELECT COUNT(*) as total FROM tblbrixly_product_costs");
+        if ($cloudCountRes && $cRow = $cloudCountRes->fetch_assoc()) {
+            $cloudCount = (int)$cRow['total'];
+        }
+
+        // Asignar costos Brixly específicos a cada TLD
         foreach ($domainsCatalog as &$dItem) {
-            if ($dItem['cost_brixly'] === null) {
-                $dItem['cost_brixly'] = $dItem['prices'][$baseCurrencyId]['renew'] ?? ($dItem['prices'][$baseCurrencyId]['transfer'] ?? 13.99);
+            $extKey = $dItem['extension'];
+            if (isset($brixlyCosts[$extKey])) {
+                $dItem['brixly_costs'] = $brixlyCosts[$extKey];
+                $dItem['cost_brixly'] = $brixlyCosts[$extKey]['register'];
+                $dItem['has_brixly'] = true;
+            } else {
+                $fallbackReg = $dItem['prices'][$baseCurrencyId]['register'] ?? 13.99;
+                $fallbackRen = $dItem['prices'][$baseCurrencyId]['renew'] ?? $fallbackReg;
+                $fallbackTra = $dItem['prices'][$baseCurrencyId]['transfer'] ?? $fallbackReg;
+                $dItem['brixly_costs'] = [
+                    'register' => (float)$fallbackReg,
+                    'renew'    => (float)$fallbackRen,
+                    'transfer' => (float)$fallbackTra,
+                    'register_retail' => null,
+                    'transfer_retail' => null,
+                    'renew_retail'    => null
+                ];
+                $dItem['cost_brixly'] = (float)$fallbackReg;
+                $dItem['has_brixly'] = false;
             }
         }
         unset($dItem);
@@ -172,6 +312,10 @@ if ($action === 'get_currencies') {
             'base_currency' => $baseCurrency,
             'currencies' => $currencies,
             'domains' => array_values($domainsCatalog),
+            'brixly_stats' => [
+                'total_tlds_in_db' => count($brixlyCosts),
+                'total_products_in_db' => $cloudCount
+            ],
             'server_time' => date('Y-m-d H:i:s')
         ]);
         exit;
@@ -185,8 +329,208 @@ if ($action === 'get_currencies') {
     }
 }
 
+
 // ========================================================
-// ACCIÓN B: ACTUALIZACIÓN MASIVA DE PRECIOS
+// ACCIÓN: IMPORTAR TARIFARIO EXCEL DE BRIXLY (TLDs Y CLOUD)
+// ========================================================
+if ($action === 'import_brixly_data') {
+    try {
+        ensureBrixlyTablesExist($conexion);
+
+        $tldsToSave = [];
+        $productsToSave = [];
+
+        // 1. Si se envió JSON vía body
+        if (!empty($inputData['tlds']) && is_array($inputData['tlds'])) {
+            $tldsToSave = $inputData['tlds'];
+        }
+        if (!empty($inputData['products']) && is_array($inputData['products'])) {
+            $productsToSave = $inputData['products'];
+        }
+
+        // 2. Si se envió un archivo vía $_FILES['excel_file']
+        if (isset($_FILES['excel_file']) && $_FILES['excel_file']['error'] === UPLOAD_ERR_OK) {
+            $tmpPath = $_FILES['excel_file']['tmp_name'];
+            $fileName = $_FILES['excel_file']['name'];
+            $parsed = parseBrixlyUploadedFile($tmpPath, $fileName);
+            if (!empty($parsed['tlds'])) {
+                $tldsToSave = array_merge($tldsToSave, $parsed['tlds']);
+            }
+            if (!empty($parsed['products'])) {
+                $productsToSave = array_merge($productsToSave, $parsed['products']);
+            }
+        }
+
+        if (empty($tldsToSave) && empty($productsToSave)) {
+            http_response_code(400);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'No se encontraron registros válidos de TLDs ni de Productos Cloud para guardar.'
+            ]);
+            exit;
+        }
+
+        $conexion->begin_transaction();
+
+        $tldCount = 0;
+        if (!empty($tldsToSave)) {
+            $stmtTld = $conexion->prepare("
+                INSERT INTO tblbrixly_domain_costs 
+                (extension, register_cost, transfer_cost, renew_cost, register_retail, transfer_retail, renew_retail)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                ON DUPLICATE KEY UPDATE 
+                register_cost = VALUES(register_cost),
+                transfer_cost = VALUES(transfer_cost),
+                renew_cost = VALUES(renew_cost),
+                register_retail = VALUES(register_retail),
+                transfer_retail = VALUES(transfer_retail),
+                renew_retail = VALUES(renew_retail),
+                updated_at = CURRENT_TIMESTAMP
+            ");
+
+            foreach ($tldsToSave as $t) {
+                $rawExt = strtolower(trim($t['extension'] ?? ($t['tld'] ?? '')));
+                if ($rawExt === '') continue;
+                if (substr($rawExt, 0, 1) !== '.') {
+                    $rawExt = '.' . $rawExt;
+                }
+
+                $regCost = isset($t['register_cost']) ? (float)$t['register_cost'] : 0.0;
+                $traCost = isset($t['transfer_cost']) ? (float)$t['transfer_cost'] : 0.0;
+                $renCost = isset($t['renew_cost']) ? (float)$t['renew_cost'] : 0.0;
+                $regRet  = isset($t['register_retail']) && $t['register_retail'] !== '' ? (float)$t['register_retail'] : null;
+                $traRet  = isset($t['transfer_retail']) && $t['transfer_retail'] !== '' ? (float)$t['transfer_retail'] : null;
+                $renRet  = isset($t['renew_retail']) && $t['renew_retail'] !== '' ? (float)$t['renew_retail'] : null;
+
+                $stmtTld->bind_param("sdddddd", $rawExt, $regCost, $traCost, $renCost, $regRet, $traRet, $renRet);
+                $stmtTld->execute();
+                $tldCount++;
+            }
+        }
+
+        $prodCount = 0;
+        if (!empty($productsToSave)) {
+            $stmtProd = $conexion->prepare("
+                INSERT INTO tblbrixly_product_costs 
+                (product_name, billing_cycle, setup_fee, recurring_cost, retail_rec, saving_percent)
+                VALUES (?, ?, ?, ?, ?, ?)
+                ON DUPLICATE KEY UPDATE 
+                setup_fee = VALUES(setup_fee),
+                recurring_cost = VALUES(recurring_cost),
+                retail_rec = VALUES(retail_rec),
+                saving_percent = VALUES(saving_percent),
+                updated_at = CURRENT_TIMESTAMP
+            ");
+
+            foreach ($productsToSave as $p) {
+                $pName = trim($p['product_name'] ?? ($p['product'] ?? ''));
+                if ($pName === '') continue;
+                $pCycle = trim($p['billing_cycle'] ?? '');
+                $pSetup = isset($p['setup_fee']) ? (float)$p['setup_fee'] : 0.0;
+                $pRecur = isset($p['recurring_cost']) ? (float)$p['recurring_cost'] : (isset($p['recurring']) ? (float)$p['recurring'] : 0.0);
+                $pRetail = isset($p['retail_rec']) ? (float)$p['retail_rec'] : 0.0;
+                $pSaving = trim($p['saving_percent'] ?? '');
+
+                $stmtProd->bind_param("ssddds", $pName, $pCycle, $pSetup, $pRecur, $pRetail, $pSaving);
+                $stmtProd->execute();
+                $prodCount++;
+            }
+        }
+
+        $conexion->commit();
+
+        echo json_encode([
+            'status' => 'success',
+            'message' => "Tarifario de Brixly guardado exitosamente en base de datos: {$tldCount} TLDs y {$prodCount} Productos Cloud.",
+            'tlds_saved' => $tldCount,
+            'products_saved' => $prodCount
+        ]);
+        exit;
+    } catch (Throwable $t) {
+        if (isset($conexion)) {
+            $conexion->rollback();
+        }
+        http_response_code(500);
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Error al guardar datos de Brixly: ' . $t->getMessage()
+        ]);
+        exit;
+    }
+}
+
+// ========================================================
+// ACCIÓN B: GUARDAR PRECIO INDIVIDUAL (CLICK-TO-EDIT & ENTER)
+// ========================================================
+if ($action === 'save_single_price') {
+    try {
+        $dpid = (int)($inputData['dpid'] ?? 0);
+        $currencyId = (int)($inputData['currency_id'] ?? 0);
+        $type = trim($inputData['type'] ?? '');
+        $price = isset($inputData['price']) ? (float)$inputData['price'] : null;
+
+        if ($dpid <= 0 || $currencyId <= 0 || !in_array($type, ['domainregister', 'domainrenew', 'domaintransfer']) || $price === null) {
+            http_response_code(400);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Parámetros inválidos para actualizar precio'
+            ]);
+            exit;
+        }
+
+        // 1. Verificar si existe en tblpricing
+        $stmtCheck = $conexion->prepare("SELECT id FROM tblpricing WHERE type = ? AND currency = ? AND relid = ? LIMIT 1");
+        $stmtCheck->bind_param("sii", $type, $currencyId, $dpid);
+        $stmtCheck->execute();
+        $stmtCheck->store_result();
+
+        if ($stmtCheck->num_rows > 0) {
+            $stmtUpdate = $conexion->prepare("UPDATE tblpricing SET msetupfee = ? WHERE type = ? AND currency = ? AND relid = ?");
+            $stmtUpdate->bind_param("dsii", $price, $type, $currencyId, $dpid);
+            $stmtUpdate->execute();
+        } else {
+            $stmtInsert = $conexion->prepare("
+                INSERT INTO tblpricing 
+                (type, currency, relid, msetupfee, qsetupfee, ssetupfee, asetupfee, bsetupfee, monthly, quarterly, semiannually, annually, biennially)
+                VALUES (?, ?, ?, ?, -1, -1, -1, -1, -1, -1, -1, -1, -1)
+            ");
+            $stmtInsert->bind_param("siid", $type, $currencyId, $dpid, $price);
+            $stmtInsert->execute();
+        }
+
+        // 2. Sincronizar en segundo plano el caché de precios JSON
+        $refreshScript = __DIR__ . '/refresh_prices.php';
+        if (file_exists($refreshScript)) {
+            try {
+                ob_start();
+                include $refreshScript;
+                ob_end_clean();
+            } catch (\Throwable $t) {
+                ob_end_clean();
+            }
+        }
+
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Precio guardado exitosamente en WHMCS',
+            'dpid' => $dpid,
+            'currency_id' => $currencyId,
+            'type' => $type,
+            'price' => $price
+        ]);
+        exit;
+    } catch (\Throwable $t) {
+        http_response_code(500);
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Error al guardar precio: ' . $t->getMessage()
+        ]);
+        exit;
+    }
+}
+
+// ========================================================
+// ACCIÓN C: ACTUALIZACIÓN MASIVA DE PRECIOS
 // ========================================================
 if ($action === 'update_prices') {
     try {
@@ -272,6 +616,23 @@ if ($action === 'update_prices') {
             exit;
         }
 
+        // Cargar costos mayoristas oficiales de Brixly desde la base de datos
+        $brixlyCosts = [];
+        $brixlyRes = $conexion->query("SELECT extension, register_cost, transfer_cost, renew_cost FROM tblbrixly_domain_costs");
+        if ($brixlyRes) {
+            while ($b = $brixlyRes->fetch_assoc()) {
+                $extClean = strtolower(trim($b['extension']));
+                if ($extClean !== '' && substr($extClean, 0, 1) !== '.') {
+                    $extClean = '.' . $extClean;
+                }
+                $brixlyCosts[$extClean] = [
+                    'register' => (float)$b['register_cost'],
+                    'transfer' => (float)$b['transfer_cost'],
+                    'renew'    => (float)$b['renew_cost']
+                ];
+            }
+        }
+
         // 3. Preparar Statements SQL para UPDATE, INSERT y actualización de tasas
         $stmtCheck = $conexion->prepare("SELECT id FROM tblpricing WHERE type = ? AND currency = ? AND relid = ? LIMIT 1");
         $stmtUpdate = $conexion->prepare("UPDATE tblpricing SET msetupfee = ? WHERE type = ? AND currency = ? AND relid = ?");
@@ -312,10 +673,16 @@ if ($action === 'update_prices') {
 
             // Recorrer todos los TLDs
             foreach ($tldCatalog as $dpid => $tldData) {
+                $extKey = strtolower(trim($tldData['extension']));
+                if ($extKey !== '' && substr($extKey, 0, 1) !== '.') {
+                    $extKey = '.' . $extKey;
+                }
+                $bData = $brixlyCosts[$extKey] ?? null;
+
                 $typesToProcess = [
-                    'domainregister' => $tldData['register'],
-                    'domainrenew'    => $tldData['renew'],
-                    'domaintransfer' => $tldData['transfer']
+                    'domainregister' => ($bData && $bData['register'] > 0) ? $bData['register'] : $tldData['register'],
+                    'domainrenew'    => ($bData && $bData['renew'] > 0) ? $bData['renew'] : $tldData['renew'],
+                    'domaintransfer' => ($bData && $bData['transfer'] > 0) ? $bData['transfer'] : $tldData['transfer']
                 ];
 
                 $tldSuccess = false;

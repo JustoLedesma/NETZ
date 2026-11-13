@@ -1346,7 +1346,199 @@
       border-radius: 8px;
       overflow: hidden;
     }
+
+    /* Inline Click-to-Edit Styles */
+    .inline-price-cell-wrap {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+    }
+
+    .inline-price-badge {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: #1e293b;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .inline-price-badge:hover {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1d4ed8;
+      box-shadow: 0 2px 6px rgba(59, 130, 246, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .inline-price-badge .edit-hint-icon {
+      font-size: 10px;
+      color: #94a3b8;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .inline-price-badge:hover .edit-hint-icon {
+      opacity: 1;
+      color: #3b82f6;
+    }
+
+    .inline-price-badge.pending {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #fde68a;
+    }
+
+    .inline-edit-input-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #fff;
+      padding: 2px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    .inline-price-input {
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #111827;
+      background: #fff;
+      border: 2px solid var(--primary);
+      padding: 4px 8px;
+      border-radius: 5px;
+      width: 105px;
+      outline: none;
+    }
+
+    .inline-btn-save, .inline-btn-cancel {
+      border: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      transition: all 0.15s ease;
+    }
+
+    .inline-btn-save {
+      background: #10b981;
+      color: #fff;
+    }
+    .inline-btn-save:hover { background: #059669; }
+
+    .inline-btn-cancel {
+      background: #f1f5f9;
+      color: #64748b;
+    }
+    .inline-btn-cancel:hover { background: #fee2e2; color: #dc2626; }
+
+    .inline-save-success {
+      background: #dcfce7 !important;
+      border-color: #86efac !important;
+      color: #166534 !important;
+      animation: pulseGreen 0.6s ease;
+    }
+
+    /* Tabla de Dominios Limpia y Elegante */
+    #table-mass-all-domains th {
+      background: #1e293b !important;
+      color: #ffffff !important;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 12px 14px;
+      border-bottom: 2px solid #334155;
+      white-space: nowrap;
+    }
+  
+    /* Estructura apilada de Precios con Referencia Brixly debajo */
+    .price-cell-stacked {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+
+    .brixly-ref-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: #64748b;
+      background: #f8fafc;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px dashed #cbd5e1;
+      white-space: nowrap;
+      line-height: 1.25;
+      transition: all 0.15s ease;
+    }
+
+    .brixly-ref-row.exact-match {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      color: #166534;
+    }
+
+    .brixly-ref-label {
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      color: #0284c7;
+    }
+
+    .brixly-ref-val {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .brixly-ref-equiv {
+      font-size: 10px;
+      color: #64748b;
+      margin-left: 2px;
+      font-weight: 500;
+    }
+
+    /* Zona de Carga Excel */
+    .excel-drop-zone {
+      border: 2px dashed #94a3b8;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .excel-drop-zone:hover, .excel-drop-zone.dragover {
+      border-color: #059669;
+      background: #ecfdf5;
+    }
+
+    .excel-drop-icon {
+      font-size: 30px;
+      color: #059669;
+      margin-bottom: 8px;
+    }
+
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -1518,22 +1710,96 @@
     <div id="view-mass-update" style="display: none;">
       <div class="mass-container">
         
-        <!-- Tarjeta Hero Informativa -->
-        <div class="mass-hero-card">
-          <div class="mass-hero-info">
-            <h2>
-              <i class="fas fa-bolt" style="color: #4f46e5;"></i> Actualizador Masivo de Precios de Dominios
-            </h2>
-            <p>
-              Herramienta de un solo clic conectada directamente a la base de datos MySQL de WHMCS (<code>tbldomainpricing</code> / <code>tblpricing</code>).
-              Calcula y actualiza masivamente los precios de <strong>Registro (1 año)</strong>, <strong>Renovación</strong> y <strong>Transferencia</strong>
-              para todas las monedas activas aplicando margen de ganancia global y redondeo psicológico a <code>.99</code>.
-            </p>
+        <!-- Barra de Estado Compacta y Limpia -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding: 14px 20px; background: #fff; border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.03);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 38px; height: 38px; border-radius: 8px; background: #eef2ff; color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 18px;">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <div>
+              <div style="font-weight: 700; color: #1e1b4b; font-size: 1.05rem;">Actualización Masiva y Edición de Precios de Dominios</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted);">WHMCS MySQL (<code>tblpricing</code> / <code>tbldomainpricing</code>)</div>
+            </div>
           </div>
           <div class="mass-badges-wrap">
-            <span class="mass-badge db-ok"><i class="fas fa-database"></i> BD: Conectada (WHMCS)</span>
-            <span class="mass-badge" id="mass-total-tlds-badge"><i class="fas fa-globe"></i> TLDs en BD: Detectando...</span>
-            <span class="mass-badge base-cur" id="mass-base-curr-badge"><i class="fas fa-dollar-sign"></i> Moneda Base: USD (ID 1)</span>
+            <span class="mass-badge db-ok"><i class="fas fa-database"></i> BD: Conectada</span>
+            <span class="mass-badge" id="mass-total-tlds-badge"><i class="fas fa-globe"></i> 513 TLDs</span>
+            <span class="mass-badge base-cur" id="mass-base-curr-badge"><i class="fas fa-dollar-sign"></i> Base: USD (ID 1)</span>
+          </div>
+        </div>
+
+        
+        <!-- Tarjeta de Importación de Tarifario Excel de Brixly -->
+        <div class="mass-card" style="margin-bottom: 20px; border-left: 4px solid #10b981;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+            <div>
+              <div class="mass-card-title" style="margin-bottom: 4px;">
+                <i class="fas fa-file-excel" style="color: #10b981;"></i> Cargar Tarifario Oficial de Servidor (Excel / CSV de Brixly)
+                <span id="brixly-tlds-db-badge" class="mass-badge" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; font-size: 11px; margin-left: 6px;">
+                  <i class="fas fa-database"></i> <span id="brixly-db-count">0</span> TLDs Brixly en BD
+                </span>
+                <span id="brixly-prods-db-badge" class="mass-badge" style="background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; font-size: 11px; margin-left: 4px;">
+                  <i class="fas fa-cloud"></i> <span id="brixly-prods-count">0</span> Cloud en BD
+                </span>
+              </div>
+              <p class="mass-card-desc" style="margin-bottom: 0;">
+                Sube el archivo Excel que te da el servidor con los costos mayoristas. El sistema extrae automáticamente la sección de <strong>TLDs (Registro, Renovación y Transferencia)</strong> y los <strong>Productos Cloud</strong>, guardándolos permanentemente en la base de datos de WHMCS para mostrarlos debajo de cada precio como referencia.
+              </p>
+            </div>
+            <div>
+              <label for="excel-file-input" class="btn-settings" style="cursor: pointer; background: #059669; color: #fff; border-color: #047857; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; padding: 10px 18px; box-shadow: 0 2px 6px rgba(5,150,105,0.2);">
+                <i class="fas fa-file-upload"></i> Seleccionar Archivo Excel (.xlsx / .csv)
+              </label>
+              <input type="file" id="excel-file-input" accept=".xlsx, .xls, .csv" style="display: none;" onchange="handleExcelFileUpload(event)">
+            </div>
+          </div>
+
+          <!-- Zona de Drag & Drop -->
+          <div id="excel-drop-zone" class="excel-drop-zone" onclick="document.getElementById('excel-file-input').click()">
+            <i class="fas fa-cloud-upload-alt excel-drop-icon"></i>
+            <div style="font-weight: 700; color: #1e293b; font-size: 0.98rem;">
+              Arrastra y suelta aquí tu archivo Excel de Brixly (.xlsx, .xls o .csv)
+            </div>
+            <div style="font-size: 0.83rem; color: #64748b; margin-top: 4px;">
+              o haz clic para explorar en tu equipo. Los datos se guardarán de forma persistente en MySQL.
+            </div>
+          </div>
+
+          <!-- Panel de Previsualización y Confirmación de Guardado -->
+          <div id="excel-preview-panel" style="display: none; margin-top: 16px; padding: 16px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+              <div>
+                <strong style="color: #0f172a; font-size: 1.05rem;" id="excel-preview-filename">Archivo cargado</strong>
+                <div style="font-size: 0.84rem; color: #059669; font-weight: 600; margin-top: 2px;" id="excel-preview-summary">
+                  Detectados: 0 TLDs y 0 Productos Cloud
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <button type="button" class="btn-refresh" id="btn-save-brixly-db" onclick="saveParsedBrixlyData()" style="background: #059669; padding: 8px 18px;">
+                  <i class="fas fa-save" style="margin-right: 6px;"></i> Guardar Precios en Base de Datos
+                </button>
+                <button type="button" class="btn-settings" onclick="dismissExcelPreview()" style="padding: 8px 14px;">
+                  Cancelar
+                </button>
+              </div>
+            </div>
+
+            <!-- Tabla de Muestra de Primeros 5 TLDs -->
+            <div style="overflow-x: auto;">
+              <table class="mass-table" style="font-size: 12px; margin: 0;">
+                <thead>
+                  <tr style="background: #334155;">
+                    <th style="padding: 8px 10px;">TLD</th>
+                    <th style="padding: 8px 10px;">Register (You Pay)</th>
+                    <th style="padding: 8px 10px;">Transfer (You Pay)</th>
+                    <th style="padding: 8px 10px;">Renew (You Pay)</th>
+                    <th style="padding: 8px 10px;">Register Retail</th>
+                    <th style="padding: 8px 10px;">Renew Retail</th>
+                  </tr>
+                </thead>
+                <tbody id="excel-preview-tbody"></tbody>
+              </table>
+            </div>
           </div>
         </div>
 
@@ -1650,48 +1916,48 @@
 
           </div>
 
-          <!-- Tarjeta 3: Catálogo Completo de Dominios (Costo Brixly como primer campo) -->
+          <!-- Tarjeta 3: Catálogo Completo de Dominios con Pestañas por País (Costo Brixly como primer campo) -->
           <div class="mass-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 14px;">
               <div>
                 <div class="mass-card-title" style="margin-bottom: 4px;">
-                  <i class="fas fa-list-alt" style="color: var(--primary);"></i> Precios de Dominios Ya Creados en WHMCS
-                  <span id="mass-domains-count-badge" class="mass-badge" style="font-size: 11px; margin-left: 6px;">0 TLDs</span>
+                  <i class="fas fa-list-alt" style="color: var(--primary);"></i> Precios de Dominios en WHMCS
+                  <span id="mass-domains-count-badge" class="mass-badge" style="font-size: 11px; margin-left: 6px;">513 TLDs</span>
                 </div>
                 <p class="mass-card-desc" style="margin-bottom: 0;">
-                  Lista completa de dominios configurados en la base de datos de WHMCS. El <strong>Costo Brixly (USD)</strong> se muestra como primer campo de referencia.
+                  El primer campo muestra el <strong>Costo Brixly (USD)</strong>. Haz clic sobre cualquier precio de <strong>Registro, Renovación o Transferencia</strong>, escribe el nuevo valor y pulsa <kbd style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-weight:700;">Enter</kbd> para guardarlo directamente en WHMCS.
                 </p>
               </div>
 
-              <!-- Controles: Selector de moneda para ver precios creados + Buscador en tiempo real -->
-              <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-                <div style="display: flex; align-items: center; gap: 6px;">
-                  <label for="mass-domain-currency-select" style="font-size: 0.82rem; font-weight: 700; color: #374151; text-transform: uppercase;">Ver en:</label>
-                  <select id="mass-domain-currency-select" onchange="changeMassDomainCurrency(this.value)" style="padding: 7px 12px; border: 1px solid var(--border); border-radius: 8px; font-weight: 700; font-size: 13px; color: #1e1b4b; background: #f8fafc; outline: none; cursor: pointer;">
-                    <!-- Se llena con las divisas activas -->
-                  </select>
-                </div>
-
-                <div style="position: relative;">
-                  <input type="search" id="mass-domain-search" placeholder="Filtrar TLD (ej: .com, .store, .py)..." oninput="filterMassDomainsTable(this.value)" style="padding: 8px 12px 8px 32px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; outline: none; width: 260px; max-width: 100%; background: #fff;">
-                  <i class="fas fa-search" style="position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 12px; color: #9ca3af;"></i>
-                </div>
+              <!-- Buscador en tiempo real -->
+              <div style="position: relative;">
+                <input type="search" id="mass-domain-search" placeholder="Filtrar TLD (ej: .com, .store, .py)..." oninput="filterMassDomainsTable(this.value)" style="padding: 8px 12px 8px 32px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; outline: none; width: 280px; max-width: 100%; background: #fff;">
+                <i class="fas fa-search" style="position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 12px; color: #9ca3af;"></i>
               </div>
             </div>
+
+            <!-- Navegación de Pestañas de Países (como en la primera foto) -->
+            <nav class="tabs-nav" id="mass-country-tabs-nav" style="margin-bottom: 16px; border-bottom: 2px solid var(--border); display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px;" aria-label="Selección de país para dominios"></nav>
 
             <div class="mass-table-wrap">
               <table class="mass-table" id="table-mass-all-domains">
                 <thead>
                   <tr>
-                    <th style="background: #0f172a; width: 170px;">
+                    <th style="width: 170px;">
                       <i class="fas fa-server" style="color: #38bdf8; margin-right: 5px;"></i> Costo Brixly (USD)
                     </th>
-                    <th style="width: 160px;">Extensión (TLD)</th>
-                    <th>Registrar (Actual)</th>
-                    <th>Renovación (Actual)</th>
-                    <th>Transferencia (Actual)</th>
-                    <th style="background: #065f46;">
-                      <i class="fas fa-calculator" style="margin-right: 5px;"></i> Proyectado (+Margen .99)
+                    <th style="width: 150px;">Extensión (TLD)</th>
+                    <th>
+                      Registrar (Actual) <i class="fas fa-pencil-alt" style="font-size: 10px; opacity: 0.6; margin-left: 3px;" title="Click para editar, Enter para guardar"></i>
+                    </th>
+                    <th>
+                      Renovación (Actual) <i class="fas fa-pencil-alt" style="font-size: 10px; opacity: 0.6; margin-left: 3px;" title="Click para editar, Enter para guardar"></i>
+                    </th>
+                    <th>
+                      Transferencia (Actual) <i class="fas fa-pencil-alt" style="font-size: 10px; opacity: 0.6; margin-left: 3px;" title="Click para editar, Enter para guardar"></i>
+                    </th>
+                    <th>
+                      <i class="fas fa-calculator" style="color: #34d399; margin-right: 5px;"></i> Proyectado (+Margen .99)
                     </th>
                     <th>Registrador</th>
                   </tr>
@@ -2820,6 +3086,17 @@
         // Popular selector de moneda para el catálogo de dominios
         populateDomainCurrencySelector();
 
+        // Actualizar estadísticas de Brixly en BD
+        if (data.brixly_stats) {
+          const tldsCountSpan = document.getElementById('brixly-db-count');
+          const prodsCountSpan = document.getElementById('brixly-prods-count');
+          if (tldsCountSpan) tldsCountSpan.textContent = data.brixly_stats.total_tlds_in_db || 0;
+          if (prodsCountSpan) prodsCountSpan.textContent = data.brixly_stats.total_products_in_db || 0;
+        }
+
+        // Inicializar listeners del drop zone
+        initExcelDropZone();
+
         // Renderizar tablas
         renderMassCurrenciesTable();
         renderMassDomainsTable();
@@ -2990,7 +3267,7 @@
       if (!tbody) return;
 
       if (!massUpdateDomainsCatalog.length) {
-        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 24px;">No hay dominios cargados en el catálogo.</td></tr>`;
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 24px;">No hay dominios cargados en el catálogo.</td></tr>';
         return;
       }
 
@@ -3003,7 +3280,7 @@
         if (r.checked) roundingMode = r.value;
       }
 
-      const activeCurr = massUpdateCurrenciesData.find(c => c.id === selectedDomainCurrencyId) || massUpdateBaseCurrency || { id: 1, code: 'USD', rate: 1.0 };
+      const activeCurr = massUpdateCurrenciesData.find(c => c.id === selectedDomainCurrencyId) || massUpdateBaseCurrency || { id: 1, code: 'USD', rate: 1.0, prefix: '$', suffix: ' USD' };
       const currentRate = getActiveCurrencyRate(selectedDomainCurrencyId);
 
       // Filtrar dominios
@@ -3030,7 +3307,7 @@
 
       if (infoDiv) {
         const endRange = Math.min(startIndex + pageItems.length, totalItems);
-        infoDiv.innerHTML = `Mostrando <strong>${pageItems.length ? startIndex + 1 : 0}</strong> a <strong>${endRange}</strong> de <strong>${totalItems}</strong> dominios`;
+        infoDiv.innerHTML = `Mostrando <strong>${pageItems.length ? startIndex + 1 : 0}</strong> a <strong>${endRange}</strong> de <strong>${totalItems}</strong> dominios (Moneda: <strong>${activeCurr.code}</strong>)`;
       }
 
       if (controlsDiv) {
@@ -3050,15 +3327,36 @@
       }
 
       if (!pageItems.length) {
-        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 24px; color: var(--text-muted);">No se encontraron dominios con el filtro "${massDomainsSearchQuery}".</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 24px; color: var(--text-muted);">No se encontraron dominios con el filtro "${escapeHtml(massDomainsSearchQuery)}".</td></tr>`;
         return;
       }
 
       tbody.innerHTML = pageItems.map(d => {
-        const costBrixlyNum = (d.cost_brixly !== null && !isNaN(d.cost_brixly)) ? parseFloat(d.cost_brixly) : null;
-        const brixlyBadge = (costBrixlyNum !== null)
-          ? `<span style="font-family: var(--font-mono); font-weight: 800; color: #0284c7; background: #f0f9ff; padding: 4px 10px; border-radius: 6px; border: 1px solid #bae6fd; font-size: 0.92rem;">$${costBrixlyNum.toFixed(2)} USD</span>`
-          : `<span class="pending-cell" style="padding: 2px 6px;">PENDIENTE</span>`;
+        // Costos mayoristas de referencia Brixly guardados en BD
+        const bCosts = d.brixly_costs || { register: d.cost_brixly || 13.99, renew: d.cost_brixly || 13.99, transfer: d.cost_brixly || 13.99 };
+        const hasBrixly = (d.has_brixly === true);
+
+        const brixlyRegUsd = parseFloat(bCosts.register) || 0.0;
+        const brixlyRenUsd = parseFloat(bCosts.renew) || 0.0;
+        const brixlyTraUsd = parseFloat(bCosts.transfer) || 0.0;
+
+        // Equivalencias en moneda activa si no es USD
+        let regEquivText = '';
+        let renEquivText = '';
+        let traEquivText = '';
+        if (activeCurr.code !== 'USD' && currentRate > 0) {
+          const regEquiv = brixlyRegUsd * currentRate;
+          const renEquiv = brixlyRenUsd * currentRate;
+          const traEquiv = brixlyTraUsd * currentRate;
+          regEquivText = ` <span class="brixly-ref-equiv">(≈ ${formatPriceClean(regEquiv, activeCurr)})</span>`;
+          renEquivText = ` <span class="brixly-ref-equiv">(≈ ${formatPriceClean(renEquiv, activeCurr)})</span>`;
+          traEquivText = ` <span class="brixly-ref-equiv">(≈ ${formatPriceClean(traEquiv, activeCurr)})</span>`;
+        }
+
+        // 1. Costo Brixly (USD) primera columna
+        const brixlyBadge = (brixlyRegUsd > 0)
+          ? `<span style="font-family: var(--font-mono); font-weight: 800; color: #0284c7; background: #f0f9ff; padding: 4px 10px; border-radius: 6px; border: 1px solid #bae6fd; font-size: 0.92rem;">$${brixlyRegUsd.toFixed(2)} USD</span>`
+          : '<span class="inline-price-badge pending"><i class="fas fa-clock" style="font-size:10px; margin-right:4px;"></i>PENDIENTE</span>';
 
         // Precios actuales para la moneda seleccionada
         const currPrices = (d.prices && d.prices[selectedDomainCurrencyId]) || {};
@@ -3066,41 +3364,502 @@
         const renVal = currPrices.renew;
         const traVal = currPrices.transfer;
 
-        const regFmt = (regVal !== null && regVal !== undefined && regVal >= 0)
-          ? `<span style="font-family: var(--font-mono); font-weight: 700; color: #1f2937;">${formatCurrencyVal(regVal, activeCurr)}</span>`
-          : `<span class="pending-cell" style="padding: 2px 6px;">PENDIENTE</span>`;
+        // 2. Registrar (Actual) con referencia Brixly debajo
+        const regCell = `
+          <div class="price-cell-stacked">
+            <div class="inline-price-cell-wrap" id="inline-price-cell-${d.id}-${selectedDomainCurrencyId}-register">
+              <span class="inline-price-badge ${(regVal === null || regVal === undefined || regVal < 0) ? 'pending' : ''}" 
+                    onclick="activateInlineEdit(${d.id}, ${selectedDomainCurrencyId}, 'register', ${(regVal === null || regVal === undefined || regVal < 0) ? 'null' : regVal}, this)" 
+                    title="Haz clic para editar precio de Registro y pulsa Enter para guardar en WHMCS">
+                ${formatPriceClean(regVal, activeCurr)}
+                <i class="fas fa-pencil-alt edit-hint-icon"></i>
+              </span>
+            </div>
+            <div class="brixly-ref-row ${hasBrixly ? 'exact-match' : ''}" title="Costo mayorista de Registro de Brixly">
+              <span class="brixly-ref-label">Brixly:</span>
+              <span class="brixly-ref-val">$${brixlyRegUsd.toFixed(2)} USD</span>${regEquivText}
+            </div>
+          </div>
+        `;
 
-        const renFmt = (renVal !== null && renVal !== undefined && renVal >= 0)
-          ? `<span style="font-family: var(--font-mono); color: #374151;">${formatCurrencyVal(renVal, activeCurr)}</span>`
-          : `<span class="pending-cell" style="padding: 2px 6px;">PENDIENTE</span>`;
+        // 3. Renovación (Actual) con referencia Brixly debajo
+        const renCell = `
+          <div class="price-cell-stacked">
+            <div class="inline-price-cell-wrap" id="inline-price-cell-${d.id}-${selectedDomainCurrencyId}-renew">
+              <span class="inline-price-badge ${(renVal === null || renVal === undefined || renVal < 0) ? 'pending' : ''}" 
+                    onclick="activateInlineEdit(${d.id}, ${selectedDomainCurrencyId}, 'renew', ${(renVal === null || renVal === undefined || renVal < 0) ? 'null' : renVal}, this)" 
+                    title="Haz clic para editar precio de Renovación y pulsa Enter para guardar en WHMCS">
+                ${formatPriceClean(renVal, activeCurr)}
+                <i class="fas fa-pencil-alt edit-hint-icon"></i>
+              </span>
+            </div>
+            <div class="brixly-ref-row ${hasBrixly ? 'exact-match' : ''}" title="Costo mayorista de Renovación de Brixly">
+              <span class="brixly-ref-label">Brixly:</span>
+              <span class="brixly-ref-val">$${brixlyRenUsd.toFixed(2)} USD</span>${renEquivText}
+            </div>
+          </div>
+        `;
 
-        const traFmt = (traVal !== null && traVal !== undefined && traVal >= 0)
-          ? `<span style="font-family: var(--font-mono); color: #374151;">${formatCurrencyVal(traVal, activeCurr)}</span>`
-          : `<span class="pending-cell" style="padding: 2px 6px;">PENDIENTE</span>`;
+        // 4. Transferencia (Actual) con referencia Brixly debajo
+        const traCell = `
+          <div class="price-cell-stacked">
+            <div class="inline-price-cell-wrap" id="inline-price-cell-${d.id}-${selectedDomainCurrencyId}-transfer">
+              <span class="inline-price-badge ${(traVal === null || traVal === undefined || traVal < 0) ? 'pending' : ''}" 
+                    onclick="activateInlineEdit(${d.id}, ${selectedDomainCurrencyId}, 'transfer', ${(traVal === null || traVal === undefined || traVal < 0) ? 'null' : traVal}, this)" 
+                    title="Haz clic para editar precio de Transferencia y pulsa Enter para guardar en WHMCS">
+                ${formatPriceClean(traVal, activeCurr)}
+                <i class="fas fa-pencil-alt edit-hint-icon"></i>
+              </span>
+            </div>
+            <div class="brixly-ref-row ${hasBrixly ? 'exact-match' : ''}" title="Costo mayorista de Transferencia de Brixly">
+              <span class="brixly-ref-label">Brixly:</span>
+              <span class="brixly-ref-val">$${brixlyTraUsd.toFixed(2)} USD</span>${traEquivText}
+            </div>
+          </div>
+        `;
 
-        // Proyección con tasa y margen
-        let projFmt = '-';
-        if (costBrixlyNum !== null) {
-          const converted = costBrixlyNum * currentRate;
+        // 5. Proyección con tasa y margen con costo base debajo
+        let projCell = '-';
+        if (brixlyRegUsd > 0) {
+          const converted = brixlyRegUsd * currentRate;
           const withMargin = converted * (1 + margin / 100);
           const finalProj = calculateSmartPoint99(withMargin, roundingMode);
-          projFmt = `<span style="font-family: var(--font-mono); font-weight: 800; color: #059669; background: #ecfdf5; padding: 3px 8px; border-radius: 6px; border: 1px solid #a7f3d0;">${formatCurrencyVal(finalProj, activeCurr)}</span>`;
+          projCell = `
+            <div class="price-cell-stacked">
+              <span style="font-family: var(--font-mono); font-weight: 800; color: #059669; background: #ecfdf5; padding: 4px 10px; border-radius: 6px; border: 1px solid #a7f3d0; font-size: 0.92rem;">
+                ${formatPriceClean(finalProj, activeCurr)}
+              </span>
+              <div class="brixly-ref-row" title="Base de costo Brixly sobre la que se calculó el margen">
+                <span class="brixly-ref-label">Base Costo:</span>
+                <span class="brixly-ref-val">$${brixlyRegUsd.toFixed(2)} USD</span>
+              </div>
+            </div>
+          `;
         }
 
-        const autoregTag = `<span class="mass-badge" style="background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; font-size: 11px; padding: 2px 8px;"><i class="fas fa-server" style="color:#0284c7; margin-right: 4px;"></i>${d.autoreg || 'brixly'}</span>`;
+        const autoregTag = `<span class="mass-badge" style="background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; font-size: 11px; padding: 2px 8px;"><i class="fas fa-server" style="color:#0284c7; margin-right: 4px;"></i>${escapeHtml(d.autoreg || 'brixly')}</span>`;
 
         return `
           <tr>
             <td>${brixlyBadge}</td>
-            <td><strong style="color: #1e1b4b; font-size: 0.98rem;">${d.extension}</strong></td>
-            <td>${regFmt}</td>
-            <td>${renFmt}</td>
-            <td>${traFmt}</td>
-            <td>${projFmt}</td>
+            <td><strong style="color: #1e1b4b; font-size: 0.98rem; font-family: var(--font-mono);">${escapeHtml(d.extension)}</strong></td>
+            <td>${regCell}</td>
+            <td>${renCell}</td>
+            <td>${traCell}</td>
+            <td>${projCell}</td>
             <td>${autoregTag}</td>
           </tr>
         `;
       }).join('');
+    }
+
+    // ========================================================
+    // CONTROLADORES DE EDICIÓN INLINE (CLICK -> ENTER -> SAVE WHMCS)
+    // ========================================================
+    function activateInlineEdit(dpid, currId, type, currentPrice, badgeEl) {
+      const container = document.getElementById(`inline-price-cell-${dpid}-${currId}-${type}`);
+      if (!container) return;
+
+      const rawVal = (currentPrice !== null && currentPrice !== undefined && !isNaN(currentPrice) && currentPrice >= 0) ? currentPrice : '';
+
+      container.innerHTML = `
+        <div class="inline-edit-input-group" id="inline-group-${dpid}-${currId}-${type}">
+          <input type="number" 
+                 step="any" 
+                 class="inline-price-input" 
+                 id="inline-input-${dpid}-${currId}-${type}"
+                 value="${rawVal}" 
+                 placeholder="0.00"
+                 data-dpid="${dpid}" 
+                 data-currency="${currId}" 
+                 data-type="${type}" 
+                 data-original="${rawVal}"
+                 onkeydown="handleInlinePriceKey(event, ${dpid}, ${currId}, '${type}', this)">
+          <button type="button" class="inline-btn-save" onclick="submitInlinePrice(${dpid}, ${currId}, '${type}', document.getElementById('inline-input-${dpid}-${currId}-${type}'))" title="Guardar en WHMCS (Enter)">
+            <i class="fas fa-check"></i>
+          </button>
+          <button type="button" class="inline-btn-cancel" onclick="cancelInlineEdit(${dpid}, ${currId}, '${type}', ${currentPrice === null ? 'null' : currentPrice})" title="Cancelar (Esc)">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      `;
+
+      const input = document.getElementById(`inline-input-${dpid}-${currId}-${type}`);
+      if (input) {
+        input.focus();
+        input.select();
+      }
+    }
+
+    function handleInlinePriceKey(event, dpid, currId, type, inputEl) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        submitInlinePrice(dpid, currId, type, inputEl);
+      } else if (event.key === 'Escape') {
+        event.preventDefault();
+        const orig = inputEl.getAttribute('data-original');
+        const origVal = (orig !== '' && orig !== 'null') ? parseFloat(orig) : null;
+        cancelInlineEdit(dpid, currId, type, origVal);
+      }
+    }
+
+    function cancelInlineEdit(dpid, currId, type, originalPrice) {
+      const container = document.getElementById(`inline-price-cell-${dpid}-${currId}-${type}`);
+      if (!container) return;
+
+      const activeCurr = massUpdateCurrenciesData.find(c => c.id === currId) || massUpdateBaseCurrency || { id: currId, code: 'USD', prefix: '$', suffix: ' USD' };
+      const formattedBadge = formatPriceClean(originalPrice, activeCurr);
+
+      container.innerHTML = `
+        <span class="inline-price-badge ${originalPrice === null ? 'pending' : ''}" 
+              onclick="activateInlineEdit(${dpid}, ${currId}, '${type}', ${originalPrice === null ? 'null' : originalPrice}, this)" 
+              title="Haz clic para editar este precio y pulsa Enter para guardar">
+          ${formattedBadge}
+          <i class="fas fa-pencil-alt edit-hint-icon"></i>
+        </span>
+      `;
+    }
+
+    async function submitInlinePrice(dpid, currId, type, inputEl) {
+      if (!inputEl) return;
+      const newValStr = inputEl.value.trim();
+      const newPrice = (newValStr !== '') ? parseFloat(newValStr) : null;
+
+      if (newPrice === null || isNaN(newPrice) || newPrice < 0) {
+        showSyncToast('warn', 'Por favor ingresa un precio numérico válido.');
+        inputEl.focus();
+        return;
+      }
+
+      const container = document.getElementById(`inline-price-cell-${dpid}-${currId}-${type}`);
+      if (container) {
+        container.innerHTML = `
+          <span style="font-size: 11px; color: var(--primary); display: inline-flex; align-items: center; gap: 5px; font-weight: 600;">
+            <i class="fas fa-spinner fa-spin"></i> Guardando...
+          </span>
+        `;
+      }
+
+      let dbType = type;
+      if (type === 'register') dbType = 'domainregister';
+      if (type === 'renew')    dbType = 'domainrenew';
+      if (type === 'transfer') dbType = 'domaintransfer';
+
+      try {
+        const res = await fetch('api/actualizar-precios-dominios.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'save_single_price',
+            dpid: dpid,
+            currency_id: currId,
+            type: dbType,
+            price: newPrice
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok || data.status !== 'success') {
+          throw new Error(data.message || 'Error al guardar precio en WHMCS');
+        }
+
+        // Actualizar catálogo local en memoria
+        const domItem = massUpdateDomainsCatalog.find(d => d.id === dpid);
+        if (domItem) {
+          if (!domItem.prices) domItem.prices = {};
+          if (!domItem.prices[currId]) domItem.prices[currId] = { register: null, renew: null, transfer: null };
+          domItem.prices[currId][type] = newPrice;
+        }
+
+        const activeCurr = massUpdateCurrenciesData.find(c => c.id === currId) || massUpdateBaseCurrency || { id: currId, code: 'USD', prefix: '$', suffix: ' USD' };
+        const formattedBadge = formatPriceClean(newPrice, activeCurr);
+
+        if (container) {
+          container.innerHTML = `
+            <span class="inline-price-badge inline-save-success" 
+                  onclick="activateInlineEdit(${dpid}, ${currId}, '${type}', ${newPrice}, this)" 
+                  title="Haz clic para editar este precio y pulsa Enter para guardar">
+              ${formattedBadge}
+              <i class="fas fa-check" style="font-size: 10px; color: #16a34a; margin-left: 4px;"></i>
+            </span>
+          `;
+          setTimeout(() => {
+            const badge = container.querySelector('.inline-price-badge');
+            if (badge) {
+              badge.classList.remove('inline-save-success');
+              badge.innerHTML = `
+                ${formattedBadge}
+                <i class="fas fa-pencil-alt edit-hint-icon"></i>
+              `;
+            }
+          }, 1500);
+        }
+
+        const typeLabels = { register: 'Registro', renew: 'Renovación', transfer: 'Transferencia' };
+        showSyncToast('success', `✓ Guardado: ${domItem ? domItem.extension : ''} [${typeLabels[type] || type}] → ${formattedBadge}`);
+      } catch (err) {
+        console.error('Error submitInlinePrice:', err);
+        showSyncToast('warn', 'Error al guardar: ' + err.message);
+        if (container) {
+          const orig = inputEl.getAttribute('data-original');
+          const origVal = (orig !== '' && orig !== 'null') ? parseFloat(orig) : null;
+          cancelInlineEdit(dpid, currId, type, origVal);
+        }
+      }
+    }
+
+    // ========================================================
+    // GESTIÓN Y CARGA DE EXCEL DE PRECIOS BRIXLY (TLDs Y CLOUD)
+    // ========================================================
+    let parsedBrixlyTlds = [];
+    let parsedBrixlyProducts = [];
+
+    function handleExcelFileUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      processExcelFile(file);
+    }
+
+    function processExcelFile(file) {
+      const fileName = file.name;
+      showSyncToast('info', 'Leyendo archivo ' + fileName + '...');
+
+      if (typeof XLSX !== 'undefined') {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          try {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            parseBrixlyWorkbook(workbook, fileName);
+          } catch (err) {
+            console.error('Error al parsear Excel con SheetJS:', err);
+            uploadExcelDirectly(file);
+          }
+        };
+        reader.readAsArrayBuffer(file);
+      } else {
+        uploadExcelDirectly(file);
+      }
+    }
+
+    function parseBrixlyWorkbook(workbook, fileName) {
+      const firstSheetName = workbook.SheetNames[0];
+      const sheet = workbook.Sheets[firstSheetName];
+      const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '' });
+
+      parsedBrixlyTlds = [];
+      parsedBrixlyProducts = [];
+
+      let isProductSection = false;
+      let isTldSection = false;
+
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        if (!row || !row.length) continue;
+
+        const col0 = String(row[0] || '').trim().toLowerCase();
+
+        // Encabezado de Productos Cloud
+        if (col0 === 'product') {
+          isProductSection = true;
+          isTldSection = false;
+          continue;
+        }
+
+        // Encabezado de TLDs
+        if (col0 === 'tld') {
+          isTldSection = true;
+          isProductSection = false;
+          continue;
+        }
+
+        // Extracción de Productos Cloud
+        if (isProductSection && row[0] !== '') {
+          const pName = String(row[0]).trim();
+          if (pName.toLowerCase() === 'tld') {
+            isTldSection = true;
+            isProductSection = false;
+            continue;
+          }
+          parsedBrixlyProducts.push({
+            product_name: pName,
+            billing_cycle: String(row[1] || '').trim(),
+            setup_fee: parseFloat(row[2]) || 0,
+            recurring_cost: parseFloat(row[3]) || 0,
+            retail_rec: parseFloat(row[4]) || 0,
+            saving_percent: String(row[6] || '').trim()
+          });
+        }
+
+        // Extracción de TLDs
+        if (isTldSection && row[0] !== '') {
+          let rawExt = String(row[0]).trim().toLowerCase();
+          if (!rawExt) continue;
+          if (!rawExt.startsWith('.')) {
+            rawExt = '.' + rawExt;
+          }
+
+          parsedBrixlyTlds.push({
+            extension: rawExt,
+            register_cost: parseFloat(row[1]) || 0,
+            register_retail: parseFloat(row[2]) || null,
+            transfer_cost: parseFloat(row[4]) || 0,
+            transfer_retail: parseFloat(row[5]) || null,
+            renew_cost: parseFloat(row[7]) || 0,
+            renew_retail: parseFloat(row[8]) || null
+          });
+        }
+      }
+
+      if (!parsedBrixlyTlds.length && !parsedBrixlyProducts.length) {
+        showSyncToast('warn', 'No se pudieron detectar tablas de TLDs ni de Productos en el archivo.');
+        return;
+      }
+
+      renderExcelPreview(fileName);
+    }
+
+    function renderExcelPreview(fileName) {
+      const panel = document.getElementById('excel-preview-panel');
+      const filenameSpan = document.getElementById('excel-preview-filename');
+      const summaryDiv = document.getElementById('excel-preview-summary');
+      const tbody = document.getElementById('excel-preview-tbody');
+
+      if (!panel) return;
+
+      if (filenameSpan) filenameSpan.textContent = 'Archivo: ' + fileName;
+      if (summaryDiv) {
+        summaryDiv.innerHTML = '<i class="fas fa-check-circle"></i> Detectados exitosamente: <strong>' + parsedBrixlyTlds.length + ' TLDs de Dominios</strong> y <strong>' + parsedBrixlyProducts.length + ' Productos Cloud</strong>';
+      }
+
+      if (tbody) {
+        const previewItems = parsedBrixlyTlds.slice(0, 5);
+        tbody.innerHTML = previewItems.map(t => {
+          const regRetFmt = t.register_retail ? ('$' + t.register_retail.toFixed(2)) : '-';
+          const renRetFmt = t.renew_retail ? ('$' + t.renew_retail.toFixed(2)) : '-';
+          return '<tr>' +
+            '<td><strong>' + t.extension + '</strong></td>' +
+            '<td style="font-family: var(--font-mono); font-weight: 700; color: #0284c7;">$' + t.register_cost.toFixed(2) + ' USD</td>' +
+            '<td style="font-family: var(--font-mono); font-weight: 700; color: #0284c7;">$' + t.transfer_cost.toFixed(2) + ' USD</td>' +
+            '<td style="font-family: var(--font-mono); font-weight: 700; color: #0284c7;">$' + t.renew_cost.toFixed(2) + ' USD</td>' +
+            '<td style="font-family: var(--font-mono);">' + regRetFmt + '</td>' +
+            '<td style="font-family: var(--font-mono);">' + renRetFmt + '</td>' +
+          '</tr>';
+        }).join('') + (parsedBrixlyTlds.length > 5 ? '<tr><td colspan="6" style="text-align: center; color: var(--text-muted); font-size: 11px;">... y ' + (parsedBrixlyTlds.length - 5) + ' TLDs más listos para guardar en MySQL.</td></tr>' : '');
+      }
+
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      showSyncToast('success', '¡' + parsedBrixlyTlds.length + ' TLDs detectados! Haz clic en "Guardar Precios en Base de Datos"');
+    }
+
+    function dismissExcelPreview() {
+      const panel = document.getElementById('excel-preview-panel');
+      if (panel) panel.style.display = 'none';
+      parsedBrixlyTlds = [];
+      parsedBrixlyProducts = [];
+      const fileInput = document.getElementById('excel-file-input');
+      if (fileInput) fileInput.value = '';
+    }
+
+    async function saveParsedBrixlyData() {
+      if (!parsedBrixlyTlds.length && !parsedBrixlyProducts.length) {
+        showSyncToast('warn', 'No hay datos cargados para guardar.');
+        return;
+      }
+
+      const btn = document.getElementById('btn-save-brixly-db');
+      const originalText = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando en MySQL...';
+      }
+
+      showSyncToast('info', 'Guardando costos de Brixly de forma persistente en MySQL...');
+
+      try {
+        const response = await fetch('api/actualizar-precios-dominios.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'import_brixly_data',
+            tlds: parsedBrixlyTlds,
+            products: parsedBrixlyProducts
+          })
+        });
+
+        const res = await response.json();
+        if (!response.ok || res.status !== 'success') {
+          throw new Error(res.message || 'Error en el servidor al guardar en MySQL');
+        }
+
+        showSyncToast('success', '✓ ¡' + res.tlds_saved + ' TLDs y ' + res.products_saved + ' Productos Cloud guardados exitosamente en la BD!');
+        dismissExcelPreview();
+
+        await loadMassUpdateCurrencies();
+      } catch (err) {
+        console.error('Error saveParsedBrixlyData:', err);
+        showSyncToast('warn', 'Error: ' + err.message);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+        }
+      }
+    }
+
+    async function uploadExcelDirectly(file) {
+      const formData = new FormData();
+      formData.append('action', 'import_brixly_data');
+      formData.append('excel_file', file);
+
+      showSyncToast('info', 'Subiendo archivo al servidor para procesar en MySQL...');
+
+      try {
+        const res = await fetch('api/actualizar-precios-dominios.php', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (!res.ok || data.status !== 'success') {
+          throw new Error(data.message || 'Error al procesar archivo en el servidor');
+        }
+
+        showSyncToast('success', '✓ ¡' + data.tlds_saved + ' TLDs y ' + data.products_saved + ' Productos guardados exitosamente en la BD!');
+        await loadMassUpdateCurrencies();
+      } catch (e) {
+        console.error('Error uploadExcelDirectly:', e);
+        showSyncToast('warn', 'Error: ' + e.message);
+      }
+    }
+
+    function initExcelDropZone() {
+      const dropZone = document.getElementById('excel-drop-zone');
+      if (!dropZone) return;
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropZone.classList.add('dragover');
+        }, false);
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropZone.classList.remove('dragover');
+        }, false);
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        if (files && files.length) {
+          processExcelFile(files[0]);
+        }
+      }, false);
     }
 
     // ========================================================
