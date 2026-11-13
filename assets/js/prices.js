@@ -78,7 +78,7 @@
                 if (parts.length > 1) {
                     const sld = parts.slice(0, -1).join('.');
                     const tld = '.' + parts[parts.length - 1];
-                    domainQuery = `&domainoption=owndomain&sld=${encodeURIComponent(sld)}&tld=${encodeURIComponent(tld)}`;
+                    domainQuery = `&sld=${encodeURIComponent(sld)}&tld=${encodeURIComponent(tld)}`;
                 }
             }
 
