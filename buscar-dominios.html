@@ -616,6 +616,48 @@
                 });
             }
 
+            function descomponerDominio(dominio) {
+                var d = (dominio || '').trim().toLowerCase();
+                d = d.replace(/^https?:\/\//i, '').replace(/^www\./i, '').replace(/\/+$/, '');
+
+                var multiPartTlds = [
+                    '.com.py', '.net.py', '.org.py', '.edu.py', '.mil.py', '.gov.py',
+                    '.com.br', '.net.br', '.org.br', '.eco.br',
+                    '.com.ar', '.net.ar', '.org.ar',
+                    '.com.mx', '.org.mx', '.edu.mx',
+                    '.com.co', '.co.co', '.net.co',
+                    '.com.cl',
+                    '.co.uk', '.org.uk', '.me.uk',
+                    '.com.uy', '.com.bo', '.com.pe'
+                ];
+
+                for (var i = 0; i < multiPartTlds.length; i++) {
+                    var ext = multiPartTlds[i];
+                    if (d.length > ext.length && d.indexOf(ext, d.length - ext.length) !== -1) {
+                        return {
+                            sld: d.substring(0, d.length - ext.length),
+                            tld: ext,
+                            domain: d
+                        };
+                    }
+                }
+
+                var lastDot = d.lastIndexOf('.');
+                if (lastDot > 0) {
+                    return {
+                        sld: d.substring(0, lastDot),
+                        tld: d.substring(lastDot),
+                        domain: d
+                    };
+                }
+
+                return {
+                    sld: d,
+                    tld: '.com',
+                    domain: d ? d + '.com' : ''
+                };
+            }
+
             // Algoritmo de distancia de Damerau-Levenshtein para coincidencia difusa (fuzzy match)
             function calcularDistanciaLevenshtein(a, b) {
                 if (a === b) return 0;
@@ -859,8 +901,15 @@
                                 badgesPrecios = '<span style="' + badgeStyle + '">' + escapeHtml(sym) + ' ' + escapeHtml(localVal) + '</span>';
                             }
 
-                            var hostingPath = (currentCountry === 'py') ? '/hosting-ilimitado' : '/' + currentCountry + '/hosting-ilimitado';
-                            var enlaceRegistro = hostingPath + '?domain=' + encodeURIComponent(domConsultado);
+                            var parsedDom = descomponerDominio(domConsultado);
+                            var whmcsCurrencyMap = { 'py': 2, 'br': 3, 'ar': 4, 'es': 5, 'us': 1, 'cl': 6, 'co': 7, 'mx': 8 };
+                            var currId = whmcsCurrencyMap[currentCountry] || 2;
+                            var enlaceRegistro = 'https://client.netz.com.py/cart.php?a=add&domain=register'
+                                + '&query=' + encodeURIComponent(parsedDom.domain)
+                                + '&sld=' + encodeURIComponent(parsedDom.sld)
+                                + '&tld=' + encodeURIComponent(parsedDom.tld)
+                                + '&domains[]=' + encodeURIComponent(parsedDom.domain)
+                                + (currId ? '&currency=' + encodeURIComponent(currId) : '');
                             var textoBoton = (currentCountry === 'br') ? 'Registrar Domínio' : (currentCountry === 'us' ? 'Register Domain' : 'Registrar Dominio');
 
                             resultadoContainer.innerHTML = '' +
