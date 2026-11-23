@@ -233,6 +233,12 @@ func main() {
 		_ = syncAssets("conexion", filepath.Join(distDir, "conexion"))
 	}
 
+	// Copiar carpeta vendor (PHPMailer, requerido por mailer.php)
+	if fi, err := os.Stat("vendor"); err == nil && fi.IsDir() {
+		fmt.Println("📦 Sincronizando /vendor/...")
+		_ = syncAssets("vendor", filepath.Join(distDir, "vendor"))
+	}
+
 	// Copiar carpeta api si existe
 	if fi, err := os.Stat("api"); err == nil && fi.IsDir() {
 		fmt.Println("📦 Sincronizando /api/...")

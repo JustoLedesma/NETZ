@@ -4,7 +4,31 @@ header('Content-Type: text/plain; charset=utf-8');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require __DIR__ . '/vendor/autoload.php';
+// Si ocurre un error fatal, devolver un texto legible en lugar de una respuesta vacía
+register_shutdown_function(function () {
+    $err = error_get_last();
+    if ($err && in_array($err['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true)) {
+        error_log("mailer.php fatal: {$err['message']} en {$err['file']}:{$err['line']}");
+        if (!headers_sent()) {
+            http_response_code(500);
+        }
+        echo "Error interno del formulario. Por favor escríbanos a info@netz.com.py o WhatsApp.";
+    }
+});
+
+$phpMailerSrc = __DIR__ . '/vendor/phpmailer/phpmailer/src';
+if (is_file(__DIR__ . '/vendor/autoload.php')) {
+    require __DIR__ . '/vendor/autoload.php';
+} elseif (is_file($phpMailerSrc . '/PHPMailer.php')) {
+    require $phpMailerSrc . '/Exception.php';
+    require $phpMailerSrc . '/PHPMailer.php';
+    require $phpMailerSrc . '/SMTP.php';
+} else {
+    error_log('mailer.php: no se encontró PHPMailer (falta la carpeta vendor/ en el servidor)');
+    http_response_code(500);
+    echo "Error de configuración del servidor de correo. Por favor escríbanos a info@netz.com.py o WhatsApp.";
+    exit;
+}
 
 const MAIL_TO        = 'justo.ledesma91@gmail.com';
 const MAIL_FROM      = 'info@netz.com.py';
