@@ -40,3 +40,7 @@ dist/
 Thumbs.db
 .vscode/
 .idea/
+.mailer.php
+mailer.php
+notas.txt
+.notas.txt
