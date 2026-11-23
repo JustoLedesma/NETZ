@@ -952,7 +952,7 @@ a,a:hover{-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-
 .contact-page-form-send h5{font-family:'Poppins', sans-serif;text-transform:capitalize;font-weight:bold;font-size:20px;letter-spacing:1px;margin-bottom:30px;color:#2f3538;position:relative;padding-left:15px;display:block;}
 .contact-page-form-send h5 span{display:block;font-size:14px;font-weight:300;margin-top:5px;color:#5a5967;letter-spacing:0;}
 .contact-page-form-send .field.input-field{position:relative;margin-top:10px;}
-.contact-page-form-send .field.input-field input[type="email"], .contact-page-form-send .field.input-field input[type="text"]{height:45px;width:100%;padding:0 20px 0;font-weight:100;font-size:13px;outline:none;border-radius:6px;border:1px solid #eff0f1;margin-bottom:10px;}
+.contact-page-form-send .field.input-field input[type="email"], .contact-page-form-send .field.input-field input[type="text"], .contact-page-form-send .field.input-field input[type="tel"]{height:45px;width:100%;padding:0 20px 0;font-weight:100;font-size:13px;outline:none;border-radius:6px;border:1px solid #eff0f1;margin-bottom:10px;}
 .contact-page-form-send .field.input-field .input-group-prepend{position:absolute;left:15px;top:12px;font-size:13px;font-weight:bold;opacity:0.4;pointer-events:none;}
 .form-contain-home textarea{width:100%;padding:0 20px 0;font-weight:100;font-size:13px;outline:none;border-radius:6px;border:1px solid #eff0f1;min-height:120px;outline:none;padding-top:13px;margin-bottom:20px;}
 #form-messages.error{padding:13px 20px;background:#fddddb;color:#c5746f;font-size:16px;border-radius:3px;border-left:3px solid #F44336;width:100%;margin:0 15px 30px;}

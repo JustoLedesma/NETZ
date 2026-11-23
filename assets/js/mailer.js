@@ -2,11 +2,13 @@ $(function() {
 
 	var form = $('#ajax-contact');
 	var formMessages = $('#form-messages');
+	var submitBtn = form.find('button[type="submit"]');
 
 	$(form).submit(function(e) {
 		e.preventDefault();
 
 		var formData = $(form).serialize();
+		submitBtn.prop('disabled', true).text('Enviando...');
 
 		$.ajax({
 			type: 'POST',
@@ -20,6 +22,7 @@ $(function() {
 			$(formMessages).text(response);
 
 			$('#name').val('');
+			$('#phone').val('');
 			$('#email').val('');
 			$('#message').val('');
 		})
@@ -27,11 +30,14 @@ $(function() {
 			$(formMessages).removeClass('success');
 			$(formMessages).addClass('error');
 
-			if (data.responseText !== '') {
+			if (data.responseText) {
 				$(formMessages).text(data.responseText);
 			} else {
 				$(formMessages).text('Ocurrió un inconveniente al enviar su mensaje. Por favor contáctenos a info@netz.com.py o WhatsApp.');
 			}
+		})
+		.always(function() {
+			submitBtn.prop('disabled', false).text('Enviar');
 		});
 
 	});
