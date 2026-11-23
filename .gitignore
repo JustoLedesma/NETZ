@@ -32,7 +32,7 @@ config/admin_credentials.php
 
 # Salida de generación y dependencias
 dist/
-/vendor/
+# /vendor/ se versiona: solo contiene PHPMailer y el hosting no ejecuta composer install
 /node_modules/
 
 # Entornos, SO e IDE
