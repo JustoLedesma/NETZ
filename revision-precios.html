@@ -300,6 +300,133 @@
     }
     .btn-refresh:hover { background: var(--primary-hover); }
 
+    .btn-export-csv {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      background: #059669;
+      color: #ffffff;
+      border: 1px solid #047857;
+    }
+    .btn-export-csv:hover {
+      background: #047857;
+    }
+    .btn-export-csv:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    /* Popover de Exportación CSV (Modern Web Guidance: viewport-aware-dropdowns) */
+    @supports not selector(:popover-open) {
+      [popover]:not(.\:popover-open) {
+        display: none;
+      }
+    }
+
+    .csv-export-popover {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.16);
+      padding: 8px;
+      width: min(350px, calc(100vw - 24px));
+      color: var(--text);
+    }
+
+    .csv-export-popover:is(:popover-open, .\:popover-open) {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    @supports (position-area: block-end) {
+      .csv-export-popover {
+        inset: auto;
+        margin: 6px 0 0 0;
+        position-area: block-end span-inline-start;
+        position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+      }
+    }
+
+    .csv-export-header {
+      padding: 6px 10px 8px;
+      border-bottom: 1px solid #f1f5f9;
+      margin-bottom: 4px;
+    }
+
+    .csv-export-header strong {
+      display: block;
+      font-size: 0.82rem;
+      color: #0f172a;
+    }
+
+    .csv-export-header span {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .csv-export-item {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 9px 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+      color: var(--text);
+    }
+
+    .csv-export-item:hover {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .csv-export-item-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 13px;
+      margin-top: 1px;
+    }
+
+    .csv-export-item-title {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.25;
+    }
+
+    .csv-export-item-desc {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    .csv-export-divider {
+      border: 0;
+      border-top: 1px solid #f1f5f9;
+      margin: 4px 0;
+    }
+
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
@@ -1899,7 +2026,45 @@
             Precios oficiales sincronizados desde WHMCS con unión de dominios en tiempo real.
           </p>
         </div>
-        <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <button type="button" class="btn-export-csv" id="btn-top-export-csv" popovertarget="csv-export-panel" style="margin: 0;">
+            <i class="fas fa-file-csv"></i> Descargar CSV <i class="fas fa-chevron-down" style="font-size: 11px; opacity: 0.85;" aria-hidden="true"></i>
+          </button>
+          <div id="csv-export-panel" popover="auto" class="csv-export-popover">
+            <div class="csv-export-header">
+              <strong>Exportar Lista de Precios (CSV)</strong>
+              <span>Incluye todas las monedas sincronizadas (PYG, BRL, ARS, EUR, USD y más).</span>
+            </div>
+            <button type="button" class="csv-export-item" onclick="exportPricesCsv('all')">
+              <span class="csv-export-item-icon" style="background: #dcfce7; color: #15803d;"><i class="fas fa-layer-group"></i></span>
+              <span>
+                <span class="csv-export-item-title">Todos los Precios (Todas las Monedas)</span>
+                <span class="csv-export-item-desc">Planes y Productos + Precios de Dominios (Registro, Renovación y Transferencia) en un solo CSV.</span>
+              </span>
+            </button>
+            <button type="button" class="csv-export-item" onclick="exportPricesCsv('products')">
+              <span class="csv-export-item-icon" style="background: #e0e7ff; color: #4338ca;"><i class="fas fa-boxes"></i></span>
+              <span>
+                <span class="csv-export-item-title">Solo Planes y Productos (Todas las Monedas)</span>
+                <span class="csv-export-item-desc">Mensual, Trimestral, Semestral, Anual, Bienal y Trienal por moneda.</span>
+              </span>
+            </button>
+            <button type="button" class="csv-export-item" onclick="exportPricesCsv('domains')">
+              <span class="csv-export-item-icon" style="background: #e0f2fe; color: #0369a1;"><i class="fas fa-globe-americas"></i></span>
+              <span>
+                <span class="csv-export-item-title">Solo Precios de Dominios (Todas las Monedas)</span>
+                <span class="csv-export-item-desc">Todos los TLDs con Registro, Renovación y Transferencia por moneda.</span>
+              </span>
+            </button>
+            <hr class="csv-export-divider">
+            <button type="button" class="csv-export-item" onclick="exportPricesCsv('current')">
+              <span class="csv-export-item-icon" style="background: #fef3c7; color: #b45309;"><i class="fas fa-map-marker-alt"></i></span>
+              <span>
+                <span class="csv-export-item-title" id="csv-current-country-label">Solo País Activo (Planes + Dominios)</span>
+                <span class="csv-export-item-desc">Descarga únicamente los precios de la pestaña actual.</span>
+              </span>
+            </button>
+          </div>
           <button type="button" class="btn-refresh" id="btn-top-refresh" onclick="handleRefreshPrices()" style="margin: 0;">
             <i class="fas fa-sync-alt"></i> Recargar Precios
           </button>
@@ -2673,6 +2838,7 @@
       const btnSettings = document.getElementById('btn-top-settings');
       const btnMassUpdate = document.getElementById('btn-top-mass-update');
       const btnRefresh = document.getElementById('btn-top-refresh');
+      const btnExportCsv = document.getElementById('btn-top-export-csv');
       const title = document.getElementById('header-main-title');
       const desc = document.getElementById('header-main-desc');
 
@@ -2691,6 +2857,7 @@
           btnMassUpdate.setAttribute('onclick', "toggleView('mass-update')");
         }
         if (btnRefresh) btnRefresh.style.display = 'none';
+        if (btnExportCsv) btnExportCsv.style.display = 'none';
         if (title) title.innerHTML = '<i class="fas fa-cog" style="color: var(--primary); margin-right: 6px;"></i> Ajustes de Seguridad y Acceso';
         if (desc) desc.textContent = 'Modifica el usuario y la contraseña del panel de administración.';
         updateUserDisplay();
@@ -2717,6 +2884,7 @@
           btnSettings.setAttribute('onclick', "toggleView('settings')");
         }
         if (btnRefresh) btnRefresh.style.display = 'none';
+        if (btnExportCsv) btnExportCsv.style.display = 'none';
         if (title) title.innerHTML = '<i class="fas fa-bolt" style="color: #10b981; margin-right: 6px;"></i> Actualización Masiva de Precios de Dominios (WHMCS)';
         if (desc) desc.textContent = 'Aplica tasas de cambio manuales, margen de beneficio y redondeo a .99 directamente en tbldomainpricing de WHMCS.';
         loadMassUpdateCurrencies();
@@ -2735,6 +2903,7 @@
           btnMassUpdate.setAttribute('onclick', "toggleView('mass-update')");
         }
         if (btnRefresh) btnRefresh.style.display = 'inline-flex';
+        if (btnExportCsv) btnExportCsv.style.display = 'inline-flex';
         if (title) title.innerHTML = '<i class="fas fa-chart-line" style="color: var(--primary); margin-right: 6px;"></i> Revisión de Precios por País';
         if (desc) desc.textContent = 'Precios oficiales sincronizados desde WHMCS con unión de dominios en tiempo real.';
       }
@@ -3416,6 +3585,7 @@
 
       // Renderizar Paneles
       container.innerHTML = results.map(r => renderCountryPane(r.country, r.result)).join('');
+      updateCsvCurrentCountryLabel();
     }
 
     function switchTab(code) {
@@ -3426,6 +3596,334 @@
       document.querySelectorAll('.tab-content').forEach(pane => {
         pane.classList.toggle('active', pane.id === `pane-${code}`);
       });
+      updateCsvCurrentCountryLabel();
+    }
+
+    // ========================================================
+    // EXPORTACIÓN DE PRECIOS A CSV (TODAS LAS MONEDAS)
+    // ========================================================
+    if (!Object.hasOwn(HTMLElement.prototype, 'popover')) {
+      const polyfillScript = document.createElement('script');
+      polyfillScript.src = 'https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover.min.js';
+      polyfillScript.async = true;
+      document.head.appendChild(polyfillScript);
+    }
+
+    const CURRENCY_LABELS = {
+      PYG: 'Guaraní',
+      BRL: 'Real',
+      ARS: 'Peso argentino',
+      EUR: 'Euro',
+      USD: 'Dólar',
+      CLP: 'Peso chileno',
+      COP: 'Peso colombiano',
+      MXN: 'Peso mexicano'
+    };
+
+    function updateCsvCurrentCountryLabel() {
+      const labelEl = document.getElementById('csv-current-country-label');
+      if (!labelEl) return;
+      const country = COUNTRIES.find(c => c.code === activeCountry);
+      if (!country) {
+        labelEl.textContent = 'Solo País Activo (Planes + Dominios)';
+        return;
+      }
+      const loaded = loadedCountryData[country.code];
+      const curr = (loaded && loaded.data && loaded.data.currency) || country.defaultCurrency || '';
+      labelEl.textContent = `Solo ${country.name} (${curr})`;
+    }
+
+    function getMergedDomainsForCountry(result) {
+      const d = (result && result.data) ? result.data : {};
+      const publicDomains = d.domains || {};
+      const extendedDomains = (result && result.extendedData && result.extendedData.domains) ? result.extendedData.domains : {};
+      const apiDomains = (result && result.apiDomains) ? result.apiDomains : {};
+      const allDomains = Object.assign({}, apiDomains, extendedDomains, publicDomains);
+      return { publicDomains, allDomains };
+    }
+
+    function formatCsvPriceValue(val, currency) {
+      if (val === null || val === undefined || val === '' || val === -1 || Number(val) < 0) {
+        return 'PENDIENTE';
+      }
+      const num = Number(val);
+      if (!Number.isFinite(num)) return 'PENDIENTE';
+      const noDecimals = (currency === 'CLP' || currency === 'COP' || currency === 'PYG');
+      return noDecimals ? String(Math.round(num)) : num.toFixed(2);
+    }
+
+    function escapeCsvCell(value) {
+      if (value === null || value === undefined) return '';
+      const str = String(value);
+      if (/[",\r\n]/.test(str)) {
+        return '"' + str.replace(/"/g, '""') + '"';
+      }
+      return str;
+    }
+
+    function downloadCsvFile(filename, rows) {
+      const csvContent = '\uFEFF' + rows.map(row => row.map(escapeCsvCell).join(',')).join('\r\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    async function exportPricesCsv(mode = 'all') {
+      // Cerrar el popover de opciones si está abierto
+      const panel = document.getElementById('csv-export-panel');
+      if (panel && typeof panel.hidePopover === 'function') {
+        try { panel.hidePopover(); } catch (e) {}
+      }
+
+      const btn = document.getElementById('btn-top-export-csv');
+      const originalBtnHtml = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando CSV...';
+      }
+
+      try {
+        // Asegurar que todos los países estén cargados antes de exportar
+        const targetCountries = (mode === 'current')
+          ? COUNTRIES.filter(c => c.code === activeCountry)
+          : COUNTRIES.slice();
+
+        const missingCountries = targetCountries.filter(c => !loadedCountryData[c.code] || !loadedCountryData[c.code].success);
+        if (missingCountries.length > 0) {
+          await Promise.all(missingCountries.map(c => loadCountryData(c)));
+        }
+
+        const validCountries = targetCountries.filter(c => loadedCountryData[c.code] && loadedCountryData[c.code].success);
+        if (!validCountries.length) {
+          showSyncToast('warn', 'No hay datos de precios cargados para exportar.');
+          return;
+        }
+
+        const todayStr = new Date().toISOString().slice(0, 10);
+        const rows = [];
+        let totalProducts = 0;
+        let totalDomains = 0;
+        const currenciesIncluded = [];
+
+        if (mode === 'products') {
+          rows.push([
+            'País',
+            'Código País',
+            'Moneda',
+            'Nombre Moneda',
+            'WHMCS Currency ID',
+            'ID Producto',
+            'Nombre del Plan',
+            'Mensual',
+            'Trimestral',
+            'Semestral',
+            'Anual',
+            'Bienal',
+            'Trienal'
+          ]);
+
+          validCountries.forEach(country => {
+            const result = loadedCountryData[country.code];
+            const d = result.data || {};
+            const currency = (d.currency || country.defaultCurrency || '').toUpperCase();
+            const currencyName = CURRENCY_LABELS[currency] || currency;
+            const countryName = d.country || country.name;
+            const whmcsId = (d.whmcsCurrencyId !== null && d.whmcsCurrencyId !== undefined) ? d.whmcsCurrencyId : '';
+            if (!currenciesIncluded.includes(currency)) currenciesIncluded.push(currency);
+
+            const products = d.products || {};
+            const productIds = Object.keys(products).sort((a, b) => Number(a) - Number(b));
+            productIds.forEach(pid => {
+              const p = products[pid] || {};
+              rows.push([
+                countryName,
+                country.code.toUpperCase(),
+                currency,
+                currencyName,
+                whmcsId,
+                `PID ${pid}`,
+                p.name || `Plan #${pid}`,
+                formatCsvPriceValue(p.monthly, currency),
+                formatCsvPriceValue(p.quarterly, currency),
+                formatCsvPriceValue(p.semiannually, currency),
+                formatCsvPriceValue(p.annually, currency),
+                formatCsvPriceValue(p.biennially, currency),
+                formatCsvPriceValue(p.triennially, currency)
+              ]);
+              totalProducts++;
+            });
+          });
+
+          downloadCsvFile(`netz-planes-productos-todas-monedas-${todayStr}.csv`, rows);
+          showSyncToast('success', `CSV descargado: ${totalProducts.toLocaleString()} filas de Planes y Productos en ${currenciesIncluded.join(', ')}.`);
+          return;
+        }
+
+        if (mode === 'domains') {
+          rows.push([
+            'País',
+            'Código País',
+            'Moneda',
+            'Nombre Moneda',
+            'WHMCS Currency ID',
+            'Extensión (TLD)',
+            'Origen',
+            'Registro',
+            'Renovación',
+            'Transferencia'
+          ]);
+
+          validCountries.forEach(country => {
+            const result = loadedCountryData[country.code];
+            const d = result.data || {};
+            const currency = (d.currency || country.defaultCurrency || '').toUpperCase();
+            const currencyName = CURRENCY_LABELS[currency] || currency;
+            const countryName = d.country || country.name;
+            const whmcsId = (d.whmcsCurrencyId !== null && d.whmcsCurrencyId !== undefined) ? d.whmcsCurrencyId : '';
+            if (!currenciesIncluded.includes(currency)) currenciesIncluded.push(currency);
+
+            const { publicDomains, allDomains } = getMergedDomainsForCountry(result);
+            const domainKeys = Object.keys(allDomains).sort();
+            domainKeys.forEach(ext => {
+              const dom = allDomains[ext] || {};
+              const dotExt = ext.startsWith('.') ? ext : `.${ext}`;
+              const origin = Object.prototype.hasOwnProperty.call(publicDomains, ext) ? 'Index / Web' : 'Base WHMCS';
+              rows.push([
+                countryName,
+                country.code.toUpperCase(),
+                currency,
+                currencyName,
+                whmcsId,
+                dotExt,
+                origin,
+                formatCsvPriceValue(dom.register, currency),
+                formatCsvPriceValue(dom.renew, currency),
+                formatCsvPriceValue(dom.transfer, currency)
+              ]);
+              totalDomains++;
+            });
+          });
+
+          downloadCsvFile(`netz-precios-dominios-todas-monedas-${todayStr}.csv`, rows);
+          showSyncToast('success', `CSV descargado: ${totalDomains.toLocaleString()} filas de Dominios en ${currenciesIncluded.join(', ')}.`);
+          return;
+        }
+
+        // Modo 'all' (todas las monedas) o 'current' (país activo): Planes y Productos + Precios de Dominios unificados
+        rows.push([
+          'Categoría',
+          'País',
+          'Código País',
+          'Moneda',
+          'Nombre Moneda',
+          'WHMCS Currency ID',
+          'ID / TLD',
+          'Nombre / Extensión',
+          'Origen',
+          'Mensual',
+          'Trimestral',
+          'Semestral',
+          'Anual',
+          'Bienal',
+          'Trienal',
+          'Registro',
+          'Renovación',
+          'Transferencia'
+        ]);
+
+        validCountries.forEach(country => {
+          const result = loadedCountryData[country.code];
+          const d = result.data || {};
+          const currency = (d.currency || country.defaultCurrency || '').toUpperCase();
+          const currencyName = CURRENCY_LABELS[currency] || currency;
+          const countryName = d.country || country.name;
+          const whmcsId = (d.whmcsCurrencyId !== null && d.whmcsCurrencyId !== undefined) ? d.whmcsCurrencyId : '';
+          if (!currenciesIncluded.includes(currency)) currenciesIncluded.push(currency);
+
+          // 1. Planes y Productos
+          const products = d.products || {};
+          const productIds = Object.keys(products).sort((a, b) => Number(a) - Number(b));
+          productIds.forEach(pid => {
+            const p = products[pid] || {};
+            rows.push([
+              'Planes y Productos',
+              countryName,
+              country.code.toUpperCase(),
+              currency,
+              currencyName,
+              whmcsId,
+              `PID ${pid}`,
+              p.name || `Plan #${pid}`,
+              'WHMCS',
+              formatCsvPriceValue(p.monthly, currency),
+              formatCsvPriceValue(p.quarterly, currency),
+              formatCsvPriceValue(p.semiannually, currency),
+              formatCsvPriceValue(p.annually, currency),
+              formatCsvPriceValue(p.biennially, currency),
+              formatCsvPriceValue(p.triennially, currency),
+              '',
+              '',
+              ''
+            ]);
+            totalProducts++;
+          });
+
+          // 2. Precios de Dominios (Registro, Renovación y Transferencia)
+          const { publicDomains, allDomains } = getMergedDomainsForCountry(result);
+          const domainKeys = Object.keys(allDomains).sort();
+          domainKeys.forEach(ext => {
+            const dom = allDomains[ext] || {};
+            const dotExt = ext.startsWith('.') ? ext : `.${ext}`;
+            const origin = Object.prototype.hasOwnProperty.call(publicDomains, ext) ? 'Index / Web' : 'Base WHMCS';
+            rows.push([
+              'Precios de Dominios',
+              countryName,
+              country.code.toUpperCase(),
+              currency,
+              currencyName,
+              whmcsId,
+              dotExt,
+              dotExt,
+              origin,
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              formatCsvPriceValue(dom.register, currency),
+              formatCsvPriceValue(dom.renew, currency),
+              formatCsvPriceValue(dom.transfer, currency)
+            ]);
+            totalDomains++;
+          });
+        });
+
+        const fileSlug = (mode === 'current')
+          ? `netz-precios-${validCountries[0].code}-${todayStr}.csv`
+          : `netz-todos-los-precios-${todayStr}.csv`;
+
+        downloadCsvFile(fileSlug, rows);
+        showSyncToast(
+          'success',
+          `CSV descargado: ${totalProducts.toLocaleString()} planes + ${totalDomains.toLocaleString()} dominios (${currenciesIncluded.join(', ')}).`,
+          5500
+        );
+      } catch (err) {
+        console.error('Error exportPricesCsv:', err);
+        showSyncToast('warn', 'Error al generar el archivo CSV: ' + err.message);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = originalBtnHtml;
+        }
+      }
     }
 
     // ========================================================

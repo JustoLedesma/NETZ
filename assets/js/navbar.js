@@ -16,8 +16,14 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="index">Inicio<span class="sr-only">(current)</span> </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="desarrollo-software">Sistemas<span class="nav-new-tag">Nuevo</span></a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="sistemas-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Sistemas<span class="nav-new-tag">Nuevo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="sistemas-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-shopping-cart"></i> <a href="/e-commerce-demo">E-commerce<span class="nav-new-tag">Tienda online lista para vender</span></a></li>
+                                        <li><i class="fas fa-code"></i> <a href="desarrollo-software">Desarrollo de Software<span>Sistemas y APIs a medida</span></a></li>
+                                    </ul>
+                                </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Hosting</a>
@@ -112,8 +118,14 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="index">Início<span class="sr-only">(current)</span> </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="desarrollo-software">Sistemas<span class="nav-new-tag">Novo</span></a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="sistemas-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Sistemas<span class="nav-new-tag">Novo</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="sistemas-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-shopping-cart"></i> <a href="/e-commerce-demo">E-commerce<span class="nav-new-tag">Loja online pronta para vender</span></a></li>
+                                        <li><i class="fas fa-code"></i> <a href="desarrollo-software">Desenvolvimento de Software<span>Sistemas e APIs sob medida</span></a></li>
+                                    </ul>
+                                </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Hospedagem</a>
@@ -208,8 +220,14 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="index">Home<span class="sr-only">(current)</span> </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="desarrollo-software">Systems<span class="nav-new-tag">New</span></a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" id="sistemas-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Systems<span class="nav-new-tag">New</span></a>
+                                <div class="dropdown-menu coodiv-dropdown-header web-menu" aria-labelledby="sistemas-megamenu">
+                                    <ul class="web-hosting-menu-header">
+                                        <li><i class="fas fa-shopping-cart"></i> <a href="/e-commerce-demo">E-commerce<span class="nav-new-tag">Online store ready to sell</span></a></li>
+                                        <li><i class="fas fa-code"></i> <a href="desarrollo-software">Software Development<span>Custom systems & APIs</span></a></li>
+                                    </ul>
+                                </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" role="button" id="webhosting-megamenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Hosting</a>
@@ -363,11 +381,11 @@
         var isBr = country === 'br' || path.startsWith('/br') || path.includes('/br/');
         var template = isBr ? navbarHTML_pt : (isUs ? navbarHTML_en : navbarHTML);
         var finalNavbarHTML = prefixNavbarLinks(template);
-        var isDesarrollo = path.includes('desarrollo-software');
-        if (isDesarrollo) {
+        var isSistemas = path.includes('desarrollo-software') || path.includes('e-commerce-demo');
+        if (isSistemas) {
             finalNavbarHTML = finalNavbarHTML.replace(
-                /<li class="nav-item">(\s*<a class="nav-link" href="[^"]*desarrollo-software)/,
-                '<li class="nav-item active">$1'
+                /<li class="nav-item dropdown">(\s*<a class="nav-link" role="button" id="sistemas-megamenu")/,
+                '<li class="nav-item dropdown active">$1'
             );
         }
         const headerContainer = document.getElementById('navbar-container') || document.getElementById('header-navbar-container');
